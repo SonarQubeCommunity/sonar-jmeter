@@ -4,6 +4,7 @@
 	<groupId>es.excentia.jmeter.report</groupId>
 	<artifactId>jmeter-report-client</artifactId>
 	<version>0.1</version>
+	<packaging>jar</packaging>
 	
 	<name>JMeter Report Client</name>
 	<description>Client to retrieve JMeter test results from JMeter report server.</description>
@@ -59,15 +60,6 @@
 	</properties>
 
 	<build>
-
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav</artifactId>
-				<version>1.0-beta-2</version>
-			</extension>
-		</extensions>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
