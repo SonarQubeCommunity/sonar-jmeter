@@ -1,0 +1,49 @@
+/*
+ * JMeter Report Server
+ * Copyright (C) 2010 eXcentia
+ * mailto:info AT excentia DOT es
+ *
+ * SONAR JMeter Plugin is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * SONAR JMeter Plugin is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with Sonar; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ */
+
+package es.excentia.jmeter.report.server.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ServiceFactory {
+
+	private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.service.impl";
+
+	private static Map<Class<? extends Service>, Service> map = new HashMap<Class<? extends Service>, Service>();
+
+	@SuppressWarnings("unchecked")
+	public static synchronized <T extends Service> T get(Class<T> service) {
+		T serviceInstance = (T) map.get(service);
+		if (serviceInstance == null) {
+			try {
+				Class<T> serviceImpl = (Class<T>) Class.forName(IMPL_PACKAGE
+						+ "." + service.getSimpleName() + "Impl");
+				serviceInstance = serviceImpl
+					.getConstructor((Class<?> [])null)
+					.newInstance((Object[])null);
+			} catch (Exception e) {
+				throw new ServiceFactoryException(e);
+			}
+			map.put(service, serviceInstance);
+		}
+		return serviceInstance;
+	}
+}

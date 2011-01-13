@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://xmlbeans.testresults.server.report.jmeter.excentia.es"
+	xmlns="http://xmlbeans.testresults.server.report.jmeter.excentia.es"
+	elementFormDefault="qualified"
+>
+
+	<xs:element name="testResults">
+  	<xs:complexType>
+	  	<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="httpSample" type="HttpSample" />
+			<xs:element name="sample" type="Sample"/>
+	    </xs:choice>
+		<xs:attribute name="version" type="xs:string" />
+	</xs:complexType>
+	</xs:element>
+  
+	<xs:complexType name="HttpSample">
+	<xs:complexContent>
+	<xs:extension base="AbstractSample" >
+		<xs:sequence>
+			<xs:element name="httpSample" type="HttpSample" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="assertionResult" type="AssertionResult" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:extension>
+	</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="Sample">
+	<xs:complexContent>
+	<xs:extension base="AbstractSample" >
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="httpSample" type="HttpSample" />
+			<xs:element name="sample" type="Sample"/>
+	    </xs:choice>
+	</xs:extension>
+	</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="AbstractSample">
+		<xs:attribute name="t" type="xs:long" use="required"/>
+		<xs:attribute name="lt" type="xs:long"/>
+		<xs:attribute name="ts" type="xs:long"/>
+		<xs:attribute name="s" type="xs:boolean"/>
+		<xs:attribute name="lb" type="xs:string"/>
+		<xs:attribute name="rc" type="xs:string"/>
+		<xs:attribute name="rm" type="xs:string"/>
+		<xs:attribute name="tn" type="xs:string"/>
+		<xs:attribute name="dt" type="xs:string"/>
+		<xs:attribute name="by" type="xs:long"/>
+	</xs:complexType>
+	
+	<xs:complexType name="AssertionResult">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="failure" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="error" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="failureMessage" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

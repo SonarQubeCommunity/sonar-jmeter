@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<sample t="284" lt="0" ts="1283273767828" s="true" lb="TR_HOME" rc="200" rm="Number of samples in transaction : 24, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="1082054">
+  <httpSample t="14" lt="14" ts="1283273767828" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="3" lt="3" ts="1283273767842" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="2" lt="2" ts="1283273767845" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="3" lt="2" ts="1283273767847" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="2" lt="2" ts="1283273767850" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="2" lt="2" ts="1283273767853" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="2" lt="2" ts="1283273767855" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="2" lt="2" ts="1283273767857" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="6" lt="2" ts="1283273767860" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="2" lt="2" ts="1283273767866" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="139" lt="139" ts="1283273767869" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="4" lt="4" ts="1283273768008" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="4" lt="4" ts="1283273768012" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="3" lt="3" ts="1283273768016" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="3" lt="3" ts="1283273768020" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="4" lt="4" ts="1283273768023" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="3" lt="3" ts="1283273768027" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="2" lt="2" ts="1283273768030" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="2" lt="2" ts="1283273768032" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="2" lt="2" ts="1283273768034" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="2" lt="2" ts="1283273768037" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="11" lt="11" ts="1283273768039" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479"/>
+  <httpSample t="57" lt="53" ts="1283273768055" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="0" lt="0" ts="1283273768112" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+<sample t="133" lt="0" ts="1283273768114" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="71" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="61" lt="55" ts="1283273768186" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="123" lt="0" ts="1283273768247" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="62" lt="16" ts="1283273768247" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="60" lt="55" ts="1283273768310" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="12" lt="0" ts="1283273768371" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="3" lt="3" ts="1283273768371" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="9" lt="9" ts="1283273768374" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="23" lt="0" ts="1283273768384" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="3" lt="3" ts="1283273768384" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="14" lt="14" ts="1283273768387" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="6" lt="6" ts="1283273768401" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="57" lt="0" ts="1283273768408" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="11" lt="10" ts="1283273768408" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="46" lt="44" ts="1283273768419" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="10" lt="0" ts="1283273768466" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="10" lt="10" ts="1283273768466" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="11" lt="0" ts="1283273768477" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="11" lt="10" ts="1283273768477" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+<sample t="297" lt="0" ts="1283274305089" s="false" lb="TR_HOME" rc="" rm="Number of samples in transaction : 24, number of failing samples : 1" tn="Grupo de Hilos 1-1" dt="" by="1082053">
+  <httpSample t="14" lt="14" ts="1283274305090" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="3" lt="3" ts="1283274305104" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="2" lt="2" ts="1283274305107" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="3" lt="2" ts="1283274305109" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="2" lt="2" ts="1283274305112" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="3" lt="3" ts="1283274305114" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="2" lt="2" ts="1283274305117" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="2" lt="2" ts="1283274305119" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="7" lt="3" ts="1283274305121" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="2" lt="2" ts="1283274305128" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="141" lt="139" ts="1283274305130" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="4" lt="4" ts="1283274305271" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="4" lt="4" ts="1283274305275" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="4" lt="4" ts="1283274305279" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="4" lt="4" ts="1283274305283" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="3" lt="3" ts="1283274305287" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="4" lt="4" ts="1283274305290" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="2" lt="2" ts="1283274305294" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="2" lt="2" ts="1283274305296" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="2" lt="2" ts="1283274305299" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="3" lt="3" ts="1283274305301" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="12" lt="12" ts="1283274305304" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>false</failure>
+      <error>true</error>
+      <failureMessage>org.apache.bsf.BSFException: unsupported language: </failureMessage>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="59" lt="55" ts="1283274305325" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="1" lt="0" ts="1283274305385" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="277"/>
+</sample>
+<sample t="212" lt="0" ts="1283274305421" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="91" lt="30" ts="1283274305421" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="121" lt="114" ts="1283274305512" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="164" lt="0" ts="1283274305634" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="68" lt="22" ts="1283274305634" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="96" lt="91" ts="1283274305702" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="14" lt="0" ts="1283274305799" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="4" lt="4" ts="1283274305799" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="10" lt="10" ts="1283274305803" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="24" lt="0" ts="1283274305814" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="4" lt="4" ts="1283274305814" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="14" lt="14" ts="1283274305818" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="6" lt="6" ts="1283274305832" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="61" lt="0" ts="1283274305839" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="12" lt="11" ts="1283274305840" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="48" lt="47" ts="1283274305852" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="12" lt="0" ts="1283274305901" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="12" lt="12" ts="1283274305901" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="12" lt="0" ts="1283274305914" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="12" lt="12" ts="1283274305914" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+<sample t="534" lt="0" ts="1283274352938" s="true" lb="TR_HOME" rc="200" rm="Number of samples in transaction : 24, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="1082054">
+  <httpSample t="14" lt="14" ts="1283274352938" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="3" lt="3" ts="1283274352952" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="3" lt="3" ts="1283274352955" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="3" lt="2" ts="1283274352958" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="2" lt="2" ts="1283274352961" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="4" lt="4" ts="1283274352963" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="2" lt="2" ts="1283274352967" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="2" lt="2" ts="1283274352970" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="6" lt="3" ts="1283274352972" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="2" lt="2" ts="1283274352979" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="146" lt="145" ts="1283274352982" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="4" lt="4" ts="1283274353129" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="4" lt="4" ts="1283274353133" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="2" lt="2" ts="1283274353137" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="3" lt="3" ts="1283274353139" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="2" lt="2" ts="1283274353142" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="2" lt="2" ts="1283274353144" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="2" lt="2" ts="1283274353147" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="3" lt="3" ts="1283274353149" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="2" lt="2" ts="1283274353152" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="3" lt="3" ts="1283274353154" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="13" lt="13" ts="1283274353157" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>false</failure>
+      <error>false</error>
+      <failureMessage>Fallo</failureMessage>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="56" lt="52" ts="1283274353415" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="0" lt="0" ts="1283274353472" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+<sample t="138" lt="0" ts="1283274353476" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="77" lt="21" ts="1283274353476" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="61" lt="56" ts="1283274353553" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="134" lt="0" ts="1283274353616" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="65" lt="16" ts="1283274353616" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="68" lt="64" ts="1283274353682" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="14" lt="0" ts="1283274353751" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="3" lt="3" ts="1283274353751" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="11" lt="10" ts="1283274353754" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="25" lt="0" ts="1283274353766" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="3" lt="3" ts="1283274353766" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="15" lt="15" ts="1283274353769" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="7" lt="7" ts="1283274353784" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="62" lt="0" ts="1283274353792" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="12" lt="11" ts="1283274353792" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="50" lt="47" ts="1283274353804" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="13" lt="0" ts="1283274353856" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="13" lt="12" ts="1283274353856" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="15" lt="0" ts="1283274353871" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="15" lt="15" ts="1283274353871" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+<sample t="319" lt="0" ts="1283274410277" s="false" lb="TR_HOME" rc="" rm="Number of samples in transaction : 24, number of failing samples : 1" tn="Grupo de Hilos 1-1" dt="" by="1082053">
+  <httpSample t="22" lt="20" ts="1283274410277" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="3" lt="3" ts="1283274410299" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="2" lt="2" ts="1283274410302" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="3" lt="2" ts="1283274410305" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="2" lt="2" ts="1283274410308" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="2" lt="2" ts="1283274410311" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="2" lt="2" ts="1283274410313" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="2" lt="2" ts="1283274410316" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="9" lt="3" ts="1283274410318" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="3" lt="3" ts="1283274410327" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="140" lt="139" ts="1283274410330" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="4" lt="4" ts="1283274410470" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="4" lt="4" ts="1283274410474" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="4" lt="4" ts="1283274410478" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="4" lt="4" ts="1283274410482" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="2" lt="2" ts="1283274410486" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="3" lt="3" ts="1283274410488" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="6" lt="6" ts="1283274410491" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="3" lt="3" ts="1283274410497" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="2" lt="2" ts="1283274410501" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="2" lt="2" ts="1283274410504" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="13" lt="12" ts="1283274410507" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>true</failure>
+      <error>false</error>
+      <failureMessage>Fallo</failureMessage>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="61" lt="58" ts="1283274410535" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="0" lt="0" ts="1283274410596" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="277"/>
+</sample>
+<sample t="139" lt="0" ts="1283274410599" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="63" lt="20" ts="1283274410599" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="76" lt="72" ts="1283274410662" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="117" lt="0" ts="1283274410739" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="56" lt="14" ts="1283274410740" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="60" lt="55" ts="1283274410796" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="14" lt="0" ts="1283274410857" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="2" lt="2" ts="1283274410857" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="11" lt="11" ts="1283274410860" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="26" lt="0" ts="1283274410872" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="4" lt="4" ts="1283274410872" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="15" lt="15" ts="1283274410876" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="7" lt="7" ts="1283274410891" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="61" lt="0" ts="1283274410899" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="12" lt="11" ts="1283274410899" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="49" lt="45" ts="1283274410911" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="11" lt="0" ts="1283274410961" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="11" lt="11" ts="1283274410961" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="11" lt="0" ts="1283274410973" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="11" lt="11" ts="1283274410973" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+<sample t="322" lt="0" ts="1283274515497" s="false" lb="TR_HOME" rc="" rm="Number of samples in transaction : 24, number of failing samples : 1" tn="Grupo de Hilos 1-1" dt="" by="1082054">
+  <httpSample t="14" lt="14" ts="1283274515497" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="2" lt="2" ts="1283274515512" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="3" lt="3" ts="1283274515514" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="2" lt="2" ts="1283274515517" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="2" lt="2" ts="1283274515520" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="2" lt="2" ts="1283274515522" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="2" lt="2" ts="1283274515525" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="3" lt="3" ts="1283274515527" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="6" lt="3" ts="1283274515530" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="2" lt="2" ts="1283274515537" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="153" lt="152" ts="1283274515540" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="3" lt="3" ts="1283274515693" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="3" lt="3" ts="1283274515697" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="3" lt="3" ts="1283274515701" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="9" lt="9" ts="1283274515704" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="4" lt="4" ts="1283274515713" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="3" lt="3" ts="1283274515717" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="4" lt="4" ts="1283274515720" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="2" lt="2" ts="1283274515724" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="2" lt="2" ts="1283274515727" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="3" lt="2" ts="1283274515729" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="10" lt="10" ts="1283274515732" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>true</failure>
+      <error>false</error>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="60" lt="56" ts="1283274515759" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="0" lt="0" ts="1283274515819" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+<sample t="125" lt="0" ts="1283274515824" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="63" lt="17" ts="1283274515824" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="62" lt="58" ts="1283274515887" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="120" lt="0" ts="1283274515951" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="62" lt="15" ts="1283274515951" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="58" lt="55" ts="1283274516013" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="20" lt="0" ts="1283274516073" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="10" lt="10" ts="1283274516073" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="10" lt="10" ts="1283274516083" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="28" lt="0" ts="1283274516094" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="5" lt="5" ts="1283274516094" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="14" lt="14" ts="1283274516099" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="9" lt="8" ts="1283274516113" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="65" lt="0" ts="1283274516124" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="14" lt="13" ts="1283274516124" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="51" lt="48" ts="1283274516138" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="13" lt="0" ts="1283274516189" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="12" lt="12" ts="1283274516190" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="12" lt="0" ts="1283274516203" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="12" lt="11" ts="1283274516203" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+<sample t="434" lt="0" ts="1283274646040" s="true" lb="TR_HOME" rc="200" rm="Number of samples in transaction : 24, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="1082054">
+  <httpSample t="15" lt="15" ts="1283274646041" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="3" lt="3" ts="1283274646056" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="2" lt="2" ts="1283274646059" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="3" lt="2" ts="1283274646061" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="2" lt="2" ts="1283274646064" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="2" lt="2" ts="1283274646067" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="2" lt="2" ts="1283274646069" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="2" lt="2" ts="1283274646072" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="6" lt="3" ts="1283274646074" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="3" lt="3" ts="1283274646080" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="279" lt="279" ts="1283274646083" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="4" lt="4" ts="1283274646363" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="3" lt="3" ts="1283274646367" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="2" lt="2" ts="1283274646370" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="2" lt="2" ts="1283274646372" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="2" lt="2" ts="1283274646375" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="2" lt="2" ts="1283274646377" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="2" lt="2" ts="1283274646379" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="2" lt="2" ts="1283274646382" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="2" lt="2" ts="1283274646384" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="2" lt="2" ts="1283274646386" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="10" lt="10" ts="1283274646389" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>false</failure>
+      <error>false</error>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="60" lt="59" ts="1283274646413" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="0" lt="0" ts="1283274646474" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+<sample t="189" lt="0" ts="1283274646477" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="64" lt="17" ts="1283274646477" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="125" lt="116" ts="1283274646541" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="127" lt="0" ts="1283274646667" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="66" lt="17" ts="1283274646667" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="61" lt="56" ts="1283274646733" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="14" lt="0" ts="1283274646796" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="4" lt="4" ts="1283274646796" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="10" lt="10" ts="1283274646800" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="24" lt="0" ts="1283274646811" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="3" lt="3" ts="1283274646811" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="14" lt="14" ts="1283274646814" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="7" lt="7" ts="1283274646828" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="60" lt="0" ts="1283274646837" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="13" lt="12" ts="1283274646837" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="47" lt="45" ts="1283274646850" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="12" lt="0" ts="1283274646898" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="11" lt="11" ts="1283274646899" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="12" lt="0" ts="1283274646911" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="12" lt="12" ts="1283274646911" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+<sample t="354" lt="0" ts="1283274754031" s="false" lb="TR_HOME" rc="" rm="Number of samples in transaction : 24, number of failing samples : 1" tn="Grupo de Hilos 1-1" dt="" by="1082054">
+  <httpSample t="16" lt="16" ts="1283274754031" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="4" lt="4" ts="1283274754047" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="3" lt="3" ts="1283274754051" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="4" lt="3" ts="1283274754055" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="3" lt="3" ts="1283274754059" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="3" lt="3" ts="1283274754062" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="3" lt="3" ts="1283274754065" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="3" lt="3" ts="1283274754068" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="9" lt="3" ts="1283274754071" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="4" lt="4" ts="1283274754080" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="158" lt="156" ts="1283274754084" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="4" lt="4" ts="1283274754242" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="3" lt="3" ts="1283274754247" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="4" lt="4" ts="1283274754251" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="4" lt="4" ts="1283274754256" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="4" lt="4" ts="1283274754261" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="5" lt="5" ts="1283274754265" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="3" lt="3" ts="1283274754270" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="3" lt="3" ts="1283274754274" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="4" lt="4" ts="1283274754277" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="4" lt="4" ts="1283274754281" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="10" lt="10" ts="1283274754285" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>true</failure>
+      <error>true</error>
+      <failureMessage>org.apache.bsf.BSFException: JavaScript Error: Internal Error: org.mozilla.javascript.EcmaError: TypeError: Cannot find function setMessage.</failureMessage>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="63" lt="60" ts="1283274754321" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="1" lt="0" ts="1283274754384" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+<sample t="123" lt="0" ts="1283274754388" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="63" lt="21" ts="1283274754388" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="60" lt="57" ts="1283274754451" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="136" lt="0" ts="1283274754513" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="66" lt="16" ts="1283274754513" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="70" lt="66" ts="1283274754579" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="13" lt="0" ts="1283274754650" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="4" lt="4" ts="1283274754650" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="9" lt="9" ts="1283274754654" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="25" lt="0" ts="1283274754664" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="4" lt="4" ts="1283274754664" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="14" lt="14" ts="1283274754668" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="6" lt="6" ts="1283274754683" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="61" lt="0" ts="1283274754690" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="12" lt="11" ts="1283274754690" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="49" lt="46" ts="1283274754702" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="12" lt="0" ts="1283274754752" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="12" lt="12" ts="1283274754752" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="14" lt="0" ts="1283274754765" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="14" lt="14" ts="1283274754765" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+<sample t="314" lt="0" ts="1283274816186" s="false" lb="TR_HOME" rc="" rm="Number of samples in transaction : 24, number of failing samples : 1" tn="Grupo de Hilos 1-1" dt="" by="1082053">
+  <httpSample t="13" lt="13" ts="1283274816186" s="true" lb="/iceweb/" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="8397"/>
+  <httpSample t="2" lt="2" ts="1283274816200" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="13979"/>
+  <httpSample t="3" lt="3" ts="1283274816202" s="true" lb="/iceweb/js/json.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7788"/>
+  <httpSample t="3" lt="2" ts="1283274816205" s="true" lb="/iceweb/js/jquery-1.4.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="158407"/>
+  <httpSample t="2" lt="2" ts="1283274816208" s="true" lb="/iceweb/js/common.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1161"/>
+  <httpSample t="2" lt="2" ts="1283274816210" s="true" lb="/iceweb/js/ajax.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11865"/>
+  <httpSample t="2" lt="2" ts="1283274816213" s="true" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="42362"/>
+  <httpSample t="2" lt="2" ts="1283274816215" s="true" lb="/iceweb/styles/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2588"/>
+  <httpSample t="6" lt="3" ts="1283274816217" s="true" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="711799"/>
+  <httpSample t="2" lt="2" ts="1283274816224" s="true" lb="/iceweb/js/OpenLayersExt.js" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12330"/>
+  <httpSample t="151" lt="150" ts="1283274816226" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1219"/>
+  <httpSample t="3" lt="3" ts="1283274816378" s="true" lb="/iceweb/js/OpenLayers/style.css" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="7149"/>
+  <httpSample t="3" lt="3" ts="1283274816382" s="true" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2898"/>
+  <httpSample t="3" lt="3" ts="1283274816385" s="true" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2998"/>
+  <httpSample t="2" lt="2" ts="1283274816388" s="true" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3733"/>
+  <httpSample t="2" lt="2" ts="1283274816391" s="true" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3006"/>
+  <httpSample t="2" lt="2" ts="1283274816393" s="true" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3028"/>
+  <httpSample t="3" lt="3" ts="1283274816396" s="true" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2986"/>
+  <httpSample t="3" lt="3" ts="1283274816399" s="true" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="3011"/>
+  <httpSample t="3" lt="3" ts="1283274816402" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2985"/>
+  <httpSample t="4" lt="4" ts="1283274816405" s="true" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="2851"/>
+  <httpSample t="13" lt="13" ts="1283274816409" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11479">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>true</failure>
+      <error>false</error>
+      <failureMessage>Total count existe y es mayor que 0</failureMessage>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="62" lt="56" ts="1283274816438" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
+  <sample t="0" lt="0" ts="1283274816500" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="277"/>
+</sample>
+<sample t="135" lt="0" ts="1283274816504" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="70" lt="18" ts="1283274816504" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="65" lt="59" ts="1283274816574" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="137" lt="0" ts="1283274816640" s="true" lb="TR_ORDENAR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="72" lt="17" ts="1283274816640" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="65" lt="59" ts="1283274816712" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+</sample>
+<sample t="15" lt="0" ts="1283274816778" s="true" lb="TR_SELEC_MARCA" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5068">
+  <httpSample t="4" lt="4" ts="1283274816778" s="true" lb="/iceweb/img/mix_sel.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="785"/>
+  <httpSample t="10" lt="10" ts="1283274816783" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4283"/>
+</sample>
+<sample t="27" lt="0" ts="1283274816794" s="true" lb="TR_ABRIR_DETALLE_CENTRO" rc="200" rm="Number of samples in transaction : 3, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="5690">
+  <httpSample t="3" lt="3" ts="1283274816794" s="true" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="bin" by="189"/>
+  <httpSample t="15" lt="15" ts="1283274816798" s="true" lb="/iceweb/centroDetalle" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="4487"/>
+  <httpSample t="8" lt="7" ts="1283274816813" s="true" lb="/iceweb/restful/Centro/46022932" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="1014"/>
+</sample>
+<sample t="63" lt="0" ts="1283274816822" s="true" lb="TR_FILTRA_POR_PROVI" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="60075">
+  <httpSample t="12" lt="11" ts="1283274816822" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="11153"/>
+  <httpSample t="51" lt="46" ts="1283274816834" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="48922"/>
+</sample>
+<sample t="12" lt="0" ts="1283274816886" s="true" lb="TR_ORDENA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="12297">
+  <httpSample t="12" lt="11" ts="1283274816886" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="12297"/>
+</sample>
+<sample t="12" lt="0" ts="1283274816899" s="true" lb="TR_SIGUIENTE_PAGINA_GRID" rc="200" rm="Number of samples in transaction : 1, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="14836">
+  <httpSample t="12" lt="12" ts="1283274816899" s="true" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="14836"/>
+</sample>
+
+</testResults>

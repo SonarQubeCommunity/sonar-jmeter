@@ -1,0 +1,115 @@
+<%	if measure('requestTotal') and measure('requestTotal').value > 0 %>
+<table width="100%">
+<tbody>
+<tr>
+	<td colspan="3" style="padding-bottom: 10px">
+		<h3>Performance tests (<%= format_measure('testDesc') -%>)</h3>
+	</td>
+</tr>
+<tr>
+	<td valign="top">
+		<p>
+			<%	
+				errorColor = 'green'
+				if measure('requestErrorPercent').value > 0 
+					errorColor = 'rgb(200,50,50)'
+				end 
+			%>
+			<span class="big" style="color:<%=errorColor-%>;" >
+				<%= format_measure('requestErrorPercent') -%>
+			</span>errors <%= tendency_icon(measure('requestErrorPercent')) %>
+		</p>
+		<p><%= format_measure('duration') -%></p>
+ 		<p><%= format_measure('usersLogged') -%> users</p>
+	</td>
+	<td width="10%" />
+	<td valign="top">
+		 <p><span class="big"><%= format_measure('requestTotal') -%></span> total requests</p>
+  		 <p><%= format_measure('transTotal') -%> total transactions</p>
+	</td>
+</tr>
+<tr colspan="3"><td height="10px"></td></tr>
+<tr>
+	<td>
+		<h3>Requests</h3>
+		<p><span class="big"><%= format_measure('requestOkPerMinute') -%></span> requests ok/min <%= tendency_icon(measure('requestOkPerMinute')) %></p>
+		<p><%= format_measure('requestResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('requestResponseTimeOkAvg')) %></p>
+		<p><%= format_measure('requestResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('requestResponseTimeOkDevPercent')) %></p>
+	</td>
+	<td width="10%" />
+	<td>
+<%	if measure('transTotal').value > 0 %>
+		<h3>Transactions</h3>
+		<p><span class="big"><%= format_measure('transOkPerMinute') -%></span> transactions ok/min <%= tendency_icon(measure('transOkPerMinute')) %></p>
+		<p><%= format_measure('transResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('transResponseTimeOkAvg')) %></p>
+		<p><%= format_measure('transResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('transResponseTimeOkDevPercent')) %></p>
+<%  end %>
+	</td>
+</tr>
+
+<%	if measure('transTotal').value > 0 %>
+<tr >
+	<td style="padding-top: 15px; padding-bottom: 8px;" colspan="3">
+		<h3>Transaction response time distributions</h3>
+	</td>
+</tr>
+<tr>
+	<%
+		def fn(x)
+			x = x.to_f * 100
+			x = x.round
+			x = x / 100.0
+			return x.to_s
+		end
+		
+		def transMapToTable(measureName)
+			html = '<table>'
+			measure(measureName).data.split(';').each {
+				|regStr|
+				reg = regStr.split('=')
+				html.concat('<tr><td>'+reg[0]+'</td><td>'+fn(reg[1])+'</td></tr>')
+			}
+			html.concat('</table>')
+			return html
+		end
+	%>
+	<td align="center">
+		<%
+		   title = 'Average (ms)'
+		   m = 'transMapResponseTimeOkAvg'
+		   chart_id = 'chart_' + m
+		   query='ck=distbar&c=777777&w=220&h=100&bgc=ffffff&fs=8&v=' + u(measure(m).data)
+		%>
+		  <p><%= chart(query, :id => chart_id) -%></p>
+		  <span class="small" style="position:relative;top:-10px;left:10px;"><%= title -%></span>
+		  
+		  <script type='text/javascript'>
+		  //<![CDATA[
+		  new Tip('<%=chart_id-%>', '<div><%= transMapToTable(m) -%></div>');
+		  //]]>
+		  </script>
+	</td>
+	<td width="10%" />
+	<td align="center">
+		<%
+		   title = 'Deviation (%)'
+		   m = 'transMapResponseTimeOkDevPercent'
+		   chart_id = 'chart_' + m
+		   query='ck=distbar&c=777777&w=220&h=100&bgc=ffffff&fs=8&v=' + u(measure(m).data)
+		%>
+		  
+		  <p><%= chart(query, :id => chart_id, :alt => title) -%></p>
+		  <span class="small" style="position:relative;top:-10px;left:10px;"><%= title -%></span>
+		  
+		  <script type='text/javascript'>
+		  //<![CDATA[
+		  new Tip('<%=chart_id-%>', '<div><%= transMapToTable(m) -%></div>');
+		  //]]>
+		  </script>
+	</td>
+</tr>
+<% end %>
+
+</tbody>
+</table>
+<% end %>
