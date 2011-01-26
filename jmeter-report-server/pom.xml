@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.excentia.jmeter.report</groupId>
 	<artifactId>jmeter-report-server</artifactId>
-	<version>0.1</version>
+	<version>0.1-SNAPSHOT</version>
 	
 	<name>JMeter Report Server</name>
 
