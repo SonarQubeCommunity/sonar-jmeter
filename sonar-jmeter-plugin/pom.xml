@@ -9,7 +9,7 @@
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>sonar-jmeter-plugin</artifactId>
+  <artifactId>sonar-jmeter-plugin</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>sonar-plugin</packaging>
 	<name>Sonar JMeter Plugin</name>
@@ -84,9 +84,9 @@
 
 		<!-- JMeter Report Client -->
 		<dependency>
-			<groupId>es.excentia.jmeter.report</groupId>
+		  <groupId>${pom.groupId}</groupId>
 			<artifactId>jmeter-report-client</artifactId>
-			<version>0.1</version>
+			<version>0.1-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
