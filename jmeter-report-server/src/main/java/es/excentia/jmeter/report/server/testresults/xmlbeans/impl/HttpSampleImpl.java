@@ -18,13 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-/*
- * XML Type:  HttpSample
- * Namespace: http://xmlbeans.testresults.server.report.jmeter.excentia.es
- * Java type: es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample
- *
- * Automatically generated - do not modify.
- */
 package es.excentia.jmeter.report.server.testresults.xmlbeans.impl;
 /**
  * An XML HttpSample(@http://xmlbeans.testresults.server.report.jmeter.excentia.es).

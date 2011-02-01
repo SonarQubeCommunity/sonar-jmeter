@@ -18,14 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-/*
- * An XML document type.
- * Localname: testResults
- * Namespace: http://xmlbeans.testresults.server.report.jmeter.excentia.es
- * Java type: es.excentia.jmeter.report.server.testresults.xmlbeans.TestResultsDocument
- *
- * Automatically generated - do not modify.
- */
 package es.excentia.jmeter.report.server.testresults.xmlbeans.impl;
 /**
  * A document containing one testResults(@http://xmlbeans.testresults.server.report.jmeter.excentia.es) element.
