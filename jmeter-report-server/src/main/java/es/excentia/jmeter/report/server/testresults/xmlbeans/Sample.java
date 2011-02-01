@@ -20,12 +20,6 @@
 
 package es.excentia.jmeter.report.server.testresults.xmlbeans;
 
-
-/**
- * An XML Sample(@http://xmlbeans.testresults.server.report.jmeter.excentia.es).
- *
- * This is a complex type.
- */
 public interface Sample extends es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)

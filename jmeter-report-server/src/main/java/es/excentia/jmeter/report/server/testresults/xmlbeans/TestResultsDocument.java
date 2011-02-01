@@ -20,12 +20,6 @@
 
 package es.excentia.jmeter.report.server.testresults.xmlbeans;
 
-
-/**
- * A document containing one testResults(@http://xmlbeans.testresults.server.report.jmeter.excentia.es) element.
- *
- * This is a complex type.
- */
 public interface TestResultsDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)

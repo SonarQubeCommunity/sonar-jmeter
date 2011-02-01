@@ -19,11 +19,7 @@
  */
 
 package es.excentia.jmeter.report.server.testresults.xmlbeans.impl;
-/**
- * An XML AssertionResult(@http://xmlbeans.testresults.server.report.jmeter.excentia.es).
- *
- * This is a complex type.
- */
+
 public class AssertionResultImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements es.excentia.jmeter.report.server.testresults.xmlbeans.AssertionResult
 {
     private static final long serialVersionUID = 1L;

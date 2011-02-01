@@ -19,11 +19,7 @@
  */
 
 package es.excentia.jmeter.report.server.testresults.xmlbeans.impl;
-/**
- * An XML Sample(@http://xmlbeans.testresults.server.report.jmeter.excentia.es).
- *
- * This is a complex type.
- */
+
 public class SampleImpl extends es.excentia.jmeter.report.server.testresults.xmlbeans.impl.AbstractSampleImpl implements es.excentia.jmeter.report.server.testresults.xmlbeans.Sample
 {
     private static final long serialVersionUID = 1L;
