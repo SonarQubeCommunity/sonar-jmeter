@@ -119,31 +119,4 @@
 
 	</build>
 
-	<repositories>
-
-		<!-- Repositorios de eXcentia -->
-		<repository>
-			<id>internal</id>
-			<name>eXcentia release repository</name>
-			<url>http://servicios.excentia.es/archiva/repository/internal/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>snapshots</id>
-			<name>eXcentia snapshot repository</name>
-			<url>http://servicios.excentia.es/archiva/repository/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
 </project>

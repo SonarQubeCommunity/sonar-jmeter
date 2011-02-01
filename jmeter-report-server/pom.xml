@@ -122,9 +122,9 @@
 	
 		<!-- JMeter Report Client -->
 		<dependency>
-			<groupId>es.excentia.jmeter.report</groupId>
+			<groupId>${pom.groupId}</groupId>
 			<artifactId>jmeter-report-client</artifactId>
-			<version>0.1</version>
+			<version>0.1-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- Logging -->
