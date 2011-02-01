@@ -9,13 +9,13 @@
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-  <artifactId>sonar-jmeter-plugin</artifactId>
+	<artifactId>sonar-jmeter-plugin</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>sonar-plugin</packaging>
 	<name>Sonar JMeter Plugin</name>
 
 	<description>Retrieve JMeter test results in SONAR.</description>
-	
+
 	<url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 	<organization>
 		<name>eXcentia</name>
@@ -84,7 +84,7 @@
 
 		<!-- JMeter Report Client -->
 		<dependency>
-		  <groupId>${pom.groupId}</groupId>
+			<groupId>${pom.groupId}</groupId>
 			<artifactId>jmeter-report-client</artifactId>
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
@@ -104,7 +104,7 @@
 					<pluginClass>es.excentia.sonar.jmeter.JMeterPlugin</pluginClass>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -116,7 +116,34 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
+
 	</build>
-	
+
+	<repositories>
+
+		<!-- Repositorios de eXcentia -->
+		<repository>
+			<id>internal</id>
+			<name>eXcentia release repository</name>
+			<url>http://servicios.excentia.es/archiva/repository/internal/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<name>eXcentia snapshot repository</name>
+			<url>http://servicios.excentia.es/archiva/repository/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 </project>
