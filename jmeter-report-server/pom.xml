@@ -91,9 +91,6 @@
 					</execution>
 				</executions>
 				<inherited>true</inherited>
-				<configuration>
-			       <sourceGenerationDirectory>src/main/java</sourceGenerationDirectory>
-			    </configuration>
 			</plugin>
 
 			<plugin>
