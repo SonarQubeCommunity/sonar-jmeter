@@ -16,54 +16,16 @@
 
 	<description>Retrieve JMeter test results in SONAR.</description>
 
-	<url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
-	<organization>
-		<name>eXcentia</name>
-		<url>http://www.excentia.es</url>
-	</organization>
-
-	<inceptionYear>2010</inceptionYear>
-
-	<licenses>
-		<license>
-			<name>GNU LGPL 3</name>
-			<url>http://www.gnu.org/licenses/lgpl.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<id>cfillol</id>
-			<name>Carlos Fillol Sendra</name>
-			<email>cfillol@excentia.es</email>
-			<organization>eXcentia</organization>
-			<organizationUrl>www.excentia.es</organizationUrl>
-		</developer>
-		<developer>
-			<id>acalero</id>
-			<name>Antonio Calero</name>
-			<email>acalero@excentia.es</email>
-			<organization>eXcentia</organization>
-			<organizationUrl>www.excentia.es</organizationUrl>
-		</developer>
-	</developers>
-
-	<issueManagement>
-		<system>jira</system>
-		<url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14592</url>
-	</issueManagement>
-
 	<scm>
 		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</connection>
 		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</developerConnection>
-		<tag>HEAD</tag>
 		<url>http://svn.sonar-plugins.codehaus.org</url>
 	</scm>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.version>2.4</sonar.version>
+	   <sonar.pluginClass>es.excentia.sonar.jmeter.JMeterPlugin</sonar.pluginClass>
+	   <sonar.pluginName>JMeter</sonar.pluginName>
+	   <sonar.version>2.4</sonar.version>
 	</properties>
 
 	<dependencies>
@@ -84,39 +46,11 @@
 
 		<!-- JMeter Report Client -->
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>jmeter-report-client</artifactId>
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
-
-	<build>
-
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<version>1.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<pluginKey>JMeterPlugin</pluginKey>
-					<pluginClass>es.excentia.sonar.jmeter.JMeterPlugin</pluginClass>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-
-	</build>
 
 </project>
