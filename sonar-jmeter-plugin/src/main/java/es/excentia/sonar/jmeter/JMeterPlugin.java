@@ -27,25 +27,10 @@ import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 
-@Properties({
-    @Property(
-    	key=JMeterPluginConst.HOST_PROPERTY, name="Host", 
-    	description = "JMeter server host",
-    	project = true, global = true
-    ),
-    @Property(
-    	key=JMeterPluginConst.PORT_PROPERTY, name="Port", 
-    	description = "JMeter server port",
-    	defaultValue="4444",
-    	project = true, global = true
-    ),
-    @Property(
-    	key=JMeterPluginConst.CONFIG_PROPERTY, name="Configuration", 
-    	description = "Test configuration key",
-    	project = true, global = false
-    )
-})
-	
+@Properties( {
+    @Property(key = JMeterPluginConst.HOST_PROPERTY, name = "Host", description = "JMeter server host", project = true, global = true),
+    @Property(key = JMeterPluginConst.PORT_PROPERTY, name = "Port", description = "JMeter server port", defaultValue = "4444", project = true, global = true),
+    @Property(key = JMeterPluginConst.CONFIG_PROPERTY, name = "Configuration", description = "Test configuration key", project = true, global = false) })
 /**
  * This class is the entry point for all extensions
  */
@@ -68,11 +53,10 @@ public class JMeterPlugin implements Plugin {
    */
   @SuppressWarnings("unchecked")
   public List getExtensions() {
-    return Arrays.asList(
-    	JMeterMetrics.class, JMeterSensor.class, 
-    	JMeterDashboardWidget.class
-    	//, GwtJMeterPage.class
-    );
+    return Arrays.asList(JMeterMetrics.class, JMeterSensor.class,
+        JMeterDashboardWidget.class
+    // , GwtJMeterPage.class
+        );
   }
 
   @Override

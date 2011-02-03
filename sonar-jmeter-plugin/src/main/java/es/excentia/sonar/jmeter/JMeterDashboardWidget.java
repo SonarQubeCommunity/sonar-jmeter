@@ -27,7 +27,8 @@ import org.sonar.api.web.UserRole;
 
 @NavigationSection(NavigationSection.RESOURCE)
 @UserRole(UserRole.USER)
-public class JMeterDashboardWidget extends AbstractRubyTemplate implements RubyRailsWidget {
+public class JMeterDashboardWidget extends AbstractRubyTemplate implements
+    RubyRailsWidget {
 
   public String getId() {
     return "jmeter";

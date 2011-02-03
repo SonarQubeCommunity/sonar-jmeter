@@ -22,18 +22,18 @@ package es.excentia.sonar.jmeter.exception;
 
 public class JMeterPluginException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public JMeterPluginException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public JMeterPluginException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public JMeterPluginException(String message) {
-		super(message);
-	}
+  public JMeterPluginException(String message) {
+    super(message);
+  }
 
-	public JMeterPluginException(Throwable cause) {
-		super(cause);
-	}
+  public JMeterPluginException(Throwable cause) {
+    super(cause);
+  }
 
 }

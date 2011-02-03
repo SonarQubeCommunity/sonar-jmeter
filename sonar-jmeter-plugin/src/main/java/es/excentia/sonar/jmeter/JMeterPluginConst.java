@@ -21,7 +21,7 @@
 package es.excentia.sonar.jmeter;
 
 public class JMeterPluginConst {
-	public static final String HOST_PROPERTY = "es.excentia.sonar.jmeter.server.host";
-	public static final String PORT_PROPERTY = "es.excentia.sonar.jmeter.server.port";
-	public static final String CONFIG_PROPERTY = "es.excentia.sonar.jmeter.server.config";        
+  public static final String HOST_PROPERTY = "es.excentia.sonar.jmeter.server.host";
+  public static final String PORT_PROPERTY = "es.excentia.sonar.jmeter.server.port";
+  public static final String CONFIG_PROPERTY = "es.excentia.sonar.jmeter.server.config";
 }
