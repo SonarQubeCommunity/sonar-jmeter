@@ -26,59 +26,56 @@ import es.excentia.jmeter.report.client.serialization.StreamWriter;
 import es.excentia.jmeter.report.client.serialization.Transformer;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
-public class BucketAvgResponseTimeTransformer extends Transformer<HttpSample, Measure>{
+public class BucketAvgResponseTimeTransformer extends
+    Transformer<HttpSample, Measure> {
 
-	private static final int DEFAULT_MILLIS_BUCKET = 500;
-	private int millisBucket;
-	
-	public BucketAvgResponseTimeTransformer(
-		StreamReader<HttpSample> reader,
-		StreamWriter<Measure> writer,
-		int millisBucket
-	) {
-		super(reader, writer);
-	}
+  private static final int DEFAULT_MILLIS_BUCKET = 500;
+  private int millisBucket;
 
-	@Override
-	public void transform() {
-		if (millisBucket<=0) {
-			millisBucket = DEFAULT_MILLIS_BUCKET;
-		}
-		
-		HttpSample httpSample = reader.read();
-		if (httpSample==null) {
-			return;
-		}
-		
-		
-		long ts = httpSample.getTs();
-		int digitsToReset = (int)Math.log10(ts);	
-		long bucketGround = ((long)(ts/digitsToReset))*digitsToReset;
-		long bucketRoof = bucketGround + millisBucket;
-		
-		do {
-			
-			long total = 0;
-			int values = 0;
-			while (httpSample!=null && httpSample.getTs()<bucketRoof) {
-				total += httpSample.getT();
-				values++;
-				httpSample = reader.read();
-			}
-			
-			if (values!=0) {
-				// Si no hay valores, no hay medida
-				
-				Measure measure = new Measure();
-				measure.setTimeStamp(bucketRoof - millisBucket/2);
-				measure.setValue(((double)total)/values);
-			
-				writer.write(measure);
-			}
-			
-			bucketRoof += millisBucket;
-			
-		} while (httpSample!=null);
-	}
+  public BucketAvgResponseTimeTransformer(StreamReader<HttpSample> reader,
+      StreamWriter<Measure> writer, int millisBucket) {
+    super(reader, writer);
+  }
+
+  @Override
+  public void transform() {
+    if (millisBucket <= 0) {
+      millisBucket = DEFAULT_MILLIS_BUCKET;
+    }
+
+    HttpSample httpSample = reader.read();
+    if (httpSample == null) {
+      return;
+    }
+
+    long ts = httpSample.getTs();
+    int digitsToReset = (int) Math.log10(ts);
+    long bucketGround = ((long) (ts / digitsToReset)) * digitsToReset;
+    long bucketRoof = bucketGround + millisBucket;
+
+    do {
+
+      long total = 0;
+      int values = 0;
+      while (httpSample != null && httpSample.getTs() < bucketRoof) {
+        total += httpSample.getT();
+        values++;
+        httpSample = reader.read();
+      }
+
+      if (values != 0) {
+        // Si no hay valores, no hay medida
+
+        Measure measure = new Measure();
+        measure.setTimeStamp(bucketRoof - millisBucket / 2);
+        measure.setValue(((double) total) / values);
+
+        writer.write(measure);
+      }
+
+      bucketRoof += millisBucket;
+
+    } while (httpSample != null);
+  }
 
 }

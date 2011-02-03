@@ -33,41 +33,39 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
  * 
  */
 public class JtlHttpSampleReader extends StreamReader<HttpSample> {
-	
-	protected JtlSampleMixReader jtlReader;
-	protected List<HttpSample> httpSamples;
-	protected int httpSamplesIndex;
 
-	
-	public JtlHttpSampleReader(InputStream is) {
-		super(is);
-		jtlReader = new JtlSampleMixReader(is);
-	}
+  protected JtlSampleMixReader jtlReader;
+  protected List<HttpSample> httpSamples;
+  protected int httpSamplesIndex;
 
-	
-	@Override
-	public HttpSample getObjectFromStream() throws Exception {
-		if (httpSamples!=null && 
-			httpSamplesIndex<httpSamples.size()) {
-			HttpSample httpSample = httpSamples.get(httpSamplesIndex);
-			httpSamplesIndex++;
-			return httpSample;
-		} 
-		
-		while (true) {
-			SampleMix sampleMix = jtlReader.read();
-			if (sampleMix==null) return null;
-			
-			List<HttpSample> newHttpSamples = sampleMix.getHttpSamples();
-			
-			if (newHttpSamples==null || newHttpSamples.size()==0) {
-				continue;
-			} else {
-				httpSamples = newHttpSamples;
-				httpSamplesIndex = 1;
-				return httpSamples.get(0);
-			}
-		}		
-	}
+  public JtlHttpSampleReader(InputStream is) {
+    super(is);
+    jtlReader = new JtlSampleMixReader(is);
+  }
+
+  @Override
+  public HttpSample getObjectFromStream() throws Exception {
+    if (httpSamples != null && httpSamplesIndex < httpSamples.size()) {
+      HttpSample httpSample = httpSamples.get(httpSamplesIndex);
+      httpSamplesIndex++;
+      return httpSample;
+    }
+
+    while (true) {
+      SampleMix sampleMix = jtlReader.read();
+      if (sampleMix == null)
+        return null;
+
+      List<HttpSample> newHttpSamples = sampleMix.getHttpSamples();
+
+      if (newHttpSamples == null || newHttpSamples.size() == 0) {
+        continue;
+      } else {
+        httpSamples = newHttpSamples;
+        httpSamplesIndex = 1;
+        return httpSamples.get(0);
+      }
+    }
+  }
 
 }

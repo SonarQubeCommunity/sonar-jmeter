@@ -26,8 +26,11 @@ import es.excentia.jmeter.report.client.data.GlobalSummary;
 
 public interface OperationService extends Service {
 
-	void writeBucketMeasures(OutputStream os, String config, String metric, int millisBucket);
-	GlobalSummary getGlobalSummary(String config);
-	void writeGlobalSummary(OutputStream os, String config);
-	
+  void writeBucketMeasures(OutputStream os, String config, String metric,
+      int millisBucket);
+
+  GlobalSummary getGlobalSummary(String config);
+
+  void writeGlobalSummary(OutputStream os, String config);
+
 }

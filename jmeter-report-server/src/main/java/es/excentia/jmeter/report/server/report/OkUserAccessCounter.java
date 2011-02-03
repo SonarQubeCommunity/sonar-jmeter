@@ -26,36 +26,34 @@ import java.util.Map;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public class OkUserAccessCounter extends ReportData {
-	protected Map<String,Long> accessByUserCount = new HashMap<String, Long>(); 
-	protected long distictUsersCount;
-	
-	
-	public Map<String, Long> getAccessByUserCount() {
-		return accessByUserCount;
-	}
+  protected Map<String, Long> accessByUserCount = new HashMap<String, Long>();
+  protected long distictUsersCount;
 
-	public long getDistictUsersCount() {
-		return distictUsersCount;
-	}
+  public Map<String, Long> getAccessByUserCount() {
+    return accessByUserCount;
+  }
 
-	
-	@Override
-	public void addMeasure(AbstractSample sample) {
-		if (sample.getS()) {
-			String tn = sample.getTn();
-			Long accessCount = accessByUserCount.get(tn);
-			if (accessCount==null) {
-				distictUsersCount++;
-				accessByUserCount.put(tn, (long)1);
-			} else {
-				accessByUserCount.put(tn, accessCount++);
-			}
-		}
-	}
-	
-	@Override
-	public String toString() {
-		return Long.toString(distictUsersCount)+" "+accessByUserCount;
-	}
-	
+  public long getDistictUsersCount() {
+    return distictUsersCount;
+  }
+
+  @Override
+  public void addMeasure(AbstractSample sample) {
+    if (sample.getS()) {
+      String tn = sample.getTn();
+      Long accessCount = accessByUserCount.get(tn);
+      if (accessCount == null) {
+        distictUsersCount++;
+        accessByUserCount.put(tn, (long) 1);
+      } else {
+        accessByUserCount.put(tn, accessCount++);
+      }
+    }
+  }
+
+  @Override
+  public String toString() {
+    return Long.toString(distictUsersCount) + " " + accessByUserCount;
+  }
+
 }

@@ -23,43 +23,46 @@ package es.excentia.jmeter.report.server.report;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class TransMapSimplifier<TReportData,TValue> {
+public abstract class TransMapSimplifier<TReportData, TValue> {
 
-	Map<String,TReportData> origMap;
-	
-	public TransMapSimplifier() { }
-	public TransMapSimplifier(Map<String,TReportData> origMap) {
-		this.origMap = origMap;
-	}
+  Map<String, TReportData> origMap;
 
-	public final Map<String,TValue> toSimpleMap() {
-		return toSimpleMap(origMap);
-	}
-	
-	public final Map<String,TValue> toSimpleMap(Map<String,TReportData> origMap) {
-		Map<String,TValue> simpleMap = new HashMap<String,TValue>();
-		for (String key : origMap.keySet()) {
-			TValue value = reportDataToValue(origMap.get(key));
-			if (!isNullOrNaNNumber(value)) {
-				simpleMap.put(key, value);
-			}
-		}
-		return simpleMap;
-	}
-	
-	protected abstract TValue reportDataToValue(TReportData data);
-	
-	protected boolean isNullOrNaNNumber(TValue value) {
-		
-		if (value==null) return true;
-		if (value instanceof Double && (value==null || ((Double)value).isNaN())) {
-			return true;
-		}
-		if (value instanceof Float && (value==null || ((Float)value).isNaN())) {
-			return true;
-		}
-		
-		return false;
-	}
-	
+  public TransMapSimplifier() {
+  }
+
+  public TransMapSimplifier(Map<String, TReportData> origMap) {
+    this.origMap = origMap;
+  }
+
+  public final Map<String, TValue> toSimpleMap() {
+    return toSimpleMap(origMap);
+  }
+
+  public final Map<String, TValue> toSimpleMap(Map<String, TReportData> origMap) {
+    Map<String, TValue> simpleMap = new HashMap<String, TValue>();
+    for (String key : origMap.keySet()) {
+      TValue value = reportDataToValue(origMap.get(key));
+      if (!isNullOrNaNNumber(value)) {
+        simpleMap.put(key, value);
+      }
+    }
+    return simpleMap;
+  }
+
+  protected abstract TValue reportDataToValue(TReportData data);
+
+  protected boolean isNullOrNaNNumber(TValue value) {
+
+    if (value == null)
+      return true;
+    if (value instanceof Double && (value == null || ((Double) value).isNaN())) {
+      return true;
+    }
+    if (value instanceof Float && (value == null || ((Float) value).isNaN())) {
+      return true;
+    }
+
+    return false;
+  }
+
 }

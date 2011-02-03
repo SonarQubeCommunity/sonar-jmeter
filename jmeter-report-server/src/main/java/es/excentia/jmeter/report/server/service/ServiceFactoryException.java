@@ -24,18 +24,18 @@ import es.excentia.jmeter.report.server.exception.JMeterReportServerException;
 
 public class ServiceFactoryException extends JMeterReportServerException {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public ServiceFactoryException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public ServiceFactoryException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public ServiceFactoryException(String message) {
-		super(message);
-	}
+  public ServiceFactoryException(String message) {
+    super(message);
+  }
 
-	public ServiceFactoryException(Throwable cause) {
-		super(cause);
-	}
+  public ServiceFactoryException(Throwable cause) {
+    super(cause);
+  }
 
 }

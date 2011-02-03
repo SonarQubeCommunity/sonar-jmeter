@@ -23,36 +23,36 @@ package es.excentia.jmeter.report.server.report;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public class Duration extends ReportData {
-	
-	private static final int MILLISECONDS_IN_ONE_MINUTE = 60000;
-	
-	protected long startTs = -1;
-	protected long endTs = -1;
-	
-	public long getDuration() {
-		return endTs - startTs;
-	}
-	
-	public double getDurationInMinutes() {
-		return ((double)(endTs - startTs))/MILLISECONDS_IN_ONE_MINUTE;
-	}
 
-	@Override
-	public void addMeasure(AbstractSample sample) {
-		long ts = sample.getTs();
-		
-		if (startTs==-1 || ts<startTs) {
-			startTs = ts;
-		}
-		
-		if (ts>endTs) {
-			endTs = ts;
-		}
-	}
-	
-	@Override
-	public String toString() {
-		return Double.toString(getDurationInMinutes()) +" min.";
-	}
-	
+  private static final int MILLISECONDS_IN_ONE_MINUTE = 60000;
+
+  protected long startTs = -1;
+  protected long endTs = -1;
+
+  public long getDuration() {
+    return endTs - startTs;
+  }
+
+  public double getDurationInMinutes() {
+    return ((double) (endTs - startTs)) / MILLISECONDS_IN_ONE_MINUTE;
+  }
+
+  @Override
+  public void addMeasure(AbstractSample sample) {
+    long ts = sample.getTs();
+
+    if (startTs == -1 || ts < startTs) {
+      startTs = ts;
+    }
+
+    if (ts > endTs) {
+      endTs = ts;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return Double.toString(getDurationInMinutes()) + " min.";
+  }
+
 }

@@ -28,26 +28,23 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 public class BucketMeasuresTransformerFactory {
 
-	private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.transformer";
+  private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.transformer";
 
-	@SuppressWarnings("unchecked")
-	public static synchronized Transformer<HttpSample,Measure> get(
-		String name, 
-		StreamReader<HttpSample> reader, 
-		StreamWriter<Measure> writer, 
-		int millisBucket
-	) {
-		try {
-			
-			Class<Transformer<HttpSample,Measure>> clazz = (Class<Transformer<HttpSample,Measure>>) 
-				Class.forName(IMPL_PACKAGE+ "." + name + "Transformer");
-			
-			return clazz
-				.getConstructor(new Class<?>[] {StreamReader.class, StreamWriter.class, int.class})
-				.newInstance(new Object[] {reader, writer, millisBucket});
-			
-		} catch (Exception e) {
-			throw new BuckedMeasuresTransformerFactoryException(e);
-		}
-	}
+  @SuppressWarnings("unchecked")
+  public static synchronized Transformer<HttpSample, Measure> get(String name,
+      StreamReader<HttpSample> reader, StreamWriter<Measure> writer,
+      int millisBucket) {
+    try {
+
+      Class<Transformer<HttpSample, Measure>> clazz = (Class<Transformer<HttpSample, Measure>>) Class
+          .forName(IMPL_PACKAGE + "." + name + "Transformer");
+
+      return clazz.getConstructor(
+          new Class<?>[] { StreamReader.class, StreamWriter.class, int.class })
+          .newInstance(new Object[] { reader, writer, millisBucket });
+
+    } catch (Exception e) {
+      throw new BuckedMeasuresTransformerFactoryException(e);
+    }
+  }
 }

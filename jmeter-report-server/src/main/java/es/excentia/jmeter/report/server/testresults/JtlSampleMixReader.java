@@ -39,82 +39,81 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
  * 
  */
 public class JtlSampleMixReader extends StreamReader<SampleMix> {
-	
-	private static final Logger log = LoggerFactory.getLogger(JtlSampleMixReader.class);
-	private static final boolean LOG_WARN = log.isWarnEnabled();
-	
-	protected JtlAbstractSampleReader jtlReader;
-	
-	public JtlSampleMixReader(InputStream is) {
-		super(is);
-		jtlReader = new JtlAbstractSampleReader(is);
-	}
-	
-	protected boolean isTransaction(Sample sample) {
-		if (sample.getRm()!=null && 
-			sample.getRm().contains("Number of samples in transaction")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	protected boolean addTransaction(
-			Sample sample, 
-			List<Sample> samples, 
-			List<HttpSample> httpSamples
-	) {
-		if (!isTransaction(sample)) return false;
-		
-		samples.add(sample);
-		
-		// Anotamos los HttpSamples que cuelgan de la transacción
-		for (HttpSample httpSample : sample.getHttpSampleArray()) {
-			httpSamples.add(httpSample);
-		}
-		
-		// Anotamos las transacciones hijas
-		for (Sample s : sample.getSampleArray()) {
-			addTransaction(s, samples, httpSamples);
-		}
-		
-		return true;
-	}
-	
-	@Override
-	public SampleMix getObjectFromStream() throws Exception {
-		AbstractSample abstractSample = jtlReader.read();	
-		if (abstractSample==null) return null;
-		
-		List<Sample> transactions = new ArrayList<Sample>();
-		List<HttpSample> httpSamples = new ArrayList<HttpSample>();
-		
-		boolean addedNodes = false;
-		while (abstractSample!=null) {
-			
-			// Se trata de un Sample o de un HttpSample?
-			if (abstractSample instanceof Sample) {
-				addedNodes = addTransaction(
-					(Sample)abstractSample, transactions, httpSamples
-				);
-			} else if(abstractSample instanceof HttpSample) {
-				httpSamples.add((HttpSample)abstractSample);
-				addedNodes = true;
-			} else {
-				if (LOG_WARN) {
-					log.warn("Tipo de sample no reconocido: " + 
-							abstractSample.getClass().getSimpleName());
-				}
-			}
-			
-			if(addedNodes) {
-				return new SampleMix(transactions, httpSamples);
-			}
-			
-			abstractSample = jtlReader.read();
-		}
-		
-		return null;
-	}
+
+  private static final Logger log = LoggerFactory
+      .getLogger(JtlSampleMixReader.class);
+  private static final boolean LOG_WARN = log.isWarnEnabled();
+
+  protected JtlAbstractSampleReader jtlReader;
+
+  public JtlSampleMixReader(InputStream is) {
+    super(is);
+    jtlReader = new JtlAbstractSampleReader(is);
+  }
+
+  protected boolean isTransaction(Sample sample) {
+    if (sample.getRm() != null
+        && sample.getRm().contains("Number of samples in transaction")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  protected boolean addTransaction(Sample sample, List<Sample> samples,
+      List<HttpSample> httpSamples) {
+    if (!isTransaction(sample))
+      return false;
+
+    samples.add(sample);
+
+    // Anotamos los HttpSamples que cuelgan de la transacción
+    for (HttpSample httpSample : sample.getHttpSampleArray()) {
+      httpSamples.add(httpSample);
+    }
+
+    // Anotamos las transacciones hijas
+    for (Sample s : sample.getSampleArray()) {
+      addTransaction(s, samples, httpSamples);
+    }
+
+    return true;
+  }
+
+  @Override
+  public SampleMix getObjectFromStream() throws Exception {
+    AbstractSample abstractSample = jtlReader.read();
+    if (abstractSample == null)
+      return null;
+
+    List<Sample> transactions = new ArrayList<Sample>();
+    List<HttpSample> httpSamples = new ArrayList<HttpSample>();
+
+    boolean addedNodes = false;
+    while (abstractSample != null) {
+
+      // Se trata de un Sample o de un HttpSample?
+      if (abstractSample instanceof Sample) {
+        addedNodes = addTransaction((Sample) abstractSample, transactions,
+            httpSamples);
+      } else if (abstractSample instanceof HttpSample) {
+        httpSamples.add((HttpSample) abstractSample);
+        addedNodes = true;
+      } else {
+        if (LOG_WARN) {
+          log.warn("Tipo de sample no reconocido: "
+              + abstractSample.getClass().getSimpleName());
+        }
+      }
+
+      if (addedNodes) {
+        return new SampleMix(transactions, httpSamples);
+      }
+
+      abstractSample = jtlReader.read();
+    }
+
+    return null;
+  }
 
 }

@@ -41,78 +41,75 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 public class ConfigServiceImpl implements ConfigService {
 
-	/**
-     * Load jmeter report server properties file from the classpath
-     */
-    protected static Properties getPropertiesFromClasspath() {
-        Properties props = new Properties();
-        
-        String propsName = JMeterReportConst.REPORT_SERVER_PROPERTIES;
-        URL url = ClassLoader.getSystemResource(propsName);
-        if (url==null) {
-        	throw new ConfigException(
-        		"Properties file '"+propsName+"' doesn't exist");
-		}
-        
-        try {
-			props.load(url.openStream());
-		} catch (IOException e) {
-			throw new ConfigException(
-				"Cannot load properties file: "+propsName);
-		}
-		
-        return props;
+  /**
+   * Load jmeter report server properties file from the classpath
+   */
+  protected static Properties getPropertiesFromClasspath() {
+    Properties props = new Properties();
+
+    String propsName = JMeterReportConst.REPORT_SERVER_PROPERTIES;
+    URL url = ClassLoader.getSystemResource(propsName);
+    if (url == null) {
+      throw new ConfigException("Properties file '" + propsName
+          + "' doesn't exist");
     }
-    
-	protected InputStream getInputStreamByConfig(String config) {
-		
-		InputStream is = null;
-		
-		if (config.startsWith("test")) {
-			// Modo test: Las métricas se recogerán a partir de archivos
-			// de recursos de test del classpath
-			is = getClass().getResourceAsStream("/"+config+".jtl.xml");
-		}
-		
-		if (is==null) {
-			// Obtenemos la ubicación del fichero jtl a partir del fichero
-			// de properties
-			Properties props = getPropertiesFromClasspath();
-			String jtlPathProp = "testconfig."+config+".jtlpath";
-			String jtlPath = props.getProperty(jtlPathProp);
-			
-			if (jtlPath==null) {
-				throw new ConfigException(
-					"There is no property "+jtlPathProp+" in "+
-					JMeterReportConst.REPORT_SERVER_PROPERTIES
-				);
-			}
-			
-			try {
-				is = new FileInputStream(new File(jtlPath));
-			} catch (FileNotFoundException e) {
-				throw new ConfigException(
-					"JTL file defined for config '"+config+"' doesn't exist"
-				);
-			}
-		}
-		
-		return is;
-	}
-	
-	public StreamReader<AbstractSample> getAbstractSampleReaderByConfig(String config) {
-		InputStream is = getInputStreamByConfig(config);
-		return new JtlAbstractSampleReader(is);
-	}
-	
-	public StreamReader<HttpSample> getHttpSampleReaderByConfig(String config) {
-		InputStream is = getInputStreamByConfig(config);
-		return new JtlHttpSampleReader(is);
-	}
-	
-	public StreamReader<SampleMix> getSampleMixReaderByConfig(String config) {
-		InputStream is = getInputStreamByConfig(config);
-		return new JtlSampleMixReader(is);
-	}
-		
+
+    try {
+      props.load(url.openStream());
+    } catch (IOException e) {
+      throw new ConfigException("Cannot load properties file: " + propsName);
+    }
+
+    return props;
+  }
+
+  protected InputStream getInputStreamByConfig(String config) {
+
+    InputStream is = null;
+
+    if (config.startsWith("test")) {
+      // Modo test: Las métricas se recogerán a partir de archivos
+      // de recursos de test del classpath
+      is = getClass().getResourceAsStream("/" + config + ".jtl.xml");
+    }
+
+    if (is == null) {
+      // Obtenemos la ubicación del fichero jtl a partir del fichero
+      // de properties
+      Properties props = getPropertiesFromClasspath();
+      String jtlPathProp = "testconfig." + config + ".jtlpath";
+      String jtlPath = props.getProperty(jtlPathProp);
+
+      if (jtlPath == null) {
+        throw new ConfigException("There is no property " + jtlPathProp
+            + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
+      }
+
+      try {
+        is = new FileInputStream(new File(jtlPath));
+      } catch (FileNotFoundException e) {
+        throw new ConfigException("JTL file defined for config '" + config
+            + "' doesn't exist");
+      }
+    }
+
+    return is;
+  }
+
+  public StreamReader<AbstractSample> getAbstractSampleReaderByConfig(
+      String config) {
+    InputStream is = getInputStreamByConfig(config);
+    return new JtlAbstractSampleReader(is);
+  }
+
+  public StreamReader<HttpSample> getHttpSampleReaderByConfig(String config) {
+    InputStream is = getInputStreamByConfig(config);
+    return new JtlHttpSampleReader(is);
+  }
+
+  public StreamReader<SampleMix> getSampleMixReaderByConfig(String config) {
+    InputStream is = getInputStreamByConfig(config);
+    return new JtlSampleMixReader(is);
+  }
+
 }

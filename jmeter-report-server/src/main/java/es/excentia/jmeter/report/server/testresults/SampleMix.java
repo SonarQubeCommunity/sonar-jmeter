@@ -26,22 +26,21 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 
 public class SampleMix {
-	
-	List<Sample> transactions;
-	List<HttpSample> httpSamples;
-	
-	public SampleMix(List<Sample> transactions, List<HttpSample> httpSamples) {
-		this.transactions = transactions;
-		this.httpSamples = httpSamples;
-	}
 
-	public List<Sample> getTransactions() {
-		return transactions;
-	}
+  List<Sample> transactions;
+  List<HttpSample> httpSamples;
 
-	public List<HttpSample> getHttpSamples() {
-		return httpSamples;
-	}
-	
-	
+  public SampleMix(List<Sample> transactions, List<HttpSample> httpSamples) {
+    this.transactions = transactions;
+    this.httpSamples = httpSamples;
+  }
+
+  public List<Sample> getTransactions() {
+    return transactions;
+  }
+
+  public List<HttpSample> getHttpSamples() {
+    return httpSamples;
+  }
+
 }

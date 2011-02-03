@@ -24,18 +24,18 @@ import es.excentia.jmeter.report.server.exception.JMeterReportServerException;
 
 public class JtlReaderException extends JMeterReportServerException {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public JtlReaderException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public JtlReaderException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public JtlReaderException(String message) {
-		super(message);
-	}
+  public JtlReaderException(String message) {
+    super(message);
+  }
 
-	public JtlReaderException(Throwable cause) {
-		super(cause);
-	}
+  public JtlReaderException(Throwable cause) {
+    super(cause);
+  }
 
 }

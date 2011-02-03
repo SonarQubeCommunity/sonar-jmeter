@@ -25,25 +25,24 @@ import java.util.Map;
 
 public class ServiceFactory {
 
-	private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.service.impl";
+  private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.service.impl";
 
-	private static Map<Class<? extends Service>, Service> map = new HashMap<Class<? extends Service>, Service>();
+  private static Map<Class<? extends Service>, Service> map = new HashMap<Class<? extends Service>, Service>();
 
-	@SuppressWarnings("unchecked")
-	public static synchronized <T extends Service> T get(Class<T> service) {
-		T serviceInstance = (T) map.get(service);
-		if (serviceInstance == null) {
-			try {
-				Class<T> serviceImpl = (Class<T>) Class.forName(IMPL_PACKAGE
-						+ "." + service.getSimpleName() + "Impl");
-				serviceInstance = serviceImpl
-					.getConstructor((Class<?> [])null)
-					.newInstance((Object[])null);
-			} catch (Exception e) {
-				throw new ServiceFactoryException(e);
-			}
-			map.put(service, serviceInstance);
-		}
-		return serviceInstance;
-	}
+  @SuppressWarnings("unchecked")
+  public static synchronized <T extends Service> T get(Class<T> service) {
+    T serviceInstance = (T) map.get(service);
+    if (serviceInstance == null) {
+      try {
+        Class<T> serviceImpl = (Class<T>) Class.forName(IMPL_PACKAGE + "."
+            + service.getSimpleName() + "Impl");
+        serviceInstance = serviceImpl.getConstructor((Class<?>[]) null)
+            .newInstance((Object[]) null);
+      } catch (Exception e) {
+        throw new ServiceFactoryException(e);
+      }
+      map.put(service, serviceInstance);
+    }
+    return serviceInstance;
+  }
 }

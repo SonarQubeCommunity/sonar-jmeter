@@ -25,11 +25,12 @@ import es.excentia.jmeter.report.server.testresults.SampleMix;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
-
 public interface ConfigService extends Service {
 
-	StreamReader<AbstractSample> getAbstractSampleReaderByConfig(String config);
-	StreamReader<HttpSample> getHttpSampleReaderByConfig(String config);
-	StreamReader<SampleMix> getSampleMixReaderByConfig(String config);
-	
+  StreamReader<AbstractSample> getAbstractSampleReaderByConfig(String config);
+
+  StreamReader<HttpSample> getHttpSampleReaderByConfig(String config);
+
+  StreamReader<SampleMix> getSampleMixReaderByConfig(String config);
+
 }

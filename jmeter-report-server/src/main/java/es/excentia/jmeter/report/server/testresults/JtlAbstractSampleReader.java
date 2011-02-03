@@ -46,148 +46,151 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.TestResultsDocument
 /**
  * Reader para obtener objetos a partir de un fichero jtl
  * 
- * El procedimiento de lectura con stax y xmlbeans para
- * poder leer ficheros grandes se ha tomado de 
- * http://www.devx.com/xml/Article/34037/1954
- *
+ * El procedimiento de lectura con stax y xmlbeans para poder leer ficheros
+ * grandes se ha tomado de http://www.devx.com/xml/Article/34037/1954
+ * 
  * @author cfillol
  * 
  */
 @SuppressWarnings("restriction")
 public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
 
-	public static final String NAMESPACE = "http://xmlbeans.testresults.server.report.jmeter.excentia.es";
-	
-	private static final int NODE_READ_BUFFER_MAX_BYTES = 1024 * 1024;
-	
-	private static final String HTTPSAMPLE_TAG_NAME = "httpSample";
-	private static final String SAMPLE_TAG_NAME = "sample";
-	
-	private static final Logger log = LoggerFactory.getLogger(JtlAbstractSampleReader.class);
-	private static final boolean LOG_DEBUG = log.isDebugEnabled();
-	private static final boolean LOG_TRACE = log.isTraceEnabled();
-	
-	protected XMLEventReader reader;
-	protected XMLEventWriter writer;
-	protected XmlOptions options;
-	protected XmlOptions validationOptions;
-	protected ArrayList<XmlValidationError> validationErrors = new ArrayList<XmlValidationError>();
-	protected ResettableStringWriter swriter;
-	protected int readCount = 0;
+  public static final String NAMESPACE = "http://xmlbeans.testresults.server.report.jmeter.excentia.es";
 
-	public JtlAbstractSampleReader(InputStream is) {
-		super(is);
-		
-		if (LOG_DEBUG) {
-			log.debug("Creating JtlAbstractSampleReader ...");
-		}
-		
-		try {
-			
-			// Create the input reader to read the file. We will
-			// use the defaults here, but it could be configured
-			// using the properties.
-			XMLInputFactory inFactory = XMLInputFactory.newInstance();
-			reader = inFactory.createXMLEventReader(is);
-	
-			// Create an output writer. The writer uses the resettable
-			// buffer so we can use the same writer continuously.
-			XMLOutputFactory outFactory = XMLOutputFactory.newInstance();
-			outFactory.setProperty("javax.xml.stream.isRepairingNamespaces", true);
-			swriter = new ResettableStringWriter(NODE_READ_BUFFER_MAX_BYTES);
-			writer = outFactory.createXMLEventWriter(swriter);
-			
-	        options = new XmlOptions();
-			Map<String, String> ns = new HashMap<String, String>(); 
-		    ns.put("", NAMESPACE); 
-		    options.setLoadSubstituteNamespaces(ns); 
-		    options.setDocumentType(TestResultsDocument.TestResults.type);
-		    
-		    validationOptions = new XmlOptions();
-		    validationOptions.setErrorListener(validationErrors);
-		    
-		} catch (Exception e) {
-			if (LOG_DEBUG) {
-				log.debug("Cannot create JtlReader", e);
-			}
-			throw new JtlReaderException("Cannot create JtlReader", e);
-		}
-	}
+  private static final int NODE_READ_BUFFER_MAX_BYTES = 1024 * 1024;
 
-	@Override
-	protected AbstractSample getObjectFromStream() throws Exception {
-		
-		// Begin reading events
-		int sampleDepth = 0;
-		while (reader.hasNext()) {
-				
-			XMLEvent evt = reader.nextEvent();
+  private static final String HTTPSAMPLE_TAG_NAME = "httpSample";
+  private static final String SAMPLE_TAG_NAME = "sample";
 
-			// Empieza un HttpSample ...
-			if (evt.isStartElement()) {
-				StartElement elem = (StartElement) evt;
-				String tagName = elem.getName().getLocalPart();
-				if (HTTPSAMPLE_TAG_NAME.equals(tagName) || SAMPLE_TAG_NAME.equals(tagName)) {
-					sampleDepth++;
-				}
-			}
+  private static final Logger log = LoggerFactory
+      .getLogger(JtlAbstractSampleReader.class);
+  private static final boolean LOG_DEBUG = log.isDebugEnabled();
+  private static final boolean LOG_TRACE = log.isTraceEnabled();
 
-			// Nos quedamos con el xml que cuelga del primer HttpSample 
-			// y de todos sus descendiente
-			if (sampleDepth>0) {
-				writer.add(evt);
-			}
-			
-			if (evt.isEndElement()) {
-				EndElement elem = (EndElement) evt;
-				String tagName = elem.getName().getLocalPart();
-				if (HTTPSAMPLE_TAG_NAME.equals(tagName) || SAMPLE_TAG_NAME.equals(tagName)) {
-					
-					readCount++;	// Actualizamos el contador de HttSamples leídos
-					
-					if (sampleDepth==1) {
-						// Si llegamos al final del HttpSample padre,
-						// terminamos de guardar el xml que nos interesa y
-						// lo devolvemos en forma de objeto
-						
-						// Flush the write and grabe the XML from
-			            // the memory, string buffer. At the same time
-			            // we reset the position in the buffer.
-						writer.flush();
-			            String sampleXml = swriter.reset();
-			            
-			            if (LOG_TRACE) {
-			            	log.trace(sampleXml);
-			            }
-			            
-						// Convertimos el xml en objeto de XmlBeans.
-			            // Con XmlBeans, tenemos que usar el nodo padre para cargar
-			            // el fragmento interno de xml.
-			            TestResultsDocument.TestResults testResults = (TestResultsDocument.TestResults) 
-			            		XmlObject.Factory.parse(sampleXml, options);
-			            if (!testResults.validate(validationOptions)) {
-			            	throw new JtlReaderException(validationErrors.get(0).toString());
-			            }
-			            
-			            // Devolvemos el HttpSample leído
-			            if (HTTPSAMPLE_TAG_NAME.equals(tagName)) {
-			            	return testResults.getHttpSampleArray(0);
-			            } else {
-			            	return testResults.getSampleArray(0);
-			            }
-					}
-					
-		            sampleDepth--;
-				}
-			}
-				
-		}
+  protected XMLEventReader reader;
+  protected XMLEventWriter writer;
+  protected XmlOptions options;
+  protected XmlOptions validationOptions;
+  protected ArrayList<XmlValidationError> validationErrors = new ArrayList<XmlValidationError>();
+  protected ResettableStringWriter swriter;
+  protected int readCount = 0;
 
-		if (LOG_DEBUG) {
-			log.debug(String.format("JtlAbstractSampleReader read %d nodes", readCount));
-		}
-		
-		return null;
-	}
+  public JtlAbstractSampleReader(InputStream is) {
+    super(is);
+
+    if (LOG_DEBUG) {
+      log.debug("Creating JtlAbstractSampleReader ...");
+    }
+
+    try {
+
+      // Create the input reader to read the file. We will
+      // use the defaults here, but it could be configured
+      // using the properties.
+      XMLInputFactory inFactory = XMLInputFactory.newInstance();
+      reader = inFactory.createXMLEventReader(is);
+
+      // Create an output writer. The writer uses the resettable
+      // buffer so we can use the same writer continuously.
+      XMLOutputFactory outFactory = XMLOutputFactory.newInstance();
+      outFactory.setProperty("javax.xml.stream.isRepairingNamespaces", true);
+      swriter = new ResettableStringWriter(NODE_READ_BUFFER_MAX_BYTES);
+      writer = outFactory.createXMLEventWriter(swriter);
+
+      options = new XmlOptions();
+      Map<String, String> ns = new HashMap<String, String>();
+      ns.put("", NAMESPACE);
+      options.setLoadSubstituteNamespaces(ns);
+      options.setDocumentType(TestResultsDocument.TestResults.type);
+
+      validationOptions = new XmlOptions();
+      validationOptions.setErrorListener(validationErrors);
+
+    } catch (Exception e) {
+      if (LOG_DEBUG) {
+        log.debug("Cannot create JtlReader", e);
+      }
+      throw new JtlReaderException("Cannot create JtlReader", e);
+    }
+  }
+
+  @Override
+  protected AbstractSample getObjectFromStream() throws Exception {
+
+    // Begin reading events
+    int sampleDepth = 0;
+    while (reader.hasNext()) {
+
+      XMLEvent evt = reader.nextEvent();
+
+      // Empieza un HttpSample ...
+      if (evt.isStartElement()) {
+        StartElement elem = (StartElement) evt;
+        String tagName = elem.getName().getLocalPart();
+        if (HTTPSAMPLE_TAG_NAME.equals(tagName)
+            || SAMPLE_TAG_NAME.equals(tagName)) {
+          sampleDepth++;
+        }
+      }
+
+      // Nos quedamos con el xml que cuelga del primer HttpSample
+      // y de todos sus descendiente
+      if (sampleDepth > 0) {
+        writer.add(evt);
+      }
+
+      if (evt.isEndElement()) {
+        EndElement elem = (EndElement) evt;
+        String tagName = elem.getName().getLocalPart();
+        if (HTTPSAMPLE_TAG_NAME.equals(tagName)
+            || SAMPLE_TAG_NAME.equals(tagName)) {
+
+          readCount++; // Actualizamos el contador de HttSamples leídos
+
+          if (sampleDepth == 1) {
+            // Si llegamos al final del HttpSample padre,
+            // terminamos de guardar el xml que nos interesa y
+            // lo devolvemos en forma de objeto
+
+            // Flush the write and grabe the XML from
+            // the memory, string buffer. At the same time
+            // we reset the position in the buffer.
+            writer.flush();
+            String sampleXml = swriter.reset();
+
+            if (LOG_TRACE) {
+              log.trace(sampleXml);
+            }
+
+            // Convertimos el xml en objeto de XmlBeans.
+            // Con XmlBeans, tenemos que usar el nodo padre para cargar
+            // el fragmento interno de xml.
+            TestResultsDocument.TestResults testResults = (TestResultsDocument.TestResults) XmlObject.Factory
+                .parse(sampleXml, options);
+            if (!testResults.validate(validationOptions)) {
+              throw new JtlReaderException(validationErrors.get(0).toString());
+            }
+
+            // Devolvemos el HttpSample leído
+            if (HTTPSAMPLE_TAG_NAME.equals(tagName)) {
+              return testResults.getHttpSampleArray(0);
+            } else {
+              return testResults.getSampleArray(0);
+            }
+          }
+
+          sampleDepth--;
+        }
+      }
+
+    }
+
+    if (LOG_DEBUG) {
+      log.debug(String.format("JtlAbstractSampleReader read %d nodes",
+          readCount));
+    }
+
+    return null;
+  }
 
 }

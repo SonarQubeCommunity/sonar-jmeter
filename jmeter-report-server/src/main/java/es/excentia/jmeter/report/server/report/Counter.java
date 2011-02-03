@@ -21,43 +21,51 @@
 package es.excentia.jmeter.report.server.report;
 
 public abstract class Counter extends ReportData {
-	
-	protected long total;
-	protected long counter;
-	
-	protected void incrementTotal() { total++; }
-	protected void incrementCounter() { counter++; }
-	
-	public long getTotal() {
-		return total;
-	}
-	
-	public long getCounter() {
-		return counter;
-	}
-	
-	public long getOpositeCounter() {
-		long opositeCounter = getTotal() - counter;
-		if (opositeCounter<=0) return 0;
-		
-		return opositeCounter;
-	}
-	
-	public double getPercent() {
-		if (counter==0) return 0;
-		
-		return (counter*100.0)/getTotal();
-	}
-	
-	public double getOpositePercent() {
-		long opositeCounter = getOpositeCounter();
-		if (opositeCounter==0) return 0;
-		
-		return (opositeCounter*100.0)/getTotal();
-	}
 
-	@Override
-	public String toString() {
-		return getCounter() + " ("+Math.round(getPercent())+"%)";
-	}
+  protected long total;
+  protected long counter;
+
+  protected void incrementTotal() {
+    total++;
+  }
+
+  protected void incrementCounter() {
+    counter++;
+  }
+
+  public long getTotal() {
+    return total;
+  }
+
+  public long getCounter() {
+    return counter;
+  }
+
+  public long getOpositeCounter() {
+    long opositeCounter = getTotal() - counter;
+    if (opositeCounter <= 0)
+      return 0;
+
+    return opositeCounter;
+  }
+
+  public double getPercent() {
+    if (counter == 0)
+      return 0;
+
+    return (counter * 100.0) / getTotal();
+  }
+
+  public double getOpositePercent() {
+    long opositeCounter = getOpositeCounter();
+    if (opositeCounter == 0)
+      return 0;
+
+    return (opositeCounter * 100.0) / getTotal();
+  }
+
+  @Override
+  public String toString() {
+    return getCounter() + " (" + Math.round(getPercent()) + "%)";
+  }
 }

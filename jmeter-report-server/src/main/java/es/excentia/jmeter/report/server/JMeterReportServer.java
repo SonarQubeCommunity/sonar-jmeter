@@ -41,152 +41,155 @@ import es.excentia.jmeter.report.server.service.ServiceFactory;
  */
 public class JMeterReportServer {
 
-	private static final Logger log = LoggerFactory.getLogger(JMeterReportServer.class);
-	private static final boolean LOG_DEBUG = log.isDebugEnabled();
-	private static final boolean LOG_TRACE = log.isTraceEnabled();
+  private static final Logger log = LoggerFactory
+      .getLogger(JMeterReportServer.class);
+  private static final boolean LOG_DEBUG = log.isDebugEnabled();
+  private static final boolean LOG_TRACE = log.isTraceEnabled();
 
-	private static int port = 4444, maxConnections = 0;
-	
-	private ServerSocket listener;;
-	private Thread serverThread;
-	private int connections = 0;
-	private boolean stopWhenPossible = false;
-	
-	protected OperationService metricService = ServiceFactory.get(OperationService.class);
-	
-	/**
-	 * Atendemos en forma de hilos las peticiones de los clientes
-	 */
-	class RequestThread implements Runnable {
-		
-		private Socket socket;
+  private static int port = 4444, maxConnections = 0;
 
-		RequestThread(Socket socket) {
-			this.socket = socket;
-		}
+  private ServerSocket listener;;
+  private Thread serverThread;
+  private int connections = 0;
+  private boolean stopWhenPossible = false;
 
-		public void run() {
+  protected OperationService metricService = ServiceFactory
+      .get(OperationService.class);
 
-			try {
+  /**
+   * Atendemos en forma de hilos las peticiones de los clientes
+   */
+  class RequestThread implements Runnable {
 
-				DataInputStream in = new DataInputStream(socket.getInputStream());
-				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+    private Socket socket;
 
-				int op = in.readInt();
-				if (LOG_DEBUG) {
-					log.debug("Attending client request operation: " + op);
-				}
-				
-				try {	
-					
-					String config;
-					String metric;
-					
-					switch (op) {
-					case JMeterReportConst.OP_GET_GLOBAL_SUMMARY:
-						config = in.readUTF();
-						metricService.writeGlobalSummary(out, config);
-						break;
-						
-					case JMeterReportConst.OP_GET_BUCKET_MEASURES:
-						config = in.readUTF();
-						metric = in.readUTF();
-						int millisBucket = in.readInt();
-						metricService.writeBucketMeasures(out, config, metric, millisBucket);
-						break;
-						
-					default:
-						throw new JMeterReportServerException("Invalid operation code: "+op);
-					}
-				
-				} catch (IOException ioe) {
-					log.error("IOException on socket listen", ioe);
-				} catch (Exception e) {
-					log.error("Report request exception", e);
+    RequestThread(Socket socket) {
+      this.socket = socket;
+    }
 
-					// Comunicamos el error al cliente
-					out.writeInt(JMeterReportConst.RETURN_CODE_ERROR);
-					out.writeUTF(e.getMessage());
-				} 
-				
-			} catch (IOException ioe) {
-				log.error("IOException on socket listen", ioe);
-			} finally {
-				try {
-					connections--;
-					socket.close();
-				} catch (Exception e) {
-					log.error("Cannot close server socket", e);
-				}
-			}
-		}
+    public void run() {
 
-	}
-	
-	/**
-	 *  Listen for incoming connections and handle them
-	 */
-	private void startListening() {
-		try {
-			
-			log.info("Starting server on port "+port);
-			
-			listener = new ServerSocket(port);
-			Socket socket;
+      try {
 
-			while ((connections++ < maxConnections) || (maxConnections == 0))  {
-				socket = listener.accept();
-				RequestThread requestThread = new RequestThread(socket);
-				Thread t = new Thread(requestThread);
-				t.start();
-			}
-			
-		} catch (IOException ioe) {
-			if (LOG_TRACE) {
-				log.trace("IOException on socket listen", ioe);
-			} else if (!stopWhenPossible) {
-				log.error("IOException on socket listen", ioe);
-			}
-		}
-		
-		log.info("Server stopped");
-	}
-	
-	/**
-	 *  Listen for incoming connections and handle them
-	 *  in a thread, without stopping execution
-	 */
-	public void start() {
-		if (serverThread==null) {
-			stopWhenPossible = false;
-			serverThread = new Thread(new Runnable() {
-				public void run() {
-					startListening();
-				}
-			});
-			serverThread.start();
-		}
-	}
-	
-	public void stop() {
-		if (listener!=null) {
-			log.info("Stopping server ...");
-			
-			stopWhenPossible = true;
-			
-			try {
-				listener.close();
-			} catch (IOException e) {
-				log.error("Error parando el servidor", e);
-			} finally {
-				listener = null;
-			}
-		}
-	}
-	
-	public static void main(String[] args) {
-		new JMeterReportServer().startListening();
-	}
+        DataInputStream in = new DataInputStream(socket.getInputStream());
+        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+
+        int op = in.readInt();
+        if (LOG_DEBUG) {
+          log.debug("Attending client request operation: " + op);
+        }
+
+        try {
+
+          String config;
+          String metric;
+
+          switch (op) {
+          case JMeterReportConst.OP_GET_GLOBAL_SUMMARY:
+            config = in.readUTF();
+            metricService.writeGlobalSummary(out, config);
+            break;
+
+          case JMeterReportConst.OP_GET_BUCKET_MEASURES:
+            config = in.readUTF();
+            metric = in.readUTF();
+            int millisBucket = in.readInt();
+            metricService
+                .writeBucketMeasures(out, config, metric, millisBucket);
+            break;
+
+          default:
+            throw new JMeterReportServerException("Invalid operation code: "
+                + op);
+          }
+
+        } catch (IOException ioe) {
+          log.error("IOException on socket listen", ioe);
+        } catch (Exception e) {
+          log.error("Report request exception", e);
+
+          // Comunicamos el error al cliente
+          out.writeInt(JMeterReportConst.RETURN_CODE_ERROR);
+          out.writeUTF(e.getMessage());
+        }
+
+      } catch (IOException ioe) {
+        log.error("IOException on socket listen", ioe);
+      } finally {
+        try {
+          connections--;
+          socket.close();
+        } catch (Exception e) {
+          log.error("Cannot close server socket", e);
+        }
+      }
+    }
+
+  }
+
+  /**
+   * Listen for incoming connections and handle them
+   */
+  private void startListening() {
+    try {
+
+      log.info("Starting server on port " + port);
+
+      listener = new ServerSocket(port);
+      Socket socket;
+
+      while ((connections++ < maxConnections) || (maxConnections == 0)) {
+        socket = listener.accept();
+        RequestThread requestThread = new RequestThread(socket);
+        Thread t = new Thread(requestThread);
+        t.start();
+      }
+
+    } catch (IOException ioe) {
+      if (LOG_TRACE) {
+        log.trace("IOException on socket listen", ioe);
+      } else if (!stopWhenPossible) {
+        log.error("IOException on socket listen", ioe);
+      }
+    }
+
+    log.info("Server stopped");
+  }
+
+  /**
+   * Listen for incoming connections and handle them in a thread, without
+   * stopping execution
+   */
+  public void start() {
+    if (serverThread == null) {
+      stopWhenPossible = false;
+      serverThread = new Thread(new Runnable() {
+        public void run() {
+          startListening();
+        }
+      });
+      serverThread.start();
+    }
+  }
+
+  public void stop() {
+    if (listener != null) {
+      log.info("Stopping server ...");
+
+      stopWhenPossible = true;
+
+      try {
+        listener.close();
+      } catch (IOException e) {
+        log.error("Error parando el servidor", e);
+      } finally {
+        listener = null;
+      }
+    }
+  }
+
+  public static void main(String[] args) {
+    new JMeterReportServer().startListening();
+  }
 
 }
-

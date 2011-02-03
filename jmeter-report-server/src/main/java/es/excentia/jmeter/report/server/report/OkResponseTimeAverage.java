@@ -23,18 +23,18 @@ package es.excentia.jmeter.report.server.report;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public class OkResponseTimeAverage extends Average {
-	@Override
-	public void addMeasure(AbstractSample sample) {
-		if (sample.getS()) {
-			switch (getSummary().getActualPhaseIndex()) {
-			case Report.FIRST_PHASE:
-				incrementTotal();
-				addToAvg(sample.getT());
-				break;
-			case Report.SECOND_PHASE:
-				addToDev(sample.getT());
-				break;
-			}
-		}
-	}
+  @Override
+  public void addMeasure(AbstractSample sample) {
+    if (sample.getS()) {
+      switch (getSummary().getActualPhaseIndex()) {
+      case Report.FIRST_PHASE:
+        incrementTotal();
+        addToAvg(sample.getT());
+        break;
+      case Report.SECOND_PHASE:
+        addToDev(sample.getT());
+        break;
+      }
+    }
+  }
 }

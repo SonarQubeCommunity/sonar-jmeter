@@ -21,59 +21,62 @@
 package es.excentia.jmeter.report.server.report;
 
 public abstract class Average extends ReportData {
-	
-	protected long total;
-	protected double sumAvg;
-	protected Double avg;
-	protected double sumDev;
-	
-	protected void incrementTotal() { 
-		total++; 
-	}
-	
-	protected void addToAvg(double value) { 
-		sumAvg = sumAvg + value; 
-	}
-	
-	protected void addToDev(double value) { 
-		sumDev = sumDev + Math.pow(value - getAverage(), 2); 
-	}
-	
-	protected long getTotal() {
-		if (getSummary().getActualPhaseIndex()>=Report.SECOND_PHASE) {
-			return total;
-		} else {
-			throw new ReportException("El total aún no está disponible");
-		}
-	}
-	
-	
-	public Double getAverage() {
-		if (getSummary().getActualPhaseIndex()<Report.SECOND_PHASE) {	
-			throw new ReportException("La media aún no está disponible");
-		}
-		
-		if (getTotal()<=0) return Double.NaN;
-		if (avg!=null) return avg;
 
-		avg = sumAvg/getTotal();
-		return avg;
-	}
-	
-	public double getDeviation() {
-		// TODO cfillol: Comprobar que estamos en la tercera fase?
-		if (getTotal()<=0) return Double.NaN;
-		return Math.sqrt(sumDev/(getTotal() - 1));
-	}
-	
-	public double getDeviationPercent() {
-		// TODO cfillol: Comprobar que estamos en la tercera fase?
-		if (getTotal()<=0) return Double.NaN;		
-		return (getDeviation()*100.0)/getAverage();
-	}
+  protected long total;
+  protected double sumAvg;
+  protected Double avg;
+  protected double sumDev;
 
-	@Override
-	public String toString() {
-		return getAverage() + " (dev. "+Math.round(getDeviationPercent())+"%)";
-	}
+  protected void incrementTotal() {
+    total++;
+  }
+
+  protected void addToAvg(double value) {
+    sumAvg = sumAvg + value;
+  }
+
+  protected void addToDev(double value) {
+    sumDev = sumDev + Math.pow(value - getAverage(), 2);
+  }
+
+  protected long getTotal() {
+    if (getSummary().getActualPhaseIndex() >= Report.SECOND_PHASE) {
+      return total;
+    } else {
+      throw new ReportException("El total aún no está disponible");
+    }
+  }
+
+  public Double getAverage() {
+    if (getSummary().getActualPhaseIndex() < Report.SECOND_PHASE) {
+      throw new ReportException("La media aún no está disponible");
+    }
+
+    if (getTotal() <= 0)
+      return Double.NaN;
+    if (avg != null)
+      return avg;
+
+    avg = sumAvg / getTotal();
+    return avg;
+  }
+
+  public double getDeviation() {
+    // TODO cfillol: Comprobar que estamos en la tercera fase?
+    if (getTotal() <= 0)
+      return Double.NaN;
+    return Math.sqrt(sumDev / (getTotal() - 1));
+  }
+
+  public double getDeviationPercent() {
+    // TODO cfillol: Comprobar que estamos en la tercera fase?
+    if (getTotal() <= 0)
+      return Double.NaN;
+    return (getDeviation() * 100.0) / getAverage();
+  }
+
+  @Override
+  public String toString() {
+    return getAverage() + " (dev. " + Math.round(getDeviationPercent()) + "%)";
+  }
 }

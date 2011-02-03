@@ -27,28 +27,27 @@ import java.util.Map;
 
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
-
 public class TransOrder extends ReportData {
-	
-	protected List<String> transOrderedList = new ArrayList<String>();
-	protected Map<String,String> transMap = new HashMap<String, String>();
-	
-	public List<String> getTransOrderedList() {
-		return transOrderedList;
-	}
 
-	@Override
-	public void addMeasure(AbstractSample sample) {
-		String transName = getSummary().getActualTransName();
-		if (transName!=null && !transMap.containsKey(transName)) {
-			transOrderedList.add(transName);
-			transMap.put(transName, transName);
-		}
-	}
-	
-	@Override
-	public String toString() {
-		return "Transaction ordered list: "+transOrderedList;
-	}
+  protected List<String> transOrderedList = new ArrayList<String>();
+  protected Map<String, String> transMap = new HashMap<String, String>();
+
+  public List<String> getTransOrderedList() {
+    return transOrderedList;
+  }
+
+  @Override
+  public void addMeasure(AbstractSample sample) {
+    String transName = getSummary().getActualTransName();
+    if (transName != null && !transMap.containsKey(transName)) {
+      transOrderedList.add(transName);
+      transMap.put(transName, transName);
+    }
+  }
+
+  @Override
+  public String toString() {
+    return "Transaction ordered list: " + transOrderedList;
+  }
 
 }

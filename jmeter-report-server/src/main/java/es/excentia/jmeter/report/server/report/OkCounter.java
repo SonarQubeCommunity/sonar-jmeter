@@ -23,36 +23,41 @@ package es.excentia.jmeter.report.server.report;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public class OkCounter extends Counter {
-	
-	public double getCounterPerMinute() {
-		if (counter==0) return 0;
-		
-		double testDurationInMinutes = getSummary().getTestDurationInMinutes();
-		return ((double)counter)/testDurationInMinutes;
-	}
-	
-	public double getCounterPerUser() {
-		if (counter==0) return 0;
-		return ((double)counter)/getSummary().getNumUsersLogged();
-	}
-	
-	public double getCounterPerMinuteAndUser() {
-		if (counter==0) return 0;
-		
-		long usersLogged = getSummary().getNumUsersLogged();
-		double testDurationInMinutes = getSummary().getTestDurationInMinutes();
-		
-		return ((double)counter)/(testDurationInMinutes*usersLogged);
-	}
-	
-	@Override
-	public void addMeasure(AbstractSample sample) {
-		incrementTotal();
-		if (sample.getS()) incrementCounter();
-	}
-	
-	@Override
-	public String toString() {
-		return getCounter() + " ("+Math.round(getPercent())+"%, "+getCounterPerMinuteAndUser()+" per minute and user)";
-	}
+
+  public double getCounterPerMinute() {
+    if (counter == 0)
+      return 0;
+
+    double testDurationInMinutes = getSummary().getTestDurationInMinutes();
+    return ((double) counter) / testDurationInMinutes;
+  }
+
+  public double getCounterPerUser() {
+    if (counter == 0)
+      return 0;
+    return ((double) counter) / getSummary().getNumUsersLogged();
+  }
+
+  public double getCounterPerMinuteAndUser() {
+    if (counter == 0)
+      return 0;
+
+    long usersLogged = getSummary().getNumUsersLogged();
+    double testDurationInMinutes = getSummary().getTestDurationInMinutes();
+
+    return ((double) counter) / (testDurationInMinutes * usersLogged);
+  }
+
+  @Override
+  public void addMeasure(AbstractSample sample) {
+    incrementTotal();
+    if (sample.getS())
+      incrementCounter();
+  }
+
+  @Override
+  public String toString() {
+    return getCounter() + " (" + Math.round(getPercent()) + "%, "
+        + getCounterPerMinuteAndUser() + " per minute and user)";
+  }
 }

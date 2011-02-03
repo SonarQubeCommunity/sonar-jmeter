@@ -22,20 +22,22 @@ package es.excentia.jmeter.report.server.transformer;
 
 import es.excentia.jmeter.report.server.exception.JMeterReportServerException;
 
-public class BuckedMeasuresTransformerFactoryException extends JMeterReportServerException {
+public class BuckedMeasuresTransformerFactoryException extends
+    JMeterReportServerException {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public BuckedMeasuresTransformerFactoryException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public BuckedMeasuresTransformerFactoryException(String message,
+      Throwable cause) {
+    super(message, cause);
+  }
 
-	public BuckedMeasuresTransformerFactoryException(String message) {
-		super(message);
-	}
+  public BuckedMeasuresTransformerFactoryException(String message) {
+    super(message);
+  }
 
-	public BuckedMeasuresTransformerFactoryException(Throwable cause) {
-		super(cause);
-	}
+  public BuckedMeasuresTransformerFactoryException(Throwable cause) {
+    super(cause);
+  }
 
 }

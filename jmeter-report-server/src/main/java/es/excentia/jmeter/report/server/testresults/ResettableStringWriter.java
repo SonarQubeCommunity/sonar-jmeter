@@ -28,56 +28,56 @@ import java.io.Writer;
  * at any time and the contents of the buffer will be returned.
  */
 public class ResettableStringWriter extends Writer {
-	
-	/**
-	 * The internal buffer used to store the data written to this stream.
-	 */
-	private StringBuilder mBuffer = new StringBuilder();
 
-	/**
-	 * The maximum bytes this writer will buffer.
-	 */
-	private int mMaxBytes = 1024;
+  /**
+   * The internal buffer used to store the data written to this stream.
+   */
+  private StringBuilder mBuffer = new StringBuilder();
 
-	/**
-	 * Constructs the writer which will hold a fixed maximum of bytes. If more
-	 * bytes are written, an exception will be raised.
-	 * 
-	 * @param maxBytes
-	 *            the maximum number of bytes this writer will buffer
-	 */
-	public ResettableStringWriter(int maxBytes) {
-		mMaxBytes = maxBytes;
-	}
+  /**
+   * The maximum bytes this writer will buffer.
+   */
+  private int mMaxBytes = 1024;
 
-	@Override
-	public void close() throws IOException {
-		// no op
-	}
+  /**
+   * Constructs the writer which will hold a fixed maximum of bytes. If more
+   * bytes are written, an exception will be raised.
+   * 
+   * @param maxBytes
+   *          the maximum number of bytes this writer will buffer
+   */
+  public ResettableStringWriter(int maxBytes) {
+    mMaxBytes = maxBytes;
+  }
 
-	@Override
-	public void flush() throws IOException {
-		// no op
-	}
+  @Override
+  public void close() throws IOException {
+    // no op
+  }
 
-	@Override
-	public void write(char[] cbuf, int off, int len) throws IOException {
-		mBuffer.append(cbuf, off, len);
+  @Override
+  public void flush() throws IOException {
+    // no op
+  }
 
-		if (mBuffer.length() > mMaxBytes) {
-			throw new IOException("Memory buffer overflow");
-		}
-	}
+  @Override
+  public void write(char[] cbuf, int off, int len) throws IOException {
+    mBuffer.append(cbuf, off, len);
 
-	/**
-	 * Resets the stream to a length of zero. Any data written to the stream
-	 * since the last call to reset will be returned.
-	 * 
-	 * @return the contents of the stream buffer
-	 */
-	public String reset() {
-		String data = mBuffer.toString();
-		mBuffer.setLength(0);
-		return data;
-	}
+    if (mBuffer.length() > mMaxBytes) {
+      throw new IOException("Memory buffer overflow");
+    }
+  }
+
+  /**
+   * Resets the stream to a length of zero. Any data written to the stream since
+   * the last call to reset will be returned.
+   * 
+   * @return the contents of the stream buffer
+   */
+  public String reset() {
+    String data = mBuffer.toString();
+    mBuffer.setLength(0);
+    return data;
+  }
 }

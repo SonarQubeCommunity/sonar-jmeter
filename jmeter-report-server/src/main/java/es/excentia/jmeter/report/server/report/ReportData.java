@@ -24,16 +24,16 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public abstract class ReportData {
 
-	protected Report summary;
+  protected Report summary;
 
-	public Report getSummary() {
-		return summary;
-	}
+  public Report getSummary() {
+    return summary;
+  }
 
-	public void setSummary(Report summary) {
-		this.summary = summary;
-	}
-	
-	public abstract void addMeasure(AbstractSample sample); 
-	
+  public void setSummary(Report summary) {
+    this.summary = summary;
+  }
+
+  public abstract void addMeasure(AbstractSample sample);
+
 }
