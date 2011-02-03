@@ -24,7 +24,7 @@
   </scm>
 
   <properties>
-    <sonar.pluginClass>es.excentia.sonar.jmeter.JMeterPlugin</sonar.pluginClass>
+    <sonar.pluginClass>org.sonar.plugins.jmeter.JMeterPlugin</sonar.pluginClass>
     <sonar.pluginName>JMeter</sonar.pluginName>
     <sonar.version>2.4</sonar.version>
   </properties>
