@@ -2,83 +2,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.codehaus.sonar-plugins.jmeter</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>jmeter-report-server</artifactId>
 	<version>0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>	
+	<packaging>jar</packaging>
 	<name>JMeter Report Server</name>
 
 	<description>Server to retrieve JMeter test results from JMeter data files.</description>
-	
-	<url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
-	<organization>
-		<name>eXcentia</name>
-		<url>http://www.excentia.es</url>
-	</organization>
-
-	<inceptionYear>2010</inceptionYear>
-
-	<licenses>
-		<license>
-			<name>GNU LGPL 3</name>
-			<url>http://www.gnu.org/licenses/lgpl.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<id>cfillol</id>
-			<name>Carlos Fillol Sendra</name>
-			<email>cfillol@excentia.es</email>
-			<organization>eXcentia</organization>
-			<organizationUrl>www.excentia.es</organizationUrl>
-		</developer>
-		<developer>
-			<id>acalero</id>
-			<name>Antonio Calero</name>
-			<email>acalero@excentia.es</email>
-			<organization>eXcentia</organization>
-			<organizationUrl>www.excentia.es</organizationUrl>
-		</developer>
-	</developers>
-
-	<issueManagement>
-		<system>jira</system>
-		<url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14592</url>
-	</issueManagement>
 
 	<scm>
 		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/jmeter-report-server</connection>
 		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/jmeter-report-server</developerConnection>
-		<tag>HEAD</tag>
 		<url>http://svn.sonar-plugins.codehaus.org</url>
 	</scm>
-    
-    <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+	<properties>
 		<slf4j.version>1.5.10</slf4j.version>
-    </properties>
-    
+	</properties>
+
 	<build>
 		<plugins>
-		
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>xmlbeans-maven-plugin</artifactId>
@@ -97,18 +47,18 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.2-beta-5</version>
 				<configuration>
-					<outputDirectory>dist/lib</outputDirectory> 
+					<outputDirectory>dist/lib</outputDirectory>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>					
+					</descriptorRefs>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
+
 	<dependencies>
-	
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -116,14 +66,14 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-	
+
 		<!-- JMeter Report Client -->
 		<dependency>
-			<groupId>${pom.groupId}</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>jmeter-report-client</artifactId>
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -134,22 +84,22 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
-		</dependency>		
-		
-		
+		</dependency>
+
+
 		<!-- Xml management -->
 		<dependency>
 			<groupId>org.apache.xmlbeans</groupId>
 			<artifactId>xmlbeans</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-				
+
 		<dependency>
 			<groupId>stax</groupId>
 			<artifactId>stax</artifactId>
 			<version>1.2.0_rc2-dev</version>
 		</dependency>
-		
+
 	</dependencies>
-	
+
 </project>
