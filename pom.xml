@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-/*
- * Sonar JMeter Plugin, open source plugin for Sonar
- * Copyright (C) 2010 eXcentia
- *
- * Sonar JMeter Plugin is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
- *
- * Sonar is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with Sonar; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
- */
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <!--
+    Sonar JMeter Plugin, open source plugin for Sonar 
+    Copyright (C) 2010 eXcentia 
+    
+    Sonar JMeter Plugin is free software; you can redistribute it and/or 
+    modify it under the terms of the GNU Lesser General Public 
+    License as published by the Free Software Foundation; either 
+    version 3 of the License, or (at your option) any later version. 
+    
+    Sonar is distributed in the hope that it will be useful, 
+    but WITHOUT ANY WARRANTY; without even the implied warranty of 
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    
+    See the GNU Lesser General Public License for more details.
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02 
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -34,41 +33,43 @@
   <artifactId>parent</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  
+
   <name>Sonar JMeter Plugin (parent)</name>
-  <description>Sonar JMeter plugin and JMeter Report Server</description>
+  <description>Sonar JMeter plugin, JMeter Report Server and JMeter Report Client</description>
+
+  <url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 
   <organization>
-		<name>eXcentia</name>
-		<url>http://www.excentia.es</url>
-	</organization>
+    <name>eXcentia</name>
+    <url>http://www.excentia.es</url>
+  </organization>
 
-	<inceptionYear>2010</inceptionYear>
+  <inceptionYear>2010</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>GNU LGPL 3</name>
-			<url>http://www.gnu.org/licenses/lgpl.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+  <licenses>
+    <license>
+      <name>GNU LGPL 3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-	<developers>
-		<developer>
-			<id>cfillol</id>
-			<name>Carlos Fillol Sendra</name>
-			<email>cfillol@excentia.es</email>
-			<organization>eXcentia</organization>
-			<organizationUrl>www.excentia.es</organizationUrl>
-		</developer>
-		<developer>
-			<id>acalero</id>
-			<name>Antonio Calero</name>
-			<email>acalero@excentia.es</email>
-			<organization>eXcentia</organization>
-			<organizationUrl>www.excentia.es</organizationUrl>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <id>cfillol</id>
+      <name>Carlos Fillol Sendra</name>
+      <email>cfillol@excentia.es</email>
+      <organization>eXcentia</organization>
+      <organizationUrl>www.excentia.es</organizationUrl>
+    </developer>
+    <developer>
+      <id>acalero</id>
+      <name>Antonio Calero</name>
+      <email>acalero@excentia.es</email>
+      <organization>eXcentia</organization>
+      <organizationUrl>www.excentia.es</organizationUrl>
+    </developer>
+  </developers>
 
   <modules>
     <module>jmeter-report-client</module>
@@ -77,47 +78,19 @@
   </modules>
 
   <scm>
-		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter</connection>
-		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter</developerConnection>
-		<tag>HEAD</tag>
-		<url>http://svn.sonar-plugins.codehaus.org</url>
-	</scm>
-	
-  <issueManagement>
-		<system>jira</system>
-		<url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14592</url>
-	</issueManagement>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter</developerConnection>
+    <url>http://svn.sonar-plugins.codehaus.org</url>
+  </scm>
 
-  
+  <issueManagement>
+    <system>jira</system>
+    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14592</url>
+  </issueManagement>
+
+
   <properties>
     <sonar.version>2.4</sonar.version>
   </properties>
-  
-  <repositories>
-
-		<!-- Repositorios de eXcentia -->
-		<repository>
-			<id>internal</id>
-			<name>eXcentia release repository</name>
-			<url>http://servicios.excentia.es/archiva/repository/internal/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>snapshots</id>
-			<name>eXcentia snapshot repository</name>
-			<url>http://servicios.excentia.es/archiva/repository/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 </project>

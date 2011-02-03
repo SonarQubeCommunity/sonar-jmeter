@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.codehaus.sonar-plugins.jmeter</groupId>
-		<artifactId>parent</artifactId>
-		<version>0.1-SNAPSHOT</version>
-	</parent>
+  <parent>
+    <groupId>org.codehaus.sonar-plugins.jmeter</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
+  </parent>
 
-	<artifactId>sonar-jmeter-plugin</artifactId>
-	<version>0.1-SNAPSHOT</version>
-	<packaging>sonar-plugin</packaging>
-	<name>Sonar JMeter Plugin</name>
+  <artifactId>sonar-jmeter-plugin</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>sonar-plugin</packaging>
+  <name>Sonar JMeter Plugin</name>
 
-	<description>Retrieve JMeter test results in SONAR.</description>
+  <description>Retrieve JMeter test results in SONAR.</description>
+  <url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 
-	<scm>
-		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</connection>
-		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</developerConnection>
-		<url>http://svn.sonar-plugins.codehaus.org</url>
-	</scm>
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</developerConnection>
+    <url>http://svn.sonar-plugins.codehaus.org</url>
+  </scm>
 
-	<properties>
-	   <sonar.pluginClass>es.excentia.sonar.jmeter.JMeterPlugin</sonar.pluginClass>
-	   <sonar.pluginName>JMeter</sonar.pluginName>
-	   <sonar.version>2.4</sonar.version>
-	</properties>
+  <properties>
+    <sonar.pluginClass>es.excentia.sonar.jmeter.JMeterPlugin</sonar.pluginClass>
+    <sonar.pluginName>JMeter</sonar.pluginName>
+    <sonar.version>2.4</sonar.version>
+  </properties>
 
-	<dependencies>
-		<!-- Sonar plugin -->
-		<dependency>
-			<groupId>org.codehaus.sonar</groupId>
-			<artifactId>sonar-plugin-api</artifactId>
-			<version>${sonar.version}</version>
-		</dependency>
+  <dependencies>
+    <!-- Sonar plugin -->
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>${sonar.version}</version>
+    </dependency>
 
-		<!-- Unit tests -->
-		<dependency>
-			<groupId>org.codehaus.sonar</groupId>
-			<artifactId>sonar-testing-harness</artifactId>
-			<version>${sonar.version}</version>
-			<scope>test</scope>
-		</dependency>
+    <!-- Unit tests -->
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-testing-harness</artifactId>
+      <version>${sonar.version}</version>
+      <scope>test</scope>
+    </dependency>
 
-		<!-- JMeter Report Client -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>jmeter-report-client</artifactId>
-			<version>0.1-SNAPSHOT</version>
-		</dependency>
+    <!-- JMeter Report Client -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jmeter-report-client</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
 
-	</dependencies>
+  </dependencies>
 
 </project>
