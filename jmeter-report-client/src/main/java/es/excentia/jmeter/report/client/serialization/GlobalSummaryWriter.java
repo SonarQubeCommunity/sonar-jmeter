@@ -30,115 +30,117 @@ import es.excentia.jmeter.report.client.data.GlobalSummary;
 
 public class GlobalSummaryWriter extends ErrorCheckStreamWriter<GlobalSummary> {
 
-	protected DataOutputStream dos;
-	
-	public GlobalSummaryWriter(OutputStream os) {
-		super(os);
-		dos = new DataOutputStream(os);
-	}
+  protected DataOutputStream dos;
 
-	@Override
-	public void writeObjectToStream(GlobalSummary obj) throws IOException {
+  public GlobalSummaryWriter(OutputStream os) {
+    super(os);
+    dos = new DataOutputStream(os);
+  }
 
-		writeString(obj.getTestDesc()==null?"":obj.getTestDesc()); 
-		dos.writeLong(obj.getUsersLogged());
-		dos.writeLong(obj.getTestDuration());
-		
-		dos.writeLong(obj.getRequestsTotal());
-		dos.writeLong(obj.getRequestsOkTotal());
-		dos.writeLong(obj.getRequestsErrorTotal());
-		dos.writeDouble(obj.getRequestsErrorPercent());
-		
-		dos.writeDouble(obj.getRequestsOkPerMinute());
-		dos.writeDouble(obj.getRequestsOkPerMinuteAndUser());
-		
-		dos.writeDouble(obj.getRequestsResponseTimeOkAvg());
-		dos.writeDouble(obj.getRequestsResponseTimeOkAvgDev());
-		dos.writeDouble(obj.getRequestsResponseTimeOkAvgDevPercent());
-		
-		dos.writeDouble(obj.getRequestsBytesOkAvg());
-		dos.writeDouble(obj.getRequestsBytesOkAvgDev());
-		dos.writeDouble(obj.getRequestsBytesOkAvgDevPercent());
-		
-		dos.writeLong(obj.getTransTotal());
-		dos.writeLong(obj.getTransOkTotal());
-		dos.writeLong(obj.getTransErrorTotal());	
-		dos.writeDouble(obj.getTransErrorPercent());
-		
-		dos.writeDouble(obj.getTransOkPerMinute());
-		dos.writeDouble(obj.getTransOkPerMinuteAndUser());
-		
-		dos.writeDouble(obj.getTransResponseTimeOkAvg());
-		dos.writeDouble(obj.getTransResponseTimeOkAvgDev());
-		dos.writeDouble(obj.getTransResponseTimeOkAvgDevPercent());
-		
-		dos.writeDouble(obj.getTransBytesOkAvg());
-		dos.writeDouble(obj.getTransBytesOkAvgDev());
-		dos.writeDouble(obj.getTransBytesOkAvgDevPercent());
-		
-		writeString(obj.getSlowestTransName());
-		dos.writeDouble(obj.getSlowestTransResponseTimeOkAvg());
-		dos.writeDouble(obj.getSlowestTransBytesOkAvgDevPercent());
-		
-		writeString(obj.getMostUnstableTransName());			
-		dos.writeDouble(obj.getMostUnstableTransResponseTimeOkAvgDevPercent());
-		dos.writeDouble(obj.getMostUnstableTransBytesOkAvgDevPercent());	
-		
-		writeStringList(obj.getTransOrder());
-		writeTransMapLong(obj.getTransMapOkTotal());
-		writeTransMapLong(obj.getTransMapErrorTotal());
-		
-		writeTransMapDouble(obj.getTransMapResponseTimeOkAvg());
-		writeTransMapDouble(obj.getTransMapResponseTimeOkAvgDev());
-		writeTransMapDouble(obj.getTransMapResponseTimeOkAvgDevPercent());
-		
-		writeTransMapDouble(obj.getTransMapBytesOkAvg());
-		writeTransMapDouble(obj.getTransMapBytesOkAvgDev());
-		writeTransMapDouble(obj.getTransMapBytesOkAvgDevPercent());
-		
-	}
-	
-	protected void writeStringList(List<String> list) throws IOException {
-		if (list==null || list.size()==0) {
-			dos.writeInt(0);
-			return;
-		}
-		
-		dos.writeInt(list.size());
-		for (String value : list) {
-			dos.writeUTF(value);
-		}
-	}
-	
-	protected void writeString(String str) throws IOException {
-		dos.writeBoolean(str==null);
-		if (str!=null) dos.writeUTF(str);
-	}
-	
-	protected void writeTransMapLong(Map<String,Long> map) throws IOException {
-		if (map==null || map.size()==0) {
-			dos.writeInt(0);
-			return;
-		}
-		
-		dos.writeInt(map.size());
-		for (String key : map.keySet()) {
-			dos.writeUTF(key);
-			dos.writeLong(map.get(key));
-		}
-	}
-	
-	protected void writeTransMapDouble(Map<String,Double> map) throws IOException {
-		if (map==null || map.size()==0) {
-			dos.writeInt(0);
-			return;
-		}
-		
-		dos.writeInt(map.size());
-		for (String key : map.keySet()) {
-			dos.writeUTF(key);
-			dos.writeDouble(map.get(key));
-		}
-	}
-	
+  @Override
+  public void writeObjectToStream(GlobalSummary obj) throws IOException {
+
+    writeString(obj.getTestDesc() == null ? "" : obj.getTestDesc());
+    dos.writeLong(obj.getUsersLogged());
+    dos.writeLong(obj.getTestDuration());
+
+    dos.writeLong(obj.getRequestsTotal());
+    dos.writeLong(obj.getRequestsOkTotal());
+    dos.writeLong(obj.getRequestsErrorTotal());
+    dos.writeDouble(obj.getRequestsErrorPercent());
+
+    dos.writeDouble(obj.getRequestsOkPerMinute());
+    dos.writeDouble(obj.getRequestsOkPerMinuteAndUser());
+
+    dos.writeDouble(obj.getRequestsResponseTimeOkAvg());
+    dos.writeDouble(obj.getRequestsResponseTimeOkAvgDev());
+    dos.writeDouble(obj.getRequestsResponseTimeOkAvgDevPercent());
+
+    dos.writeDouble(obj.getRequestsBytesOkAvg());
+    dos.writeDouble(obj.getRequestsBytesOkAvgDev());
+    dos.writeDouble(obj.getRequestsBytesOkAvgDevPercent());
+
+    dos.writeLong(obj.getTransTotal());
+    dos.writeLong(obj.getTransOkTotal());
+    dos.writeLong(obj.getTransErrorTotal());
+    dos.writeDouble(obj.getTransErrorPercent());
+
+    dos.writeDouble(obj.getTransOkPerMinute());
+    dos.writeDouble(obj.getTransOkPerMinuteAndUser());
+
+    dos.writeDouble(obj.getTransResponseTimeOkAvg());
+    dos.writeDouble(obj.getTransResponseTimeOkAvgDev());
+    dos.writeDouble(obj.getTransResponseTimeOkAvgDevPercent());
+
+    dos.writeDouble(obj.getTransBytesOkAvg());
+    dos.writeDouble(obj.getTransBytesOkAvgDev());
+    dos.writeDouble(obj.getTransBytesOkAvgDevPercent());
+
+    writeString(obj.getSlowestTransName());
+    dos.writeDouble(obj.getSlowestTransResponseTimeOkAvg());
+    dos.writeDouble(obj.getSlowestTransBytesOkAvgDevPercent());
+
+    writeString(obj.getMostUnstableTransName());
+    dos.writeDouble(obj.getMostUnstableTransResponseTimeOkAvgDevPercent());
+    dos.writeDouble(obj.getMostUnstableTransBytesOkAvgDevPercent());
+
+    writeStringList(obj.getTransOrder());
+    writeTransMapLong(obj.getTransMapOkTotal());
+    writeTransMapLong(obj.getTransMapErrorTotal());
+
+    writeTransMapDouble(obj.getTransMapResponseTimeOkAvg());
+    writeTransMapDouble(obj.getTransMapResponseTimeOkAvgDev());
+    writeTransMapDouble(obj.getTransMapResponseTimeOkAvgDevPercent());
+
+    writeTransMapDouble(obj.getTransMapBytesOkAvg());
+    writeTransMapDouble(obj.getTransMapBytesOkAvgDev());
+    writeTransMapDouble(obj.getTransMapBytesOkAvgDevPercent());
+
+  }
+
+  protected void writeStringList(List<String> list) throws IOException {
+    if (list == null || list.size() == 0) {
+      dos.writeInt(0);
+      return;
+    }
+
+    dos.writeInt(list.size());
+    for (String value : list) {
+      dos.writeUTF(value);
+    }
+  }
+
+  protected void writeString(String str) throws IOException {
+    dos.writeBoolean(str == null);
+    if (str != null)
+      dos.writeUTF(str);
+  }
+
+  protected void writeTransMapLong(Map<String, Long> map) throws IOException {
+    if (map == null || map.size() == 0) {
+      dos.writeInt(0);
+      return;
+    }
+
+    dos.writeInt(map.size());
+    for (String key : map.keySet()) {
+      dos.writeUTF(key);
+      dos.writeLong(map.get(key));
+    }
+  }
+
+  protected void writeTransMapDouble(Map<String, Double> map)
+      throws IOException {
+    if (map == null || map.size() == 0) {
+      dos.writeInt(0);
+      return;
+    }
+
+    dos.writeInt(map.size());
+    for (String key : map.keySet()) {
+      dos.writeUTF(key);
+      dos.writeDouble(map.get(key));
+    }
+  }
+
 }

@@ -23,24 +23,24 @@ package es.excentia.jmeter.report.client.serialization;
 import java.io.OutputStream;
 
 public abstract class StreamWriter<T> {
-	OutputStream os;
-	
-	public StreamWriter(OutputStream os) {
-		this.os = os;
-	}
-	
-	public void write(T obj) {
-		try {
-			
-			writeObjectToStream(obj);
-			
-		} catch(StreamException e) {
-			throw e;
-		} catch(Exception e) {
-			throw new StreamException(e);
-		}
-	}
-	
-	public abstract void writeObjectToStream(T obj) throws Exception;
-	
+  OutputStream os;
+
+  public StreamWriter(OutputStream os) {
+    this.os = os;
+  }
+
+  public void write(T obj) {
+    try {
+
+      writeObjectToStream(obj);
+
+    } catch (StreamException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new StreamException(e);
+    }
+  }
+
+  public abstract void writeObjectToStream(T obj) throws Exception;
+
 }

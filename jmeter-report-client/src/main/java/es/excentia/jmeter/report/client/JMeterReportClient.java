@@ -38,84 +38,84 @@ import es.excentia.jmeter.report.client.serialization.StreamReader;
 
 public class JMeterReportClient {
 
-	private static final Logger log = LoggerFactory.getLogger(JMeterReportClient.class);
-	private static final boolean LOG_DEBUG = log.isDebugEnabled();
-	
-	private String serverHost = JMeterReportConst.DEFAULT_HOST;
-	private int serverPort = JMeterReportConst.DEFAULT_PORT;
+  private static final Logger log = LoggerFactory
+      .getLogger(JMeterReportClient.class);
+  private static final boolean LOG_DEBUG = log.isDebugEnabled();
 
-	public JMeterReportClient() {
-		// Cliente con parámetros de conexión por defecto
-	}
-	
-	public JMeterReportClient(String serverHost, int serverPort) {
-		this.serverHost = serverHost;
-		this.serverPort = serverPort;
-	}
-	
-	protected Socket openSocket() throws IOException {
-		SocketFactory socketFactory = SocketFactory.getDefault();
-		return socketFactory.createSocket(serverHost, serverPort);
-	}
-		
-	public GlobalSummary getGlobalSummary(String config) {
-			if (LOG_DEBUG) {
-				log.debug("getGlobalSummary");
-				log.debug("config: " + config);
-			}
-			
-			Socket socket = null;
-			try {
-				socket = openSocket();
+  private String serverHost = JMeterReportConst.DEFAULT_HOST;
+  private int serverPort = JMeterReportConst.DEFAULT_PORT;
 
-				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-				dos.writeInt(JMeterReportConst.OP_GET_GLOBAL_SUMMARY);
-				dos.writeUTF(config);
-				
-				return new GlobalSummaryReader(socket.getInputStream()).read();
-				
-			} catch (JMeterReportException e) {
-				throw e;
-			} catch (Exception e) {
-				throw new JMeterReportException(e);
-			}
-			
-			// No cerramos el socket.
-			// El socket lo cerrará el servidor cuando termine de servir todos
-			// los datos.
-		}
-	
-	public StreamReader<Measure> getBuckedMeasures(
-		String config, String metric, int millisBucket
-	) {
-		if (LOG_DEBUG) {
-			log.debug("getBuckedMeasures");
-			log.debug("config: " + config);
-			log.debug("metric: " + metric);
-			log.debug("millisBucket: " + millisBucket);
-		}
-		
-		Socket socket = null;
-		try {
-			socket = openSocket();
+  public JMeterReportClient() {
+    // Cliente con parámetros de conexión por defecto
+  }
 
-			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-			dos.writeInt(JMeterReportConst.OP_GET_BUCKET_MEASURES);
-			dos.writeUTF(config);
-			dos.writeUTF(metric);
-			dos.writeInt(millisBucket);
-						
-			return new MeasureReader(socket.getInputStream());
-			
-		} catch (JMeterReportException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new JMeterReportException(e);
-		}
+  public JMeterReportClient(String serverHost, int serverPort) {
+    this.serverHost = serverHost;
+    this.serverPort = serverPort;
+  }
 
-		// No cerramos el socket.
-		// El socket lo cerrará el servidor cuando termine de servir todos
-		// los datos.
-	}
+  protected Socket openSocket() throws IOException {
+    SocketFactory socketFactory = SocketFactory.getDefault();
+    return socketFactory.createSocket(serverHost, serverPort);
+  }
+
+  public GlobalSummary getGlobalSummary(String config) {
+    if (LOG_DEBUG) {
+      log.debug("getGlobalSummary");
+      log.debug("config: " + config);
+    }
+
+    Socket socket = null;
+    try {
+      socket = openSocket();
+
+      DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+      dos.writeInt(JMeterReportConst.OP_GET_GLOBAL_SUMMARY);
+      dos.writeUTF(config);
+
+      return new GlobalSummaryReader(socket.getInputStream()).read();
+
+    } catch (JMeterReportException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new JMeterReportException(e);
+    }
+
+    // No cerramos el socket.
+    // El socket lo cerrará el servidor cuando termine de servir todos
+    // los datos.
+  }
+
+  public StreamReader<Measure> getBuckedMeasures(String config, String metric,
+      int millisBucket) {
+    if (LOG_DEBUG) {
+      log.debug("getBuckedMeasures");
+      log.debug("config: " + config);
+      log.debug("metric: " + metric);
+      log.debug("millisBucket: " + millisBucket);
+    }
+
+    Socket socket = null;
+    try {
+      socket = openSocket();
+
+      DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+      dos.writeInt(JMeterReportConst.OP_GET_BUCKET_MEASURES);
+      dos.writeUTF(config);
+      dos.writeUTF(metric);
+      dos.writeInt(millisBucket);
+
+      return new MeasureReader(socket.getInputStream());
+
+    } catch (JMeterReportException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new JMeterReportException(e);
+    }
+
+    // No cerramos el socket.
+    // El socket lo cerrará el servidor cuando termine de servir todos
+    // los datos.
+  }
 
 }

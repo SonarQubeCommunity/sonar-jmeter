@@ -24,18 +24,18 @@ import es.excentia.jmeter.report.client.exception.JMeterReportException;
 
 public class StreamException extends JMeterReportException {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public StreamException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public StreamException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public StreamException(String message) {
-		super(message);
-	}
+  public StreamException(String message) {
+    super(message);
+  }
 
-	public StreamException(Throwable cause) {
-		super(cause);
-	}
+  public StreamException(Throwable cause) {
+    super(cause);
+  }
 
 }

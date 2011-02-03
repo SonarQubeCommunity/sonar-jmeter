@@ -20,16 +20,16 @@
 
 package es.excentia.jmeter.report.client.serialization;
 
-public abstract class Transformer<TInput,TOuput> {
+public abstract class Transformer<TInput, TOuput> {
 
-	protected StreamReader<TInput> reader;
-	protected StreamWriter<TOuput> writer;
-	
-	public Transformer(StreamReader<TInput> reader, StreamWriter<TOuput> writer) {
-		this.reader = reader;
-		this.writer = writer;
-	}
-	
-	public abstract void transform();
-	
+  protected StreamReader<TInput> reader;
+  protected StreamWriter<TOuput> writer;
+
+  public Transformer(StreamReader<TInput> reader, StreamWriter<TOuput> writer) {
+    this.reader = reader;
+    this.writer = writer;
+  }
+
+  public abstract void transform();
+
 }

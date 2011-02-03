@@ -32,106 +32,106 @@ import es.excentia.jmeter.report.client.data.GlobalSummary;
 
 public class GlobalSummaryReader extends ErrorCheckStreamReader<GlobalSummary> {
 
-	protected DataInputStream dis;
-	
-	public GlobalSummaryReader(InputStream is) {
-		super(is);
-		dis = new DataInputStream(is);
-	}
+  protected DataInputStream dis;
 
-	@Override
-	public GlobalSummary getObjectFromStream() throws IOException {
-		GlobalSummary summary = new GlobalSummary();
-		
-		summary.setTestDesc(readString()); 
-		summary.setUsersLogged(dis.readLong());
-		summary.setTestDuration(dis.readLong());
-		
-		summary.setRequestsTotal(dis.readLong());
-		summary.setRequestsOkTotal(dis.readLong());
-		summary.setRequestsErrorTotal(dis.readLong());
-		summary.setRequestsErrorPercent(dis.readDouble());
-		
-		summary.setRequestsOkPerMinute(dis.readDouble());
-		summary.setRequestsOkPerMinuteAndUser(dis.readDouble());
-		
-		summary.setRequestsResponseTimeOkAvg(dis.readDouble());
-		summary.setRequestsResponseTimeOkAvgDev(dis.readDouble());
-		summary.setRequestsResponseTimeOkAvgDevPercent(dis.readDouble());
-		
-		summary.setRequestsBytesOkAvg(dis.readDouble());
-		summary.setRequestsBytesOkAvgDev(dis.readDouble());
-		summary.setRequestsBytesOkAvgDevPercent(dis.readDouble());
-		
-		summary.setTransTotal(dis.readLong());
-		summary.setTransOkTotal(dis.readLong());
-		summary.setTransErrorTotal(dis.readLong());	
-		summary.setTransErrorPercent(dis.readDouble());
-		
-		summary.setTransOkPerMinute(dis.readDouble());
-		summary.setTransOkPerMinuteAndUser(dis.readDouble());
-		
-		summary.setTransResponseTimeOkAvg(dis.readDouble());
-		summary.setTransResponseTimeOkAvgDev(dis.readDouble());
-		summary.setTransResponseTimeOkAvgDevPercent(dis.readDouble());
-		
-		summary.setTransBytesOkAvg(dis.readDouble());
-		summary.setTransBytesOkAvgDev(dis.readDouble());
-		summary.setTransBytesOkAvgDevPercent(dis.readDouble());
-		
-		summary.setSlowestTransName(readString());
-		summary.setSlowestTransResponseTimeOkAvg(dis.readDouble());
-		summary.setSlowestTransBytesOkAvgDevPercent(dis.readDouble());
-		
-		summary.setMostUnstableTransName(readString());			
-		summary.setMostUnstableTransResponseTimeOkAvgDevPercent(dis.readDouble());
-		summary.setMostUnstableTransBytesOkAvgDevPercent(dis.readDouble());	
-		
-		summary.setTransOrder(readStringList());
-		summary.setTransMapOkTotal(readTransMapLong());
-		summary.setTransMapErrorTotal(readTransMapLong());
-		
-		summary.setTransMapResponseTimeOkAvg(readTransMapDouble());
-		summary.setTransMapResponseTimeOkAvgDev(readTransMapDouble());
-		summary.setTransMapResponseTimeOkAvgDevPercent(readTransMapDouble());
-		
-		summary.setTransMapBytesOkAvg(readTransMapDouble());
-		summary.setTransMapBytesOkAvgDev(readTransMapDouble());
-		summary.setTransMapBytesOkAvgDevPercent(readTransMapDouble());
-		
-		return summary;
-	}
-	
-	protected String readString() throws IOException {
-		boolean isNull = dis.readBoolean();
-		return isNull? null : dis.readUTF();
-	}
-	
-	protected List<String> readStringList() throws IOException {
-		int size = dis.readInt();
-		List<String> list = new ArrayList<String>();
-		for (int i=0; i<size; i++) {
-			list.add(dis.readUTF());
-		}
-		return list;
-	}
-	
-	protected Map<String,Long> readTransMapLong() throws IOException {
-		int size = dis.readInt();
-		Map<String,Long> map = new HashMap<String,Long>();
-		for (int i=0; i<size; i++) {
-			map.put(dis.readUTF(), dis.readLong());
-		}
-		return map;
-	}
-	
-	protected Map<String,Double> readTransMapDouble() throws IOException {
-		int size = dis.readInt();
-		Map<String,Double> map = new HashMap<String,Double>();
-		for (int i=0; i<size; i++) {
-			map.put(dis.readUTF(), dis.readDouble());
-		}
-		return map;
-	}
-	
+  public GlobalSummaryReader(InputStream is) {
+    super(is);
+    dis = new DataInputStream(is);
+  }
+
+  @Override
+  public GlobalSummary getObjectFromStream() throws IOException {
+    GlobalSummary summary = new GlobalSummary();
+
+    summary.setTestDesc(readString());
+    summary.setUsersLogged(dis.readLong());
+    summary.setTestDuration(dis.readLong());
+
+    summary.setRequestsTotal(dis.readLong());
+    summary.setRequestsOkTotal(dis.readLong());
+    summary.setRequestsErrorTotal(dis.readLong());
+    summary.setRequestsErrorPercent(dis.readDouble());
+
+    summary.setRequestsOkPerMinute(dis.readDouble());
+    summary.setRequestsOkPerMinuteAndUser(dis.readDouble());
+
+    summary.setRequestsResponseTimeOkAvg(dis.readDouble());
+    summary.setRequestsResponseTimeOkAvgDev(dis.readDouble());
+    summary.setRequestsResponseTimeOkAvgDevPercent(dis.readDouble());
+
+    summary.setRequestsBytesOkAvg(dis.readDouble());
+    summary.setRequestsBytesOkAvgDev(dis.readDouble());
+    summary.setRequestsBytesOkAvgDevPercent(dis.readDouble());
+
+    summary.setTransTotal(dis.readLong());
+    summary.setTransOkTotal(dis.readLong());
+    summary.setTransErrorTotal(dis.readLong());
+    summary.setTransErrorPercent(dis.readDouble());
+
+    summary.setTransOkPerMinute(dis.readDouble());
+    summary.setTransOkPerMinuteAndUser(dis.readDouble());
+
+    summary.setTransResponseTimeOkAvg(dis.readDouble());
+    summary.setTransResponseTimeOkAvgDev(dis.readDouble());
+    summary.setTransResponseTimeOkAvgDevPercent(dis.readDouble());
+
+    summary.setTransBytesOkAvg(dis.readDouble());
+    summary.setTransBytesOkAvgDev(dis.readDouble());
+    summary.setTransBytesOkAvgDevPercent(dis.readDouble());
+
+    summary.setSlowestTransName(readString());
+    summary.setSlowestTransResponseTimeOkAvg(dis.readDouble());
+    summary.setSlowestTransBytesOkAvgDevPercent(dis.readDouble());
+
+    summary.setMostUnstableTransName(readString());
+    summary.setMostUnstableTransResponseTimeOkAvgDevPercent(dis.readDouble());
+    summary.setMostUnstableTransBytesOkAvgDevPercent(dis.readDouble());
+
+    summary.setTransOrder(readStringList());
+    summary.setTransMapOkTotal(readTransMapLong());
+    summary.setTransMapErrorTotal(readTransMapLong());
+
+    summary.setTransMapResponseTimeOkAvg(readTransMapDouble());
+    summary.setTransMapResponseTimeOkAvgDev(readTransMapDouble());
+    summary.setTransMapResponseTimeOkAvgDevPercent(readTransMapDouble());
+
+    summary.setTransMapBytesOkAvg(readTransMapDouble());
+    summary.setTransMapBytesOkAvgDev(readTransMapDouble());
+    summary.setTransMapBytesOkAvgDevPercent(readTransMapDouble());
+
+    return summary;
+  }
+
+  protected String readString() throws IOException {
+    boolean isNull = dis.readBoolean();
+    return isNull ? null : dis.readUTF();
+  }
+
+  protected List<String> readStringList() throws IOException {
+    int size = dis.readInt();
+    List<String> list = new ArrayList<String>();
+    for (int i = 0; i < size; i++) {
+      list.add(dis.readUTF());
+    }
+    return list;
+  }
+
+  protected Map<String, Long> readTransMapLong() throws IOException {
+    int size = dis.readInt();
+    Map<String, Long> map = new HashMap<String, Long>();
+    for (int i = 0; i < size; i++) {
+      map.put(dis.readUTF(), dis.readLong());
+    }
+    return map;
+  }
+
+  protected Map<String, Double> readTransMapDouble() throws IOException {
+    int size = dis.readInt();
+    Map<String, Double> map = new HashMap<String, Double>();
+    for (int i = 0; i < size; i++) {
+      map.put(dis.readUTF(), dis.readDouble());
+    }
+    return map;
+  }
+
 }

@@ -28,19 +28,19 @@ import es.excentia.jmeter.report.client.data.Measure;
 
 public class MeasureReader extends ErrorCheckStreamReader<Measure> {
 
-	protected DataInputStream dis;
-	
-	public MeasureReader(InputStream is) {
-		super(is);
-		dis = new DataInputStream(is);
-	}
+  protected DataInputStream dis;
 
-	@Override
-	public Measure getObjectFromStream() throws IOException {
-		Measure measure = new Measure();
-		measure.setTimeStamp(dis.readLong());
-		measure.setValue(dis.readDouble());
-		return measure;
-	}
-	
+  public MeasureReader(InputStream is) {
+    super(is);
+    dis = new DataInputStream(is);
+  }
+
+  @Override
+  public Measure getObjectFromStream() throws IOException {
+    Measure measure = new Measure();
+    measure.setTimeStamp(dis.readLong());
+    measure.setValue(dis.readDouble());
+    return measure;
+  }
+
 }

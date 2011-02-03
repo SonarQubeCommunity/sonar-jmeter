@@ -22,29 +22,27 @@ package es.excentia.jmeter.report.client;
 
 public class JMeterReportConst {
 
-	public static final String REPORT_SERVER_PROPERTIES = "jmeter-report-server.properties";
-	
-	public static final String DEFAULT_HOST = "localhost";
-	public static final int DEFAULT_PORT = 4444;
-	
-	public static final int RETURN_CODE_OK = Integer.MAX_VALUE;
-	public static final int RETURN_CODE_ERROR = Integer.MIN_VALUE;
-	
-	public static final int OP_GET_AVALIABLE_CONFIGS = 1;
-	public static final int OP_GET_AVALIABLE_METRICS = 2;
-	public static final int OP_GET_BUCKET_MEASURES = 3;
-	public static final int OP_GET_GLOBAL_SUMMARY = 4;
-	
-	public static final String METRIC_BUCKET_AVG_RESPONSE_TIME = "BucketAvgResponseTime";
-	
-	public static final String TEST_CONFIG_HTTP = "test-http";
-	public static final String TEST_CONFIG_TRANS = "test-trans";
-	public static final String TEST_CONFIG_TRANS_PLAIN = "test-trans-plain";
-	public static final String TEST_CONFIG_TRANS_PLAIN_SHORT = "test-trans-plain-short";
+  public static final String REPORT_SERVER_PROPERTIES = "jmeter-report-server.properties";
 
-	public static final String[] TEST_CONFIGS = new String[] {
-		TEST_CONFIG_HTTP, TEST_CONFIG_TRANS, 
-		TEST_CONFIG_TRANS_PLAIN, TEST_CONFIG_TRANS_PLAIN_SHORT
-	};
-	
+  public static final String DEFAULT_HOST = "localhost";
+  public static final int DEFAULT_PORT = 4444;
+
+  public static final int RETURN_CODE_OK = Integer.MAX_VALUE;
+  public static final int RETURN_CODE_ERROR = Integer.MIN_VALUE;
+
+  public static final int OP_GET_AVALIABLE_CONFIGS = 1;
+  public static final int OP_GET_AVALIABLE_METRICS = 2;
+  public static final int OP_GET_BUCKET_MEASURES = 3;
+  public static final int OP_GET_GLOBAL_SUMMARY = 4;
+
+  public static final String METRIC_BUCKET_AVG_RESPONSE_TIME = "BucketAvgResponseTime";
+
+  public static final String TEST_CONFIG_HTTP = "test-http";
+  public static final String TEST_CONFIG_TRANS = "test-trans";
+  public static final String TEST_CONFIG_TRANS_PLAIN = "test-trans-plain";
+  public static final String TEST_CONFIG_TRANS_PLAIN_SHORT = "test-trans-plain-short";
+
+  public static final String[] TEST_CONFIGS = new String[] { TEST_CONFIG_HTTP,
+      TEST_CONFIG_TRANS, TEST_CONFIG_TRANS_PLAIN, TEST_CONFIG_TRANS_PLAIN_SHORT };
+
 }

@@ -22,18 +22,18 @@ package es.excentia.jmeter.report.client.exception;
 
 public class JMeterReportException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public JMeterReportException(String message, Throwable cause) {
-		super(message, cause);
-	}
+  public JMeterReportException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public JMeterReportException(String message) {
-		super(message);
-	}
+  public JMeterReportException(String message) {
+    super(message);
+  }
 
-	public JMeterReportException(Throwable cause) {
-		super(cause);
-	}
-	
+  public JMeterReportException(Throwable cause) {
+    super(cause);
+  }
+
 }

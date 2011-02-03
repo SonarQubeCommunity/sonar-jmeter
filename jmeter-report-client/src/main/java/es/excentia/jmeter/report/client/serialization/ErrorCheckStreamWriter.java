@@ -26,27 +26,27 @@ import java.io.OutputStream;
 import es.excentia.jmeter.report.client.JMeterReportConst;
 
 public abstract class ErrorCheckStreamWriter<T> extends StreamWriter<T> {
-	
-	DataOutputStream dos;
-	
-	public ErrorCheckStreamWriter(OutputStream os) {
-		super(os);
-		dos = new DataOutputStream(os);
-	}
-	
-	public final void write(T obj) {
-		try {
-			dos.writeInt(JMeterReportConst.RETURN_CODE_OK);
-			dos.flush();
-			
-			writeObjectToStream(obj);
-		} catch(StreamException e) {
-			throw e;
-		} catch(Exception e) {
-			throw new StreamException(e);
-		}
-	}
-	
-	public abstract void writeObjectToStream(T obj) throws Exception;
-	
+
+  DataOutputStream dos;
+
+  public ErrorCheckStreamWriter(OutputStream os) {
+    super(os);
+    dos = new DataOutputStream(os);
+  }
+
+  public final void write(T obj) {
+    try {
+      dos.writeInt(JMeterReportConst.RETURN_CODE_OK);
+      dos.flush();
+
+      writeObjectToStream(obj);
+    } catch (StreamException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new StreamException(e);
+    }
+  }
+
+  public abstract void writeObjectToStream(T obj) throws Exception;
+
 }

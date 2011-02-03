@@ -22,21 +22,23 @@ package es.excentia.jmeter.report.client.data;
 
 public class Measure {
 
-	protected long timeStamp;
-	protected double value;
-	
-	
-	public long getTimeStamp() {
-		return timeStamp;
-	}
-	public void setTimeStamp(long timeStamp) {
-		this.timeStamp = timeStamp;
-	}
-	public double getValue() {
-		return value;
-	}
-	public void setValue(double value) {
-		this.value = value;
-	}
-		
+  protected long timeStamp;
+  protected double value;
+
+  public long getTimeStamp() {
+    return timeStamp;
+  }
+
+  public void setTimeStamp(long timeStamp) {
+    this.timeStamp = timeStamp;
+  }
+
+  public double getValue() {
+    return value;
+  }
+
+  public void setValue(double value) {
+    this.value = value;
+  }
+
 }

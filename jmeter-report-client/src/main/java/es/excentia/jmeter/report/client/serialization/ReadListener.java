@@ -22,6 +22,6 @@ package es.excentia.jmeter.report.client.serialization;
 
 public interface ReadListener<T> {
 
-	public void onRead(T obj);
-	
+  public void onRead(T obj);
+
 }

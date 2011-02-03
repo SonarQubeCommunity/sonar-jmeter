@@ -28,17 +28,17 @@ import es.excentia.jmeter.report.client.data.Measure;
 
 public class MeasureWriter extends ErrorCheckStreamWriter<Measure> {
 
-	protected DataOutputStream dos;
-	
-	public MeasureWriter(OutputStream os) {
-		super(os);
-		dos = new DataOutputStream(os);
-	}
+  protected DataOutputStream dos;
 
-	@Override
-	public void writeObjectToStream(Measure obj) throws IOException {
-		dos.writeLong(obj.getTimeStamp());
-		dos.writeDouble(obj.getValue());
-	}
-	
+  public MeasureWriter(OutputStream os) {
+    super(os);
+    dos = new DataOutputStream(os);
+  }
+
+  @Override
+  public void writeObjectToStream(Measure obj) throws IOException {
+    dos.writeLong(obj.getTimeStamp());
+    dos.writeDouble(obj.getValue());
+  }
+
 }

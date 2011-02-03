@@ -22,7 +22,8 @@ package es.excentia.jmeter.report.client.serialization;
 
 public interface ReadHandler<T> {
 
-	public void addReadListener(ReadListener<T> obj);
-	public void removeReadListener(ReadListener<T> obj);
-	
+  public void addReadListener(ReadListener<T> obj);
+
+  public void removeReadListener(ReadListener<T> obj);
+
 }

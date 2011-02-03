@@ -27,34 +27,34 @@ import java.io.InputStream;
 import es.excentia.jmeter.report.client.JMeterReportConst;
 
 public abstract class ErrorCheckStreamReader<T> extends StreamReader<T> {
-	
-	DataInputStream dis;
-	
-	public ErrorCheckStreamReader(InputStream is) {
-		super(is);
-		dis = new DataInputStream(is);
-	}
-	
-	public final T read() {
 
-		try {
-			
-			int errorControl = dis.readInt();
-			if (errorControl==JMeterReportConst.RETURN_CODE_ERROR) {
-				throw new StreamException("Server error: "+dis.readUTF());
-			}
-			
-			return getObjectFromStream();
-			
-		} catch(EOFException e) {
-			return null;
-		} catch(StreamException e) {
-			throw e;
-		} catch(Exception e) {
-			throw new StreamException(e);
-		}
-		
-	}
-	
-	protected abstract T getObjectFromStream() throws Exception;
+  DataInputStream dis;
+
+  public ErrorCheckStreamReader(InputStream is) {
+    super(is);
+    dis = new DataInputStream(is);
+  }
+
+  public final T read() {
+
+    try {
+
+      int errorControl = dis.readInt();
+      if (errorControl == JMeterReportConst.RETURN_CODE_ERROR) {
+        throw new StreamException("Server error: " + dis.readUTF());
+      }
+
+      return getObjectFromStream();
+
+    } catch (EOFException e) {
+      return null;
+    } catch (StreamException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new StreamException(e);
+    }
+
+  }
+
+  protected abstract T getObjectFromStream() throws Exception;
 }
