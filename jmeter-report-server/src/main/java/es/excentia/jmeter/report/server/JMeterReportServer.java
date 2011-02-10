@@ -48,7 +48,7 @@ public class JMeterReportServer {
 
   private static int port = 4444, maxConnections = 0;
 
-  private ServerSocket listener;;
+  private ServerSocket listener;
   private Thread serverThread;
   private int connections = 0;
   private boolean stopWhenPossible = false;

@@ -51,13 +51,13 @@ public class ConfigServiceImpl implements ConfigService {
     URL url = ClassLoader.getSystemResource(propsName);
     if (url == null) {
       throw new ConfigException("Properties file '" + propsName
-          + "' doesn't exist");
+          + "' doesn't exist.");
     }
 
     try {
       props.load(url.openStream());
     } catch (IOException e) {
-      throw new ConfigException("Cannot load properties file: " + propsName);
+      throw new ConfigException("Cannot load properties file: " + propsName+"\nURL="+url.toString());
     }
 
     return props;

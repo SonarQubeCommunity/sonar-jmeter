@@ -21,7 +21,10 @@
 package es.excentia.jmeter.report.server.report;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 public abstract class TransMapSimplifier<TReportData, TValue> {
 
@@ -40,6 +43,7 @@ public abstract class TransMapSimplifier<TReportData, TValue> {
 
   public final Map<String, TValue> toSimpleMap(Map<String, TReportData> origMap) {
     Map<String, TValue> simpleMap = new HashMap<String, TValue>();
+    
     for (String key : origMap.keySet()) {
       TValue value = reportDataToValue(origMap.get(key));
       if (!isNullOrNaNNumber(value)) {
@@ -55,10 +59,10 @@ public abstract class TransMapSimplifier<TReportData, TValue> {
 
     if (value == null)
       return true;
-    if (value instanceof Double && (value == null || ((Double) value).isNaN())) {
+    if (value instanceof Double && ((Double) value).isNaN()) {
       return true;
     }
-    if (value instanceof Float && (value == null || ((Float) value).isNaN())) {
+    if (value instanceof Float && ((Float) value).isNaN()) {
       return true;
     }
 
