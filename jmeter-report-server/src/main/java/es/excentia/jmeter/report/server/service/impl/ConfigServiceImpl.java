@@ -28,8 +28,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import es.excentia.jmeter.report.client.JMeterReportConst;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
+import es.excentia.jmeter.report.server.JMeterReportServer;
 import es.excentia.jmeter.report.server.exception.ConfigException;
 import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.testresults.JtlAbstractSampleReader;
@@ -41,6 +45,9 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 public class ConfigServiceImpl implements ConfigService {
 
+  private static final Logger log = LoggerFactory
+  .getLogger(JMeterReportServer.class);
+  
   /**
    * Load jmeter report server properties file from the classpath
    */
@@ -62,6 +69,17 @@ public class ConfigServiceImpl implements ConfigService {
 
     return props;
   }
+  
+  /**
+   * Load jmeter report server properties file from system properties in command line
+   */
+  protected static Properties getPropertiesFromSystem() {
+    
+    Properties props = System.getProperties();
+        
+    return props;
+  }
+
 
   protected InputStream getInputStreamByConfig(String config) {
 
@@ -74,17 +92,26 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     if (is == null) {
-      // Obtenemos la ubicación del fichero jtl a partir del fichero
-      // de properties
-      Properties props = getPropertiesFromClasspath();
+      // Retrieve JTL file path through system property
       String jtlPathProp = "testconfig." + config + ".jtlpath";
-      String jtlPath = props.getProperty(jtlPathProp);
+      String jtlPath = System.getProperty(jtlPathProp);
 
       if (jtlPath == null) {
-        throw new ConfigException("There is no property " + jtlPathProp
-            + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
+        log.info("Property "+jtlPathProp+" not found in system properties. Loading server properties from classpath...");
+        // if no system property found then try to find it in classpath
+        Properties props = getPropertiesFromClasspath();
+        jtlPath = props.getProperty(jtlPathProp);
+        
+        if(jtlPath == null) {
+          throw new ConfigException("There is no property " + jtlPathProp
+              + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
+        }
+        
       }
 
+      log.debug("Test configuration: "+config);
+      log.debug("JTL file:           "+jtlPath);
+      
       try {
         is = new FileInputStream(new File(jtlPath));
       } catch (FileNotFoundException e) {
