@@ -21,6 +21,7 @@
 package es.excentia.jmeter.report.server.service;
 
 import es.excentia.jmeter.report.client.serialization.StreamReader;
+import es.excentia.jmeter.report.server.data.ConfigInfo;
 import es.excentia.jmeter.report.server.testresults.SampleMix;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
@@ -32,5 +33,7 @@ public interface ConfigService extends Service {
   StreamReader<HttpSample> getHttpSampleReaderByConfig(String config);
 
   StreamReader<SampleMix> getSampleMixReaderByConfig(String config);
+  
+  void setInMemoryConfigInfo(String name, ConfigInfo configInfo);
 
 }

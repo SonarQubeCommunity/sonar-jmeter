@@ -28,9 +28,10 @@ import org.sonar.api.Properties;
 import org.sonar.api.Property;
 
 @Properties( {
-    @Property(key = JMeterPluginConst.HOST_PROPERTY, name = "Host", description = "JMeter server host", project = true, global = true),
-    @Property(key = JMeterPluginConst.PORT_PROPERTY, name = "Port", description = "JMeter server port", defaultValue = "4444", project = true, global = true),
-    @Property(key = JMeterPluginConst.CONFIG_PROPERTY, name = "Configuration", description = "Test configuration key", project = true, global = false) })
+  @Property(key = JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, name = "Local jtl file", description = "Local jtl file path. If specified no remote config is used.", project = true, global = false),
+  @Property(key = JMeterPluginConst.HOST_PROPERTY, name = "Remote server host", description = "Remote jmeter report server host, used for getting remote results if no local jtl file is defined.", project = true, global = true),
+  @Property(key = JMeterPluginConst.PORT_PROPERTY, name = "Remote server port", description = "Remote jmeter report server port, used for getting remote results if no local jtl file is defined.", defaultValue = "4444", project = true, global = true),
+  @Property(key = JMeterPluginConst.CONFIG_PROPERTY, name = "Remote config name", description = "Remote jmeter report server config name, used for getting remote results if no local jtl file is defined.", project = true, global = false) })
 /**
  * This class is the entry point for all extensions
  */
@@ -49,7 +50,7 @@ public class JMeterPlugin implements Plugin {
   }
 
   /**
-   * This is where you're going to declare all your Sonar extensions
+   * This is where we declare all our Sonar extensions
    */
   @SuppressWarnings("unchecked")
   public List getExtensions() {

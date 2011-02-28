@@ -1,5 +1,5 @@
 /*
- * Sonar JMeter Plugin
+ * JMeter Report Server
  * Copyright (C) 2010 eXcentia
  * dev@sonar.codehaus.org
  *
@@ -18,11 +18,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.jmeter;
+package es.excentia.jmeter.report.server.data;
 
-public class JMeterPluginConst {
-  public static final String HOST_PROPERTY = "org.sonar.plugins.jmeter.server.host";
-  public static final String PORT_PROPERTY = "org.sonar.plugins.jmeter.server.port";
-  public static final String CONFIG_PROPERTY = "org.sonar.plugins.jmeter.server.config";
-  public static final String LOCAL_JTL_PATH_PROPERTY = "org.sonar.plugins.jmeter.jtlpath";
+public class ConfigInfo {
+
+  private String name;
+  private String jtlPath;
+  
+  
+  public ConfigInfo(String jtlPath) {
+    super();
+    this.jtlPath = jtlPath;
+  }
+
+  
+  public String getName() {
+    return name;
+  }
+  public void setName(String name) {
+    this.name = name;
+  }
+  public String getJtlPath() {
+    return jtlPath;
+  }
+  public void setJtlPath(String jtlPath) {
+    this.jtlPath = jtlPath;
+  }
+  
 }

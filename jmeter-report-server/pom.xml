@@ -72,15 +72,17 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.7</version>
+      <version>4.8.1</version>
       <scope>test</scope>
     </dependency>
+    
     <!-- JMeter Report Client -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>jmeter-report-client</artifactId>
       <version>0.2-SNAPSHOT</version>
     </dependency>
+    
     <!-- Logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -92,6 +94,7 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
+    
     <!-- Xml management -->
     <dependency>
       <groupId>org.apache.xmlbeans</groupId>

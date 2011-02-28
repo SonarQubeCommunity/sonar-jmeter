@@ -26,14 +26,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.JMeterReportConst;
+import es.excentia.jmeter.report.client.exception.JMeterReportException;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.server.JMeterReportServer;
+import es.excentia.jmeter.report.server.data.ConfigInfo;
 import es.excentia.jmeter.report.server.exception.ConfigException;
 import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.testresults.JtlAbstractSampleReader;
@@ -47,6 +51,15 @@ public class ConfigServiceImpl implements ConfigService {
 
   private static final Logger log = LoggerFactory
   .getLogger(JMeterReportServer.class);
+  
+  
+  /**
+   * From 0.2, you can set config properties programmatically and
+   * these ones have preferences over system properties and classpath property
+   * files.
+   */
+  private static final Map<String, ConfigInfo> inMemoryConfigs = new HashMap<String, ConfigInfo>();
+  
   
   /**
    * Load jmeter report server properties file from the classpath
@@ -92,21 +105,33 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     if (is == null) {
-      // Retrieve JTL file path through system property
-      String jtlPathProp = "testconfig." + config + ".jtlpath";
-      String jtlPath = System.getProperty(jtlPathProp);
-
-      if (jtlPath == null) {
-        log.info("Property "+jtlPathProp+" not found in system properties. Loading server properties from classpath...");
-        // if no system property found then try to find it in classpath
-        Properties props = getPropertiesFromClasspath();
-        jtlPath = props.getProperty(jtlPathProp);
+      
+      String jtlPath;
+      
+      // Try to retrieve JTL file path through inMemoryConfigs
+      ConfigInfo configInfo = inMemoryConfigs.get(config);
+      if (configInfo!=null) {
+        jtlPath = configInfo.getJtlPath();
+      } else {
+      
+        String jtlPathProp = "testconfig." + config + ".jtlpath";
         
-        if(jtlPath == null) {
-          throw new ConfigException("There is no property " + jtlPathProp
-              + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
+        // Try to retrieve JTL file path through system property
+        jtlPath = System.getProperty(jtlPathProp);
+         
+        if (jtlPath == null) {
+          // Try to find JTL file path in classpath properties file
+          log.info("Property "+jtlPathProp+" not found in system properties. Loading server properties from classpath...");
+          
+          Properties props = getPropertiesFromClasspath();
+          jtlPath = props.getProperty(jtlPathProp);
+          
+          if(jtlPath == null) {
+            throw new ConfigException("There is no property " + jtlPathProp
+                + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
+          }
+          
         }
-        
       }
 
       log.debug("Test configuration: "+config);
@@ -137,6 +162,28 @@ public class ConfigServiceImpl implements ConfigService {
   public StreamReader<SampleMix> getSampleMixReaderByConfig(String config) {
     InputStream is = getInputStreamByConfig(config);
     return new JtlSampleMixReader(is);
+  }
+  
+  
+  public void setInMemoryConfigInfo(String name, ConfigInfo configInfo) {
+    
+    if (name==null || name.trim().length()==0) {
+      throw new JMeterReportException("Config must have a name");
+    }
+    
+    if (configInfo!=null) {
+      configInfo.setName(name);
+      
+      String jtlPath = configInfo.getJtlPath();
+      if (jtlPath==null || jtlPath.trim().length()==0) {
+        throw new JMeterReportException("Config must have a jtl file path");
+      }
+      
+      inMemoryConfigs.put(name, configInfo);
+      
+    } else {
+      inMemoryConfigs.remove(name);
+    }
   }
 
 }

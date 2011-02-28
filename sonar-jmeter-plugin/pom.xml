@@ -34,6 +34,7 @@
       <groupId>org.codehaus.sonar</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <version>${sonar.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Unit tests -->
@@ -44,10 +45,18 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- JMeter Report Client -->
+    <!-- JMeter Report Client and Server
+    	Now we include the server into the plugin so
+    	we can analize local jtl files. 
+    -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>jmeter-report-client</artifactId>
+      <version>0.2-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jmeter-report-server</artifactId>
       <version>0.2-SNAPSHOT</version>
     </dependency>
 

@@ -33,7 +33,7 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 
 /**
- * Reader para obtener sólo los objetos HttpSample de un fichero jtl
+ * Reader para obtener los objetos HttpSample y Sample de un fichero jtl
  * 
  * @author cfillol
  * 

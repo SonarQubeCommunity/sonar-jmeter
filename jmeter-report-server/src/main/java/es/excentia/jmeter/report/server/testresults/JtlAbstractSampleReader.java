@@ -52,7 +52,6 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.TestResultsDocument
  * @author cfillol
  * 
  */
-@SuppressWarnings("restriction")
 public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
 
   public static final String NAMESPACE = "http://xmlbeans.testresults.server.report.jmeter.excentia.es";
@@ -113,6 +112,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       throw new JtlReaderException("Cannot create JtlReader", e);
     }
   }
+  
 
   @Override
   protected AbstractSample getObjectFromStream() throws Exception {
@@ -123,32 +123,43 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
 
       XMLEvent evt = reader.nextEvent();
 
-      // Empieza un HttpSample ...
       if (evt.isStartElement()) {
         StartElement elem = (StartElement) evt;
         String tagName = elem.getName().getLocalPart();
         if (HTTPSAMPLE_TAG_NAME.equals(tagName)
             || SAMPLE_TAG_NAME.equals(tagName)) {
+          
+          // Empieza un HttpSample ...
           sampleDepth++;
         }
-      }
+      } 
 
-      // Nos quedamos con el xml que cuelga del primer HttpSample
-      // y de todos sus descendiente
+      
       if (sampleDepth > 0) {
+        // Nos quedamos con el xml que cuelga del primer HttpSample
+        // y de todos sus descendientes
         writer.add(evt);
+      } else {
+        // Descartamos el nodo raíz, pero lo incluimos en el writer
+        // para que el xml siga siendo válido
+        writer.add(evt);
+        writer.flush();
+        swriter.reset();
       }
-
+      
+      
       if (evt.isEndElement()) {
         EndElement elem = (EndElement) evt;
         String tagName = elem.getName().getLocalPart();
         if (HTTPSAMPLE_TAG_NAME.equals(tagName)
             || SAMPLE_TAG_NAME.equals(tagName)) {
-
+          
+          // Acaba un HttpSample ...
+          
           readCount++; // Actualizamos el contador de HttSamples leídos
 
           if (sampleDepth == 1) {
-            // Si llegamos al final del HttpSample padre,
+            // Si hemos llegado al final del HttpSample padre,
             // terminamos de guardar el xml que nos interesa y
             // lo devolvemos en forma de objeto
 
@@ -178,11 +189,12 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
               return testResults.getSampleArray(0);
             }
           }
-
+          
           sampleDepth--;
         }
-      }
 
+      }
+      
     }
 
     if (LOG_DEBUG) {
