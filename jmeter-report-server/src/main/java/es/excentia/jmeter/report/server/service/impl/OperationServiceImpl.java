@@ -60,15 +60,17 @@ public class OperationServiceImpl implements OperationService {
 
   protected long getLong(Map<String, Long> map, String key) {
     Long value = map.get(key);
-    if (value == null)
+    if (value == null) {
       value = (long) 0;
+    }
     return value;
   }
 
   protected double getDouble(Map<String, Double> map, String key) {
     Double value = map.get(key);
-    if (value == null)
+    if (value == null) {
       value = 0.0;
+    }
     return value;
   }
 
@@ -139,14 +141,6 @@ public class OperationServiceImpl implements OperationService {
     globalSummary.setTransBytesOkAvgDev(okBytesAverage.getDeviation());
     globalSummary.setTransBytesOkAvgDevPercent(okBytesAverage
         .getDeviationPercent());
-
-    // globalSummary.setSlowestTransName(readString());
-    // globalSummary.setSlowestTransResponseTimeOkAvg(dis.readDouble());
-    // globalSummary.setSlowestTransBytesOkAvgDevPercent(dis.readDouble());
-    //		
-    // globalSummary.setMostUnstableTransName(readString());
-    // globalSummary.setMostUnstableTransResponseTimeOkAvgDevPercent(dis.readDouble());
-    // globalSummary.setMostUnstableTransBytesOkAvgDevPercent(dis.readDouble());
 
     // Tipos de transacciones
     TransOrder transOrder = report.getDataTransGlobal(TransOrder.class);

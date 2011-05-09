@@ -43,23 +43,26 @@ public abstract class Counter extends ReportData {
 
   public long getOpositeCounter() {
     long opositeCounter = getTotal() - counter;
-    if (opositeCounter <= 0)
+    if (opositeCounter <= 0) {
       return 0;
+    }
 
     return opositeCounter;
   }
 
   public double getPercent() {
-    if (counter == 0)
+    if (counter == 0) {
       return 0;
+    }
 
     return (counter * 100.0) / getTotal();
   }
 
   public double getOpositePercent() {
     long opositeCounter = getOpositeCounter();
-    if (opositeCounter == 0)
+    if (opositeCounter == 0) {
       return 0;
+    }
 
     return (opositeCounter * 100.0) / getTotal();
   }

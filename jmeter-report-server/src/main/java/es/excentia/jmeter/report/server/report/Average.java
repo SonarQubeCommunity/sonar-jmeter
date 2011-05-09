@@ -52,10 +52,12 @@ public abstract class Average extends ReportData {
       throw new ReportException("La media aún no está disponible");
     }
 
-    if (getTotal() <= 0)
+    if (getTotal() <= 0) {
       return Double.NaN;
-    if (avg != null)
+    }
+    if (avg != null) {
       return avg;
+    }
 
     avg = sumAvg / getTotal();
     return avg;
@@ -63,15 +65,17 @@ public abstract class Average extends ReportData {
 
   public double getDeviation() {
     // TODO cfillol: Comprobar que estamos en la tercera fase?
-    if (getTotal() <= 0)
+    if (getTotal() <= 0) {
       return Double.NaN;
+    }
     return Math.sqrt(sumDev / (getTotal() - 1));
   }
 
   public double getDeviationPercent() {
     // TODO cfillol: Comprobar que estamos en la tercera fase?
-    if (getTotal() <= 0)
+    if (getTotal() <= 0) {
       return Double.NaN;
+    }
     return (getDeviation() * 100.0) / getAverage();
   }
 

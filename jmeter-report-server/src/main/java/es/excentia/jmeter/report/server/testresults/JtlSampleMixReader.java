@@ -62,8 +62,9 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
 
   protected boolean addTransaction(Sample sample, List<Sample> samples,
       List<HttpSample> httpSamples) {
-    if (!isTransaction(sample))
+    if (!isTransaction(sample)) {
       return false;
+    }
 
     samples.add(sample);
 
@@ -83,8 +84,9 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
   @Override
   public SampleMix getObjectFromStream() throws Exception {
     AbstractSample abstractSample = jtlReader.read();
-    if (abstractSample == null)
+    if (abstractSample == null) {
       return null;
+    }
 
     List<Sample> transactions = new ArrayList<Sample>();
     List<HttpSample> httpSamples = new ArrayList<HttpSample>();

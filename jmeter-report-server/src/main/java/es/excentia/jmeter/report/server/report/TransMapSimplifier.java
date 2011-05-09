@@ -57,8 +57,9 @@ public abstract class TransMapSimplifier<TReportData, TValue> {
 
   protected boolean isNullOrNaNNumber(TValue value) {
 
-    if (value == null)
+    if (value == null) {
       return true;
+    }
     if (value instanceof Double && ((Double) value).isNaN()) {
       return true;
     }

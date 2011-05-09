@@ -25,22 +25,25 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 public class OkCounter extends Counter {
 
   public double getCounterPerMinute() {
-    if (counter == 0)
+    if (counter == 0) {
       return 0;
+    }  
 
     double testDurationInMinutes = getSummary().getTestDurationInMinutes();
     return ((double) counter) / testDurationInMinutes;
   }
 
   public double getCounterPerUser() {
-    if (counter == 0)
+    if (counter == 0) {
       return 0;
+    }
     return ((double) counter) / getSummary().getNumUsersLogged();
   }
 
   public double getCounterPerMinuteAndUser() {
-    if (counter == 0)
+    if (counter == 0) {
       return 0;
+    }
 
     long usersLogged = getSummary().getNumUsersLogged();
     double testDurationInMinutes = getSummary().getTestDurationInMinutes();
@@ -51,8 +54,10 @@ public class OkCounter extends Counter {
   @Override
   public void addMeasure(AbstractSample sample) {
     incrementTotal();
-    if (sample.getS())
+    if (sample.getS()) {
       incrementCounter();
+    }
+      
   }
 
   @Override
