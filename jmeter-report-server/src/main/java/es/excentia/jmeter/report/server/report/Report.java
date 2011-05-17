@@ -93,16 +93,16 @@ public class Report {
     }
 
     switch (scope) {
-    case SCOPE_TRANS_GLOBAL:
-      transGlobalDataClasses.put(clazz.getSimpleName(), clazz);
-      break;
-    case SCOPE_TRANS_TYPE:
-      transTypeDataClasses.put(clazz.getSimpleName(), clazz);
-      break;
-    // case SCOPE_REQUEST_GLOBAL:
-    default:
-      requestGlobalDataClasses.put(clazz.getSimpleName(), clazz);
-      break;
+      case SCOPE_TRANS_GLOBAL:
+        transGlobalDataClasses.put(clazz.getSimpleName(), clazz);
+        break;
+      case SCOPE_TRANS_TYPE:
+        transTypeDataClasses.put(clazz.getSimpleName(), clazz);
+        break;
+        // case SCOPE_REQUEST_GLOBAL:
+      default:
+        requestGlobalDataClasses.put(clazz.getSimpleName(), clazz);
+        break;
     }
   }
 
@@ -198,7 +198,7 @@ public class Report {
 
           for (String dataName : transTypeData[phase].keySet()) {
             Map<String, ReportData> transDataMap = transTypeData[phase]
-                .get(dataName);
+                                                                 .get(dataName);
 
             ReportData data = transDataMap.get(actualTransName);
             if (data == null) {
@@ -226,7 +226,7 @@ public class Report {
     ReportData data;
     try {
       data = (ReportData) summaryDataClass.getConstructors()[0]
-          .newInstance(new Object[] {});
+                                                             .newInstance(new Object[] {});
     } catch (Exception e) {
       throw new ReportException(e);
     }

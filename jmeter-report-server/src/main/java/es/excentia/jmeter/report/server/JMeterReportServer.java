@@ -42,7 +42,7 @@ import es.excentia.jmeter.report.server.service.ServiceFactory;
 public class JMeterReportServer {
 
   private static final Logger log = LoggerFactory
-      .getLogger(JMeterReportServer.class);
+  .getLogger(JMeterReportServer.class);
   private static final boolean LOG_DEBUG = log.isDebugEnabled();
   private static final boolean LOG_TRACE = log.isTraceEnabled();
 
@@ -54,7 +54,7 @@ public class JMeterReportServer {
   private boolean stopWhenPossible = false;
 
   protected OperationService metricService = ServiceFactory
-      .get(OperationService.class);
+  .get(OperationService.class);
 
   /**
    * Atendemos en forma de hilos las peticiones de los clientes
@@ -85,22 +85,22 @@ public class JMeterReportServer {
           String metric;
 
           switch (op) {
-          case JMeterReportConst.OP_GET_GLOBAL_SUMMARY:
-            config = in.readUTF();
-            metricService.writeGlobalSummary(out, config);
-            break;
+            case JMeterReportConst.OP_GET_GLOBAL_SUMMARY:
+              config = in.readUTF();
+              metricService.writeGlobalSummary(out, config);
+              break;
 
-          case JMeterReportConst.OP_GET_BUCKET_MEASURES:
-            config = in.readUTF();
-            metric = in.readUTF();
-            int millisBucket = in.readInt();
-            metricService
-                .writeBucketMeasures(out, config, metric, millisBucket);
-            break;
+            case JMeterReportConst.OP_GET_BUCKET_MEASURES:
+              config = in.readUTF();
+              metric = in.readUTF();
+              int millisBucket = in.readInt();
+              metricService
+              .writeBucketMeasures(out, config, metric, millisBucket);
+              break;
 
-          default:
-            throw new JMeterReportServerException("Invalid operation code: "
-                + op);
+            default:
+              throw new JMeterReportServerException("Invalid operation code: "
+                  + op);
           }
 
         } catch (IOException ioe) {

@@ -43,6 +43,6 @@ public class JMeterReportConst {
   public static final String TEST_CONFIG_TRANS_PLAIN_SHORT = "test-trans-plain-short";
 
   public static final String[] TEST_CONFIGS = new String[] { TEST_CONFIG_HTTP,
-      TEST_CONFIG_TRANS, TEST_CONFIG_TRANS_PLAIN, TEST_CONFIG_TRANS_PLAIN_SHORT };
+    TEST_CONFIG_TRANS, TEST_CONFIG_TRANS_PLAIN, TEST_CONFIG_TRANS_PLAIN_SHORT };
 
 }

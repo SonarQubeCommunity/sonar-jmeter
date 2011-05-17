@@ -32,10 +32,10 @@ import org.sonar.api.Property;
   @Property(key = JMeterPluginConst.HOST_PROPERTY, name = "Remote server host", description = "Remote jmeter report server host, used for getting remote results if no local jtl file is defined.", project = true, global = true),
   @Property(key = JMeterPluginConst.PORT_PROPERTY, name = "Remote server port", description = "Remote jmeter report server port, used for getting remote results if no local jtl file is defined.", defaultValue = "4444", project = true, global = true),
   @Property(key = JMeterPluginConst.CONFIG_PROPERTY, name = "Remote config name", description = "Remote jmeter report server config name, used for getting remote results if no local jtl file is defined.", project = true, global = false) })
-/**
- * This class is the entry point for all extensions
- */
-public class JMeterPlugin implements Plugin {
+  /**
+   * This class is the entry point for all extensions
+   */
+  public class JMeterPlugin implements Plugin {
 
   public String getKey() {
     return "jmeter";
@@ -56,8 +56,8 @@ public class JMeterPlugin implements Plugin {
   public List getExtensions() {
     return Arrays.asList(JMeterMetrics.class, JMeterSensor.class,
         JMeterDashboardWidget.class
-    // , GwtJMeterPage.class
-        );
+        // , GwtJMeterPage.class
+    );
   }
 
   @Override

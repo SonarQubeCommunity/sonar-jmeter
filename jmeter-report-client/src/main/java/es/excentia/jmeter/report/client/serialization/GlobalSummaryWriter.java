@@ -130,7 +130,7 @@ public class GlobalSummaryWriter extends ErrorCheckStreamWriter<GlobalSummary> {
   }
 
   protected void writeTransMapDouble(Map<String, Double> map)
-      throws IOException {
+  throws IOException {
     if (map == null || map.size() == 0) {
       dos.writeInt(0);
       return;

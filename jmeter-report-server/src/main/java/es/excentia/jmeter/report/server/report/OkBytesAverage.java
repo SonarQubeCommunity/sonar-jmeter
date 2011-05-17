@@ -27,13 +27,13 @@ public class OkBytesAverage extends Average {
   public void addMeasure(AbstractSample sample) {
     if (sample.getS()) {
       switch (getSummary().getActualPhaseIndex()) {
-      case Report.FIRST_PHASE:
-        incrementTotal();
-        addToAvg(sample.getBy());
-        break;
-      case Report.SECOND_PHASE:
-        addToDev(sample.getBy());
-        break;
+        case Report.FIRST_PHASE:
+          incrementTotal();
+          addToAvg(sample.getBy());
+          break;
+        case Report.SECOND_PHASE:
+          addToDev(sample.getBy());
+          break;
       }
     }
   }
