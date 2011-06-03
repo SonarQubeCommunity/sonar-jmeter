@@ -25,8 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.measures.Measure;
-import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.jmeter.exception.JMeterPluginException;
 
@@ -48,77 +46,24 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
 
 
   public boolean shouldExecuteOnProject(Project project) {
-    // this sensor is executed if local jtl path or remote config name are set
-    String jtlPath = (String) project
-    .getProperty(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
-
-    String config = (String) project
-    .getProperty(JMeterPluginConst.CONFIG_PROPERTY);
-
-    return StringUtils.isNotBlank(jtlPath) || StringUtils.isNotBlank(config);
+    return true;
   }
 
   public void analyse(Project project, SensorContext context) {
 
+    // this sensor is executed if local jtl path or remote config name are set
+    String jtlPath = (String) project.getProperty(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
+    String config = (String) project.getProperty(JMeterPluginConst.CONFIG_PROPERTY);
+    if (StringUtils.isBlank(jtlPath) && StringUtils.isBlank(config)) {
+      return;
+    }
+    
     LOG.debug("START JMeterSensor");
 
     try {
 
       GlobalSummary summary = getGlobalSummary(project);
-
-      context.saveMeasure(JMeterMetrics.requestErrorPercent,
-          summary.getRequestsErrorPercent());
-      context.saveMeasure(new Measure(JMeterMetrics.testDesc, summary
-          .getTestDesc()));
-      context.saveMeasure(JMeterMetrics.duration,
-          new Double(summary.getTestDuration()));
-      context.saveMeasure(JMeterMetrics.usersLogged,
-          new Double(summary.getUsersLogged()));
-      context.saveMeasure(JMeterMetrics.requestTotal,
-          new Double(summary.getRequestsTotal()));
-      context.saveMeasure(JMeterMetrics.transTotal,
-          new Double(summary.getTransTotal()));
-
-      if (summary.getRequestsTotal() > 0) {
-        context.saveMeasure(JMeterMetrics.requestResponseTimeOkAvg,
-            new Double(summary.getRequestsResponseTimeOkAvg()));
-        context.saveMeasure(
-            JMeterMetrics.requestResponseTimeOkDevPercent,
-            new Double(summary
-                .getRequestsResponseTimeOkAvgDevPercent()));
-        context.saveMeasure(JMeterMetrics.requestOkPerMinute,
-            new Double(summary.getRequestsOkPerMinute()));
-        context.saveMeasure(JMeterMetrics.requestOkPerMinuteAndUser,
-            new Double(summary.getRequestsOkPerMinuteAndUser()));
-      }
-
-      if (summary.getTransTotal() > 0) {
-        context.saveMeasure(JMeterMetrics.transResponseTimeOkAvg,
-            new Double(summary.getTransResponseTimeOkAvg()));
-        context.saveMeasure(
-            JMeterMetrics.transResponseTimeOkDevPercent,
-            new Double(summary.getTransBytesOkAvgDevPercent()));
-        context.saveMeasure(JMeterMetrics.transOkPerMinute, new Double(
-            summary.getTransOkPerMinute()));
-        context.saveMeasure(JMeterMetrics.transOkPerMinuteAndUser,
-            new Double(summary.getTransOkPerMinuteAndUser()));
-
-        // transMapResponseTimeOkAvg
-        PropertiesBuilder<String, Double> transMapResponseTimeOkAvgPropBuild = new PropertiesBuilder<String, Double>(
-            JMeterMetrics.transMapResponseTimeOkAvg,
-            summary.getTransMapResponseTimeOkAvg());
-        context.saveMeasure(new Measure(
-            JMeterMetrics.transMapResponseTimeOkAvg,
-            transMapResponseTimeOkAvgPropBuild.buildData()));
-
-        // transMapResponseTimeOkDevPercent
-        PropertiesBuilder<String, Double> transMapResponseTimeOkDevPropBuild = new PropertiesBuilder<String, Double>(
-            JMeterMetrics.transMapResponseTimeOkDevPercent,
-            summary.getTransMapResponseTimeOkAvgDevPercent());
-        context.saveMeasure(new Measure(
-            JMeterMetrics.transMapResponseTimeOkDevPercent,
-            transMapResponseTimeOkDevPropBuild.buildData()));
-      }
+      JMeterMAO.saveSummaryAsMetrics(summary, context);
 
     } catch (Exception e) {
       LOG.error("Cannot analyse project '" + project.getName() + "'", e);

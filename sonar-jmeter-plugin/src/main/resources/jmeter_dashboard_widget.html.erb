@@ -33,21 +33,21 @@
 	<td>
 		<h3>Requests</h3>
 		<p><span class="big"><%= format_measure('requestOkPerMinute') -%></span> requests ok/min <%= tendency_icon(measure('requestOkPerMinute')) %></p>
-		<p><%= format_measure('requestResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('requestResponseTimeOkAvg')) %></p>
-		<p><%= format_measure('requestResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('requestResponseTimeOkDevPercent')) %></p>
+		<%	if measure('requestResponseTimeOkAvg') %><p><%= format_measure('requestResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('requestResponseTimeOkAvg')) %></p><%  end %>
+		<%	if measure('requestResponseTimeOkDevPercent') %><p><%= format_measure('requestResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('requestResponseTimeOkDevPercent')) %></p><%  end %>
 	</td>
 	<td width="10%" />
 	<td>
 <%	if measure('transTotal').value > 0 %>
 		<h3>Transactions</h3>
 		<p><span class="big"><%= format_measure('transOkPerMinute') -%></span> transactions ok/min <%= tendency_icon(measure('transOkPerMinute')) %></p>
-		<p><%= format_measure('transResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('transResponseTimeOkAvg')) %></p>
-		<p><%= format_measure('transResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('transResponseTimeOkDevPercent')) %></p>
+		<%	if measure('transResponseTimeOkAvg') %><p><%= format_measure('transResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('transResponseTimeOkAvg')) %></p><%  end %>
+		<%	if measure('transResponseTimeOkDevPercent') %><p><%= format_measure('transResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('transResponseTimeOkDevPercent')) %></p><%  end %>
 <%  end %>
 	</td>
 </tr>
 
-<%	if measure('transTotal').value > 0 %>
+<%	if measure('transResponseTimeOkAvg') %>
 <tr >
 	<td style="padding-top: 15px; padding-bottom: 8px;" colspan="3">
 		<h3>Transaction response time distributions</h3>
@@ -91,6 +91,7 @@
 	</td>
 	<td width="10%" />
 	<td align="center">
+		<%	if measure('transResponseTimeOkDevPercent') %>
 		<%
 		   title = 'Deviation (%)'
 		   m = 'transMapResponseTimeOkDevPercent'
@@ -106,6 +107,7 @@
 		  new Tip('<%=chart_id-%>', '<div><%= transMapToTable(m) -%></div>');
 		  //]]>
 		  </script>
+		<% end %>
 	</td>
 </tr>
 <% end %>

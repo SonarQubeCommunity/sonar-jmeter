@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<sample t="1035" lt="0" ts="1306943100333" s="false" lb="TR_HOME" rc="" rm="Number of samples in transaction : 24, number of failing samples : 22" tn="Grupo de Hilos 1-1" dt="" by="3172">
+  <httpSample t="12" lt="12" ts="1306943099339" s="false" lb="/iceweb/" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099344" s="false" lb="/iceweb/js/flexigrid/css/flexigrid/flexigrid.css" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099347" s="false" lb="/iceweb/js/json.js" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099350" s="false" lb="/iceweb/js/jquery-1.4.js" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099352" s="false" lb="/iceweb/js/common.js" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099354" s="false" lb="/iceweb/js/ajax.js" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="1" lt="1" ts="1306943099356" s="false" lb="/iceweb/js/flexigrid/CentroPagedGrid.js" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099359" s="false" lb="/iceweb/styles/style.css" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099361" s="false" lb="/iceweb/js/OpenLayers/OpenLayers.js" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="1" lt="1" ts="1306943099363" s="false" lb="/iceweb/js/OpenLayersExt.js" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="438" lt="433" ts="1306943099801" s="true" lb="/safebrowsing/downloads?client=Firefox&amp;appver=3.6.6&amp;pver=2.2&amp;wrkey=AKEgNivBp737cqcFxrT3mGIj9MlDjPg688Ni50h0dtLE3kcGCZVHn47l3tnEAafCHRPAytKas0LQUooIy_LPkIJ8li6vwH_M9A==" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="2946"/>
+  <httpSample t="3" lt="3" ts="1306943099804" s="false" lb="/iceweb/js/OpenLayers/style.css" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099807" s="false" lb="/iceweb/js/OpenLayers/img/zoom-minus-mini.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="4" lt="4" ts="1306943099812" s="false" lb="/iceweb/js/OpenLayers/img/south-mini.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099815" s="false" lb="/iceweb/js/OpenLayers/img/zoom-world-mini.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099818" s="false" lb="/iceweb/js/OpenLayers/img/north-mini.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099821" s="false" lb="/iceweb/js/OpenLayers/img/west-mini.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099824" s="false" lb="/iceweb/js/OpenLayers/img/zoom-plus-mini.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099827" s="false" lb="/iceweb/js/OpenLayers/img/east-mini.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099830" s="false" lb="/iceweb/js/OpenLayers/img/layer-switcher-maximize.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943099833" s="false" lb="/iceweb/js/OpenLayers/img/layer-switcher-minimize.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="3" lt="3" ts="1306943099837" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0">
+    <assertionResult>
+      <name>BSF Assertion</name>
+      <failure>true</failure>
+      <error>false</error>
+      <failureMessage>Total count existe y es mayor que 0</failureMessage>
+    </assertionResult>
+  </httpSample>
+  <httpSample t="2" lt="2" ts="1306943100328" s="false" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <sample t="1" lt="0" ts="1306943100333" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="226"/>
+</sample>
+<sample t="5" lt="0" ts="1306943100374" s="false" lb="TR_ABRIR_LISTADO_CENTROS" rc="" rm="Number of samples in transaction : 2, number of failing samples : 2" tn="Grupo de Hilos 1-1" dt="" by="0">
+  <httpSample t="2" lt="2" ts="1306943100371" s="false" lb="/iceweb/centroLista" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943100374" s="false" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+</sample>
+<sample t="20" lt="0" ts="1306943100396" s="false" lb="TR_ORDENAR_LISTADO_CENTROS" rc="" rm="Number of samples in transaction : 2, number of failing samples : 2" tn="Grupo de Hilos 1-1" dt="" by="0">
+  <httpSample t="1" lt="1" ts="1306943100394" s="false" lb="/iceweb/centroLista" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="1" lt="1" ts="1306943100396" s="false" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+</sample>
+<sample t="3" lt="0" ts="1306943100401" s="false" lb="TR_SELEC_MARCA" rc="" rm="Number of samples in transaction : 2, number of failing samples : 2" tn="Grupo de Hilos 1-1" dt="" by="0">
+  <httpSample t="1" lt="1" ts="1306943100399" s="false" lb="/iceweb/img/mix_sel.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="1" lt="1" ts="1306943100401" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+</sample>
+<sample t="5" lt="0" ts="1306943100408" s="false" lb="TR_ABRIR_DETALLE_CENTRO" rc="" rm="Number of samples in transaction : 3, number of failing samples : 3" tn="Grupo de Hilos 1-1" dt="" by="0">
+  <httpSample t="1" lt="1" ts="1306943100404" s="false" lb="/iceweb/js/flexigrid/css/flexigrid/images/hl.png" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="1" lt="1" ts="1306943100406" s="false" lb="/iceweb/centroDetalle" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="1" lt="1" ts="1306943100408" s="false" lb="/iceweb/restful/Centro/46022932" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+</sample>
+<sample t="4" lt="0" ts="1306943100414" s="false" lb="TR_FILTRA_POR_PROVI" rc="" rm="Number of samples in transaction : 2, number of failing samples : 2" tn="Grupo de Hilos 1-1" dt="" by="0">
+  <httpSample t="1" lt="1" ts="1306943100411" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+  <httpSample t="2" lt="2" ts="1306943100414" s="false" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+</sample>
+<sample t="2" lt="0" ts="1306943100417" s="false" lb="TR_ORDENA_GRID" rc="" rm="Number of samples in transaction : 1, number of failing samples : 1" tn="Grupo de Hilos 1-1" dt="" by="0">
+  <httpSample t="2" lt="2" ts="1306943100417" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+</sample>
+<sample t="2" lt="0" ts="1306943100420" s="false" lb="TR_SIGUIENTE_PAGINA_GRID" rc="" rm="Number of samples in transaction : 1, number of failing samples : 1" tn="Grupo de Hilos 1-1" dt="" by="0">
+  <httpSample t="2" lt="2" ts="1306943100420" s="false" lb="/iceweb/restful/Centro/findPagedByVentanaAndFilter" rc="404" rm="No Encontrado" tn="Grupo de Hilos 1-1" dt="" by="0"/>
+</sample>
+
+</testResults>

@@ -52,10 +52,10 @@ import org.sonar.api.Property;
   /**
    * This is where we declare all our Sonar extensions
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public List getExtensions() {
     return Arrays.asList(JMeterMetrics.class, JMeterSensor.class,
-        JMeterDashboardWidget.class
+        JMeterDashboardWidget.class, JMeterPostJob.class
         // , GwtJMeterPage.class
     );
   }

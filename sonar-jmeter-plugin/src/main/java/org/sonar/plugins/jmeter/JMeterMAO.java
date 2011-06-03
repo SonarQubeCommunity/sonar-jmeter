@@ -1,0 +1,82 @@
+/*
+ * Sonar JMeter Plugin
+ * Copyright (C) 2010 eXcentia
+ * dev@sonar.codehaus.org
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ */
+
+package org.sonar.plugins.jmeter;
+
+import org.sonar.api.batch.SensorContext;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.measures.PropertiesBuilder;
+
+import es.excentia.jmeter.report.client.data.GlobalSummary;
+
+/**
+ * JMeterMAO
+ * JMeter Metrics Access Object
+ * 
+ * This class abstracts how JMeter data is saved as Metrics
+ *  
+ * @author cfillol
+ */
+public class JMeterMAO {
+
+  /**
+   * Save GlobalSummary as sonar metrics
+   */
+  public static void saveSummaryAsMetrics(GlobalSummary summary, SensorContext context) {
+
+      context.saveMeasure(JMeterMetrics.requestErrorPercent, summary.getRequestsErrorPercent());
+      context.saveMeasure(new Measure(JMeterMetrics.testDesc, summary.getTestDesc()));
+      context.saveMeasure(JMeterMetrics.duration, new Double(summary.getTestDuration()));
+      context.saveMeasure(JMeterMetrics.usersLogged, new Double(summary.getUsersLogged()));
+      context.saveMeasure(JMeterMetrics.requestTotal, new Double(summary.getRequestsTotal()));
+      context.saveMeasure(JMeterMetrics.transTotal, new Double(summary.getTransTotal()));
+
+      if (summary.getRequestsOkTotal() > 0) {
+        context.saveMeasure(JMeterMetrics.requestResponseTimeOkAvg, new Double(summary.getRequestsResponseTimeOkAvg()));
+        if (summary.getRequestsOkTotal() > 1) {
+          context.saveMeasure(JMeterMetrics.requestResponseTimeOkDevPercent, new Double(summary.getRequestsResponseTimeOkAvgDevPercent()));
+        }
+      }
+      context.saveMeasure(JMeterMetrics.requestOkPerMinute, new Double(summary.getRequestsOkPerMinute()));
+      context.saveMeasure(JMeterMetrics.requestOkPerMinuteAndUser, new Double(summary.getRequestsOkPerMinuteAndUser()));
+
+      if (summary.getTransOkTotal() > 0) {
+        context.saveMeasure(JMeterMetrics.transResponseTimeOkAvg, new Double(summary.getTransResponseTimeOkAvg()));
+        if (summary.getTransOkTotal() > 1) {
+          context.saveMeasure(JMeterMetrics.transResponseTimeOkDevPercent, new Double(summary.getTransBytesOkAvgDevPercent()));
+        }
+        
+        // transMapResponseTimeOkAvg
+        PropertiesBuilder<String, Double> transMapResponseTimeOkAvgPropBuild = new PropertiesBuilder<String, Double>(
+            JMeterMetrics.transMapResponseTimeOkAvg, summary.getTransMapResponseTimeOkAvg());
+        context.saveMeasure(new Measure(JMeterMetrics.transMapResponseTimeOkAvg, transMapResponseTimeOkAvgPropBuild.buildData()));
+
+        // transMapResponseTimeOkDevPercent
+        if (summary.getTransOkTotal() > 1) {
+          PropertiesBuilder<String, Double> transMapResponseTimeOkDevPropBuild = new PropertiesBuilder<String, Double>(
+              JMeterMetrics.transMapResponseTimeOkDevPercent, summary.getTransMapResponseTimeOkAvgDevPercent());
+          context.saveMeasure(new Measure(JMeterMetrics.transMapResponseTimeOkDevPercent, transMapResponseTimeOkDevPropBuild.buildData()));
+        }
+      }
+      context.saveMeasure(JMeterMetrics.transOkPerMinute, new Double(summary.getTransOkPerMinute()));
+      context.saveMeasure(JMeterMetrics.transOkPerMinuteAndUser, new Double(summary.getTransOkPerMinuteAndUser()));
+  }
+  
+}
