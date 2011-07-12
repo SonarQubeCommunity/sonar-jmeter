@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.JMeterReportConst;
 import es.excentia.jmeter.report.server.exception.JMeterReportServerException;
+import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.service.OperationService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
 
@@ -41,20 +42,17 @@ import es.excentia.jmeter.report.server.service.ServiceFactory;
  */
 public class JMeterReportServer {
 
-  private static final Logger log = LoggerFactory
-  .getLogger(JMeterReportServer.class);
+  private static final Logger log = LoggerFactory.getLogger(JMeterReportServer.class);
   private static final boolean LOG_DEBUG = log.isDebugEnabled();
   private static final boolean LOG_TRACE = log.isTraceEnabled();
-
-  private static int port = 4444, maxConnections = 0;
 
   private ServerSocket listener;
   private Thread serverThread;
   private int connections = 0;
   private boolean stopWhenPossible = false;
 
-  protected OperationService metricService = ServiceFactory
-  .get(OperationService.class);
+  protected ConfigService configService = ServiceFactory.get(ConfigService.class);
+  protected OperationService metricService = ServiceFactory.get(OperationService.class);
 
   /**
    * Atendemos en forma de hilos las peticiones de los clientes
@@ -133,8 +131,11 @@ public class JMeterReportServer {
   private void startListening() {
     try {
 
+      int port = configService.getPort();
       log.info("Starting server on port " + port);
 
+      int maxConnections = configService.getMaxConnections();
+      
       listener = new ServerSocket(port);
       Socket socket;
 

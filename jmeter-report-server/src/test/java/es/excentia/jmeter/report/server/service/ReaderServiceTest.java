@@ -20,30 +20,26 @@
 
 package es.excentia.jmeter.report.server.service;
 
-import es.excentia.jmeter.report.server.data.ConfigInfo;
+import org.junit.Assert;
+import org.junit.Test;
 
-public interface ConfigService extends Service {
+public class ReaderServiceTest {
 
-  /**
-   * Get test config info for the given test config name.
-   */
-  ConfigInfo getTestConfigInfo(String testConfigName);
-  
-  /**
-   * From 0.2, you can set test config properties programmatically and these ones have preferences over system properties and classpath
-   * property files.
-   */
-  void setTestConfigInfo(String name, ConfigInfo configInfo);
-  
-  /**
-   * Returns configured port or 4444 if property 'port' was not set
-   */
-  int getPort();
-  
-  /**
-   * Returns configured max connections number or 0 if property 
-   * 'maxConnections' was not set
-   */
-  public int getMaxConnections();
-  
+  protected ReaderService readerService = ServiceFactory
+      .get(ReaderService.class);
+
+  @Test
+  public void testLoadJTLReaderAFileNotFound() {
+    boolean error = false;
+
+    try {
+      readerService.getAbstractSampleReaderByTestConfig("A");
+    } catch (Exception e) {
+      error = true;
+      Assert.assertTrue(e.getMessage().startsWith("JTL file defined"));
+    }
+
+    Assert.assertTrue(error);
+  }
+
 }

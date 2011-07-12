@@ -20,30 +20,15 @@
 
 package es.excentia.jmeter.report.server.service;
 
-import es.excentia.jmeter.report.server.data.ConfigInfo;
+import es.excentia.jmeter.report.client.serialization.StreamReader;
+import es.excentia.jmeter.report.server.testresults.SampleMix;
+import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
+import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
-public interface ConfigService extends Service {
+public interface ReaderService extends Service {
 
-  /**
-   * Get test config info for the given test config name.
-   */
-  ConfigInfo getTestConfigInfo(String testConfigName);
-  
-  /**
-   * From 0.2, you can set test config properties programmatically and these ones have preferences over system properties and classpath
-   * property files.
-   */
-  void setTestConfigInfo(String name, ConfigInfo configInfo);
-  
-  /**
-   * Returns configured port or 4444 if property 'port' was not set
-   */
-  int getPort();
-  
-  /**
-   * Returns configured max connections number or 0 if property 
-   * 'maxConnections' was not set
-   */
-  public int getMaxConnections();
+  StreamReader<AbstractSample> getAbstractSampleReaderByTestConfig(String config);
+  StreamReader<HttpSample> getHttpSampleReaderByTestConfig(String config);
+  StreamReader<SampleMix> getSampleMixReaderByTestConfig(String config);
   
 }

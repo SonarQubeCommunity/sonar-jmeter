@@ -20,11 +20,7 @@
 
 package es.excentia.jmeter.report.server.service.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,32 +31,24 @@ import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.JMeterReportConst;
 import es.excentia.jmeter.report.client.exception.JMeterReportException;
-import es.excentia.jmeter.report.client.serialization.StreamReader;
-import es.excentia.jmeter.report.server.JMeterReportServer;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
 import es.excentia.jmeter.report.server.exception.ConfigException;
 import es.excentia.jmeter.report.server.service.ConfigService;
-import es.excentia.jmeter.report.server.testresults.JtlAbstractSampleReader;
-import es.excentia.jmeter.report.server.testresults.JtlHttpSampleReader;
-import es.excentia.jmeter.report.server.testresults.JtlSampleMixReader;
-import es.excentia.jmeter.report.server.testresults.SampleMix;
-import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
-import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
+/**
+ * @author cfillol
+ */
 public class ConfigServiceImpl implements ConfigService {
 
-  private static final Logger log = LoggerFactory
-  .getLogger(JMeterReportServer.class);
-  
-  
-  /**
-   * From 0.2, you can set config properties programmatically and
-   * these ones have preferences over system properties and classpath property
-   * files.
-   */
-  private static final Map<String, ConfigInfo> inMemoryConfigs = new HashMap<String, ConfigInfo>();
-  
-  
+  private static final String PORT_KEY = "maxConnections";
+  private static final String MAX_CONNECTIONS_KEY = "maxConnections";
+
+  private static final int PORT_DEFAULT = 4444;
+  private static final int MAX_CONNECTIONS_DEFAULT = 0;
+
+  private static final Logger log = LoggerFactory.getLogger(ConfigServiceImpl.class);
+
+
   /**
    * Load jmeter report server properties file from the classpath
    */
@@ -70,120 +58,144 @@ public class ConfigServiceImpl implements ConfigService {
     String propsName = JMeterReportConst.REPORT_SERVER_PROPERTIES;
     URL url = ClassLoader.getSystemResource(propsName);
     if (url == null) {
-      throw new ConfigException("Properties file '" + propsName
-          + "' doesn't exist.");
+      throw new ConfigException("Properties file '" + propsName + "' doesn't exist.");
     }
 
     try {
       props.load(url.openStream());
     } catch (IOException e) {
-      throw new ConfigException("Cannot load properties file: " + propsName+"\nURL="+url.toString());
+      throw new ConfigException("Cannot load properties file: " + propsName + "\nURL=" + url.toString());
     }
 
     return props;
   }
-  
+
   /**
-   * Load jmeter report server properties file from system properties in command line
+   * Get configured property string value or null
    */
-  protected static Properties getPropertiesFromSystem() {
-    
+  protected static String getProperty(String key) {
+    String value = null;
+
+    // Properties from command line have preference
     Properties props = System.getProperties();
-        
-    return props;
+    if ( !props.contains(key)) {
+      props = getPropertiesFromClasspath();
+    }
+    value = props.getProperty(key);
+    return value;
   }
 
+  /**
+   * Get a positive or 0 integer value
+   */
+  public int getNaturalProperty(String key, int defaultValue) {
+    int value = Integer.MIN_VALUE;
 
-  protected InputStream getInputStreamByConfig(String config) {
-
-    InputStream is = null;
-
-    if (config.startsWith("test")) {
-      // Modo test: Las métricas se recogerán a partir de archivos
-      // de recursos de test del classpath
-      is = getClass().getResourceAsStream("/" + config + ".jtl.xml");
-    }
-
-    if (is == null) {
-      
-      String jtlPath;
-      
-      // Try to retrieve JTL file path through inMemoryConfigs
-      ConfigInfo configInfo = inMemoryConfigs.get(config);
-      if (configInfo!=null) {
-        jtlPath = configInfo.getJtlPath();
-      } else {
-      
-        String jtlPathProp = "testconfig." + config + ".jtlpath";
-        
-        // Try to retrieve JTL file path through system property
-        jtlPath = System.getProperty(jtlPathProp);
-         
-        if (jtlPath == null) {
-          // Try to find JTL file path in classpath properties file
-          log.info("Property "+jtlPathProp+" not found in system properties. Loading server properties from classpath...");
-          
-          Properties props = getPropertiesFromClasspath();
-          jtlPath = props.getProperty(jtlPathProp);
-          
-          if(jtlPath == null) {
-            throw new ConfigException("There is no property " + jtlPathProp
-                + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
-          }
-          
-        }
-      }
-
-      log.debug("Test configuration: "+config);
-      log.debug("JTL file:           "+jtlPath);
-      
+    String strValue = getProperty(key);
+    if (strValue == null) {
+      log.debug("No " + key + " configured.");
+    } else {
       try {
-        is = new FileInputStream(new File(jtlPath));
-      } catch (FileNotFoundException e) {
-        throw new ConfigException("JTL file defined for config '" + config
-            + "' doesn't exist");
+        value = Integer.parseInt(getProperty(key));
+      } catch (NumberFormatException e) {
+        log.warn("Could not parse " + key + ": " + e.getMessage());
       }
     }
 
-    return is;
+    if (value < 0) {
+      log.warn("The value of " + key + " cannot be negative: " + value);
+    }
+
+    if (value < 0) {
+      value = defaultValue;
+      log.debug("Using default value " + value);
+    }
+
+    return value;
   }
 
-  public StreamReader<AbstractSample> getAbstractSampleReaderByConfig(
-      String config) {
-    InputStream is = getInputStreamByConfig(config);
-    return new JtlAbstractSampleReader(is);
-  }
-
-  public StreamReader<HttpSample> getHttpSampleReaderByConfig(String config) {
-    InputStream is = getInputStreamByConfig(config);
-    return new JtlHttpSampleReader(is);
-  }
-
-  public StreamReader<SampleMix> getSampleMixReaderByConfig(String config) {
-    InputStream is = getInputStreamByConfig(config);
-    return new JtlSampleMixReader(is);
-  }
   
+  private static final Map<String, ConfigInfo> inMemoryConfigs = new HashMap<String, ConfigInfo>();
   
-  public void setInMemoryConfigInfo(String name, ConfigInfo configInfo) {
+  /* (non-Javadoc)
+   * @see es.excentia.jmeter.report.server.service.ConfigService#getTestConfigInfo(java.lang.String)
+   */
+  public ConfigInfo getTestConfigInfo(String config) {
+
+    String jtlPath;
     
-    if (name==null || name.trim().length()==0) {
+    if (config.startsWith("test")) {
+      
+      // Test mode: Test JTL files are in the classpath
+      jtlPath = "classpath:/" + config + ".jtl.xml";
+      
+    } else {
+      
+      ConfigInfo memConfigInfo = inMemoryConfigs.get(config);
+      if (memConfigInfo != null) {
+        
+        // Retrieve JTL file path from memory
+        jtlPath = memConfigInfo.getJtlPath();
+        
+      } else {
+        
+        // Retrieve JTL file path from system property or properties file
+        String jtlPathProp = "testconfig." + config + ".jtlpath";
+        jtlPath = getProperty(jtlPathProp);
+        if (jtlPath == null) {
+          throw new ConfigException("There is no property " + jtlPathProp + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
+        }
+        
+      }
+    }
+    
+    return new ConfigInfo(config, jtlPath);
+    
+  }
+  
+  /* (non-Javadoc)
+   * @see es.excentia.jmeter.report.server.service.ConfigService#setTestConfigInfo(java.lang.String, es.excentia.jmeter.report.server.data.ConfigInfo)
+   */
+  public void setTestConfigInfo(String name, ConfigInfo configInfo) {
+
+    if (name == null || name.trim().length() == 0) {
       throw new JMeterReportException("Config must have a name");
     }
-    
-    if (configInfo!=null) {
+
+    if (configInfo != null) {
       configInfo.setName(name);
-      
+
       String jtlPath = configInfo.getJtlPath();
-      if (jtlPath==null || jtlPath.trim().length()==0) {
+      if (jtlPath == null || jtlPath.trim().length() == 0) {
         throw new JMeterReportException("Config must have a jtl file path");
       }
-      
+
       inMemoryConfigs.put(name, configInfo);
-      
+
     } else {
       inMemoryConfigs.remove(name);
     }
+  }
+  
+  
+  /* (non-Javadoc)
+   * @see es.excentia.jmeter.report.server.service.ConfigService#getPort()
+   */
+  public int getPort() {
+    return getNaturalProperty(PORT_KEY, PORT_DEFAULT);
+  }
+  
+  /* (non-Javadoc)
+   * @see es.excentia.jmeter.report.server.service.ConfigService#getMaxConnections()
+   */
+  public int getMaxConnections() {
+    int maxConnections = getNaturalProperty(MAX_CONNECTIONS_KEY, MAX_CONNECTIONS_DEFAULT);
+
+    if (maxConnections == MAX_CONNECTIONS_DEFAULT) {
+      log.info("Number of connections is not limited.");
+    }
+
+    return maxConnections;
   }
 
 }

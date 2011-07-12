@@ -25,9 +25,12 @@ public class ConfigInfo {
   private String name;
   private String jtlPath;
   
-  
   public ConfigInfo(String jtlPath) {
-    super();
+    this.jtlPath = jtlPath;
+  }
+  
+  public ConfigInfo(String name, String jtlPath) {
+    this.name = name;
     this.jtlPath = jtlPath;
   }
 

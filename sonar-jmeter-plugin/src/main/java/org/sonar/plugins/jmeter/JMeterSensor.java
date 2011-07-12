@@ -136,7 +136,7 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
       // Get report parsing local jtl file
       LOG.info("Getting JMeter results from local file");
       ConfigInfo configInfo = new ConfigInfo(localJtlPath);
-      configService.setInMemoryConfigInfo(projectName, configInfo);
+      configService.setTestConfigInfo(projectName, configInfo);
       globalSummary = metricService.getGlobalSummary(projectName);
 
     } else {
@@ -144,7 +144,7 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
       LOG.info("Getting JMeter results from remote server");
 
       // Remove inMemoryConfig if there was any
-      configService.setInMemoryConfigInfo(projectName, null);
+      configService.setTestConfigInfo(projectName, null);
 
       // Use a jmeter report client for getting report from a 
       // remote jmeter report server

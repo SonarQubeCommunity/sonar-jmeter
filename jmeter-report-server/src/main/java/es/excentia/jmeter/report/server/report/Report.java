@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import es.excentia.jmeter.report.client.serialization.StreamReader;
-import es.excentia.jmeter.report.server.service.ConfigService;
+import es.excentia.jmeter.report.server.service.ReaderService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
 import es.excentia.jmeter.report.server.testresults.SampleMix;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
@@ -51,7 +51,7 @@ public class Report {
   public static final int SCOPE_TRANS_TYPE = 3;
   public static final int SCOPE_ALL = 4;
 
-  ConfigService configService = ServiceFactory.get(ConfigService.class);
+  protected ReaderService readerService = ServiceFactory.get(ReaderService.class);
 
   OkUserAccessCounter okUserAccessCounter;
 
@@ -169,7 +169,7 @@ public class Report {
 
     for (int phase = FIRST_PHASE; phase <= SECOND_PHASE; phase++) {
 
-      reader = configService.getSampleMixReaderByConfig(config);
+      reader = readerService.getSampleMixReaderByTestConfig(config);
       SampleMix sampleMix = reader.read();
 
       while (sampleMix != null) {

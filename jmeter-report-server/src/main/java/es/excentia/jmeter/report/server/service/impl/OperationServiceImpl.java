@@ -36,22 +36,20 @@ import es.excentia.jmeter.report.server.report.OkResponseTimeAverage;
 import es.excentia.jmeter.report.server.report.Report;
 import es.excentia.jmeter.report.server.report.TransMapSimplifier;
 import es.excentia.jmeter.report.server.report.TransOrder;
-import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.service.OperationService;
+import es.excentia.jmeter.report.server.service.ReaderService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 import es.excentia.jmeter.report.server.transformer.BucketMeasuresTransformerFactory;
 
 public class OperationServiceImpl implements OperationService {
 
-  protected ConfigService configService = ServiceFactory
-      .get(ConfigService.class);
+  protected ReaderService readerService = ServiceFactory.get(ReaderService.class);
 
   public void writeBucketMeasures(OutputStream os, String config,
       String metric, int millisBucket) {
 
-    StreamReader<HttpSample> reader = configService
-        .getHttpSampleReaderByConfig(config);
+    StreamReader<HttpSample> reader = readerService.getHttpSampleReaderByTestConfig(config);
     StreamWriter<Measure> writer = new MeasureWriter(os);
     Transformer<HttpSample, Measure> transformer = BucketMeasuresTransformerFactory
         .get(metric, reader, writer, millisBucket);

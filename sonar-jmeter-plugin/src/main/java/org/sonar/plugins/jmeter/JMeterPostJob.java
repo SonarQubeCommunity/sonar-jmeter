@@ -105,7 +105,7 @@ public class JMeterPostJob implements PostJob, CheckProject {
       // Get report parsing jtl file
       LOG.info("Getting JMeter results from "+jtlPath);
       ConfigInfo configInfo = new ConfigInfo(jtlPath);
-      configService.setInMemoryConfigInfo(projectName, configInfo);
+      configService.setTestConfigInfo(projectName, configInfo);
       globalSummary = metricService.getGlobalSummary(projectName);
       LOG.info("JMeter GlobalSummary:\n"+globalSummary);
     }
