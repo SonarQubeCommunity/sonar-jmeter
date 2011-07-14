@@ -40,13 +40,10 @@ import es.excentia.jmeter.report.server.service.ConfigService;
  */
 public class ConfigServiceImpl implements ConfigService {
 
-  private static final String PORT_KEY = "maxConnections";
-  private static final String MAX_CONNECTIONS_KEY = "maxConnections";
-
-  private static final int PORT_DEFAULT = 4444;
-  private static final int MAX_CONNECTIONS_DEFAULT = 0;
-
   private static final Logger log = LoggerFactory.getLogger(ConfigServiceImpl.class);
+  
+  private static final String PORT_KEY = "port";
+  private static final String MAX_CONNECTIONS_KEY = "maxConnections";
 
 
   /**
@@ -89,11 +86,14 @@ public class ConfigServiceImpl implements ConfigService {
    * Get a positive or 0 integer value
    */
   public int getNaturalProperty(String key, int defaultValue) {
-    int value = Integer.MIN_VALUE;
+    int value = defaultValue;
 
     String strValue = getProperty(key);
     if (strValue == null) {
-      log.debug("No " + key + " configured.");
+      log.debug(
+          "No " + key + " configured. "+
+          "Using default value " + defaultValue + "."
+       );
     } else {
       try {
         value = Integer.parseInt(getProperty(key));
@@ -103,12 +103,11 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     if (value < 0) {
-      log.warn("The value of " + key + " cannot be negative: " + value);
-    }
-
-    if (value < 0) {
+      log.warn(
+          "The value of " + key + " cannot be negative: " + value+ ". "+
+          "Using default value " + defaultValue + "."
+      );
       value = defaultValue;
-      log.debug("Using default value " + value);
     }
 
     return value;
@@ -182,19 +181,14 @@ public class ConfigServiceImpl implements ConfigService {
    * @see es.excentia.jmeter.report.server.service.ConfigService#getPort()
    */
   public int getPort() {
-    return getNaturalProperty(PORT_KEY, PORT_DEFAULT);
+    return getNaturalProperty(PORT_KEY, JMeterReportConst.DEFAULT_PORT);
   }
   
   /* (non-Javadoc)
    * @see es.excentia.jmeter.report.server.service.ConfigService#getMaxConnections()
    */
   public int getMaxConnections() {
-    int maxConnections = getNaturalProperty(MAX_CONNECTIONS_KEY, MAX_CONNECTIONS_DEFAULT);
-
-    if (maxConnections == MAX_CONNECTIONS_DEFAULT) {
-      log.info("Number of connections is not limited.");
-    }
-
+    int maxConnections = getNaturalProperty(MAX_CONNECTIONS_KEY, JMeterReportConst.DEFAULT_MAX_CONNECTIONS);
     return maxConnections;
   }
 

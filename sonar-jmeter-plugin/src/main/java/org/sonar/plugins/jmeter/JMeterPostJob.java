@@ -63,8 +63,10 @@ public class JMeterPostJob implements PostJob, CheckProject {
 
     try {
 
-      GlobalSummary summary = getGlobalSummary(project);
-      JMeterMAO.saveSummaryAsMetrics(summary, context);
+      GlobalSummary summary = getGlobalSummaryFromLocalJTL(project);
+      if(summary!=null) {
+        JMeterMAO.saveSummaryAsMetrics(summary, context);
+      }
 
     } catch (Exception e) {
       LOG.error("Cannot analyse project '" + project.getName() + "'", e);
@@ -96,7 +98,7 @@ public class JMeterPostJob implements PostJob, CheckProject {
   /**
    * Gets the GlobalSummary from jtl file in target/jmeter-reports
    */
-  protected GlobalSummary getGlobalSummary(Project project) {
+  protected GlobalSummary getGlobalSummaryFromLocalJTL(Project project) {
     GlobalSummary globalSummary = null;
     String projectName = project.getName();
     String jtlPath = getJtlFilePath(project);
@@ -108,6 +110,8 @@ public class JMeterPostJob implements PostJob, CheckProject {
       configService.setTestConfigInfo(projectName, configInfo);
       globalSummary = metricService.getGlobalSummary(projectName);
       LOG.info("JMeter GlobalSummary:\n"+globalSummary);
+    } else {
+      LOG.info("No JTL files found in target/jmeter-reports"+jtlPath);
     }
 
     return globalSummary;

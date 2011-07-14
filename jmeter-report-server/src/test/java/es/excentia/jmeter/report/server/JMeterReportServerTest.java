@@ -32,22 +32,26 @@ import es.excentia.jmeter.report.client.JMeterReportConst;
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 import es.excentia.jmeter.report.client.data.Measure;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
+import es.excentia.jmeter.report.server.service.ConfigService;
+import es.excentia.jmeter.report.server.service.ServiceFactory;
 
 public class JMeterReportServerTest {
 
-  private static final Logger log = LoggerFactory
-      .getLogger(JMeterReportClient.class);
+  private static final Logger log = LoggerFactory.getLogger(JMeterReportClient.class);
 
+  private static final String LOCALHOST = "127.0.0.1";
   private static final double MARGEN = 0.01;
   private static final int SERVER_START_TIME = 2000;
   private static final int SERVER_STOP_TIME = 2000;
 
-  protected JMeterReportServer server;
-  protected JMeterReportClient client;
+  ConfigService configService = ServiceFactory.get(ConfigService.class);
+  
+  JMeterReportServer server;
+  JMeterReportClient client;
 
   @Before
   public void before() throws InterruptedException {
-    client = new JMeterReportClient();
+    client = new JMeterReportClient(LOCALHOST, configService.getPort());
     server = new JMeterReportServer();
     server.start();
 
@@ -156,10 +160,9 @@ public class JMeterReportServerTest {
     Assert.assertEquals(3.0, summary.getRequestsOkPerMinute(), MARGEN);
     Assert.assertEquals(3.0, summary.getRequestsOkPerMinuteAndUser(), MARGEN);
 
-    Assert
-        .assertEquals(5.58, summary.getRequestsBytesOkAvgDevPercent(), MARGEN);
-    Assert.assertEquals(0.0, summary.getRequestsResponseTimeOkAvgDevPercent(),
-        MARGEN);
+    Assert.assertEquals(5.58, summary.getRequestsBytesOkAvgDevPercent(), MARGEN);
+    Assert.assertEquals(1.0, summary.getRequestsResponseTimeOkAvg(),MARGEN);
+    Assert.assertEquals(0.0, summary.getRequestsResponseTimeOkAvgDevPercent(),MARGEN);
 
     // Transactions
     Assert.assertEquals(5, summary.getTransTotal());
@@ -170,9 +173,9 @@ public class JMeterReportServerTest {
     Assert.assertEquals(2.0, summary.getTransOkPerMinute(), MARGEN);
     Assert.assertEquals(2.0, summary.getTransOkPerMinuteAndUser(), MARGEN);
 
-    Assert.assertEquals(81.64, summary.getTransBytesOkAvgDevPercent(), MARGEN);
-    Assert.assertEquals(81.64, summary.getTransResponseTimeOkAvgDevPercent(),
-        MARGEN);
+    Assert.assertEquals(1.0, summary.getTransBytesOkAvg(),MARGEN);
+    Assert.assertEquals(0.0, summary.getTransBytesOkAvgDevPercent(), MARGEN);
+    Assert.assertEquals(81.64, summary.getTransResponseTimeOkAvgDevPercent(), MARGEN);
 
     // TransMapErrorTotal
     double value = summary.getTransMapErrorTotal().get("ERROR_TRANS");

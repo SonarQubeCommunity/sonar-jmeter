@@ -123,8 +123,7 @@ public class MockSensorContext implements SensorContext {
   }
 
   public String saveResource(Resource arg0) {
-    // TODO Auto-generated method stub
-    return null;
+    throw new NotImplementedException();
   }
 
   public void saveSource(Resource arg0, String arg1) {

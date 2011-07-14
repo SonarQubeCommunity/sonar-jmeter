@@ -26,6 +26,7 @@ public class JMeterReportConst {
 
   public static final String DEFAULT_HOST = "localhost";
   public static final int DEFAULT_PORT = 4444;
+  public static final int DEFAULT_MAX_CONNECTIONS = 0;
 
   public static final int RETURN_CODE_OK = Integer.MAX_VALUE;
   public static final int RETURN_CODE_ERROR = Integer.MIN_VALUE;
