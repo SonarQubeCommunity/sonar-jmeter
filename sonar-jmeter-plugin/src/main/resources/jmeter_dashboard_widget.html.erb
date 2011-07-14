@@ -1,3 +1,65 @@
+<%
+	def fn(x)
+		x = x.to_f * 100
+		x = x.round
+		x = x / 100.0
+		return x.to_s
+	end
+		
+	def getConfigValue(key, defaultValue)
+		value = Property.value(key, @project.id, '')
+		if (value.blank?)
+			value = configuration(key)
+		end
+		if (value.blank?)
+			value = defaultValue || ''
+		end
+	   	return value
+	end	
+	
+	def getPreferedTimeUnitPropKey(measureName)
+		if measureName.eql?('requestOkPerMinute')
+			return 'org.sonar.plugins.jmeter.requestxtimeunit'
+		else
+			if measureName.eql?('transOkPerMinute')
+				return 'org.sonar.plugins.jmeter.transxtimeunit'
+			else
+				raise 'This metric doesn\'t have prefered time unit: ' + measureName
+			end
+		end
+	end
+	
+	def getPreferedTimeUnits(measureName)
+		propKey = getPreferedTimeUnitPropKey(measureName)
+		timeUnits = getConfigValue(propKey, 'min')
+		if timeUnits.start_with?('h')
+			timeUnits = 'hour'
+		else
+			if timeUnits.start_with?('s')
+				timeUnits = 'sec'
+			else
+				timeUnits = 'min'
+			end
+		end
+		return timeUnits
+	end
+	
+	def formatByPreferedTimeUnits(measureName)
+		propKey = getPreferedTimeUnitPropKey(measureName)
+		timeUnits = getConfigValue(propKey, 'min')
+		value = measure(measureName).value;
+		if timeUnits.start_with?('h')
+			return fn(value * 60)
+		else
+			if timeUnits.start_with?('s')
+				return fn(value / 60)
+			else
+				return fn(value);
+			end
+		end
+	end	
+%>
+
 <%	if measure('requestTotal') and measure('requestTotal').value > 0 %>
 <table width="100%">
 <tbody>
@@ -32,7 +94,7 @@
 <tr>
 	<td>
 		<h3>Requests</h3>
-		<p><span class="big"><%= format_measure('requestOkPerMinute') -%></span> requests ok/min <%= tendency_icon(measure('requestOkPerMinute')) %></p>
+		<p><span class="big"><%= formatByPreferedTimeUnits('requestOkPerMinute') -%></span> requests ok/<%= getPreferedTimeUnits('requestOkPerMinute') -%> <%= tendency_icon(measure('requestOkPerMinute')) %></p>
 		<%	if measure('requestResponseTimeOkAvg') %><p><%= format_measure('requestResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('requestResponseTimeOkAvg')) %></p><%  end %>
 		<%	if measure('requestResponseTimeOkDevPercent') %><p><%= format_measure('requestResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('requestResponseTimeOkDevPercent')) %></p><%  end %>
 	</td>
@@ -40,7 +102,7 @@
 	<td>
 <%	if measure('transTotal').value > 0 %>
 		<h3>Transactions</h3>
-		<p><span class="big"><%= format_measure('transOkPerMinute') -%></span> transactions ok/min <%= tendency_icon(measure('transOkPerMinute')) %></p>
+		<p><span class="big"><%= formatByPreferedTimeUnits('transOkPerMinute') -%></span> transactions ok/<%= getPreferedTimeUnits('transOkPerMinute') -%> <%= tendency_icon(measure('transOkPerMinute')) %></p>
 		<%	if measure('transResponseTimeOkAvg') %><p><%= format_measure('transResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('transResponseTimeOkAvg')) %></p><%  end %>
 		<%	if measure('transResponseTimeOkDevPercent') %><p><%= format_measure('transResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('transResponseTimeOkDevPercent')) %></p><%  end %>
 <%  end %>
@@ -55,13 +117,6 @@
 </tr>
 <tr>
 	<%
-		def fn(x)
-			x = x.to_f * 100
-			x = x.round
-			x = x / 100.0
-			return x.to_s
-		end
-		
 		def transMapToTable(measureName)
 			html = '<table>'
 			measure(measureName).data.split(';').each {

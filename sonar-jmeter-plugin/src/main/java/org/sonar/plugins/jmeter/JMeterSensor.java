@@ -78,16 +78,14 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
    */
   protected JMeterReportClient getReportClient(Project project) {
 
-    String host = (String) project
-    .getProperty(JMeterPluginConst.HOST_PROPERTY);
+    String host = (String) project.getProperty(JMeterPluginConst.HOST_PROPERTY);
     if (StringUtils.isBlank(host)) {
       throw new JMeterPluginException(
           "You must set the HOST in sonar-jmeter-plugin config "
           + "for the project '" + project.getName() + "'");
     }
 
-    String port = (String) project
-    .getProperty(JMeterPluginConst.PORT_PROPERTY);
+    String port = (String) project.getProperty(JMeterPluginConst.PORT_PROPERTY);
     if (StringUtils.isBlank(port) || Integer.parseInt(port) == 0) {
       LOG.warn("Null or invalid jmeter-report-server PORT. "
           + "Using default '{}'", JMeterReportConst.DEFAULT_PORT);
@@ -102,8 +100,7 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
    * Gets the configured jmeter test configuration name
    */
   protected String getTestConfigName(Project project) {
-    String config = (String) project
-    .getProperty(JMeterPluginConst.CONFIG_PROPERTY);
+    String config = (String) project.getProperty(JMeterPluginConst.CONFIG_PROPERTY);
     if (StringUtils.isBlank(config)) {
       throw new JMeterPluginException(
           "You must set test CONFIG in sonar-jmeter-plugin "

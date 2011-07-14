@@ -31,7 +31,9 @@ import org.sonar.api.Property;
   @Property(key = JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, name = "Local jtl file", description = "Local jtl file path. If specified no remote config is used.", project = true, global = false),
   @Property(key = JMeterPluginConst.HOST_PROPERTY, name = "Remote server host", description = "Remote jmeter report server host, used for getting remote results if no local jtl file is defined.", project = true, global = true),
   @Property(key = JMeterPluginConst.PORT_PROPERTY, name = "Remote server port", description = "Remote jmeter report server port, used for getting remote results if no local jtl file is defined.", defaultValue = "4444", project = true, global = true),
-  @Property(key = JMeterPluginConst.CONFIG_PROPERTY, name = "Remote config name", description = "Remote jmeter report server config name, used for getting remote results if no local jtl file is defined.", project = true, global = false) })
+  @Property(key = JMeterPluginConst.CONFIG_PROPERTY, name = "Remote config name", description = "Remote jmeter report server config name, used for getting remote results if no local jtl file is defined.", project = true, global = false), 
+  @Property(key = JMeterPluginConst.REQUESTXTIME_TIMEUNIT_PROPERTY, name = "Prefered requests/time time unit", description = "Prefered time unit of number of requests per time (seconds, minutes or hours)", defaultValue = "minutes", project = true, global = true),
+  @Property(key = JMeterPluginConst.TRANSXTIME_TIMEUNIT_PROPERTY, name = "Prefered transactions/time time unit", description = "Prefered time unit of number of transactions per time (seconds, minutes or hours)", defaultValue = "minutes", project = true, global = true) })
   /**
    * This class is the entry point for all extensions
    */
@@ -56,7 +58,6 @@ import org.sonar.api.Property;
   public List getExtensions() {
     return Arrays.asList(JMeterMetrics.class, JMeterSensor.class,
         JMeterDashboardWidget.class, JMeterPostJob.class
-        // , GwtJMeterPage.class
     );
   }
 
