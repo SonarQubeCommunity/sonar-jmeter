@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins.jmeter</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
   </parent>
 
   <artifactId>jmeter-report-client</artifactId>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
   <name>JMeter Report Client</name>
 
