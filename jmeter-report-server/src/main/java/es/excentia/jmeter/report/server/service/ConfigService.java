@@ -30,7 +30,7 @@ public interface ConfigService extends Service {
   ConfigInfo getTestConfigInfo(String testConfigName);
   
   /**
-   * From 0.2, you can set test config properties programmatically and these ones have preferences over system properties and classpath
+   * From 0.2-SNAPSHOT, you can set test config properties programmatically and these ones have preferences over system properties and classpath
    * property files.
    */
   void setTestConfigInfo(String name, ConfigInfo configInfo);

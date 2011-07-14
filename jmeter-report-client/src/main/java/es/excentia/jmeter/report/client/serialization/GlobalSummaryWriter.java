@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 
@@ -123,9 +124,9 @@ public class GlobalSummaryWriter extends ErrorCheckStreamWriter<GlobalSummary> {
     }
 
     dos.writeInt(map.size());
-    for (String key : map.keySet()) {
-      dos.writeUTF(key);
-      dos.writeLong(map.get(key));
+    for (Entry<String, Long> entry: map.entrySet()) {
+      dos.writeUTF(entry.getKey());
+      dos.writeLong(entry.getValue());
     }
   }
 
@@ -137,9 +138,9 @@ public class GlobalSummaryWriter extends ErrorCheckStreamWriter<GlobalSummary> {
     }
 
     dos.writeInt(map.size());
-    for (String key : map.keySet()) {
-      dos.writeUTF(key);
-      dos.writeDouble(map.get(key));
+    for (Entry<String, Double> entry: map.entrySet()) {
+      dos.writeUTF(entry.getKey());
+      dos.writeDouble(entry.getValue());
     }
   }
 

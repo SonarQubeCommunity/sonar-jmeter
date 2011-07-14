@@ -44,10 +44,10 @@ public abstract class TransMapSimplifier<TReportData, TValue> {
   public final Map<String, TValue> toSimpleMap(Map<String, TReportData> origMap) {
     Map<String, TValue> simpleMap = new HashMap<String, TValue>();
     
-    for (String key : origMap.keySet()) {
-      TValue value = reportDataToValue(origMap.get(key));
+    for (Entry<String, TReportData> entry: origMap.entrySet()) {
+      TValue value = reportDataToValue(entry.getValue());
       if (!isNullOrNaNNumber(value)) {
-        simpleMap.put(key, value);
+        simpleMap.put(entry.getKey(), value);
       }
     }
     return simpleMap;

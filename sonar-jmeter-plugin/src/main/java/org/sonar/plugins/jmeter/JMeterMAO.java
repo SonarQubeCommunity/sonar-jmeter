@@ -43,24 +43,24 @@ public class JMeterMAO {
 
       context.saveMeasure(JMeterMetrics.requestErrorPercent, summary.getRequestsErrorPercent());
       context.saveMeasure(new Measure(JMeterMetrics.testDesc, summary.getTestDesc()));
-      context.saveMeasure(JMeterMetrics.duration, new Double(summary.getTestDuration()));
-      context.saveMeasure(JMeterMetrics.usersLogged, new Double(summary.getUsersLogged()));
-      context.saveMeasure(JMeterMetrics.requestTotal, new Double(summary.getRequestsTotal()));
-      context.saveMeasure(JMeterMetrics.transTotal, new Double(summary.getTransTotal()));
+      context.saveMeasure(JMeterMetrics.duration, Double.valueOf(summary.getTestDuration()));
+      context.saveMeasure(JMeterMetrics.usersLogged, Double.valueOf(summary.getUsersLogged()));
+      context.saveMeasure(JMeterMetrics.requestTotal, Double.valueOf(summary.getRequestsTotal()));
+      context.saveMeasure(JMeterMetrics.transTotal, Double.valueOf(summary.getTransTotal()));
 
       if (summary.getRequestsOkTotal() > 0) {
-        context.saveMeasure(JMeterMetrics.requestResponseTimeOkAvg, new Double(summary.getRequestsResponseTimeOkAvg()));
+        context.saveMeasure(JMeterMetrics.requestResponseTimeOkAvg, Double.valueOf(summary.getRequestsResponseTimeOkAvg()));
         if (summary.getRequestsOkTotal() > 1) {
-          context.saveMeasure(JMeterMetrics.requestResponseTimeOkDevPercent, new Double(summary.getRequestsResponseTimeOkAvgDevPercent()));
+          context.saveMeasure(JMeterMetrics.requestResponseTimeOkDevPercent, Double.valueOf(summary.getRequestsResponseTimeOkAvgDevPercent()));
         }
       }
-      context.saveMeasure(JMeterMetrics.requestOkPerMinute, new Double(summary.getRequestsOkPerMinute()));
-      context.saveMeasure(JMeterMetrics.requestOkPerMinuteAndUser, new Double(summary.getRequestsOkPerMinuteAndUser()));
+      context.saveMeasure(JMeterMetrics.requestOkPerMinute, Double.valueOf(summary.getRequestsOkPerMinute()));
+      context.saveMeasure(JMeterMetrics.requestOkPerMinuteAndUser, Double.valueOf(summary.getRequestsOkPerMinuteAndUser()));
 
       if (summary.getTransOkTotal() > 0) {
-        context.saveMeasure(JMeterMetrics.transResponseTimeOkAvg, new Double(summary.getTransResponseTimeOkAvg()));
+        context.saveMeasure(JMeterMetrics.transResponseTimeOkAvg, Double.valueOf(summary.getTransResponseTimeOkAvg()));
         if (summary.getTransOkTotal() > 1) {
-          context.saveMeasure(JMeterMetrics.transResponseTimeOkDevPercent, new Double(summary.getTransBytesOkAvgDevPercent()));
+          context.saveMeasure(JMeterMetrics.transResponseTimeOkDevPercent, Double.valueOf(summary.getTransBytesOkAvgDevPercent()));
         }
         
         // transMapResponseTimeOkAvg
@@ -75,8 +75,8 @@ public class JMeterMAO {
           context.saveMeasure(new Measure(JMeterMetrics.transMapResponseTimeOkDevPercent, transMapResponseTimeOkDevPropBuild.buildData()));
         }
       }
-      context.saveMeasure(JMeterMetrics.transOkPerMinute, new Double(summary.getTransOkPerMinute()));
-      context.saveMeasure(JMeterMetrics.transOkPerMinuteAndUser, new Double(summary.getTransOkPerMinuteAndUser()));
+      context.saveMeasure(JMeterMetrics.transOkPerMinute, Double.valueOf(summary.getTransOkPerMinute()));
+      context.saveMeasure(JMeterMetrics.transOkPerMinuteAndUser, Double.valueOf(summary.getTransOkPerMinuteAndUser()));
   }
   
 }
