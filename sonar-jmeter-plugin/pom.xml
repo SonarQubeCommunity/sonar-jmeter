@@ -9,7 +9,6 @@
   </parent>
 
   <artifactId>sonar-jmeter-plugin</artifactId>
-  <version>0.2-SNAPSHOT</version>
   <packaging>sonar-plugin</packaging>
   <name>Sonar JMeter Plugin</name>
 
