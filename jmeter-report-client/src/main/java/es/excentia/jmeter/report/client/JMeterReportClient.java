@@ -73,7 +73,7 @@ public class JMeterReportClient {
       dos.writeInt(JMeterReportConst.OP_GET_GLOBAL_SUMMARY);
       dos.writeUTF(config);
 
-      return new GlobalSummaryReader(socket.getInputStream()).read();
+      return new GlobalSummaryReader(socket.getInputStream()).readUntilEnd();
 
     } catch (IOException e) {
       throw new FatalJMeterReportServerException(e);

@@ -20,7 +20,11 @@
 
 package es.excentia.jmeter.report.client.serialization;
 
+import java.io.EOFException;
+import java.io.IOException;
 import java.io.InputStream;
+
+import es.excentia.jmeter.report.client.exception.SerializationException;
 
 public abstract class StreamReader<T> {
   
@@ -31,5 +35,22 @@ public abstract class StreamReader<T> {
   }
   
   public abstract T read();
+  
+  public final T readUntilEnd() {
+    T obj = read();
+    
+    try {
+
+      while (is.read()!=-1);
+      
+    } catch (EOFException e) {
+      // Do nothing when end is reached
+    } catch (IOException e) {
+        throw new SerializationException(e);
+    } 
+    
+    return obj;
+
+  }
   
 }

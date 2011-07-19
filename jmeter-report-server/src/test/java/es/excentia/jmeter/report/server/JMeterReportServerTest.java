@@ -193,6 +193,14 @@ public class JMeterReportServerTest {
   }
 
   @Test
+  public void testIntegrationGetGlobalSummary() {
+    for (String config : JMeterReportServerTestConst.TEST_CONFIGS) {
+      log.info("** TEST testIntegrationGetGlobalSummary " + config);
+      GlobalSummary summary = client.getGlobalSummary(config);
+    }
+  }
+
+  @Test
   public void testIntegrationGetBuckedMeasures() {
     for (String config : JMeterReportServerTestConst.TEST_CONFIGS) {
       log.info("** TEST IntegrationGetBuckedMeasures " + config);
@@ -207,7 +215,7 @@ public class JMeterReportServerTest {
       }
     }
   }
-
+  
   @Test
   public void testIntegrationError() {
     log.info("** TEST IntegrationError blank config");
@@ -223,5 +231,57 @@ public class JMeterReportServerTest {
     }
 
     Assert.assertTrue(error);
+  }
+  
+  
+
+  String reachedConnectionLimitErrorMsg = "";
+  
+  @Test
+  public void testConnectionLimitExceededError() {
+    log.info("** TEST testConnectionLimitExceededError");
+    
+    // Start one connection ...
+    Thread thread1 = new Thread(new Runnable() {
+      public void run() {
+        JMeterReportClient client1 = new JMeterReportClient(LOCALHOST, configService.getPort());
+        
+        try {
+          client1.getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_HTTP);
+        } catch(Exception e) {
+          log.error("client1: ", e);
+          reachedConnectionLimitErrorMsg = e.getMessage();
+        }
+      }
+    });
+    
+    // And, at the same time, in parallel, start another connection
+    Thread thread2 = new Thread(new Runnable() {
+      public void run() {
+        JMeterReportClient client2 = new JMeterReportClient(LOCALHOST, configService.getPort());
+        
+        try {
+          client2.getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_HTTP);
+        } catch(Exception e) {
+          log.error("client2: ", e);
+          reachedConnectionLimitErrorMsg = e.getMessage();
+        }
+      }
+    });
+    
+    
+    // This must launch an exception because maxConnections=1 in tests properties file
+    thread1.start();
+    thread2.start();
+    
+    // Wait for the results
+    try {
+      thread1.join();
+      thread2.join();
+    } catch (InterruptedException e) {
+      log.error("Interrupted: ", e);
+    }
+    
+    Assert.assertFalse(reachedConnectionLimitErrorMsg.isEmpty());
   }
 }

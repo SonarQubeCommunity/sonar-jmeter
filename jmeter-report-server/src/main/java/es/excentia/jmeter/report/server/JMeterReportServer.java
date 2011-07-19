@@ -49,7 +49,9 @@ public class JMeterReportServer {
   private ServerSocket listener;
   private Thread serverThread;
   private int connections = 0;
+  private int maxConnections = 0;
   private boolean stopWhenPossible = false;
+  private byte[] rubbishBuffer = new byte[128];
 
   protected ConfigService configService = ServiceFactory.get(ConfigService.class);
   protected OperationService metricService = ServiceFactory.get(OperationService.class);
@@ -92,8 +94,7 @@ public class JMeterReportServer {
               config = in.readUTF();
               metric = in.readUTF();
               int millisBucket = in.readInt();
-              metricService
-              .writeBucketMeasures(out, config, metric, millisBucket);
+              metricService.writeBucketMeasures(out, config, metric, millisBucket);
               break;
 
             default:
@@ -102,29 +103,47 @@ public class JMeterReportServer {
           }
 
         } catch (IOException ioe) {
-          log.error("IOException on socket listen", ioe);
+          log.error("IOException on socket when serving request", ioe);
         } catch (Exception e) {
           log.error("Report request exception", e);
 
-          // Comunicamos el error al cliente
+          // Send error to client
           out.writeInt(JMeterReportConst.RETURN_CODE_ERROR);
           out.writeUTF(e.getMessage());
         }
 
       } catch (IOException ioe) {
-        log.error("IOException on socket listen", ioe);
+        log.error("Could not get socket streams", ioe);
       } finally {
         try {
           connections--;
           socket.close();
+          log.debug("Request finished");
         } catch (Exception e) {
-          log.error("Cannot close server socket", e);
+          log.error("Could not close server socket", e);
         }
       }
     }
 
   }
 
+  
+  /**
+   * Send error to client and close the socket
+   */
+  private void connectionLimitExceeded(Socket socket) {
+    if (LOG_DEBUG) {
+      log.debug("Connection limit exceeded ("+maxConnections+"). Closing socket ...");
+    }
+    try {
+      socket.close();
+    } catch (Exception e) {
+      log.error("Could not close server socket", e);
+    }
+  }
+  
+    
+  
   /**
    * Listen for incoming connections and handle them
    */
@@ -134,17 +153,25 @@ public class JMeterReportServer {
       int port = configService.getPort();
       log.info("Starting server on port " + port);
 
-      int maxConnections = configService.getMaxConnections();
+      maxConnections = configService.getMaxConnections();
       
       listener = new ServerSocket(port);
       Socket socket;
 
-      while ((connections++ < maxConnections) || (maxConnections == 0)) {
+      do {
         socket = listener.accept();
-        RequestThread requestThread = new RequestThread(socket);
-        Thread t = new Thread(requestThread);
-        t.start();
-      }
+        
+        if (maxConnections!=0 && connections>=maxConnections) {
+          // The number of opened connections is limited and has been exceeded
+          connectionLimitExceeded(socket);
+        } else {
+          // Serve request
+          connections++;
+          RequestThread requestThread = new RequestThread(socket);
+          Thread t = new Thread(requestThread);
+          t.start();
+        }
+      } while (true);
 
     } catch (IOException ioe) {
       if (LOG_TRACE) {
@@ -182,7 +209,7 @@ public class JMeterReportServer {
       try {
         listener.close();
       } catch (IOException e) {
-        log.error("Error parando el servidor", e);
+        log.error("Error stoping server", e);
       } finally {
         listener = null;
       }

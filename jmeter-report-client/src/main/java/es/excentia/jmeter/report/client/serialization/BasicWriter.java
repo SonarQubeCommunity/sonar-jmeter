@@ -56,7 +56,7 @@ public abstract class BasicWriter<T> extends StreamWriter<T> {
 
   
   protected void writeStringList(List<String> list) throws IOException {
-    if (list == null || list.size() == 0) {
+    if (list == null || list.isEmpty()) {
       dos.writeInt(0);
       return;
     }
@@ -69,12 +69,13 @@ public abstract class BasicWriter<T> extends StreamWriter<T> {
 
   protected void writeString(String str) throws IOException {
     dos.writeBoolean(str == null);
-    if (str != null)
+    if (str != null) {
       dos.writeUTF(str);
+    }
   }
 
   protected void writeMapLong(Map<String, Long> map) throws IOException {
-    if (map == null || map.size() == 0) {
+    if (map == null || map.isEmpty()) {
       dos.writeInt(0);
       return;
     }
@@ -88,7 +89,7 @@ public abstract class BasicWriter<T> extends StreamWriter<T> {
 
   protected void writeMapDouble(Map<String, Double> map)
   throws IOException {
-    if (map == null || map.size() == 0) {
+    if (map == null || map.isEmpty()) {
       dos.writeInt(0);
       return;
     }
