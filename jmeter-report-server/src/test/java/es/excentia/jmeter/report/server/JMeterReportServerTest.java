@@ -235,7 +235,7 @@ public class JMeterReportServerTest {
   
   
 
-  String reachedConnectionLimitErrorMsg = "";
+  String reachedConnectionLimitErrorMsg = null;
   
   @Test
   public void testConnectionLimitExceededError() {
@@ -282,6 +282,6 @@ public class JMeterReportServerTest {
       log.error("Interrupted: ", e);
     }
     
-    Assert.assertFalse(reachedConnectionLimitErrorMsg.isEmpty());
+    Assert.assertNotNull(reachedConnectionLimitErrorMsg);
   }
 }
