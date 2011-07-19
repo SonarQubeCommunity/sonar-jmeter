@@ -20,10 +20,10 @@
 
 package es.excentia.jmeter.report.server.transformer;
 
-import es.excentia.jmeter.report.server.exception.JMeterReportServerException;
+import es.excentia.jmeter.report.client.exception.FatalJMeterReportServerException;
 
 public class BuckedMeasuresTransformerFactoryException extends
-    JMeterReportServerException {
+    FatalJMeterReportServerException {
 
   private static final long serialVersionUID = 1L;
 

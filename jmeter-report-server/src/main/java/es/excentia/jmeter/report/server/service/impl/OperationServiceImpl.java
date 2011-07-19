@@ -56,22 +56,6 @@ public class OperationServiceImpl implements OperationService {
     transformer.transform();
   }
 
-  protected long getLong(Map<String, Long> map, String key) {
-    Long value = map.get(key);
-    if (value == null) {
-      value = (long) 0;
-    }
-    return value;
-  }
-
-  protected double getDouble(Map<String, Double> map, String key) {
-    Double value = map.get(key);
-    if (value == null) {
-      value = 0.0;
-    }
-    return value;
-  }
-
   public GlobalSummary getGlobalSummary(String config) {
 
     // Obtenemos el report con los datos necesarios para rellenar el

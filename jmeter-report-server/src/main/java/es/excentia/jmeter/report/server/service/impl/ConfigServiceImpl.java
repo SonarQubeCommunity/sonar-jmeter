@@ -30,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.JMeterReportConst;
-import es.excentia.jmeter.report.client.exception.JMeterReportException;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
 import es.excentia.jmeter.report.server.exception.ConfigException;
 import es.excentia.jmeter.report.server.service.ConfigService;
@@ -123,29 +122,21 @@ public class ConfigServiceImpl implements ConfigService {
 
     String jtlPath;
     
-    if (config.startsWith("test")) {
+    ConfigInfo memConfigInfo = inMemoryConfigs.get(config);
+    if (memConfigInfo != null) {
       
-      // Test mode: Test JTL files are in the classpath
-      jtlPath = "classpath:/" + config + ".jtl.xml";
+      // Retrieve JTL file path from memory
+      jtlPath = memConfigInfo.getJtlPath();
       
     } else {
       
-      ConfigInfo memConfigInfo = inMemoryConfigs.get(config);
-      if (memConfigInfo != null) {
-        
-        // Retrieve JTL file path from memory
-        jtlPath = memConfigInfo.getJtlPath();
-        
-      } else {
-        
-        // Retrieve JTL file path from system property or properties file
-        String jtlPathProp = "testconfig." + config + ".jtlpath";
-        jtlPath = getProperty(jtlPathProp);
-        if (jtlPath == null) {
-          throw new ConfigException("There is no property " + jtlPathProp + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
-        }
-        
+      // Retrieve JTL file path from system property or properties file
+      String jtlPathProp = "testconfig." + config + ".jtlpath";
+      jtlPath = getProperty(jtlPathProp);
+      if (jtlPath == null) {
+        throw new ConfigException("There is no property " + jtlPathProp + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
       }
+      
     }
     
     return new ConfigInfo(config, jtlPath);
@@ -158,7 +149,7 @@ public class ConfigServiceImpl implements ConfigService {
   public void setTestConfigInfo(String name, ConfigInfo configInfo) {
 
     if (name == null || name.trim().length() == 0) {
-      throw new JMeterReportException("Config must have a name");
+      throw new ConfigException("Config must have a name");
     }
 
     if (configInfo != null) {
@@ -166,7 +157,7 @@ public class ConfigServiceImpl implements ConfigService {
 
       String jtlPath = configInfo.getJtlPath();
       if (jtlPath == null || jtlPath.trim().length() == 0) {
-        throw new JMeterReportException("Config must have a jtl file path");
+        throw new ConfigException("Config must have a jtl file path");
       }
 
       inMemoryConfigs.put(name, configInfo);

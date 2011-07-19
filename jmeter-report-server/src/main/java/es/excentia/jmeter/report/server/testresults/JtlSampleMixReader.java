@@ -52,12 +52,10 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
   }
 
   protected boolean isTransaction(Sample sample) {
-    if (sample.getRm() != null
-        && sample.getRm().contains("Number of samples in transaction")) {
-      return true;
-    } else {
-      return false;
-    }
+    return (
+        sample.getRm() != null && 
+        sample.getRm().contains("Number of samples in transaction")
+    );
   }
 
   protected boolean addTransaction(Sample sample, List<Sample> samples,
@@ -82,7 +80,7 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
   }
 
   @Override
-  public SampleMix getObjectFromStream() throws Exception {
+  public SampleMix read() {
     AbstractSample abstractSample = jtlReader.read();
     if (abstractSample == null) {
       return null;

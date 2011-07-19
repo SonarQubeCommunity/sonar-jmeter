@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 import es.excentia.jmeter.report.client.data.Measure;
-import es.excentia.jmeter.report.client.exception.JMeterReportException;
+import es.excentia.jmeter.report.client.exception.FatalJMeterReportServerException;
 import es.excentia.jmeter.report.client.serialization.GlobalSummaryReader;
 import es.excentia.jmeter.report.client.serialization.MeasureReader;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
@@ -75,10 +75,8 @@ public class JMeterReportClient {
 
       return new GlobalSummaryReader(socket.getInputStream()).read();
 
-    } catch (JMeterReportException e) {
-      throw e;
-    } catch (Exception e) {
-      throw new JMeterReportException(e);
+    } catch (IOException e) {
+      throw new FatalJMeterReportServerException(e);
     }
 
     // No cerramos el socket.
@@ -107,10 +105,8 @@ public class JMeterReportClient {
 
       return new MeasureReader(socket.getInputStream());
 
-    } catch (JMeterReportException e) {
-      throw e;
-    } catch (Exception e) {
-      throw new JMeterReportException(e);
+    } catch (IOException e) {
+      throw new FatalJMeterReportServerException(e);
     }
 
     // No cerramos el socket.

@@ -20,9 +20,9 @@
 
 package es.excentia.jmeter.report.server.testresults;
 
-import es.excentia.jmeter.report.server.exception.JMeterReportServerException;
+import es.excentia.jmeter.report.client.exception.SerializationException;
 
-public class JtlReaderException extends JMeterReportServerException {
+public class JtlReaderException extends SerializationException {
 
   private static final long serialVersionUID = 1L;
 

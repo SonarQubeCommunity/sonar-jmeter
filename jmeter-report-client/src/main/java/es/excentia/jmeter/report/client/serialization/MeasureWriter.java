@@ -20,25 +20,21 @@
 
 package es.excentia.jmeter.report.client.serialization;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
 import es.excentia.jmeter.report.client.data.Measure;
 
-public class MeasureWriter extends ErrorCheckStreamWriter<Measure> {
-
-  protected DataOutputStream dos;
+public class MeasureWriter extends BasicWriter<Measure> {
 
   public MeasureWriter(OutputStream os) {
     super(os);
-    dos = new DataOutputStream(os);
   }
 
   @Override
   public void writeObjectToStream(Measure obj) throws IOException {
-    dos.writeLong(obj.getTimeStamp());
-    dos.writeDouble(obj.getValue());
+      dos.writeLong(obj.getTimeStamp());
+      dos.writeDouble(obj.getValue());
   }
 
 }

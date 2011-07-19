@@ -20,9 +20,9 @@
 
 package es.excentia.jmeter.report.server.service;
 
-import es.excentia.jmeter.report.server.exception.JMeterReportServerException;
+import es.excentia.jmeter.report.client.exception.FatalJMeterReportServerException;
 
-public class ServiceFactoryException extends JMeterReportServerException {
+public class ServiceFactoryException extends FatalJMeterReportServerException {
 
   private static final long serialVersionUID = 1L;
 

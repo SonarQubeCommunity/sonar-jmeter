@@ -18,23 +18,22 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package es.excentia.jmeter.report.client.serialization;
+package es.excentia.jmeter.report.client.exception;
 
-import es.excentia.jmeter.report.client.exception.JMeterReportException;
 
-public class StreamException extends JMeterReportException {
+public class SerializationException extends FatalJMeterReportServerException {
 
   private static final long serialVersionUID = 1L;
 
-  public StreamException(String message, Throwable cause) {
+  public SerializationException(String message, Throwable cause) {
     super(message, cause);
   }
 
-  public StreamException(String message) {
+  public SerializationException(String message) {
     super(message);
   }
 
-  public StreamException(Throwable cause) {
+  public SerializationException(Throwable cause) {
     super(cause);
   }
 

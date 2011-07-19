@@ -61,7 +61,7 @@ public class ReaderServiceImpl implements ReaderService {
     String jtlPath = testConfigInfo.getJtlPath();
     
     if (LOG_DEBUG) {
-      log.debug("JTL path:           " + jtlPath);
+      log.debug("JTL path: " + jtlPath);
     }
     
     if (jtlPath.startsWith("classpath:")) {

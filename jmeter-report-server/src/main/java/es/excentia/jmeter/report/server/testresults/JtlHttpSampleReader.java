@@ -44,7 +44,7 @@ public class JtlHttpSampleReader extends StreamReader<HttpSample> {
   }
 
   @Override
-  public HttpSample getObjectFromStream() throws Exception {
+  public HttpSample read() {
     if (httpSamples != null && httpSamplesIndex < httpSamples.size()) {
       HttpSample httpSample = httpSamples.get(httpSamplesIndex);
       httpSamplesIndex++;

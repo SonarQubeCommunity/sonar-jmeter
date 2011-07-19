@@ -20,7 +20,7 @@
 
 package es.excentia.jmeter.report.client.exception;
 
-public class JMeterReportException extends RuntimeException {
+public class JMeterReportException extends Exception {
 
   private static final long serialVersionUID = 1L;
 

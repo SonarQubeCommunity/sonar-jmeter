@@ -67,9 +67,9 @@ public class JMeterReportServerTest {
   @Test
   public void testIntegrationGetGlobalSummaryHttp() {
     log.info("** TEST IntegrationGetGlobalSummary "
-        + JMeterReportConst.TEST_CONFIG_HTTP);
+        + JMeterReportServerTestConst.TEST_CONFIG_HTTP);
     GlobalSummary summary = client
-        .getGlobalSummary(JMeterReportConst.TEST_CONFIG_HTTP);
+        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_HTTP);
     log.debug(summary.toString());
 
     Assert.assertEquals(2735, summary.getRequestsTotal());
@@ -86,9 +86,9 @@ public class JMeterReportServerTest {
   @Test
   public void testIntegrationGetGlobalSummaryTrans() {
     log.info("** TEST IntegrationGetGlobalSummary "
-        + JMeterReportConst.TEST_CONFIG_TRANS);
+        + JMeterReportServerTestConst.TEST_CONFIG_TRANS);
     GlobalSummary summary = client
-        .getGlobalSummary(JMeterReportConst.TEST_CONFIG_TRANS);
+        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS);
     log.debug(summary.toString());
 
     Assert.assertEquals(288, summary.getRequestsTotal());
@@ -113,9 +113,9 @@ public class JMeterReportServerTest {
   @Test
   public void testIntegrationGetGlobalSummaryTransPlain() {
     log.info("** TEST IntegrationGetGlobalSummary "
-        + JMeterReportConst.TEST_CONFIG_TRANS_PLAIN);
+        + JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN);
     GlobalSummary summary = client
-        .getGlobalSummary(JMeterReportConst.TEST_CONFIG_TRANS_PLAIN);
+        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN);
     log.debug(summary.toString());
 
     Assert.assertEquals(352, summary.getRequestsTotal());
@@ -143,9 +143,9 @@ public class JMeterReportServerTest {
   @Test
   public void testIntegrationGetGlobalSummaryTransPlainShort() {
     log.info("** TEST IntegrationGetGlobalSummary "
-        + JMeterReportConst.TEST_CONFIG_TRANS_PLAIN_SHORT);
+        + JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN_SHORT);
     GlobalSummary summary = client
-        .getGlobalSummary(JMeterReportConst.TEST_CONFIG_TRANS_PLAIN_SHORT);
+        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN_SHORT);
     log.debug(summary.toString());
 
     Assert.assertEquals(120000, summary.getTestDuration());
@@ -194,7 +194,7 @@ public class JMeterReportServerTest {
 
   @Test
   public void testIntegrationGetBuckedMeasures() {
-    for (String config : JMeterReportConst.TEST_CONFIGS) {
+    for (String config : JMeterReportServerTestConst.TEST_CONFIGS) {
       log.info("** TEST IntegrationGetBuckedMeasures " + config);
 
       StreamReader<Measure> reader = client.getBuckedMeasures(config,

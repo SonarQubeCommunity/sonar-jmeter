@@ -225,8 +225,7 @@ public class Report {
 
     ReportData data;
     try {
-      data = (ReportData) summaryDataClass.getConstructors()[0]
-                                                             .newInstance(new Object[] {});
+      data = (ReportData) summaryDataClass.getConstructors()[0].newInstance(new Object[] {});
     } catch (Exception e) {
       throw new ReportException(e);
     }

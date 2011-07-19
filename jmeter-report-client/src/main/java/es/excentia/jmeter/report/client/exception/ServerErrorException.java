@@ -18,16 +18,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package es.excentia.jmeter.report.client.serialization;
+package es.excentia.jmeter.report.client.exception;
 
-import java.io.OutputStream;
 
-public abstract class StreamWriter<T> {
-  OutputStream os;
+public class ServerErrorException extends SerializationException {
 
-  public StreamWriter(OutputStream os) {
-    this.os = os;
+  private static final long serialVersionUID = 1L;
+
+  public ServerErrorException(String message, Throwable cause) {
+    super(message, cause);
   }
 
-  public abstract void write(T obj);  
+  public ServerErrorException(String message) {
+    super(message);
+  }
+
+  public ServerErrorException(Throwable cause) {
+    super(cause);
+  }
+
 }

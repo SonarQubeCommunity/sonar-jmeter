@@ -1,5 +1,5 @@
 /*
- * JMeter Report Client
+ * JMeter Report Server
  * Copyright (C) 2010 eXcentia
  * dev@sonar.codehaus.org
  *
@@ -18,35 +18,17 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package es.excentia.jmeter.report.client.serialization;
+package es.excentia.jmeter.report.server;
 
-import java.io.DataOutputStream;
-import java.io.OutputStream;
 
-import es.excentia.jmeter.report.client.JMeterReportConst;
+public class JMeterReportServerTestConst {
 
-public abstract class ErrorCheckStreamWriter<T> extends StreamWriter<T> {
+  public static final String TEST_CONFIG_HTTP = "test-http";
+  public static final String TEST_CONFIG_TRANS = "test-trans";
+  public static final String TEST_CONFIG_TRANS_PLAIN = "test-trans-plain";
+  public static final String TEST_CONFIG_TRANS_PLAIN_SHORT = "test-trans-plain-short";
 
-  DataOutputStream dos;
-
-  public ErrorCheckStreamWriter(OutputStream os) {
-    super(os);
-    dos = new DataOutputStream(os);
-  }
-
-  public final void write(T obj) {
-    try {
-      dos.writeInt(JMeterReportConst.RETURN_CODE_OK);
-      dos.flush();
-
-      writeObjectToStream(obj);
-    } catch (StreamException e) {
-      throw e;
-    } catch (Exception e) {
-      throw new StreamException(e);
-    }
-  }
-
-  public abstract void writeObjectToStream(T obj) throws Exception;
-
+  public static final String[] TEST_CONFIGS = new String[] { TEST_CONFIG_HTTP,
+    TEST_CONFIG_TRANS, TEST_CONFIG_TRANS_PLAIN, TEST_CONFIG_TRANS_PLAIN_SHORT };
+  
 }

@@ -20,22 +20,15 @@
 
 package es.excentia.jmeter.report.client.serialization;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 
-public class GlobalSummaryWriter extends ErrorCheckStreamWriter<GlobalSummary> {
-
-  protected DataOutputStream dos;
+public class GlobalSummaryWriter extends BasicWriter<GlobalSummary> {
 
   public GlobalSummaryWriter(OutputStream os) {
     super(os);
-    dos = new DataOutputStream(os);
   }
 
   @Override
@@ -86,62 +79,17 @@ public class GlobalSummaryWriter extends ErrorCheckStreamWriter<GlobalSummary> {
     dos.writeDouble(obj.getMostUnstableTransBytesOkAvgDevPercent());
 
     writeStringList(obj.getTransOrder());
-    writeTransMapLong(obj.getTransMapOkTotal());
-    writeTransMapLong(obj.getTransMapErrorTotal());
+    writeMapLong(obj.getTransMapOkTotal());
+    writeMapLong(obj.getTransMapErrorTotal());
 
-    writeTransMapDouble(obj.getTransMapResponseTimeOkAvg());
-    writeTransMapDouble(obj.getTransMapResponseTimeOkAvgDev());
-    writeTransMapDouble(obj.getTransMapResponseTimeOkAvgDevPercent());
+    writeMapDouble(obj.getTransMapResponseTimeOkAvg());
+    writeMapDouble(obj.getTransMapResponseTimeOkAvgDev());
+    writeMapDouble(obj.getTransMapResponseTimeOkAvgDevPercent());
 
-    writeTransMapDouble(obj.getTransMapBytesOkAvg());
-    writeTransMapDouble(obj.getTransMapBytesOkAvgDev());
-    writeTransMapDouble(obj.getTransMapBytesOkAvgDevPercent());
+    writeMapDouble(obj.getTransMapBytesOkAvg());
+    writeMapDouble(obj.getTransMapBytesOkAvgDev());
+    writeMapDouble(obj.getTransMapBytesOkAvgDevPercent());
 
-  }
-
-  protected void writeStringList(List<String> list) throws IOException {
-    if (list == null || list.size() == 0) {
-      dos.writeInt(0);
-      return;
-    }
-
-    dos.writeInt(list.size());
-    for (String value : list) {
-      dos.writeUTF(value);
-    }
-  }
-
-  protected void writeString(String str) throws IOException {
-    dos.writeBoolean(str == null);
-    if (str != null)
-      dos.writeUTF(str);
-  }
-
-  protected void writeTransMapLong(Map<String, Long> map) throws IOException {
-    if (map == null || map.size() == 0) {
-      dos.writeInt(0);
-      return;
-    }
-
-    dos.writeInt(map.size());
-    for (Entry<String, Long> entry: map.entrySet()) {
-      dos.writeUTF(entry.getKey());
-      dos.writeLong(entry.getValue());
-    }
-  }
-
-  protected void writeTransMapDouble(Map<String, Double> map)
-  throws IOException {
-    if (map == null || map.size() == 0) {
-      dos.writeInt(0);
-      return;
-    }
-
-    dos.writeInt(map.size());
-    for (Entry<String, Double> entry: map.entrySet()) {
-      dos.writeUTF(entry.getKey());
-      dos.writeDouble(entry.getValue());
-    }
   }
 
 }

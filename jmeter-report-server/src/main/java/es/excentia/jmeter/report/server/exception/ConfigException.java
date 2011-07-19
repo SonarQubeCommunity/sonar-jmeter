@@ -20,7 +20,9 @@
 
 package es.excentia.jmeter.report.server.exception;
 
-public class ConfigException extends JMeterReportServerException {
+import es.excentia.jmeter.report.client.exception.FatalJMeterReportServerException;
+
+public class ConfigException extends FatalJMeterReportServerException {
 
   private static final long serialVersionUID = 1L;
 

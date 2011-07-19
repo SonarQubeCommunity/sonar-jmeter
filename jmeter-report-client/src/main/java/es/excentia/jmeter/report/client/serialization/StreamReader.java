@@ -20,29 +20,16 @@
 
 package es.excentia.jmeter.report.client.serialization;
 
-import java.io.EOFException;
 import java.io.InputStream;
 
 public abstract class StreamReader<T> {
-  InputStream is;
+  
+  protected InputStream is;
 
   public StreamReader(InputStream is) {
     this.is = is;
   }
-
-  public T read() {
-    try {
-
-      return getObjectFromStream();
-
-    } catch (EOFException e) {
-      return null;
-    } catch (StreamException e) {
-      throw e;
-    } catch (Exception e) {
-      throw new StreamException(e);
-    }
-  }
-
-  protected abstract T getObjectFromStream() throws Exception;
+  
+  public abstract T read();
+  
 }

@@ -26,15 +26,14 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import es.excentia.jmeter.report.client.JMeterReportConst;
-import es.excentia.jmeter.report.server.testresults.JtlAbstractSampleReader;
+import es.excentia.jmeter.report.server.JMeterReportServerTestConst;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public class JtlReaderTest {
 
   @Test
   public void testReadJtlFile() throws Exception {
-    for (String config : JMeterReportConst.TEST_CONFIGS) {
+    for (String config : JMeterReportServerTestConst.TEST_CONFIGS) {
       InputStream is = getClass()
           .getResourceAsStream("/" + config + ".jtl.xml");
       Assert.assertNotNull("No se encontró en el classpath " + config

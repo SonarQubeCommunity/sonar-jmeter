@@ -18,16 +18,22 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package es.excentia.jmeter.report.client.serialization;
+package es.excentia.jmeter.report.client.exception;
 
-import java.io.OutputStream;
+public class FatalJMeterReportServerException extends RuntimeException {
 
-public abstract class StreamWriter<T> {
-  OutputStream os;
+  private static final long serialVersionUID = 1L;
 
-  public StreamWriter(OutputStream os) {
-    this.os = os;
+  public FatalJMeterReportServerException(String message, Throwable cause) {
+    super(message, cause);
   }
 
-  public abstract void write(T obj);  
+  public FatalJMeterReportServerException(String message) {
+    super(message);
+  }
+
+  public FatalJMeterReportServerException(Throwable cause) {
+    super(cause);
+  }
+
 }

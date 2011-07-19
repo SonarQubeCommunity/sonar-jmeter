@@ -20,23 +20,15 @@
 
 package es.excentia.jmeter.report.client.serialization;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 
-public class GlobalSummaryReader extends ErrorCheckStreamReader<GlobalSummary> {
-
-  protected DataInputStream dis;
+public class GlobalSummaryReader extends BasicReader<GlobalSummary> {
 
   public GlobalSummaryReader(InputStream is) {
     super(is);
-    dis = new DataInputStream(is);
   }
 
   @Override
@@ -44,6 +36,7 @@ public class GlobalSummaryReader extends ErrorCheckStreamReader<GlobalSummary> {
     GlobalSummary summary = new GlobalSummary();
 
     summary.setTestDesc(readString());
+
     summary.setUsersLogged(dis.readLong());
     summary.setTestDuration(dis.readLong());
 
@@ -88,50 +81,18 @@ public class GlobalSummaryReader extends ErrorCheckStreamReader<GlobalSummary> {
     summary.setMostUnstableTransBytesOkAvgDevPercent(dis.readDouble());
 
     summary.setTransOrder(readStringList());
-    summary.setTransMapOkTotal(readTransMapLong());
-    summary.setTransMapErrorTotal(readTransMapLong());
+    summary.setTransMapOkTotal(readMapLong());
+    summary.setTransMapErrorTotal(readMapLong());
 
-    summary.setTransMapResponseTimeOkAvg(readTransMapDouble());
-    summary.setTransMapResponseTimeOkAvgDev(readTransMapDouble());
-    summary.setTransMapResponseTimeOkAvgDevPercent(readTransMapDouble());
+    summary.setTransMapResponseTimeOkAvg(readMapDouble());
+    summary.setTransMapResponseTimeOkAvgDev(readMapDouble());
+    summary.setTransMapResponseTimeOkAvgDevPercent(readMapDouble());
 
-    summary.setTransMapBytesOkAvg(readTransMapDouble());
-    summary.setTransMapBytesOkAvgDev(readTransMapDouble());
-    summary.setTransMapBytesOkAvgDevPercent(readTransMapDouble());
+    summary.setTransMapBytesOkAvg(readMapDouble());
+    summary.setTransMapBytesOkAvgDev(readMapDouble());
+    summary.setTransMapBytesOkAvgDevPercent(readMapDouble());
 
     return summary;
-  }
-
-  protected String readString() throws IOException {
-    boolean isNull = dis.readBoolean();
-    return isNull ? null : dis.readUTF();
-  }
-
-  protected List<String> readStringList() throws IOException {
-    int size = dis.readInt();
-    List<String> list = new ArrayList<String>();
-    for (int i = 0; i < size; i++) {
-      list.add(dis.readUTF());
-    }
-    return list;
-  }
-
-  protected Map<String, Long> readTransMapLong() throws IOException {
-    int size = dis.readInt();
-    Map<String, Long> map = new HashMap<String, Long>();
-    for (int i = 0; i < size; i++) {
-      map.put(dis.readUTF(), dis.readLong());
-    }
-    return map;
-  }
-
-  protected Map<String, Double> readTransMapDouble() throws IOException {
-    int size = dis.readInt();
-    Map<String, Double> map = new HashMap<String, Double>();
-    for (int i = 0; i < size; i++) {
-      map.put(dis.readUTF(), dis.readDouble());
-    }
-    return map;
   }
 
 }

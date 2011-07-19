@@ -20,19 +20,15 @@
 
 package es.excentia.jmeter.report.client.serialization;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import es.excentia.jmeter.report.client.data.Measure;
 
-public class MeasureReader extends ErrorCheckStreamReader<Measure> {
-
-  protected DataInputStream dis;
+public class MeasureReader extends BasicReader<Measure> {
 
   public MeasureReader(InputStream is) {
     super(is);
-    dis = new DataInputStream(is);
   }
 
   @Override

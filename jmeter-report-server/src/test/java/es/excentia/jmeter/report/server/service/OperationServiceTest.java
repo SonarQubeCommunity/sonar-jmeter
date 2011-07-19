@@ -22,7 +22,7 @@ package es.excentia.jmeter.report.server.service;
 
 import org.junit.Test;
 
-import es.excentia.jmeter.report.client.JMeterReportConst;
+import es.excentia.jmeter.report.server.JMeterReportServerTestConst;
 
 public class OperationServiceTest {
 
@@ -32,7 +32,7 @@ public class OperationServiceTest {
   @Test
   public void testWriteBucketMetrics() {
     operationService.writeBucketMeasures(System.out,
-        JMeterReportConst.TEST_CONFIG_TRANS, "BucketAvgResponseTime", 500);
+        JMeterReportServerTestConst.TEST_CONFIG_TRANS, "BucketAvgResponseTime", 500);
   }
 
 }
