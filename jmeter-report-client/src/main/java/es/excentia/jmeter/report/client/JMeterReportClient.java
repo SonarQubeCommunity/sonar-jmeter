@@ -38,8 +38,7 @@ import es.excentia.jmeter.report.client.serialization.StreamReader;
 
 public class JMeterReportClient {
 
-  private static final Logger log = LoggerFactory
-      .getLogger(JMeterReportClient.class);
+  private static final Logger log = LoggerFactory.getLogger(JMeterReportClient.class);
   private static final boolean LOG_DEBUG = log.isDebugEnabled();
 
   private String serverHost = JMeterReportConst.DEFAULT_HOST;

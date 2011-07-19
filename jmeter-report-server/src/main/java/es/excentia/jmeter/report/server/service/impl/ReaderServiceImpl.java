@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
+import es.excentia.jmeter.report.server.exception.ConfigException;
 import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.service.ReaderService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
@@ -42,6 +43,8 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 public class ReaderServiceImpl implements ReaderService {
 
+  private static final String CLASSPATH_PREFIX = "classpath:";
+  
   private static final Logger log = LoggerFactory.getLogger(ReaderServiceImpl.class);
   private static final boolean LOG_DEBUG =  log.isDebugEnabled();
   
@@ -64,18 +67,20 @@ public class ReaderServiceImpl implements ReaderService {
       log.debug("JTL path: " + jtlPath);
     }
     
-    if (jtlPath.startsWith("classpath:")) {
+    if (jtlPath.startsWith(CLASSPATH_PREFIX)) {
       
       // The resource is in the classpath
-      is = getClass().getResourceAsStream("/" + config + ".jtl.xml");
-      
+      is = getClass().getResourceAsStream(jtlPath.substring(CLASSPATH_PREFIX.length()));
+      if (is==null) {
+        throw new ConfigException("JTL resource defined for config '" + config + "' not found: "+jtlPath);
+      }
     } else {
       
       // The path is a file system path
       try {
         is = new FileInputStream(new File(jtlPath));
       } catch (FileNotFoundException e) {
-        throw new RuntimeException("JTL file defined for config '" + config + "' doesn't exist");
+        throw new ConfigException("JTL file defined for config '" + config + "' doesn't exist: "+jtlPath);
       }
       
     }

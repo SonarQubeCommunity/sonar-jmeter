@@ -37,10 +37,7 @@ public class JMeterSensorTest {
   @Test
   public void testLocalJtlPathConfig() {
     Map<String,String> configMap = new HashMap<String,String>();
-    // cfillol: It doesn't mind what you set in LOCAL_JTL_PATH_PROPERTY, if you specify "test-http"
-    // as config name, JMeterReportServer will analize this internal classpath file: /src/main/resources/test-http.jtl.xml
-    // This is interesting when programming tests like this.
-    configMap.put(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, "/home/carlos/jmeter_work/iceweb.jtl");
+    configMap.put(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, "classpath:/test-http.jtl.xml");
     
     Project project = new Project("test-http-key","","test-http"); // Force "test-http" as config name
     project.setConfiguration(new MapConfiguration(configMap));
