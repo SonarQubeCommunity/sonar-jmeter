@@ -34,8 +34,15 @@ import es.excentia.jmeter.report.server.report.OkBytesAverage;
 import es.excentia.jmeter.report.server.report.OkCounter;
 import es.excentia.jmeter.report.server.report.OkResponseTimeAverage;
 import es.excentia.jmeter.report.server.report.Report;
-import es.excentia.jmeter.report.server.report.TransMapSimplifier;
 import es.excentia.jmeter.report.server.report.TransOrder;
+import es.excentia.jmeter.report.server.report.transmapsimp.BytesOkAvgDevPercentTransMapSimp;
+import es.excentia.jmeter.report.server.report.transmapsimp.BytesOkAvgDevTransMapSimp;
+import es.excentia.jmeter.report.server.report.transmapsimp.BytesOkAvgTransMapSimp;
+import es.excentia.jmeter.report.server.report.transmapsimp.ErrorTotalTransMapSimp;
+import es.excentia.jmeter.report.server.report.transmapsimp.OkTotalTransMapSimp;
+import es.excentia.jmeter.report.server.report.transmapsimp.ResponseTimeOkAvgDevPercentTransMapSimp;
+import es.excentia.jmeter.report.server.report.transmapsimp.ResponseTimeOkAvgDevTransMapSimp;
+import es.excentia.jmeter.report.server.report.transmapsimp.ResponseTimeOkAvgTransMapSimp;
 import es.excentia.jmeter.report.server.service.OperationService;
 import es.excentia.jmeter.report.server.service.ReaderService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
@@ -46,6 +53,7 @@ public class OperationServiceImpl implements OperationService {
 
   protected ReaderService readerService = ServiceFactory.get(ReaderService.class);
 
+  
   public void writeBucketMeasures(OutputStream os, String config,
       String metric, int millisBucket) {
 
@@ -56,10 +64,10 @@ public class OperationServiceImpl implements OperationService {
     transformer.transform();
   }
 
+  
   public GlobalSummary getGlobalSummary(String config) {
 
-    // Obtenemos el report con los datos necesarios para rellenar el
-    // GlobalSummary
+    // Get report with necessary data to fill the GlobalSummary
     Report report = new Report();
     report.addData(OkCounter.class, Report.SCOPE_ALL);
     report.addData(OkResponseTimeAverage.class, Report.SCOPE_ALL);
@@ -67,7 +75,7 @@ public class OperationServiceImpl implements OperationService {
     report.addData(TransOrder.class, Report.SCOPE_TRANS_GLOBAL);
     report.extract(config);
 
-    // Rellenamos el GlobalSummary
+    // Fill GlobalSummary
 
     GlobalSummary globalSummary = new GlobalSummary();
     globalSummary.setTestDesc(config);
@@ -81,128 +89,65 @@ public class OperationServiceImpl implements OperationService {
     globalSummary.setRequestsErrorTotal(okCounter.getOpositeCounter());
     globalSummary.setRequestsErrorPercent(okCounter.getOpositePercent());
     globalSummary.setRequestsOkPerMinute(okCounter.getCounterPerMinute());
-    globalSummary.setRequestsOkPerMinuteAndUser(okCounter
-        .getCounterPerMinuteAndUser());
+    globalSummary.setRequestsOkPerMinuteAndUser(okCounter.getCounterPerMinuteAndUser());
 
-    OkResponseTimeAverage okResponseTimeAverage = report
-        .getDataRequestGlobal(OkResponseTimeAverage.class);
-    globalSummary.setRequestsResponseTimeOkAvg(okResponseTimeAverage
-        .getAverage());
-    globalSummary.setRequestsResponseTimeOkAvgDev(okResponseTimeAverage
-        .getDeviation());
-    globalSummary.setRequestsResponseTimeOkAvgDevPercent(okResponseTimeAverage
-        .getDeviationPercent());
+    OkResponseTimeAverage okResponseTimeAverage = report.getDataRequestGlobal(OkResponseTimeAverage.class);
+    globalSummary.setRequestsResponseTimeOkAvg(okResponseTimeAverage.getAverage());
+    globalSummary.setRequestsResponseTimeOkAvgDev(okResponseTimeAverage.getDeviation());
+    globalSummary.setRequestsResponseTimeOkAvgDevPercent(okResponseTimeAverage.getDeviationPercent());
 
-    OkBytesAverage okBytesAverage = report
-        .getDataRequestGlobal(OkBytesAverage.class);
+    OkBytesAverage okBytesAverage = report.getDataRequestGlobal(OkBytesAverage.class);
     globalSummary.setRequestsBytesOkAvg(okBytesAverage.getAverage());
     globalSummary.setRequestsBytesOkAvgDev(okBytesAverage.getDeviation());
-    globalSummary.setRequestsBytesOkAvgDevPercent(okBytesAverage
-        .getDeviationPercent());
+    globalSummary.setRequestsBytesOkAvgDevPercent(okBytesAverage.getDeviationPercent());
 
-    // Transacciones
+    // Transactions
     okCounter = report.getDataTransGlobal(OkCounter.class);
     globalSummary.setTransTotal(okCounter.getTotal());
     globalSummary.setTransOkTotal(okCounter.getCounter());
     globalSummary.setTransErrorTotal(okCounter.getOpositeCounter());
     globalSummary.setTransErrorPercent(okCounter.getOpositePercent());
     globalSummary.setTransOkPerMinute(okCounter.getCounterPerMinute());
-    globalSummary.setTransOkPerMinuteAndUser(okCounter
-        .getCounterPerMinuteAndUser());
+    globalSummary.setTransOkPerMinuteAndUser(okCounter.getCounterPerMinuteAndUser());
 
-    okResponseTimeAverage = report
-        .getDataTransGlobal(OkResponseTimeAverage.class);
+    okResponseTimeAverage = report.getDataTransGlobal(OkResponseTimeAverage.class);
     globalSummary.setTransResponseTimeOkAvg(okResponseTimeAverage.getAverage());
-    globalSummary.setTransResponseTimeOkAvgDev(okResponseTimeAverage
-        .getDeviation());
-    globalSummary.setTransResponseTimeOkAvgDevPercent(okResponseTimeAverage
-        .getDeviationPercent());
+    globalSummary.setTransResponseTimeOkAvgDev(okResponseTimeAverage.getDeviation());
+    globalSummary.setTransResponseTimeOkAvgDevPercent(okResponseTimeAverage.getDeviationPercent());
 
     okBytesAverage = report.getDataTransGlobal(OkBytesAverage.class);
     globalSummary.setTransBytesOkAvg(okBytesAverage.getAverage());
     globalSummary.setTransBytesOkAvgDev(okBytesAverage.getDeviation());
-    globalSummary.setTransBytesOkAvgDevPercent(okBytesAverage
-        .getDeviationPercent());
+    globalSummary.setTransBytesOkAvgDevPercent(okBytesAverage.getDeviationPercent());
 
     // Tipos de transacciones
     TransOrder transOrder = report.getDataTransGlobal(TransOrder.class);
     globalSummary.setTransOrder(transOrder.getTransOrderedList());
 
     // OkCounter
-    Map<String, OkCounter> mapOkCounter = report
-        .getDataTransType(OkCounter.class);
-    globalSummary.setTransMapOkTotal(new TransMapSimplifier<OkCounter, Long>(
-        mapOkCounter) {
-      protected Long reportDataToValue(OkCounter data) {
-        return data.getCounter();
-      }
-    }.toSimpleMap());
-    globalSummary
-        .setTransMapErrorTotal(new TransMapSimplifier<OkCounter, Long>(
-            mapOkCounter) {
-          protected Long reportDataToValue(OkCounter data) {
-            return data.getTotal() - data.getCounter();
-          }
-        }.toSimpleMap());
+    Map<String, OkCounter> mapOkCounter = report.getDataTransType(OkCounter.class);
+    globalSummary.setTransMapOkTotal(new OkTotalTransMapSimp().toSimpleMap(mapOkCounter));
+    globalSummary.setTransMapErrorTotal(new ErrorTotalTransMapSimp().toSimpleMap(mapOkCounter));
 
     // OkResponseTimeAverage
-    Map<String, OkResponseTimeAverage> mapOkRespTimeAvg = report
-        .getDataTransType(OkResponseTimeAverage.class);
-
-    globalSummary
-        .setTransMapResponseTimeOkAvg(new TransMapSimplifier<OkResponseTimeAverage, Double>(
-            mapOkRespTimeAvg) {
-          protected Double reportDataToValue(OkResponseTimeAverage data) {
-            return data.getAverage();
-          }
-        }.toSimpleMap());
-    globalSummary
-        .setTransMapResponseTimeOkAvgDev(new TransMapSimplifier<OkResponseTimeAverage, Double>(
-            mapOkRespTimeAvg) {
-          protected Double reportDataToValue(OkResponseTimeAverage data) {
-            return data.getDeviation();
-          }
-        }.toSimpleMap());
-    globalSummary
-        .setTransMapResponseTimeOkAvgDevPercent(new TransMapSimplifier<OkResponseTimeAverage, Double>(
-            mapOkRespTimeAvg) {
-          protected Double reportDataToValue(OkResponseTimeAverage data) {
-            return data.getDeviationPercent();
-          }
-        }.toSimpleMap());
+    Map<String, OkResponseTimeAverage> mapOkRespTimeAvg = report.getDataTransType(OkResponseTimeAverage.class);
+    globalSummary.setTransMapResponseTimeOkAvg(new ResponseTimeOkAvgTransMapSimp().toSimpleMap(mapOkRespTimeAvg));
+    globalSummary.setTransMapResponseTimeOkAvgDev(new ResponseTimeOkAvgDevTransMapSimp().toSimpleMap(mapOkRespTimeAvg));
+    globalSummary.setTransMapResponseTimeOkAvgDevPercent(new ResponseTimeOkAvgDevPercentTransMapSimp().toSimpleMap(mapOkRespTimeAvg));
 
     // OkBytesAverage
-    Map<String, OkBytesAverage> mapOkBytesAvg = report
-        .getDataTransType(OkBytesAverage.class);
-
-    globalSummary
-        .setTransMapBytesOkAvg(new TransMapSimplifier<OkBytesAverage, Double>(
-            mapOkBytesAvg) {
-          protected Double reportDataToValue(OkBytesAverage data) {
-            return data.getAverage();
-          }
-        }.toSimpleMap());
-    globalSummary
-        .setTransMapBytesOkAvgDev(new TransMapSimplifier<OkBytesAverage, Double>(
-            mapOkBytesAvg) {
-          protected Double reportDataToValue(OkBytesAverage data) {
-            return data.getDeviation();
-          }
-        }.toSimpleMap());
-    globalSummary
-        .setTransMapBytesOkAvgDevPercent(new TransMapSimplifier<OkBytesAverage, Double>(
-            mapOkBytesAvg) {
-          protected Double reportDataToValue(OkBytesAverage data) {
-            return data.getDeviationPercent();
-          }
-        }.toSimpleMap());
-
+    Map<String, OkBytesAverage> mapOkBytesAvg = report.getDataTransType(OkBytesAverage.class);
+    globalSummary.setTransMapBytesOkAvg(new BytesOkAvgTransMapSimp().toSimpleMap(mapOkBytesAvg));
+    globalSummary.setTransMapBytesOkAvgDev(new BytesOkAvgDevTransMapSimp().toSimpleMap(mapOkBytesAvg));
+    globalSummary.setTransMapBytesOkAvgDevPercent(new BytesOkAvgDevPercentTransMapSimp().toSimpleMap(mapOkBytesAvg));
     return globalSummary;
   }
 
+  
   public void writeGlobalSummary(OutputStream os, String config) {
     GlobalSummary summary = getGlobalSummary(config);
     new GlobalSummaryWriter(os).write(summary);
   }
 
+  
 }

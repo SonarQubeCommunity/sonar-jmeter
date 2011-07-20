@@ -51,7 +51,6 @@ public class JMeterReportServer {
   private int connections = 0;
   private int maxConnections = 0;
   private boolean stopWhenPossible = false;
-  private byte[] rubbishBuffer = new byte[128];
 
   protected ConfigService configService = ServiceFactory.get(ConfigService.class);
   protected OperationService metricService = ServiceFactory.get(OperationService.class);

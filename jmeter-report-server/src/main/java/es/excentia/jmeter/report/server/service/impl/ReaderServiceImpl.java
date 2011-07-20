@@ -80,7 +80,7 @@ public class ReaderServiceImpl implements ReaderService {
       try {
         is = new FileInputStream(new File(jtlPath));
       } catch (FileNotFoundException e) {
-        throw new ConfigException("JTL file defined for config '" + config + "' doesn't exist: "+jtlPath);
+        throw new ConfigException("JTL file defined for config '" + config + "' doesn't exist: "+jtlPath, e);
       }
       
     }

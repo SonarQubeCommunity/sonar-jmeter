@@ -35,6 +35,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
 import org.apache.xmlbeans.XmlValidationError;
@@ -208,7 +209,9 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   
       return null;
     
-    } catch (Exception e) {
+    } catch (XMLStreamException e) {
+      throw new JtlReaderException(e);
+    } catch (XmlException e) {
       throw new JtlReaderException(e);
     }
   

@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.JMeterReportConst;
+import es.excentia.jmeter.report.client.util.StringUtil;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
 import es.excentia.jmeter.report.server.exception.ConfigException;
 import es.excentia.jmeter.report.server.service.ConfigService;
@@ -60,7 +61,7 @@ public class ConfigServiceImpl implements ConfigService {
     try {
       props.load(url.openStream());
     } catch (IOException e) {
-      throw new ConfigException("Cannot load properties file: " + propsName + "\nURL=" + url.toString());
+      throw new ConfigException("Cannot load properties file: " + propsName + "\nURL=" + url.toString(), e);
     }
 
     return props;
@@ -148,7 +149,7 @@ public class ConfigServiceImpl implements ConfigService {
    */
   public void setTestConfigInfo(String name, ConfigInfo configInfo) {
 
-    if (name == null || name.trim().length() == 0) {
+    if (StringUtil.isBlank(name)) {
       throw new ConfigException("Config must have a name");
     }
 
@@ -156,7 +157,7 @@ public class ConfigServiceImpl implements ConfigService {
       configInfo.setName(name);
 
       String jtlPath = configInfo.getJtlPath();
-      if (jtlPath == null || jtlPath.trim().length() == 0) {
+      if (StringUtil.isBlank(jtlPath)) {
         throw new ConfigException("Config must have a jtl file path");
       }
 
@@ -179,8 +180,7 @@ public class ConfigServiceImpl implements ConfigService {
    * @see es.excentia.jmeter.report.server.service.ConfigService#getMaxConnections()
    */
   public int getMaxConnections() {
-    int maxConnections = getNaturalProperty(MAX_CONNECTIONS_KEY, JMeterReportConst.DEFAULT_MAX_CONNECTIONS);
-    return maxConnections;
+    return getNaturalProperty(MAX_CONNECTIONS_KEY, JMeterReportConst.DEFAULT_MAX_CONNECTIONS);
   }
 
 }

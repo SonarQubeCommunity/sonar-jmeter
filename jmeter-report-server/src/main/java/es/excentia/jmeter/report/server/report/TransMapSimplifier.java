@@ -21,25 +21,10 @@
 package es.excentia.jmeter.report.server.report;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 public abstract class TransMapSimplifier<TReportData, TValue> {
-
-  Map<String, TReportData> origMap;
-
-  public TransMapSimplifier() {
-  }
-
-  public TransMapSimplifier(Map<String, TReportData> origMap) {
-    this.origMap = origMap;
-  }
-
-  public final Map<String, TValue> toSimpleMap() {
-    return toSimpleMap(origMap);
-  }
 
   public final Map<String, TValue> toSimpleMap(Map<String, TReportData> origMap) {
     Map<String, TValue> simpleMap = new HashMap<String, TValue>();

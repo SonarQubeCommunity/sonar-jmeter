@@ -32,6 +32,8 @@ import es.excentia.jmeter.report.client.JMeterReportConst;
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 import es.excentia.jmeter.report.client.data.Measure;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
+import es.excentia.jmeter.report.server.data.ConfigInfo;
+import es.excentia.jmeter.report.server.exception.ConfigException;
 import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
 
@@ -64,6 +66,56 @@ public class JMeterReportServerTest {
     Thread.sleep(SERVER_STOP_TIME);
   }
 
+  @Test
+  public void testMemoryConfig() {
+    log.info("** TEST testMemoryConfig ");
+
+    Exception error = null;
+    try {
+      configService.setTestConfigInfo("myMemoryConfig", new ConfigInfo(null));
+    } catch (ConfigException e) {
+      error = e;
+    }
+    Assert.assertNotNull(error);
+    
+    
+    ConfigInfo myMemoryConfig = new ConfigInfo("myMemoryConfig", "classpath:/test-trans-plain-short.jtl.xml");
+    
+    error = null;
+    try {
+      configService.setTestConfigInfo(null, myMemoryConfig);
+    } catch (ConfigException e) {
+      error = e;
+    }
+    Assert.assertNotNull(error);
+    
+    configService.setTestConfigInfo("myMemoryConfig", myMemoryConfig);
+    Assert.assertNotNull(configService.getTestConfigInfo("myMemoryConfig"));
+    client.getGlobalSummary("myMemoryConfig");
+    
+    
+    error = null;
+    try {
+      configService.getTestConfigInfo("notExistingConfig");
+    } catch (ConfigException e) {
+      error = e;
+    }
+    Assert.assertNotNull(error);
+  }
+  
+  @Test
+  public void testNotExistingConfig() {
+    log.info("** TEST testNotExistingConfig ");
+
+    Exception error = null;
+    try {
+      configService.getTestConfigInfo("notExistingConfig");
+    } catch (ConfigException e) {
+      error = e;
+    }
+    Assert.assertNotNull(error);
+  }
+  
   @Test
   public void testIntegrationGetGlobalSummaryHttp() {
     log.info("** TEST IntegrationGetGlobalSummary "

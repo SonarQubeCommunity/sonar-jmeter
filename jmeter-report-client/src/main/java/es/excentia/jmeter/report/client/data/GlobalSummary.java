@@ -25,17 +25,27 @@ import java.util.Map;
 
 public class GlobalSummary {
 
-  // ////////////////////////
+  //////////////////////////
   // Métricas que describen el test
 
-  String testDesc; // Descripción del test: Distribución de los usuarios en el
-  // tiempo, objetivo del test, ...
-  long usersLogged; // Num. medio de usuarios participando en el test
-  // (entendidos los usuarios como hilos paralelos de
-  // ejecución del test).
-  long testDuration; // Duración del test en milisegundos
+  /**
+   * Descripción del test: Distribución de los usuarios en el
+   * tiempo, objetivo del test, ...
+   */
+  String testDesc; 
+  
+  /**
+   * Num. medio de usuarios participando en el test
+   * (entendidos los usuarios como hilos paralelos de
+   * ejecución del test).
+   */
+  long usersLogged;
+  
+  /** Duración del test en milisegundos */
+  long testDuration;
 
-  // ////////////////////////
+  
+  //////////////////////////
   // Métricas globales requests http
 
   long requestsTotal;
@@ -54,57 +64,83 @@ public class GlobalSummary {
   double requestsBytesOkAvgDev;
   double requestsBytesOkAvgDevPercent;
 
-  // ////////////////////////
+  
+  //////////////////////////
   // Métricas globales de transacciones
 
-  long transTotal; // Num. total de transacciones
-  long transOkTotal; // Num. total de transacciones ok
-  long transErrorTotal; // Num. total de transacciones con error
-  double transErrorPercent; // % de transacciones con error
+  /** Num. total de transacciones */
+  long transTotal;
+  
+  /** Num. total de transacciones ok */
+  long transOkTotal; 
+  
+  /** Num. total de transacciones con error */
+  long transErrorTotal; 
+  
+  /** % de transacciones con error */
+  double transErrorPercent; 
+  
 
-  double transOkPerMinute; // Transacciones ok por minuto
-  double transOkPerMinuteAndUser; // Transacciones ok por minuto y por usuario
+  /** Transacciones ok por minuto */
+  double transOkPerMinute; 
+  
+  /** Transacciones ok por minuto y por usuario */
+  double transOkPerMinuteAndUser; 
+  
+  /** Tiempo de respuesta medio de una transacción */
+  double transResponseTimeOkAvg; 
+  
+  /** Desviación absoluta del tiempo de respuesta de una transacción */
+  double transResponseTimeOkAvgDev; 
+  
+  /** 
+   * Desviación relativa del tiempo de respuesta de una transacción
+   * (detección de anomalías o interferencias)
+   */
+  double transResponseTimeOkAvgDevPercent;
 
-  double transResponseTimeOkAvg; // Tiempo de respuesta medio de una
-  // transacción
-  double transResponseTimeOkAvgDev; // Desviación absoluta del tiempo de
-  // respuesta de una transacción
-  double transResponseTimeOkAvgDevPercent;// Desviación relativa del tiempo de
-  // respuesta de una transacción
-  // (detección de anomalías o
-  // interferencias)
+  
+  /** Tamanyo (en bytes) medio de una transacción */
+  double transBytesOkAvg;
+  
+  /** Desviación absoluta del tamanyo (en bytes) de una transacción */
+  double transBytesOkAvgDev; 
+  
+  /** 
+   * Desviación relativa del tamanyo (en bytes) de una transacción 
+   * (detección de anomalías o interferencias) 
+   */
+  double transBytesOkAvgDevPercent; 
 
-  double transBytesOkAvg; // Tamanyo (en bytes) medio de una transacción
-  double transBytesOkAvgDev; // Desviación absoluta del tamanyo (en bytes) de
-  // una transacción
-  double transBytesOkAvgDevPercent; // Desviación relativa del tamanyo (en
-  // bytes) de una transacción (detección
-  // de anomalías o interferencias)
+  
+  /** Tipo de transacción con el peor tiempo de respuesta medio */
+  String slowestTransName;
+  
+  /** Peor tiempo de respuesta medio **/
+  double slowestTransResponseTimeOkAvg;
+  
+  /** Peor tiempo de respuesta medio */
+  double slowestTransBytesOkAvgDevPercent; 
 
-  String slowestTransName; // Tipo de transacción con el peor tiempo de
-  // respuesta medio
-  double slowestTransResponseTimeOkAvg; // Peor tiempo de respuesta medio
-  double slowestTransBytesOkAvgDevPercent;// Peor tiempo de respuesta medio
-
-  String mostUnstableTransName; // Tipo de transacción más inestable. Tipo de
-  // transacción con la máxima desviación
-  // relativa del tiempo de respuesta. Este
-  // valor es un indicativo de la estabilidad
-  // global de la aplicación, puesto que es
-  // una cota máxima de la desviación relativa
-  // de todos los tipos de transacción
-  double mostUnstableTransResponseTimeOkAvgDevPercent; // Máx. desviación
-  // relativa del
-  // tiempo de
-  // respuesta para un
-  // único tipo de
-  // transacción
-  // (detección de
-  // anomalías o
-  // interferencias)
+  /**
+   * Tipo de transacción más inestable. Tipo de transacción con 
+   * la máxima desviación relativa del tiempo de respuesta. Este
+   * valor es un indicativo de la estabilidad global de la aplicación, 
+   * puesto que es una cota máxima de la desviación relativa
+   * de todos los tipos de transacción
+   */
+  String mostUnstableTransName; 
+  
+  /**
+   * Máx. desviación relativa del tiempo de respuesta para un
+   * único tipo de transacción (detección de anomalías o interferencias)
+   */
+  double mostUnstableTransResponseTimeOkAvgDevPercent;
+  
   double mostUnstableTransBytesOkAvgDevPercent;
 
-  // ////////////////////////
+  
+  //////////////////////////
   // Métricas concretas de cada tipos de transacción
 
   List<String> transOrder;
