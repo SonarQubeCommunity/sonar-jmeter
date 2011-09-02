@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins.jmeter</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2</version>
+    <version>0.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>sonar-jmeter-plugin</artifactId>
@@ -16,9 +16,9 @@
   <url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/tags/sonar-jmeter-plugin-0.2/sonar-jmeter-plugin</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/sonar-jmeter-plugin-0.2/sonar-jmeter-plugin</developerConnection>
-    <url>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/sonar-jmeter-plugin-0.2/svn.sonar-plugins.codehaus.org</url>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</developerConnection>
+    <url>http://svn.sonar-plugins.codehaus.org</url>
   </scm>
 
   <properties>
@@ -51,12 +51,12 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>jmeter-report-client</artifactId>
-      <version>0.2</version>
+      <version>0.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>jmeter-report-server</artifactId>
-      <version>0.2</version>
+      <version>0.3-SNAPSHOT</version>
     </dependency>
 
   </dependencies>
