@@ -30,7 +30,7 @@
 
   <groupId>org.codehaus.sonar-plugins.jmeter</groupId>
   <artifactId>parent</artifactId>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.2</version>
   <packaging>pom</packaging>
 
   <name>Sonar JMeter Plugin (parent)</name>
@@ -77,9 +77,9 @@
   </modules>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org</url>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/tags/sonar-jmeter-plugin-0.2</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/sonar-jmeter-plugin-0.2</developerConnection>
+    <url>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/sonar-jmeter-plugin-0.2</url>
   </scm>
 
   <issueManagement>
