@@ -119,7 +119,7 @@ public class JMeterReportServerTest {
   
   @Test
   public void testIntegrationGetGlobalSummaryHttp() {
-    log.info("** TEST IntegrationGetGlobalSummary "
+    log.info("** TEST testIntegrationGetGlobalSummaryHttp "
         + JMeterReportServerTestConst.TEST_CONFIG_HTTP);
     GlobalSummary summary = client
         .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_HTTP);
@@ -137,8 +137,40 @@ public class JMeterReportServerTest {
   }
 
   @Test
+  public void testIntegrationGetGlobalSummaryHttpFull() {
+    log.info("** TEST testIntegrationGetGlobalSummaryHttpFull "
+        + JMeterReportServerTestConst.TEST_CONFIG_HTTP_FULL);
+    GlobalSummary summary = client
+        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_HTTP_FULL);
+    log.debug(summary.toString());
+
+    /*
+    Assert.assertEquals(352, summary.getRequestsTotal());
+    Assert.assertEquals(344, summary.getRequestsOkTotal());
+    Assert.assertEquals(8, summary.getRequestsErrorTotal());
+    Assert.assertEquals(2.27, summary.getRequestsErrorPercent(), MARGEN);
+    Assert.assertEquals(346.00, summary.getRequestsOkPerMinute(), MARGEN);
+    Assert.assertEquals(19.31, summary.getRequestsResponseTimeOkAvg(), MARGEN);
+    Assert.assertEquals(58.81, summary.getRequestsResponseTimeOkAvgDev(),
+        MARGEN);
+
+    Assert.assertEquals(165.83, summary.getTransResponseTimeOkAvg(), MARGEN);
+    Assert.assertEquals(227.57, summary.getTransResponseTimeOkAvgDev(), MARGEN);
+    Assert.assertEquals(137.23, summary.getTransResponseTimeOkAvgDevPercent(),
+        MARGEN);
+
+    double homeErrorTotal = summary.getTransMapErrorTotal().get("HOME");
+    Assert.assertEquals(8.0, homeErrorTotal, MARGEN);
+
+    double detalleCentroDevPerc = summary
+        .getTransMapResponseTimeOkAvgDevPercent().get("DETALLE_CENTRO");
+    Assert.assertEquals(67.82, detalleCentroDevPerc, MARGEN);
+    */
+  }
+  
+  @Test
   public void testIntegrationGetGlobalSummaryTrans() {
-    log.info("** TEST IntegrationGetGlobalSummary "
+    log.info("** TEST testIntegrationGetGlobalSummaryTrans "
         + JMeterReportServerTestConst.TEST_CONFIG_TRANS);
     GlobalSummary summary = client
         .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS);
@@ -164,8 +196,40 @@ public class JMeterReportServerTest {
   }
 
   @Test
+  public void testIntegrationGetGlobalSummaryTransFull25() {
+    log.info("** TEST testIntegrationGetGlobalSummaryTransFull25 "
+        + JMeterReportServerTestConst.TEST_CONFIG_TRANS_FULL_25);
+    GlobalSummary summary = client
+        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS_FULL_25);
+    log.debug(summary.toString());
+
+    /*
+    Assert.assertEquals(352, summary.getRequestsTotal());
+    Assert.assertEquals(344, summary.getRequestsOkTotal());
+    Assert.assertEquals(8, summary.getRequestsErrorTotal());
+    Assert.assertEquals(2.27, summary.getRequestsErrorPercent(), MARGEN);
+    Assert.assertEquals(346.00, summary.getRequestsOkPerMinute(), MARGEN);
+    Assert.assertEquals(19.31, summary.getRequestsResponseTimeOkAvg(), MARGEN);
+    Assert.assertEquals(58.81, summary.getRequestsResponseTimeOkAvgDev(),
+        MARGEN);
+
+    Assert.assertEquals(165.83, summary.getTransResponseTimeOkAvg(), MARGEN);
+    Assert.assertEquals(227.57, summary.getTransResponseTimeOkAvgDev(), MARGEN);
+    Assert.assertEquals(137.23, summary.getTransResponseTimeOkAvgDevPercent(),
+        MARGEN);
+
+    double homeErrorTotal = summary.getTransMapErrorTotal().get("HOME");
+    Assert.assertEquals(8.0, homeErrorTotal, MARGEN);
+
+    double detalleCentroDevPerc = summary
+        .getTransMapResponseTimeOkAvgDevPercent().get("DETALLE_CENTRO");
+    Assert.assertEquals(67.82, detalleCentroDevPerc, MARGEN);
+    */
+  }
+  
+  @Test
   public void testIntegrationGetGlobalSummaryTransPlain() {
-    log.info("** TEST IntegrationGetGlobalSummary "
+    log.info("** TEST testIntegrationGetGlobalSummaryTransPlain "
         + JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN);
     GlobalSummary summary = client
         .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN);
@@ -195,7 +259,7 @@ public class JMeterReportServerTest {
 
   @Test
   public void testIntegrationGetGlobalSummaryTransPlainShort() {
-    log.info("** TEST IntegrationGetGlobalSummary "
+    log.info("** TEST testIntegrationGetGlobalSummaryTransPlainShort "
         + JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN_SHORT);
     GlobalSummary summary = client
         .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS_PLAIN_SHORT);
@@ -244,7 +308,7 @@ public class JMeterReportServerTest {
     value = summary.getTransMapOkTotal().get("OK_TRANS");
     Assert.assertEquals(4.0, value, MARGEN);
   }
-
+  
   @Test
   public void testIntegrationGetGlobalSummary() {
     for (String config : JMeterReportServerTestConst.TEST_CONFIGS) {

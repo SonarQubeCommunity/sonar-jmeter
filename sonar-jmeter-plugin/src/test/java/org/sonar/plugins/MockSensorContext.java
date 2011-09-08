@@ -84,10 +84,6 @@ public class MockSensorContext implements SensorContext {
     throw new NotImplementedException();
   }
 
-  public Resource getResource(Resource arg0) {
-    throw new NotImplementedException();
-  }
-
   public Dependency saveDependency(Dependency arg0) {
     throw new NotImplementedException();
   }
@@ -135,6 +131,38 @@ public class MockSensorContext implements SensorContext {
   }
 
   public void saveViolations(Collection<Violation> arg0) {
+    throw new NotImplementedException();
+  }
+
+  public boolean index(Resource resource) {
+    throw new NotImplementedException();
+  }
+
+  public boolean index(Resource resource, Resource parentReference) {
+    throw new NotImplementedException();
+  }
+
+  public boolean isExcluded(Resource reference) {
+    throw new NotImplementedException();
+  }
+
+  public boolean isIndexed(Resource reference, boolean acceptExcluded) {
+    throw new NotImplementedException();
+  }
+
+  public <R extends Resource> R getResource(R reference) {
+    throw new NotImplementedException();
+  }
+
+  public Resource getParent(Resource reference) {
+    throw new NotImplementedException();
+  }
+
+  public Collection<Resource> getChildren(Resource reference) {
+    throw new NotImplementedException();
+  }
+
+  public void saveViolation(Violation violation, boolean force) {
     throw new NotImplementedException();
   }
 

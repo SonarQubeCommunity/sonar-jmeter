@@ -25,10 +25,14 @@ public class JMeterReportServerTestConst {
 
   public static final String TEST_CONFIG_HTTP = "test-http";
   public static final String TEST_CONFIG_TRANS = "test-trans";
+  public static final String TEST_CONFIG_HTTP_FULL = "test-http-full";
+  public static final String TEST_CONFIG_TRANS_FULL_25 = "test-trans-full-25";
   public static final String TEST_CONFIG_TRANS_PLAIN = "test-trans-plain";
   public static final String TEST_CONFIG_TRANS_PLAIN_SHORT = "test-trans-plain-short";
-
-  public static final String[] TEST_CONFIGS = new String[] { TEST_CONFIG_HTTP,
-    TEST_CONFIG_TRANS, TEST_CONFIG_TRANS_PLAIN, TEST_CONFIG_TRANS_PLAIN_SHORT };
+  
+  public static final String[] TEST_CONFIGS = new String[] { 
+    TEST_CONFIG_HTTP, TEST_CONFIG_TRANS, TEST_CONFIG_HTTP_FULL, TEST_CONFIG_TRANS_FULL_25, 
+    TEST_CONFIG_TRANS_PLAIN, TEST_CONFIG_TRANS_PLAIN_SHORT 
+  };
   
 }

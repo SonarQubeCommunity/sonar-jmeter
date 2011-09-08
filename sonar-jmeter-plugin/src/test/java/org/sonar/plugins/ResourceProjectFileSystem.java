@@ -26,6 +26,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
@@ -113,6 +114,14 @@ public class ResourceProjectFileSystem implements ProjectFileSystem {
   }
 
   public File writeToWorkingDirectory(String arg0, String arg1) throws IOException {
+    throw new NotImplementedException();
+  }
+
+  public List<InputFile> mainFiles(String... langs) {
+    throw new NotImplementedException();
+  }
+
+  public List<InputFile> testFiles(String... langs) {
     throw new NotImplementedException();
   }
 
