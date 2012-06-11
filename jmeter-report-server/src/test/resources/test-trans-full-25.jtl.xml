@@ -46,6 +46,18 @@
 <sample t="46" lt="44" ts="1315464952272" s="false" lb="DETAIL" rc="" rm="Number of samples in transaction : 3, number of failing samples : 2" tn="Thread Group 1-1" dt="" by="1977"/>
 
 <httpSample t="59" it="0" lt="59" ts="1315465022157" s="false" lb="/iceweb/" rc="500" rm="Internal Server Error" tn="Thread Group 1-1" dt="text" de="iso-8859-1" by="696" sc="1" ec="1" ng="1" na="1" hn="sam">
+  <assertionResult>
+    <name>Aserción HTML</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>Tidy Parser errors:   0 (allowed 0) Tidy Parser warnings: 2 (allowed 0)</failureMessage>
+  </assertionResult>
+  <assertionResult>
+    <name>Aserción HTML</name>
+    <failure>true</failure>
+    <error>false</error>
+    <failureMessage>Tidy Parser errors:   0 (allowed 0) Tidy Parser warnings: 2 (allowed 0)</failureMessage>
+  </assertionResult>
   <responseHeader class="java.lang.String">HTTP/1.1 500 Internal Server Error
 Date: Thu, 08 Sep 2011 06:57:01 GMT
 Server: Oracle Containers for J2EE

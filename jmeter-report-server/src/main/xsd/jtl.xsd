@@ -21,7 +21,6 @@
 	<xs:extension base="AbstractSample" >
 		<xs:sequence>
 			<xs:element name="httpSample" type="HttpSample" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="assertionResult" type="AssertionResult" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:extension>
 	</xs:complexContent>
@@ -48,6 +47,8 @@
 	
 	<xs:complexType name="AbstractSample">
 		<xs:sequence>
+			<xs:element name="assertionResult" type="AssertionResult" minOccurs="0" maxOccurs="unbounded"/>
+		
 			<xs:element name="responseHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
 			<xs:element name="requestHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
 			<xs:element name="responseData" type="TextEl" minOccurs="0" maxOccurs="1" />
