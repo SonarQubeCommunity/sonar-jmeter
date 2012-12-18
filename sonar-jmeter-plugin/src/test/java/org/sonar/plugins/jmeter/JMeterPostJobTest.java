@@ -20,24 +20,50 @@
 
 package org.sonar.plugins.jmeter;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+
+import java.io.File;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.sonar.api.resources.Project;
-import org.sonar.plugins.ResourceProjectFileSystem;
+import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.plugins.MockSensorContext;
+
+import es.excentia.jmeter.report.client.data.GlobalSummary;
 
 
 public class JMeterPostJobTest {
-
-  JMeterPostJob job = new JMeterPostJob();
+  
+  // Extend original class to save globalSummary reference
+  class JMeterPostJobForTesting extends JMeterPostJob {
+    private GlobalSummary globalSumary;
+    public GlobalSummary getGlobalSummary() { 
+      return globalSumary; 
+    }
+    
+    protected GlobalSummary getGlobalSummaryFromLocalJTL(Project project) {
+      this.globalSumary = super.getGlobalSummaryFromLocalJTL(project);
+      return this.globalSumary;
+    };
+  };
+  
+  JMeterPostJobForTesting job = new JMeterPostJobForTesting();
   
   @Test
   public void test() {
-
-    Project project = new Project("JMeterPostJobTest","","JMeterPostJobTest"); // Force "test-http" as config name
-    project.setFileSystem(new ResourceProjectFileSystem("mproj"));
+    
+    ProjectFileSystem projectFileSystem = mock(ProjectFileSystem.class);
+    File testProjectFolder = new File("src/test/resources/test-project");
+    doReturn(testProjectFolder).when(projectFileSystem).getBasedir();
+    
+    Project project = spy(new Project("JMeterPostJobTest","","JMeterPostJobTest"));
+    doReturn(projectFileSystem).when(project).getFileSystem();
     
     job.executeOn(project, new MockSensorContext());
-    //Assert.assertNotNull(job.getGlobalSummary(project));
+    Assert.assertNotNull(job.getGlobalSummary());
   }
   
 }
