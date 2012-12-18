@@ -23,9 +23,9 @@ package org.sonar.plugins.jmeter;
 import java.util.Arrays;
 import java.util.List;
 
-import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.SonarPlugin;
 
 @Properties( {
   @Property(key = JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, name = "Local jtl file", description = "Local jtl file path. If specified no remote config is used.", project = true, global = false),
@@ -37,19 +37,7 @@ import org.sonar.api.Property;
   /**
    * This class is the entry point for all extensions
    */
-  public class JMeterPlugin implements Plugin {
-
-  public String getKey() {
-    return "jmeter";
-  }
-
-  public String getName() {
-    return "JMeter";
-  }
-
-  public String getDescription() {
-    return "This plugin will show you the summary of jmeter performance test";
-  }
+  public class JMeterPlugin extends SonarPlugin {
 
   /**
    * This is where we declare all our Sonar extensions

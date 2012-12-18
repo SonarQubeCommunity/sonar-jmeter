@@ -78,7 +78,6 @@ public class JMeterPostJob implements PostJob, CheckProject {
   /**
    * Gets the generated jtl file path, if it was any generated
    */
-  @SuppressWarnings("unchecked")
   protected String getJtlFilePath(Project project) {
     String baseDirPath = project.getFileSystem().getBasedir().getAbsolutePath();
     File reportDir = new File(baseDirPath + "/target/jmeter-reports");
