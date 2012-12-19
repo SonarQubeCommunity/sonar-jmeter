@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<httpSample t="10" it="0" lt="5" ts="1350570764225" s="true" lb="ssc" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="4208" sc="1" ec="0" ng="1" na="1" hn="server1">
+  <assertionResult>
+    <name>Response Assertion</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+  <httpSample t="5" it="0" lt="5" ts="1350570764225" s="true" lb="http://server.xyz.com/ssc" rc="302" rm="Moved Temporarily" tn="" dt="text" de="UTF-8" by="531" sc="1" ec="0" ng="0" na="0" hn="server1">
+    <responseHeader class="java.lang.String">HTTP/1.1 302 Moved Temporarily
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Location: http://server.xyz.com/ssc/
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+    <responseData class="java.lang.String">&lt;html&gt;&lt;head&gt;&lt;title&gt;302 Moved Temporarily&lt;/title&gt;&lt;/head&gt;&#xd;
+&lt;body bgcolor=&quot;#FFFFFF&quot;&gt;&#xd;
+&lt;p&gt;This document you requested has moved temporarily.&lt;/p&gt;&#xd;
+&lt;p&gt;It&apos;s now at &lt;a href=&quot;http://server.xyz.com/ssc/&quot;&gt;http://server.xyz.com/ssc/&lt;/a&gt;.&lt;/p&gt;&#xd;
+&lt;/body&gt;&lt;/html&gt;&#xd;
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String"></cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <redirectLocation class="java.lang.String">http://server.xyz.com/ssc/</redirectLocation>
+    <java.net.URL>http://server.xyz.com/ssc</java.net.URL>
+  </httpSample>
+  <httpSample t="5" it="0" lt="4" ts="1350570764230" s="true" lb="http://server.xyz.com/ssc/" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="3677" sc="1" ec="0" ng="0" na="0" hn="server1">
+    <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Content-Length: 3367
+Set-Cookie: JSESSIONID=p1J4QQSNvGh9t9bHqGmK2wh2SdpGYfxYvc90QFT2hB3vN7rKJQJq!1363674634; path=/; HttpOnly
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+    <responseData class="java.lang.String">&#xd;
+&#xd;
+&#xd;
+&lt;!DOCTYPE html&gt;&#xd;
+&#xd;
+&lt;html&gt;&#xd;
+&lt;head&gt;&#xd;
+&#xd;
+&#xd;
+	&lt;title&gt;GlobeCom - Self Support Console Lite&lt;/title&gt;&#xd;
+&#xd;
+	&lt;!-- jQuery --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui-1.8.18.ABC.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-ui-1.8.18.custom.min.js&quot;&gt;&lt;/script&gt;&#xd;
+&#xd;
+	&lt;!-- CSS --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_styles.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;!--[if IE]&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_ie.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;![endif]--&gt;&#xd;
+&#xd;
+	&lt;script&gt;&#xd;
+	$(function(){&#xd;
+		// BROWSER DETECTION&#xd;
+		// allow all browsers except IE6 and below&#xd;
+		if( /MSIE (\d+\.\d+)/.test(navigator.userAgent) ){&#xd;
+			var ieVer = RegExp.$1;&#xd;
+			if( ieVer &gt;= 7 ){&#xd;
+				// allow IE7 and up, do nothing&#xd;
+			}&#xd;
+			else if( ieVer &lt; 7 ){&#xd;
+				if( window.location.href.indexOf(&quot;welcome.jsp&quot;) &gt;= 0 ){&#xd;
+					$(&quot;#browserError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+					$(&quot;#loginDiv&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+				}&#xd;
+				else{&#xd;
+					$(&quot;.centerWrapper&quot;).css(&quot;display&quot;,&quot;none&quot;);	// ensure nothing is shown&#xd;
+					location.href = &quot;welcome.jsp&quot;;&#xd;
+				}&#xd;
+			}&#xd;
+		}&#xd;
+	});&#xd;
+	&lt;/script&gt;&#xd;
+&#xd;
+	&#xd;
+&#xd;
+&lt;script language=&quot;javascript&quot;&gt;&#xd;
+	/* Invoking authenticateLogin function during page load */&#xd;
+	window.onload = authenticateLogin;&#xd;
+&#xd;
+	/**&#xd;
+	*   AJAX function call to submit the username and password for authenticating the container&#xd;
+	*/&#xd;
+	function authenticateLogin(){&#xd;
+		var xmlhttp;&#xd;
+		var url = &quot;/ssc/j_security_check?j_username=subscriber&amp;j_password=subscriber1&quot;;&#xd;
+		var queryString = document.location.search.substring(1);&#xd;
+&#xd;
+		// code for IE7+, Firefox, Chrome, Opera, Safari&#xd;
+		if( window.XMLHttpRequest ){&#xd;
+			xmlhttp = new XMLHttpRequest();&#xd;
+		}&#xd;
+		// code for IE6, IE5&#xd;
+		else{&#xd;
+			xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);&#xd;
+		}&#xd;
+		xmlhttp.onreadystatechange = function(){&#xd;
+			if( xmlhttp.readyState == 4 ){&#xd;
+				document.getElementById(&quot;loginForm&quot;).action = &quot;/ssc/welcome.jsp?&quot; + queryString;&#xd;
+				document.getElementById(&quot;loginForm&quot;).submit();&#xd;
+			}&#xd;
+		}&#xd;
+		xmlhttp.open( &quot;GET&quot;, url, true );&#xd;
+		xmlhttp.send();&#xd;
+	}&#xd;
+&lt;/script&gt;&#xd;
+&#xd;
+&lt;/head&gt;&#xd;
+&#xd;
+&lt;body&gt;&#xd;
+&lt;div id=&quot;motive&quot;&gt;&#xd;
+&#xd;
+		&lt;div id=&quot;mainHeaderStripe&quot;&gt;&#xd;
+		&lt;div id=&quot;mainHeader&quot; class=&quot;centerWrapper&quot;&gt;&#xd;
+			&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;&#xd;
+			&lt;div id=&quot;appTitle&quot;&gt;Self Support Console&lt;/div&gt;&#xd;
+		&lt;/div&gt;&#xd;
+	&lt;/div&gt;&#xd;
+	&lt;div class=&quot;centerWrapper&quot;&gt;&#xd;
+				&lt;div id=&quot;primNav&quot;&gt;&#xd;
+			&lt;ul&gt;&#xd;
+				&lt;li id=&quot;nav_services&quot;&gt;My Services&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_devices&quot;&gt;My Devices&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_social&quot;&gt;Social&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_marketplace&quot;&gt;Marketplace&lt;/li&gt;&#xd;
+			&lt;/ul&gt;&#xd;
+		&lt;/div&gt;&#xd;
+		&lt;div id=&quot;colMask&quot; class=&quot;noLeftNav&quot;&gt;	&lt;!-- add class=&quot;noLeftNav&quot; if hiding the nav --&gt;&#xd;
+			&lt;div id=&quot;mainContent&quot;&gt;&#xd;
+			&lt;!-- CONTENT --&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;progressDiv&quot;&gt;&lt;img src=&quot;images/progress_lg.gif&quot;&gt;&lt;br&gt;Please Wait&lt;/div&gt;&#xd;
+				&lt;form name=&quot;loginForm&quot; id=&quot;loginForm&quot; method=&quot;post&quot;&gt;&lt;/form&gt;&#xd;
+&#xd;
+			&lt;!-- /CONTENT --&gt;&#xd;
+			&lt;/div&gt;&lt;!-- /mainContent --&gt;&#xd;
+		&lt;/div&gt;&lt;!-- /colMask --&gt;&#xd;
+				&lt;div id=&quot;mainFooter&quot; class=&quot;clearBoth&quot;&gt;&lt;img id=&quot;motiveLogo&quot; src=&quot;images/logo_motive.png&quot; align=&quot;left&quot;&gt;&lt;img id=&quot;alcatelLucentLogo&quot; src=&quot;images/logo_alcatelLucent.png&quot; align=&quot;right&quot;&gt;Copyright &amp;copy; 2006-2012 Alcatel-Lucent. All Rights Reserved.&lt;/div&gt;&#xd;
+	&lt;/div&gt;&lt;!-- centerWrapper --&gt;&#xd;
+&#xd;
+&lt;/div&gt;&lt;!-- /motive --&gt;&#xd;
+&lt;/body&gt;&#xd;
+&lt;/html&gt;&#xd;
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String"></cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <java.net.URL>http://server.xyz.com/ssc/</java.net.URL>
+  </httpSample>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Content-Length: 3367
+Set-Cookie: JSESSIONID=p1J4QQSNvGh9t9bHqGmK2wh2SdpGYfxYvc90QFT2hB3vN7rKJQJq!1363674634; path=/; HttpOnly
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+  <responseData class="java.lang.String">&#xd;
+&#xd;
+&#xd;
+&lt;!DOCTYPE html&gt;&#xd;
+&#xd;
+&lt;html&gt;&#xd;
+&lt;head&gt;&#xd;
+&#xd;
+&#xd;
+	&lt;title&gt;GlobeCom - Self Support Console Lite&lt;/title&gt;&#xd;
+&#xd;
+	&lt;!-- jQuery --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui-1.8.18.ABC.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-ui-1.8.18.custom.min.js&quot;&gt;&lt;/script&gt;&#xd;
+&#xd;
+	&lt;!-- CSS --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_styles.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;!--[if IE]&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_ie.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;![endif]--&gt;&#xd;
+&#xd;
+	&lt;script&gt;&#xd;
+	$(function(){&#xd;
+		// BROWSER DETECTION&#xd;
+		// allow all browsers except IE6 and below&#xd;
+		if( /MSIE (\d+\.\d+)/.test(navigator.userAgent) ){&#xd;
+			var ieVer = RegExp.$1;&#xd;
+			if( ieVer &gt;= 7 ){&#xd;
+				// allow IE7 and up, do nothing&#xd;
+			}&#xd;
+			else if( ieVer &lt; 7 ){&#xd;
+				if( window.location.href.indexOf(&quot;welcome.jsp&quot;) &gt;= 0 ){&#xd;
+					$(&quot;#browserError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+					$(&quot;#loginDiv&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+				}&#xd;
+				else{&#xd;
+					$(&quot;.centerWrapper&quot;).css(&quot;display&quot;,&quot;none&quot;);	// ensure nothing is shown&#xd;
+					location.href = &quot;welcome.jsp&quot;;&#xd;
+				}&#xd;
+			}&#xd;
+		}&#xd;
+	});&#xd;
+	&lt;/script&gt;&#xd;
+&#xd;
+	&#xd;
+&#xd;
+&lt;script language=&quot;javascript&quot;&gt;&#xd;
+	/* Invoking authenticateLogin function during page load */&#xd;
+	window.onload = authenticateLogin;&#xd;
+&#xd;
+	/**&#xd;
+	*   AJAX function call to submit the username and password for authenticating the container&#xd;
+	*/&#xd;
+	function authenticateLogin(){&#xd;
+		var xmlhttp;&#xd;
+		var url = &quot;/ssc/j_security_check?j_username=subscriber&amp;j_password=subscriber1&quot;;&#xd;
+		var queryString = document.location.search.substring(1);&#xd;
+&#xd;
+		// code for IE7+, Firefox, Chrome, Opera, Safari&#xd;
+		if( window.XMLHttpRequest ){&#xd;
+			xmlhttp = new XMLHttpRequest();&#xd;
+		}&#xd;
+		// code for IE6, IE5&#xd;
+		else{&#xd;
+			xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);&#xd;
+		}&#xd;
+		xmlhttp.onreadystatechange = function(){&#xd;
+			if( xmlhttp.readyState == 4 ){&#xd;
+				document.getElementById(&quot;loginForm&quot;).action = &quot;/ssc/welcome.jsp?&quot; + queryString;&#xd;
+				document.getElementById(&quot;loginForm&quot;).submit();&#xd;
+			}&#xd;
+		}&#xd;
+		xmlhttp.open( &quot;GET&quot;, url, true );&#xd;
+		xmlhttp.send();&#xd;
+	}&#xd;
+&lt;/script&gt;&#xd;
+&#xd;
+&lt;/head&gt;&#xd;
+&#xd;
+&lt;body&gt;&#xd;
+&lt;div id=&quot;motive&quot;&gt;&#xd;
+&#xd;
+		&lt;div id=&quot;mainHeaderStripe&quot;&gt;&#xd;
+		&lt;div id=&quot;mainHeader&quot; class=&quot;centerWrapper&quot;&gt;&#xd;
+			&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;&#xd;
+			&lt;div id=&quot;appTitle&quot;&gt;Self Support Console&lt;/div&gt;&#xd;
+		&lt;/div&gt;&#xd;
+	&lt;/div&gt;&#xd;
+	&lt;div class=&quot;centerWrapper&quot;&gt;&#xd;
+				&lt;div id=&quot;primNav&quot;&gt;&#xd;
+			&lt;ul&gt;&#xd;
+				&lt;li id=&quot;nav_services&quot;&gt;My Services&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_devices&quot;&gt;My Devices&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_social&quot;&gt;Social&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_marketplace&quot;&gt;Marketplace&lt;/li&gt;&#xd;
+			&lt;/ul&gt;&#xd;
+		&lt;/div&gt;&#xd;
+		&lt;div id=&quot;colMask&quot; class=&quot;noLeftNav&quot;&gt;	&lt;!-- add class=&quot;noLeftNav&quot; if hiding the nav --&gt;&#xd;
+			&lt;div id=&quot;mainContent&quot;&gt;&#xd;
+			&lt;!-- CONTENT --&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;progressDiv&quot;&gt;&lt;img src=&quot;images/progress_lg.gif&quot;&gt;&lt;br&gt;Please Wait&lt;/div&gt;&#xd;
+				&lt;form name=&quot;loginForm&quot; id=&quot;loginForm&quot; method=&quot;post&quot;&gt;&lt;/form&gt;&#xd;
+&#xd;
+			&lt;!-- /CONTENT --&gt;&#xd;
+			&lt;/div&gt;&lt;!-- /mainContent --&gt;&#xd;
+		&lt;/div&gt;&lt;!-- /colMask --&gt;&#xd;
+				&lt;div id=&quot;mainFooter&quot; class=&quot;clearBoth&quot;&gt;&lt;img id=&quot;motiveLogo&quot; src=&quot;images/logo_motive.png&quot; align=&quot;left&quot;&gt;&lt;img id=&quot;alcatelLucentLogo&quot; src=&quot;images/logo_alcatelLucent.png&quot; align=&quot;right&quot;&gt;Copyright &amp;copy; 2006-2012 Alcatel-Lucent. All Rights Reserved.&lt;/div&gt;&#xd;
+	&lt;/div&gt;&lt;!-- centerWrapper --&gt;&#xd;
+&#xd;
+&lt;/div&gt;&lt;!-- /motive --&gt;&#xd;
+&lt;/body&gt;&#xd;
+&lt;/html&gt;&#xd;
+</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <redirectLocation class="java.lang.String">http://server.xyz.com/ssc/</redirectLocation>
+  <java.net.URL>http://server.xyz.com/ssc/</java.net.URL>
+</httpSample>
+<httpSample t="13" it="0" lt="6" ts="1350570764237" s="true" lb="j_security_check" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="4736" sc="1" ec="0" ng="1" na="1" hn="server1">
+  <httpSample t="6" it="0" lt="6" ts="1350570764237" s="true" lb="http://server.xyz.com/ssc/j_security_check?j_username=subscriber&amp;j_password=subscriber1" rc="302" rm="Moved Temporarily" tn="" dt="text" de="UTF-8" by="634" sc="1" ec="0" ng="0" na="0" hn="server1">
+    <responseHeader class="java.lang.String">HTTP/1.1 302 Moved Temporarily
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Location: http://server.xyz.com/ssc
+Set-Cookie: JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634; path=/; HttpOnly
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+    <responseData class="java.lang.String">&lt;html&gt;&lt;head&gt;&lt;title&gt;302 Moved Temporarily&lt;/title&gt;&lt;/head&gt;&#xd;
+&lt;body bgcolor=&quot;#FFFFFF&quot;&gt;&#xd;
+&lt;p&gt;This document you requested has moved temporarily.&lt;/p&gt;&#xd;
+&lt;p&gt;It&apos;s now at &lt;a href=&quot;http://server.xyz.com/ssc&quot;&gt;http://server.xyz.com/ssc&lt;/a&gt;.&lt;/p&gt;&#xd;
+&lt;/body&gt;&lt;/html&gt;&#xd;
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String">JSESSIONID=p1J4QQSNvGh9t9bHqGmK2wh2SdpGYfxYvc90QFT2hB3vN7rKJQJq!1363674634</cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <redirectLocation class="java.lang.String">http://server.xyz.com/ssc</redirectLocation>
+    <java.net.URL>http://server.xyz.com/ssc/j_security_check?j_username=subscriber&amp;j_password=subscriber1</java.net.URL>
+  </httpSample>
+  <httpSample t="3" it="0" lt="3" ts="1350570764243" s="true" lb="http://server.xyz.com/ssc" rc="302" rm="Moved Temporarily" tn="Email Setup  1-1" dt="text" de="UTF-8" by="531" sc="1" ec="0" ng="0" na="0" hn="server1">
+    <responseHeader class="java.lang.String">HTTP/1.1 302 Moved Temporarily
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Location: http://server.xyz.com/ssc/
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+    <responseData class="java.lang.String">&lt;html&gt;&lt;head&gt;&lt;title&gt;302 Moved Temporarily&lt;/title&gt;&lt;/head&gt;&#xd;
+&lt;body bgcolor=&quot;#FFFFFF&quot;&gt;&#xd;
+&lt;p&gt;This document you requested has moved temporarily.&lt;/p&gt;&#xd;
+&lt;p&gt;It&apos;s now at &lt;a href=&quot;http://server.xyz.com/ssc/&quot;&gt;http://server.xyz.com/ssc/&lt;/a&gt;.&lt;/p&gt;&#xd;
+&lt;/body&gt;&lt;/html&gt;&#xd;
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String">JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634</cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <redirectLocation class="java.lang.String">http://server.xyz.com/ssc/</redirectLocation>
+    <java.net.URL>http://server.xyz.com/ssc</java.net.URL>
+  </httpSample>
+  <httpSample t="4" it="0" lt="4" ts="1350570764246" s="true" lb="http://server.xyz.com/ssc/" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="3571" sc="1" ec="0" ng="0" na="0" hn="server1">
+    <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Content-Length: 3367
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+    <responseData class="java.lang.String">&#xd;
+&#xd;
+&#xd;
+&lt;!DOCTYPE html&gt;&#xd;
+&#xd;
+&lt;html&gt;&#xd;
+&lt;head&gt;&#xd;
+&#xd;
+&#xd;
+	&lt;title&gt;GlobeCom - Self Support Console Lite&lt;/title&gt;&#xd;
+&#xd;
+	&lt;!-- jQuery --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui-1.8.18.ABC.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-ui-1.8.18.custom.min.js&quot;&gt;&lt;/script&gt;&#xd;
+&#xd;
+	&lt;!-- CSS --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_styles.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;!--[if IE]&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_ie.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;![endif]--&gt;&#xd;
+&#xd;
+	&lt;script&gt;&#xd;
+	$(function(){&#xd;
+		// BROWSER DETECTION&#xd;
+		// allow all browsers except IE6 and below&#xd;
+		if( /MSIE (\d+\.\d+)/.test(navigator.userAgent) ){&#xd;
+			var ieVer = RegExp.$1;&#xd;
+			if( ieVer &gt;= 7 ){&#xd;
+				// allow IE7 and up, do nothing&#xd;
+			}&#xd;
+			else if( ieVer &lt; 7 ){&#xd;
+				if( window.location.href.indexOf(&quot;welcome.jsp&quot;) &gt;= 0 ){&#xd;
+					$(&quot;#browserError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+					$(&quot;#loginDiv&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+				}&#xd;
+				else{&#xd;
+					$(&quot;.centerWrapper&quot;).css(&quot;display&quot;,&quot;none&quot;);	// ensure nothing is shown&#xd;
+					location.href = &quot;welcome.jsp&quot;;&#xd;
+				}&#xd;
+			}&#xd;
+		}&#xd;
+	});&#xd;
+	&lt;/script&gt;&#xd;
+&#xd;
+	&#xd;
+&#xd;
+&lt;script language=&quot;javascript&quot;&gt;&#xd;
+	/* Invoking authenticateLogin function during page load */&#xd;
+	window.onload = authenticateLogin;&#xd;
+&#xd;
+	/**&#xd;
+	*   AJAX function call to submit the username and password for authenticating the container&#xd;
+	*/&#xd;
+	function authenticateLogin(){&#xd;
+		var xmlhttp;&#xd;
+		var url = &quot;/ssc/j_security_check?j_username=subscriber&amp;j_password=subscriber1&quot;;&#xd;
+		var queryString = document.location.search.substring(1);&#xd;
+&#xd;
+		// code for IE7+, Firefox, Chrome, Opera, Safari&#xd;
+		if( window.XMLHttpRequest ){&#xd;
+			xmlhttp = new XMLHttpRequest();&#xd;
+		}&#xd;
+		// code for IE6, IE5&#xd;
+		else{&#xd;
+			xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);&#xd;
+		}&#xd;
+		xmlhttp.onreadystatechange = function(){&#xd;
+			if( xmlhttp.readyState == 4 ){&#xd;
+				document.getElementById(&quot;loginForm&quot;).action = &quot;/ssc/welcome.jsp?&quot; + queryString;&#xd;
+				document.getElementById(&quot;loginForm&quot;).submit();&#xd;
+			}&#xd;
+		}&#xd;
+		xmlhttp.open( &quot;GET&quot;, url, true );&#xd;
+		xmlhttp.send();&#xd;
+	}&#xd;
+&lt;/script&gt;&#xd;
+&#xd;
+&lt;/head&gt;&#xd;
+&#xd;
+&lt;body&gt;&#xd;
+&lt;div id=&quot;motive&quot;&gt;&#xd;
+&#xd;
+		&lt;div id=&quot;mainHeaderStripe&quot;&gt;&#xd;
+		&lt;div id=&quot;mainHeader&quot; class=&quot;centerWrapper&quot;&gt;&#xd;
+			&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;&#xd;
+			&lt;div id=&quot;appTitle&quot;&gt;Self Support Console&lt;/div&gt;&#xd;
+		&lt;/div&gt;&#xd;
+	&lt;/div&gt;&#xd;
+	&lt;div class=&quot;centerWrapper&quot;&gt;&#xd;
+				&lt;div id=&quot;primNav&quot;&gt;&#xd;
+			&lt;ul&gt;&#xd;
+				&lt;li id=&quot;nav_services&quot;&gt;My Services&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_devices&quot;&gt;My Devices&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_social&quot;&gt;Social&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_marketplace&quot;&gt;Marketplace&lt;/li&gt;&#xd;
+			&lt;/ul&gt;&#xd;
+		&lt;/div&gt;&#xd;
+		&lt;div id=&quot;colMask&quot; class=&quot;noLeftNav&quot;&gt;	&lt;!-- add class=&quot;noLeftNav&quot; if hiding the nav --&gt;&#xd;
+			&lt;div id=&quot;mainContent&quot;&gt;&#xd;
+			&lt;!-- CONTENT --&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;progressDiv&quot;&gt;&lt;img src=&quot;images/progress_lg.gif&quot;&gt;&lt;br&gt;Please Wait&lt;/div&gt;&#xd;
+				&lt;form name=&quot;loginForm&quot; id=&quot;loginForm&quot; method=&quot;post&quot;&gt;&lt;/form&gt;&#xd;
+&#xd;
+			&lt;!-- /CONTENT --&gt;&#xd;
+			&lt;/div&gt;&lt;!-- /mainContent --&gt;&#xd;
+		&lt;/div&gt;&lt;!-- /colMask --&gt;&#xd;
+				&lt;div id=&quot;mainFooter&quot; class=&quot;clearBoth&quot;&gt;&lt;img id=&quot;motiveLogo&quot; src=&quot;images/logo_motive.png&quot; align=&quot;left&quot;&gt;&lt;img id=&quot;alcatelLucentLogo&quot; src=&quot;images/logo_alcatelLucent.png&quot; align=&quot;right&quot;&gt;Copyright &amp;copy; 2006-2012 Alcatel-Lucent. All Rights Reserved.&lt;/div&gt;&#xd;
+	&lt;/div&gt;&lt;!-- centerWrapper --&gt;&#xd;
+&#xd;
+&lt;/div&gt;&lt;!-- /motive --&gt;&#xd;
+&lt;/body&gt;&#xd;
+&lt;/html&gt;&#xd;
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String">JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634</cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <java.net.URL>http://server.xyz.com/ssc/</java.net.URL>
+  </httpSample>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Content-Length: 3367
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+  <responseData class="java.lang.String">&#xd;
+&#xd;
+&#xd;
+&lt;!DOCTYPE html&gt;&#xd;
+&#xd;
+&lt;html&gt;&#xd;
+&lt;head&gt;&#xd;
+&#xd;
+&#xd;
+	&lt;title&gt;GlobeCom - Self Support Console Lite&lt;/title&gt;&#xd;
+&#xd;
+	&lt;!-- jQuery --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui-1.8.18.ABC.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-ui-1.8.18.custom.min.js&quot;&gt;&lt;/script&gt;&#xd;
+&#xd;
+	&lt;!-- CSS --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_styles.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;!--[if IE]&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_ie.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;![endif]--&gt;&#xd;
+&#xd;
+	&lt;script&gt;&#xd;
+	$(function(){&#xd;
+		// BROWSER DETECTION&#xd;
+		// allow all browsers except IE6 and below&#xd;
+		if( /MSIE (\d+\.\d+)/.test(navigator.userAgent) ){&#xd;
+			var ieVer = RegExp.$1;&#xd;
+			if( ieVer &gt;= 7 ){&#xd;
+				// allow IE7 and up, do nothing&#xd;
+			}&#xd;
+			else if( ieVer &lt; 7 ){&#xd;
+				if( window.location.href.indexOf(&quot;welcome.jsp&quot;) &gt;= 0 ){&#xd;
+					$(&quot;#browserError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+					$(&quot;#loginDiv&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+				}&#xd;
+				else{&#xd;
+					$(&quot;.centerWrapper&quot;).css(&quot;display&quot;,&quot;none&quot;);	// ensure nothing is shown&#xd;
+					location.href = &quot;welcome.jsp&quot;;&#xd;
+				}&#xd;
+			}&#xd;
+		}&#xd;
+	});&#xd;
+	&lt;/script&gt;&#xd;
+&#xd;
+	&#xd;
+&#xd;
+&lt;script language=&quot;javascript&quot;&gt;&#xd;
+	/* Invoking authenticateLogin function during page load */&#xd;
+	window.onload = authenticateLogin;&#xd;
+&#xd;
+	/**&#xd;
+	*   AJAX function call to submit the username and password for authenticating the container&#xd;
+	*/&#xd;
+	function authenticateLogin(){&#xd;
+		var xmlhttp;&#xd;
+		var url = &quot;/ssc/j_security_check?j_username=subscriber&amp;j_password=subscriber1&quot;;&#xd;
+		var queryString = document.location.search.substring(1);&#xd;
+&#xd;
+		// code for IE7+, Firefox, Chrome, Opera, Safari&#xd;
+		if( window.XMLHttpRequest ){&#xd;
+			xmlhttp = new XMLHttpRequest();&#xd;
+		}&#xd;
+		// code for IE6, IE5&#xd;
+		else{&#xd;
+			xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);&#xd;
+		}&#xd;
+		xmlhttp.onreadystatechange = function(){&#xd;
+			if( xmlhttp.readyState == 4 ){&#xd;
+				document.getElementById(&quot;loginForm&quot;).action = &quot;/ssc/welcome.jsp?&quot; + queryString;&#xd;
+				document.getElementById(&quot;loginForm&quot;).submit();&#xd;
+			}&#xd;
+		}&#xd;
+		xmlhttp.open( &quot;GET&quot;, url, true );&#xd;
+		xmlhttp.send();&#xd;
+	}&#xd;
+&lt;/script&gt;&#xd;
+&#xd;
+&lt;/head&gt;&#xd;
+&#xd;
+&lt;body&gt;&#xd;
+&lt;div id=&quot;motive&quot;&gt;&#xd;
+&#xd;
+		&lt;div id=&quot;mainHeaderStripe&quot;&gt;&#xd;
+		&lt;div id=&quot;mainHeader&quot; class=&quot;centerWrapper&quot;&gt;&#xd;
+			&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;&#xd;
+			&lt;div id=&quot;appTitle&quot;&gt;Self Support Console&lt;/div&gt;&#xd;
+		&lt;/div&gt;&#xd;
+	&lt;/div&gt;&#xd;
+	&lt;div class=&quot;centerWrapper&quot;&gt;&#xd;
+				&lt;div id=&quot;primNav&quot;&gt;&#xd;
+			&lt;ul&gt;&#xd;
+				&lt;li id=&quot;nav_services&quot;&gt;My Services&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_devices&quot;&gt;My Devices&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_social&quot;&gt;Social&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_marketplace&quot;&gt;Marketplace&lt;/li&gt;&#xd;
+			&lt;/ul&gt;&#xd;
+		&lt;/div&gt;&#xd;
+		&lt;div id=&quot;colMask&quot; class=&quot;noLeftNav&quot;&gt;	&lt;!-- add class=&quot;noLeftNav&quot; if hiding the nav --&gt;&#xd;
+			&lt;div id=&quot;mainContent&quot;&gt;&#xd;
+			&lt;!-- CONTENT --&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;progressDiv&quot;&gt;&lt;img src=&quot;images/progress_lg.gif&quot;&gt;&lt;br&gt;Please Wait&lt;/div&gt;&#xd;
+				&lt;form name=&quot;loginForm&quot; id=&quot;loginForm&quot; method=&quot;post&quot;&gt;&lt;/form&gt;&#xd;
+&#xd;
+			&lt;!-- /CONTENT --&gt;&#xd;
+			&lt;/div&gt;&lt;!-- /mainContent --&gt;&#xd;
+		&lt;/div&gt;&lt;!-- /colMask --&gt;&#xd;
+				&lt;div id=&quot;mainFooter&quot; class=&quot;clearBoth&quot;&gt;&lt;img id=&quot;motiveLogo&quot; src=&quot;images/logo_motive.png&quot; align=&quot;left&quot;&gt;&lt;img id=&quot;alcatelLucentLogo&quot; src=&quot;images/logo_alcatelLucent.png&quot; align=&quot;right&quot;&gt;Copyright &amp;copy; 2006-2012 Alcatel-Lucent. All Rights Reserved.&lt;/div&gt;&#xd;
+	&lt;/div&gt;&lt;!-- centerWrapper --&gt;&#xd;
+&#xd;
+&lt;/div&gt;&lt;!-- /motive --&gt;&#xd;
+&lt;/body&gt;&#xd;
+&lt;/html&gt;&#xd;
+</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String">JSESSIONID=p1J4QQSNvGh9t9bHqGmK2wh2SdpGYfxYvc90QFT2hB3vN7rKJQJq!1363674634</cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <redirectLocation class="java.lang.String">http://server.xyz.com/ssc</redirectLocation>
+  <java.net.URL>http://server.xyz.com/ssc/</java.net.URL>
+</httpSample>
+<httpSample t="4" it="0" lt="4" ts="1350570764252" s="true" lb="welcome" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="4693" sc="1" ec="0" ng="1" na="1" hn="server1">
+  <assertionResult>
+    <name>Response Assertion</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Content-Length: 4489
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 0
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+  <responseData class="java.lang.String">&#xd;
+&#xd;
+&#xd;
+&lt;!DOCTYPE html&gt;&#xd;
+&#xd;
+&lt;html&gt;&#xd;
+&lt;head&gt;&#xd;
+&#xd;
+&#xd;
+	&lt;title&gt;GlobeCom - Self Support Console Lite&lt;/title&gt;&#xd;
+&#xd;
+	&lt;!-- jQuery --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui-1.8.18.ABC.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-ui-1.8.18.custom.min.js&quot;&gt;&lt;/script&gt;&#xd;
+&#xd;
+	&lt;!-- CSS --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_styles.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;!--[if IE]&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_ie.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;![endif]--&gt;&#xd;
+&#xd;
+	&lt;script&gt;&#xd;
+	$(function(){&#xd;
+		// BROWSER DETECTION&#xd;
+		// allow all browsers except IE6 and below&#xd;
+		if( /MSIE (\d+\.\d+)/.test(navigator.userAgent) ){&#xd;
+			var ieVer = RegExp.$1;&#xd;
+			if( ieVer &gt;= 7 ){&#xd;
+				// allow IE7 and up, do nothing&#xd;
+			}&#xd;
+			else if( ieVer &lt; 7 ){&#xd;
+				if( window.location.href.indexOf(&quot;welcome.jsp&quot;) &gt;= 0 ){&#xd;
+					$(&quot;#browserError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+					$(&quot;#loginDiv&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+				}&#xd;
+				else{&#xd;
+					$(&quot;.centerWrapper&quot;).css(&quot;display&quot;,&quot;none&quot;);	// ensure nothing is shown&#xd;
+					location.href = &quot;welcome.jsp&quot;;&#xd;
+				}&#xd;
+			}&#xd;
+		}&#xd;
+	});&#xd;
+	&lt;/script&gt;&#xd;
+&#xd;
+	&#xd;
+&#xd;
+&lt;script type=&quot;text/javascript&quot; language=&quot;JavaScript&quot;&gt;&#xd;
+&#xd;
+	$(function(){		// on load&#xd;
+		$(&quot;#primNav&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+		$(&quot;#subscriberId&quot;).focus();&#xd;
+		$(&quot;#btn_login&quot;).button().bind( &quot;click&quot;, function(){&#xd;
+			return validateLogin();		// must return false to fail the form submission&#xd;
+		});&#xd;
+		$(&quot;body&quot;).bind( &quot;keypress&quot;, function(e){&#xd;
+			if( e.which == 13 ){&#xd;
+				$(&quot;#btn_login&quot;).click();&#xd;
+			}&#xd;
+		});&#xd;
+	});&#xd;
+&#xd;
+	function validateLogin(){&#xd;
+		$(&quot;#loginError&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+		var servURL = window.location.protocol + &quot;//&quot; + window.location.host;&#xd;
+		var subscriberId = $(&quot;#subscriberId&quot;).val();&#xd;
+		var password = $(&quot;#password&quot;).val();&#xd;
+		&#xd;
+		if((validateInteger(subscriberId) != true) || ($.trim(password) == &quot;&quot; )){&#xd;
+			$(&quot;#loginError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+			$(&quot;#subscriberId&quot;).focus();&#xd;
+			return false;	// must return false to fail the form submission&#xd;
+		}&#xd;
+		else{&#xd;
+			$(&quot;#loginForm&quot;).submit();&#xd;
+		}&#xd;
+	}&#xd;
+&#xd;
+	function validateInteger( strVABCe ){&#xd;
+		var objRegExp  = /(^-?\d{10}\d*$)/;&#xd;
+		return objRegExp.test( strVABCe );&#xd;
+	}&#xd;
+&#xd;
+&lt;/script&gt;&#xd;
+&lt;/head&gt;&#xd;
+&#xd;
+&lt;body&gt;&#xd;
+&lt;div id=&quot;motive&quot;&gt;&#xd;
+&#xd;
+		&lt;div id=&quot;mainHeaderStripe&quot;&gt;&#xd;
+		&lt;div id=&quot;mainHeader&quot; class=&quot;centerWrapper&quot;&gt;&#xd;
+			&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;&#xd;
+			&lt;div id=&quot;appTitle&quot;&gt;Self Support Console&lt;/div&gt;&#xd;
+		&lt;/div&gt;&#xd;
+	&lt;/div&gt;&#xd;
+	&lt;div class=&quot;centerWrapper&quot;&gt;&#xd;
+				&lt;div id=&quot;primNav&quot;&gt;&#xd;
+			&lt;ul&gt;&#xd;
+				&lt;li id=&quot;nav_services&quot;&gt;My Services&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_devices&quot;&gt;My Devices&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_social&quot;&gt;Social&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_marketplace&quot;&gt;Marketplace&lt;/li&gt;&#xd;
+			&lt;/ul&gt;&#xd;
+		&lt;/div&gt;&#xd;
+		&lt;div id=&quot;colMask&quot; class=&quot;noLeftNav&quot;&gt;	&lt;!-- add class=&quot;noLeftNav&quot; if hiding the nav --&gt;&#xd;
+			&lt;!-- leftNav here --&gt;&#xd;
+			&lt;div id=&quot;mainContent&quot;&gt;&#xd;
+			&lt;!-- CONTENT --&gt;&#xd;
+			&#xd;
+				&lt;form id=&quot;loginForm&quot; action=&apos;myServices.jsp&apos; method=&apos;POST&apos;&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;loginDiv&quot; class=&quot;ui-widget-content&quot;&gt;&#xd;
+					&lt;div class=&quot;ui-widget-header&quot;&gt;Access Your Account&lt;/div&gt;&#xd;
+					&lt;div class=&quot;loginContent&quot;&gt;&#xd;
+						&lt;span class=&quot;padlock&quot;&gt;&lt;/span&gt;&#xd;
+						&lt;p&gt;User ID:&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;text&quot; maxlength=&quot;10&quot; id=&quot;subscriberId&quot; name=&quot;subscriberId&quot;&gt;&lt;/p&gt;&#xd;
+						&lt;p&gt;Password:&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot;&gt;&lt;/p&gt;&#xd;
+						&lt;div id=&quot;loginButtonDiv&quot;&gt;&#xd;
+							&lt;div id=&quot;loginError&quot; class=&quot;red&quot;&gt;Incorrect username &amp; password.&lt;/div&gt;&#xd;
+							&lt;button id=&quot;btn_login&quot;&gt;Log In&lt;/button&gt;&#xd;
+						&lt;/div&gt;&#xd;
+					&lt;/div&gt;&#xd;
+				&lt;/div&gt;&lt;!-- loginDiv --&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;browserError&quot; class=&quot;ui-widget-content&quot;&gt;&#xd;
+					&lt;div class=&quot;ui-widget-header&quot;&gt;Incompatible Browser&lt;/div&gt;&#xd;
+					&lt;div class=&quot;loginContent&quot;&gt;&#xd;
+						&lt;p class=&quot;red&quot;&gt;Your browser is not supported.  Please use one of the following browsers:&lt;/p&gt;&#xd;
+						&lt;ul&gt;&#xd;
+							&lt;li&gt;Internet Explorer 7 or higher&lt;/li&gt;&#xd;
+							&lt;li&gt;Firefox&lt;/li&gt;&#xd;
+							&lt;li&gt;Chrome&lt;/li&gt;&#xd;
+							&lt;li&gt;Safari&lt;/li&gt;&#xd;
+						&lt;/ul&gt;&#xd;
+					&lt;/div&gt;&#xd;
+				&lt;/div&gt;&lt;!-- loginDiv --&gt;&#xd;
+&#xd;
+				&lt;/form&gt;&#xd;
+&#xd;
+			&lt;!-- /CONTENT --&gt;&#xd;
+			&lt;/div&gt;&lt;!-- /mainContent --&gt;&#xd;
+		&lt;/div&gt;&lt;!-- /colMask --&gt;&#xd;
+				&lt;div id=&quot;mainFooter&quot; class=&quot;clearBoth&quot;&gt;&lt;img id=&quot;motiveLogo&quot; src=&quot;images/logo_motive.png&quot; align=&quot;left&quot;&gt;&lt;img id=&quot;alcatelLucentLogo&quot; src=&quot;images/logo_alcatelLucent.png&quot; align=&quot;right&quot;&gt;Copyright &amp;copy; 2006-2012 Alcatel-Lucent. All Rights Reserved.&lt;/div&gt;&#xd;
+	&lt;/div&gt;&lt;!-- centerWrapper --&gt;&#xd;
+&#xd;
+&lt;/div&gt;&lt;!-- /motive --&gt;&#xd;
+&lt;/body&gt;&#xd;
+&lt;/html&gt;&#xd;
+</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String">JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634</cookies>
+  <method class="java.lang.String">POST</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://server.xyz.com/ssc/welcome.jsp?</java.net.URL>
+</httpSample>
+<httpSample t="7" it="0" lt="4" ts="1350570764258" s="true" lb="myServices" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="5257" sc="1" ec="0" ng="1" na="1" hn="server1">
+  <httpSample t="4" it="0" lt="4" ts="1350570764258" s="true" lb="http://server.xyz.com/ssc/myServices.jsp" rc="302" rm="Moved Temporarily" tn="" dt="text" de="UTF-8" by="564" sc="1" ec="0" ng="0" na="0" hn="server1">
+    <responseHeader class="java.lang.String">HTTP/1.1 302 Moved Temporarily
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Location: http://server.xyz.com/ssc/welcome.jsp
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 43
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+    <responseData class="java.lang.String">&lt;html&gt;&lt;head&gt;&lt;title&gt;302 Moved Temporarily&lt;/title&gt;&lt;/head&gt;&#xd;
+&lt;body bgcolor=&quot;#FFFFFF&quot;&gt;&#xd;
+&lt;p&gt;This document you requested has moved temporarily.&lt;/p&gt;&#xd;
+&lt;p&gt;It&apos;s now at &lt;a href=&quot;http://server.xyz.com/ssc/welcome.jsp&quot;&gt;http://server.xyz.com/ssc/welcome.jsp&lt;/a&gt;.&lt;/p&gt;&#xd;
+&lt;/body&gt;&lt;/html&gt;&#xd;
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String">JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634</cookies>
+    <method class="java.lang.String">POST</method>
+    <queryString class="java.lang.String">subscriberID=2101847715&amp;password=2101847715</queryString>
+    <redirectLocation class="java.lang.String">http://server.xyz.com/ssc/welcome.jsp</redirectLocation>
+    <java.net.URL>http://server.xyz.com/ssc/myServices.jsp</java.net.URL>
+  </httpSample>
+  <httpSample t="3" it="0" lt="3" ts="1350570764262" s="true" lb="http://server.xyz.com/ssc/welcome.jsp" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="4693" sc="1" ec="0" ng="0" na="0" hn="server1">
+    <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Content-Length: 4489
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+    <responseData class="java.lang.String">&#xd;
+&#xd;
+&#xd;
+&lt;!DOCTYPE html&gt;&#xd;
+&#xd;
+&lt;html&gt;&#xd;
+&lt;head&gt;&#xd;
+&#xd;
+&#xd;
+	&lt;title&gt;GlobeCom - Self Support Console Lite&lt;/title&gt;&#xd;
+&#xd;
+	&lt;!-- jQuery --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui-1.8.18.ABC.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-ui-1.8.18.custom.min.js&quot;&gt;&lt;/script&gt;&#xd;
+&#xd;
+	&lt;!-- CSS --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_styles.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;!--[if IE]&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_ie.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;![endif]--&gt;&#xd;
+&#xd;
+	&lt;script&gt;&#xd;
+	$(function(){&#xd;
+		// BROWSER DETECTION&#xd;
+		// allow all browsers except IE6 and below&#xd;
+		if( /MSIE (\d+\.\d+)/.test(navigator.userAgent) ){&#xd;
+			var ieVer = RegExp.$1;&#xd;
+			if( ieVer &gt;= 7 ){&#xd;
+				// allow IE7 and up, do nothing&#xd;
+			}&#xd;
+			else if( ieVer &lt; 7 ){&#xd;
+				if( window.location.href.indexOf(&quot;welcome.jsp&quot;) &gt;= 0 ){&#xd;
+					$(&quot;#browserError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+					$(&quot;#loginDiv&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+				}&#xd;
+				else{&#xd;
+					$(&quot;.centerWrapper&quot;).css(&quot;display&quot;,&quot;none&quot;);	// ensure nothing is shown&#xd;
+					location.href = &quot;welcome.jsp&quot;;&#xd;
+				}&#xd;
+			}&#xd;
+		}&#xd;
+	});&#xd;
+	&lt;/script&gt;&#xd;
+&#xd;
+	&#xd;
+&#xd;
+&lt;script type=&quot;text/javascript&quot; language=&quot;JavaScript&quot;&gt;&#xd;
+&#xd;
+	$(function(){		// on load&#xd;
+		$(&quot;#primNav&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+		$(&quot;#subscriberId&quot;).focus();&#xd;
+		$(&quot;#btn_login&quot;).button().bind( &quot;click&quot;, function(){&#xd;
+			return validateLogin();		// must return false to fail the form submission&#xd;
+		});&#xd;
+		$(&quot;body&quot;).bind( &quot;keypress&quot;, function(e){&#xd;
+			if( e.which == 13 ){&#xd;
+				$(&quot;#btn_login&quot;).click();&#xd;
+			}&#xd;
+		});&#xd;
+	});&#xd;
+&#xd;
+	function validateLogin(){&#xd;
+		$(&quot;#loginError&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+		var servURL = window.location.protocol + &quot;//&quot; + window.location.host;&#xd;
+		var subscriberId = $(&quot;#subscriberId&quot;).val();&#xd;
+		var password = $(&quot;#password&quot;).val();&#xd;
+		&#xd;
+		if((validateInteger(subscriberId) != true) || ($.trim(password) == &quot;&quot; )){&#xd;
+			$(&quot;#loginError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+			$(&quot;#subscriberId&quot;).focus();&#xd;
+			return false;	// must return false to fail the form submission&#xd;
+		}&#xd;
+		else{&#xd;
+			$(&quot;#loginForm&quot;).submit();&#xd;
+		}&#xd;
+	}&#xd;
+&#xd;
+	function validateInteger( strVABCe ){&#xd;
+		var objRegExp  = /(^-?\d{10}\d*$)/;&#xd;
+		return objRegExp.test( strVABCe );&#xd;
+	}&#xd;
+&#xd;
+&lt;/script&gt;&#xd;
+&lt;/head&gt;&#xd;
+&#xd;
+&lt;body&gt;&#xd;
+&lt;div id=&quot;motive&quot;&gt;&#xd;
+&#xd;
+		&lt;div id=&quot;mainHeaderStripe&quot;&gt;&#xd;
+		&lt;div id=&quot;mainHeader&quot; class=&quot;centerWrapper&quot;&gt;&#xd;
+			&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;&#xd;
+			&lt;div id=&quot;appTitle&quot;&gt;Self Support Console&lt;/div&gt;&#xd;
+		&lt;/div&gt;&#xd;
+	&lt;/div&gt;&#xd;
+	&lt;div class=&quot;centerWrapper&quot;&gt;&#xd;
+				&lt;div id=&quot;primNav&quot;&gt;&#xd;
+			&lt;ul&gt;&#xd;
+				&lt;li id=&quot;nav_services&quot;&gt;My Services&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_devices&quot;&gt;My Devices&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_social&quot;&gt;Social&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_marketplace&quot;&gt;Marketplace&lt;/li&gt;&#xd;
+			&lt;/ul&gt;&#xd;
+		&lt;/div&gt;&#xd;
+		&lt;div id=&quot;colMask&quot; class=&quot;noLeftNav&quot;&gt;	&lt;!-- add class=&quot;noLeftNav&quot; if hiding the nav --&gt;&#xd;
+			&lt;!-- leftNav here --&gt;&#xd;
+			&lt;div id=&quot;mainContent&quot;&gt;&#xd;
+			&lt;!-- CONTENT --&gt;&#xd;
+			&#xd;
+				&lt;form id=&quot;loginForm&quot; action=&apos;myServices.jsp&apos; method=&apos;POST&apos;&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;loginDiv&quot; class=&quot;ui-widget-content&quot;&gt;&#xd;
+					&lt;div class=&quot;ui-widget-header&quot;&gt;Access Your Account&lt;/div&gt;&#xd;
+					&lt;div class=&quot;loginContent&quot;&gt;&#xd;
+						&lt;span class=&quot;padlock&quot;&gt;&lt;/span&gt;&#xd;
+						&lt;p&gt;User ID:&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;text&quot; maxlength=&quot;10&quot; id=&quot;subscriberId&quot; name=&quot;subscriberId&quot;&gt;&lt;/p&gt;&#xd;
+						&lt;p&gt;Password:&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot;&gt;&lt;/p&gt;&#xd;
+						&lt;div id=&quot;loginButtonDiv&quot;&gt;&#xd;
+							&lt;div id=&quot;loginError&quot; class=&quot;red&quot;&gt;Incorrect username &amp; password.&lt;/div&gt;&#xd;
+							&lt;button id=&quot;btn_login&quot;&gt;Log In&lt;/button&gt;&#xd;
+						&lt;/div&gt;&#xd;
+					&lt;/div&gt;&#xd;
+				&lt;/div&gt;&lt;!-- loginDiv --&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;browserError&quot; class=&quot;ui-widget-content&quot;&gt;&#xd;
+					&lt;div class=&quot;ui-widget-header&quot;&gt;Incompatible Browser&lt;/div&gt;&#xd;
+					&lt;div class=&quot;loginContent&quot;&gt;&#xd;
+						&lt;p class=&quot;red&quot;&gt;Your browser is not supported.  Please use one of the following browsers:&lt;/p&gt;&#xd;
+						&lt;ul&gt;&#xd;
+							&lt;li&gt;Internet Explorer 7 or higher&lt;/li&gt;&#xd;
+							&lt;li&gt;Firefox&lt;/li&gt;&#xd;
+							&lt;li&gt;Chrome&lt;/li&gt;&#xd;
+							&lt;li&gt;Safari&lt;/li&gt;&#xd;
+						&lt;/ul&gt;&#xd;
+					&lt;/div&gt;&#xd;
+				&lt;/div&gt;&lt;!-- loginDiv --&gt;&#xd;
+&#xd;
+				&lt;/form&gt;&#xd;
+&#xd;
+			&lt;!-- /CONTENT --&gt;&#xd;
+			&lt;/div&gt;&lt;!-- /mainContent --&gt;&#xd;
+		&lt;/div&gt;&lt;!-- /colMask --&gt;&#xd;
+				&lt;div id=&quot;mainFooter&quot; class=&quot;clearBoth&quot;&gt;&lt;img id=&quot;motiveLogo&quot; src=&quot;images/logo_motive.png&quot; align=&quot;left&quot;&gt;&lt;img id=&quot;alcatelLucentLogo&quot; src=&quot;images/logo_alcatelLucent.png&quot; align=&quot;right&quot;&gt;Copyright &amp;copy; 2006-2012 Alcatel-Lucent. All Rights Reserved.&lt;/div&gt;&#xd;
+	&lt;/div&gt;&lt;!-- centerWrapper --&gt;&#xd;
+&#xd;
+&lt;/div&gt;&lt;!-- /motive --&gt;&#xd;
+&lt;/body&gt;&#xd;
+&lt;/html&gt;&#xd;
+</responseData>
+    <responseFile class="java.lang.String"></responseFile>
+    <cookies class="java.lang.String">JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634</cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <java.net.URL>http://server.xyz.com/ssc/welcome.jsp</java.net.URL>
+  </httpSample>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:37 GMT
+Server: Apache/2.2.3 (Red Hat)
+Content-Length: 4489
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+  <responseData class="java.lang.String">&#xd;
+&#xd;
+&#xd;
+&lt;!DOCTYPE html&gt;&#xd;
+&#xd;
+&lt;html&gt;&#xd;
+&lt;head&gt;&#xd;
+&#xd;
+&#xd;
+	&lt;title&gt;GlobeCom - Self Support Console Lite&lt;/title&gt;&#xd;
+&#xd;
+	&lt;!-- jQuery --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui-1.8.18.ABC.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;jquery/themes/ABC/jquery-ui.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-1.7.1.min.js&quot;&gt;&lt;/script&gt;&#xd;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;jquery/jquery-ui-1.8.18.custom.min.js&quot;&gt;&lt;/script&gt;&#xd;
+&#xd;
+	&lt;!-- CSS --&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_styles.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;!--[if IE]&gt;&#xd;
+	&lt;link type=&quot;text/css&quot; href=&quot;css/sscPortal_ie.css&quot; rel=&quot;stylesheet&quot; /&gt;&#xd;
+	&lt;![endif]--&gt;&#xd;
+&#xd;
+	&lt;script&gt;&#xd;
+	$(function(){&#xd;
+		// BROWSER DETECTION&#xd;
+		// allow all browsers except IE6 and below&#xd;
+		if( /MSIE (\d+\.\d+)/.test(navigator.userAgent) ){&#xd;
+			var ieVer = RegExp.$1;&#xd;
+			if( ieVer &gt;= 7 ){&#xd;
+				// allow IE7 and up, do nothing&#xd;
+			}&#xd;
+			else if( ieVer &lt; 7 ){&#xd;
+				if( window.location.href.indexOf(&quot;welcome.jsp&quot;) &gt;= 0 ){&#xd;
+					$(&quot;#browserError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+					$(&quot;#loginDiv&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+				}&#xd;
+				else{&#xd;
+					$(&quot;.centerWrapper&quot;).css(&quot;display&quot;,&quot;none&quot;);	// ensure nothing is shown&#xd;
+					location.href = &quot;welcome.jsp&quot;;&#xd;
+				}&#xd;
+			}&#xd;
+		}&#xd;
+	});&#xd;
+	&lt;/script&gt;&#xd;
+&#xd;
+	&#xd;
+&#xd;
+&lt;script type=&quot;text/javascript&quot; language=&quot;JavaScript&quot;&gt;&#xd;
+&#xd;
+	$(function(){		// on load&#xd;
+		$(&quot;#primNav&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+		$(&quot;#subscriberId&quot;).focus();&#xd;
+		$(&quot;#btn_login&quot;).button().bind( &quot;click&quot;, function(){&#xd;
+			return validateLogin();		// must return false to fail the form submission&#xd;
+		});&#xd;
+		$(&quot;body&quot;).bind( &quot;keypress&quot;, function(e){&#xd;
+			if( e.which == 13 ){&#xd;
+				$(&quot;#btn_login&quot;).click();&#xd;
+			}&#xd;
+		});&#xd;
+	});&#xd;
+&#xd;
+	function validateLogin(){&#xd;
+		$(&quot;#loginError&quot;).css(&quot;display&quot;,&quot;none&quot;);&#xd;
+		var servURL = window.location.protocol + &quot;//&quot; + window.location.host;&#xd;
+		var subscriberId = $(&quot;#subscriberId&quot;).val();&#xd;
+		var password = $(&quot;#password&quot;).val();&#xd;
+		&#xd;
+		if((validateInteger(subscriberId) != true) || ($.trim(password) == &quot;&quot; )){&#xd;
+			$(&quot;#loginError&quot;).css(&quot;display&quot;,&quot;block&quot;);&#xd;
+			$(&quot;#subscriberId&quot;).focus();&#xd;
+			return false;	// must return false to fail the form submission&#xd;
+		}&#xd;
+		else{&#xd;
+			$(&quot;#loginForm&quot;).submit();&#xd;
+		}&#xd;
+	}&#xd;
+&#xd;
+	function validateInteger( strVABCe ){&#xd;
+		var objRegExp  = /(^-?\d{10}\d*$)/;&#xd;
+		return objRegExp.test( strVABCe );&#xd;
+	}&#xd;
+&#xd;
+&lt;/script&gt;&#xd;
+&lt;/head&gt;&#xd;
+&#xd;
+&lt;body&gt;&#xd;
+&lt;div id=&quot;motive&quot;&gt;&#xd;
+&#xd;
+		&lt;div id=&quot;mainHeaderStripe&quot;&gt;&#xd;
+		&lt;div id=&quot;mainHeader&quot; class=&quot;centerWrapper&quot;&gt;&#xd;
+			&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;&#xd;
+			&lt;div id=&quot;appTitle&quot;&gt;Self Support Console&lt;/div&gt;&#xd;
+		&lt;/div&gt;&#xd;
+	&lt;/div&gt;&#xd;
+	&lt;div class=&quot;centerWrapper&quot;&gt;&#xd;
+				&lt;div id=&quot;primNav&quot;&gt;&#xd;
+			&lt;ul&gt;&#xd;
+				&lt;li id=&quot;nav_services&quot;&gt;My Services&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_devices&quot;&gt;My Devices&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_social&quot;&gt;Social&lt;/li&gt;&#xd;
+				&lt;li id=&quot;nav_marketplace&quot;&gt;Marketplace&lt;/li&gt;&#xd;
+			&lt;/ul&gt;&#xd;
+		&lt;/div&gt;&#xd;
+		&lt;div id=&quot;colMask&quot; class=&quot;noLeftNav&quot;&gt;	&lt;!-- add class=&quot;noLeftNav&quot; if hiding the nav --&gt;&#xd;
+			&lt;!-- leftNav here --&gt;&#xd;
+			&lt;div id=&quot;mainContent&quot;&gt;&#xd;
+			&lt;!-- CONTENT --&gt;&#xd;
+			&#xd;
+				&lt;form id=&quot;loginForm&quot; action=&apos;myServices.jsp&apos; method=&apos;POST&apos;&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;loginDiv&quot; class=&quot;ui-widget-content&quot;&gt;&#xd;
+					&lt;div class=&quot;ui-widget-header&quot;&gt;Access Your Account&lt;/div&gt;&#xd;
+					&lt;div class=&quot;loginContent&quot;&gt;&#xd;
+						&lt;span class=&quot;padlock&quot;&gt;&lt;/span&gt;&#xd;
+						&lt;p&gt;User ID:&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;text&quot; maxlength=&quot;10&quot; id=&quot;subscriberId&quot; name=&quot;subscriberId&quot;&gt;&lt;/p&gt;&#xd;
+						&lt;p&gt;Password:&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot;&gt;&lt;/p&gt;&#xd;
+						&lt;div id=&quot;loginButtonDiv&quot;&gt;&#xd;
+							&lt;div id=&quot;loginError&quot; class=&quot;red&quot;&gt;Incorrect username &amp; password.&lt;/div&gt;&#xd;
+							&lt;button id=&quot;btn_login&quot;&gt;Log In&lt;/button&gt;&#xd;
+						&lt;/div&gt;&#xd;
+					&lt;/div&gt;&#xd;
+				&lt;/div&gt;&lt;!-- loginDiv --&gt;&#xd;
+&#xd;
+				&lt;div id=&quot;browserError&quot; class=&quot;ui-widget-content&quot;&gt;&#xd;
+					&lt;div class=&quot;ui-widget-header&quot;&gt;Incompatible Browser&lt;/div&gt;&#xd;
+					&lt;div class=&quot;loginContent&quot;&gt;&#xd;
+						&lt;p class=&quot;red&quot;&gt;Your browser is not supported.  Please use one of the following browsers:&lt;/p&gt;&#xd;
+						&lt;ul&gt;&#xd;
+							&lt;li&gt;Internet Explorer 7 or higher&lt;/li&gt;&#xd;
+							&lt;li&gt;Firefox&lt;/li&gt;&#xd;
+							&lt;li&gt;Chrome&lt;/li&gt;&#xd;
+							&lt;li&gt;Safari&lt;/li&gt;&#xd;
+						&lt;/ul&gt;&#xd;
+					&lt;/div&gt;&#xd;
+				&lt;/div&gt;&lt;!-- loginDiv --&gt;&#xd;
+&#xd;
+				&lt;/form&gt;&#xd;
+&#xd;
+			&lt;!-- /CONTENT --&gt;&#xd;
+			&lt;/div&gt;&lt;!-- /mainContent --&gt;&#xd;
+		&lt;/div&gt;&lt;!-- /colMask --&gt;&#xd;
+				&lt;div id=&quot;mainFooter&quot; class=&quot;clearBoth&quot;&gt;&lt;img id=&quot;motiveLogo&quot; src=&quot;images/logo_motive.png&quot; align=&quot;left&quot;&gt;&lt;img id=&quot;alcatelLucentLogo&quot; src=&quot;images/logo_alcatelLucent.png&quot; align=&quot;right&quot;&gt;Copyright &amp;copy; 2006-2012 Alcatel-Lucent. All Rights Reserved.&lt;/div&gt;&#xd;
+	&lt;/div&gt;&lt;!-- centerWrapper --&gt;&#xd;
+&#xd;
+&lt;/div&gt;&lt;!-- /motive --&gt;&#xd;
+&lt;/body&gt;&#xd;
+&lt;/html&gt;&#xd;
+</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String">JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634</cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <redirectLocation class="java.lang.String">http://server.xyz.com/ssc/welcome.jsp</redirectLocation>
+  <java.net.URL>http://server.xyz.com/ssc/welcome.jsp</java.net.URL>
+</httpSample>
+<sample t="7" it="0" lt="0" ts="1350570764271" s="true" lb="JSR223 Sampler" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="" by="0" sc="1" ec="0" ng="1" na="1" hn="server1">
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String"></responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <samplerData class="java.lang.String">vars.put(&quot;prevAccountRandom&quot;,&quot;2101847715&quot;)</samplerData>
+</sample>
+<httpSample t="78" it="0" lt="78" ts="1350570768153" s="true" lb="Start" rc="200" rm="OK" tn="Email Setup  1-1" dt="text" de="UTF-8" by="5790" sc="1" ec="0" ng="1" na="1" hn="server1">
+  <assertionResult>
+    <name>Response Assertion</name>
+    <failure>false</failure>
+    <error>false</error>
+  </assertionResult>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 18 Oct 2012 14:30:41 GMT
+Server: Apache/2.2.3 (Red Hat)
+Cache-Control: no-cache,no-store,max-age=0
+Pragma: No-cache
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+X-Powered-By: Servlet/2.5 JSP/2.1
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+X-Requested-With: XMLHttpRequest
+User-Agent: Jakarta Commons-HttpClient/3.1
+Host: server.xyz.com
+</requestHeader>
+  <responseData class="java.lang.String">&lt;!DOCTYPE html&gt; &#xd;
+&lt;html&gt;&#xd;
+	&lt;head profile=&quot;http://www.w3.org/2005/10/profile&quot;&gt;&#xd;
+		&lt;title&gt;Motive Workflow&lt;/title&gt;&#xd;
+		&lt;meta charset=&quot;UTF-8&quot; /&gt;&#xd;
+&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/wf/favicon.png&quot;&gt;&#xd;
+&#xd;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/wf/jawrcss/N878938129/bundles/wfjQueryCss.css&quot; /&gt;
+ &#xd;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;screen&quot; href=&quot;/wf/jawrcss/57823177/bundles/wfCss.css&quot; /&gt;
+&#xd;
+&lt;!--[if IE]&gt;&#xd;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/wf/css/wf-ie.css&quot; media=&quot;screen&quot; /&gt;&#xd;
+&lt;![endif]--&gt;&#xd;
+&lt;!-- No css file found for language: en --&gt;&lt;!-- No css file found for locale: en_US --&gt;&#xd;
+&lt;!-- No css file found for role: SV_User --&gt;&lt;!-- No css file found for role: subscriber --&gt;&#xd;
+&lt;!-- No css file found for role-language: SV_User-en --&gt;&lt;!-- No css file found for role-locale: SV_User-en_US --&gt;&lt;!-- No css file found for role-language: subscriber-en --&gt;&lt;!-- No css file found for role-locale: subscriber-en_US --&gt;&#xd;
+&#xd;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/wf/jawrjs/N805322766/bundles/jQuery.js&quot; &gt;&lt;/script&gt;
+&#xd;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/wf/jQuery/jqGrid/js/i18n/grid.locale-en.js&quot; charset=&quot;UTF-8&quot;&gt;&lt;/script&gt;
+&#xd;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/wf/jawrjs/70787732/bundles/jQueryPlugins.js&quot; &gt;&lt;/script&gt;
+&#xd;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/wf/jawrjs/N1080529001/bundles/Common.js&quot; &gt;&lt;/script&gt;
+&#xd;
+&#xd;
+&lt;script&gt;&#xd;
+	smc.Resources.messages[&apos;dialogs.button.yes&apos;]= &apos;yes&apos;;&#xd;
+    smc.Resources.messages[&apos;dialogs.button.no&apos;]= &apos;no&apos;;&#xd;
+    smc.Resources.messages[&apos;dialogs.cancel.title&apos;]= &apos;Cancel Workflow&apos;;&#xd;
+    smc.Resources.messages[&apos;dialogs.cancel.message&apos;]= &apos;Are you sure you want to cancel?&apos;;&#xd;
+    smc.Resources.messages[&apos;dialogs.suspend.title&apos;]= &apos;Suspend Workflow&apos;;  &#xd;
+    smc.Resources.messages[&apos;dialogs.suspend.message&apos;]= &apos;Are you sure you want to suspend?&apos;;&#xd;
+&lt;/script&gt;		&lt;script type=&quot;text/javascript&quot; src=&quot;/wf/jawrjs/36611631/bundles/start.js&quot; &gt;&lt;/script&gt;
+&#xd;
+	&lt;/head&gt;&#xd;
+									&lt;body&gt; 	
+    &lt;script type=&quot;text/javascript&quot;&gt;
+	    var wf = new jQuery.extend(true,new Motive.WorkflowImpl(), new Motive.WorkflowBaseAdapter());
+    	
+    	jQuery(document).ready(function(){
+    		var g_restartParams = {};
+    		
+	    		    	g_restartParams[&apos;platform&apos;] = &quot;Win32&quot;;  	
+	    		    	g_restartParams[&apos;time&apos;] = &quot;1350570768143&quot;;  	
+	    		    	g_restartParams[&apos;broName&apos;] = &quot;Google Chrome&quot;;  	
+	    		    	g_restartParams[&apos;wanIP&apos;] = &quot;135.115.142.224&quot;;  	
+	    		    	g_restartParams[&apos;broVersion&apos;] = &quot;15.0.874.106 Safari/535.2&quot;;  	
+	    		    	g_restartParams[&apos;locale&apos;] = &quot;en-US&quot;;  	
+	    		    	g_restartParams[&apos;subscriberId&apos;] = &quot;2101847715&quot;;  	
+	    		    	g_restartParams[&apos;OSName&apos;] = &quot;Windows&quot;;  	
+	    		    	g_restartParams[&apos;subscriberVABCe&apos;] = &quot;2101847715&quot;;  	
+	    		    	g_restartParams[&apos;password&apos;] = &quot;2101847715&quot;;  	
+	    		    	g_restartParams[&apos;workflow&apos;] = &quot;HNMTEmailSetupFlow&quot;;  	
+	    		    	
+    		wf.init({
+    			contextPath:&quot;/wf&quot;,
+    			context:&quot;VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634!1350570641041_1350570641042&quot;,
+    			restartParams:g_restartParams,
+    			rootElement:document.body,
+    			ajaxTimeout:60000,
+    			data: {
+					feedbackControl : new Motive.FeedbackModule(wf)
+				},
+    			
+    			onInit:function(){
+    			    this.getTemplateContentArea().hide();
+    			    this.initUI();
+    				this.data.feedbackControl.init();
+    			        			}
+    		});	 
+			
+			wf.globalEvents.bind(&apos;gridcomplete&apos;,function(evt, grid){
+				// this handler may be useful for manipulating the grid
+			});	
+    		
+    		wf.globalEvents.bind(&quot;contentLoad&quot;, function () {
+    			var btn = null;
+    			var ico = null;
+    			wf.$(&quot;button&quot;).each(function(idx,elem){
+    				btn = jQuery(this);
+    				ico = {};
+    				if (btn.attr(&quot;id&quot;) === &quot;back_button&quot;) {
+    					ico.primary = &quot;ui-icon-carat-1-w&quot;;
+    				} else if (btn.attr(&quot;id&quot;) === &quot;next_button&quot;) {
+    					ico.secondary = &quot;ui-icon-carat-1-e&quot;;
+    				} else if (btn.attr(&quot;id&quot;) === &quot;cancel_button&quot;) { //cancel_button
+    					ico.primary = &quot;ui-icon-cancel&quot;;
+    				} else if (btn.attr(&quot;id&quot;) === &quot;suspend_button&quot;) { //suspend_button
+    					ico.primary = &quot;ui-icon-power&quot;;
+    				}
+    				btn.button({icons:ico});
+    			});
+    		});
+			
+			jQuery(window).bind(&quot;load resize&quot;, function(){
+				var bc = wf.getBreadcrumbControl();
+				bc.find(&quot;div&quot;).first().width(bc.innerWidth());
+			});
+			
+    	});
+    	
+    &lt;/script&gt;	
+    
+		&lt;div id=&quot;feedback&quot; style=&quot;z-index:3000;&quot;&gt;
+		&lt;div id=&quot;feedbackTab&quot;&gt;
+		&lt;h3&gt;Feedback&lt;/h3&gt;
+		&lt;/div&gt;
+		&lt;div id=&quot;feedbackContents&quot;&gt;
+		&lt;div id=&quot;feedback_buttons&quot;&gt;
+			&lt;div class=&quot;feedback_like&quot;&gt;Helpful&lt;/div&gt;
+			&lt;div class=&quot;feedback_dislike&quot;&gt;Not Helpful&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div id=&quot;feedback_comments_showHide&quot;&gt;
+			&lt;div id=&quot;feedback_comments&quot;&gt;
+				Comments&lt;br&gt;
+				&lt;textarea id=&quot;commentsText&quot;&gt;&lt;/textarea&gt;
+			&lt;/div&gt;
+				&lt;div id=&quot;feedbackError&quot; class=&quot;redColor&quot; style=&quot;display:none;&quot;&gt;Error Submitting Feedback&lt;/div&gt;
+			&lt;div class=&quot;buttons&quot;&gt;
+				&lt;button id=&quot;submit_feedback&quot;&gt;Submit&lt;/button&gt;
+				&lt;button id=&quot;cancel_feedback&quot;&gt;Cancel&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+		&lt;div id=&quot;feedbackStatus&quot; class=&quot;greenColor&quot;&gt;Feedback Submitted&lt;/div&gt;
+	&lt;/div&gt;
+	    	
+    &lt;div id=&quot;breadcrumb-area&quot; class=&quot;breadCrumbHolder module&quot;&gt;
+        &lt;div id=&quot;breadcrumb&quot; class=&quot;breadCrumb module ui-widget ui-widget-content ui-corner-all ui-state-default&quot;&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;a href=&quot;#&quot; onclick=&quot;wf.doRestart(); return false;&quot;&gt;Start&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;workflow-area&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+	&lt;/html&gt;</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String">JSESSIONID=VT2WQQSNVD3p6HY8Q7qNYc5681hL9rhQtQ2j721R25hrJpq6rzpd!1363674634</cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://server.xyz.com/wf/Start.do?&amp;workflow=HNMTEmailSetupFlow&amp;subscriberId=2101847715&amp;password=2101847715&amp;time=1350570768143&amp;broName=Google+Chrome&amp;broVersion=15.0.874.106+Safari%2F535.2&amp;platform=Win32&amp;locale=en-US&amp;OSName=Windows&amp;subscriberVABCe=2101847715&amp;wanIP=135.115.142.224</java.net.URL>
+</httpSample>
+
+</testResults>

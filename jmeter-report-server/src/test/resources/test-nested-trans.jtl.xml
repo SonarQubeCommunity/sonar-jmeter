@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+
+<httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+<httpSample t="1" lt="55" ts="1283273768114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+  
+<sample t="2" lt="0" ts="1283273768114" s="true" lb="TR_1" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="1" lt="55" ts="1283273768114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+  <sample t="0" lt="0" ts="1283273768114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+
+<sample t="7" lt="0" ts="1283273768114" s="true" lb="TR_2" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="1" lt="55" ts="1283273768114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+  <sample t="3" lt="0" ts="1283273768114" s="true" lb="TR_2_1" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+    <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+    <httpSample t="1" lt="55" ts="1283273768114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+    <sample t="1" lt="0" ts="1283273768114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+  </sample>
+  <sample t="2" lt="0" ts="1283273768114" s="true" lb="TR_2_2" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+    <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+    <httpSample t="1" lt="55" ts="1283273778114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+    <sample t="0" lt="0" ts="1283273768114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+  </sample>
+  <sample t="0" lt="0" ts="1283273778114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+
+
+<sample t="2" lt="0" ts="1283273768114" s="true" lb="TR_1" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="1" lt="55" ts="1283273768114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+  <sample t="0" lt="0" ts="1283273768114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+
+<sample t="7" lt="0" ts="1283273768114" s="true" lb="TR_2" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+  <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+  <httpSample t="1" lt="55" ts="1283273768114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+  <sample t="3" lt="0" ts="1283273768114" s="true" lb="TR_2_1" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+    <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+    <httpSample t="1" lt="55" ts="1283273768114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+    <sample t="1" lt="0" ts="1283273768114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+  </sample>
+  <sample t="1" lt="0" ts="1283273768114" s="true" lb="TR_2_2" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+    <httpSample t="1" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+    <httpSample t="1" lt="55" ts="1283273778114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+    <sample t="0" lt="0" ts="1283273768114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+  </sample>
+  <httpSample t="1" lt="0" ts="1283273768114" s="true" lb="TR_2_2" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
+    <httpSample t="2" lt="22" ts="1283273768114" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
+    <httpSample t="2" lt="55" ts="1283273778114" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="65601"/>
+  </httpSample>
+  <sample t="0" lt="0" ts="1283273778114" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+</sample>
+
+</testResults>

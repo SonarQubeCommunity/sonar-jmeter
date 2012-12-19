@@ -16,83 +16,96 @@
 	</xs:complexType>
 	</xs:element>
   
+  
+  <xs:complexType name="TextEl">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="class" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="AssertionResult">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="failure" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="error" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="failureMessage" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="AbstractSample">
+    <xs:sequence>
+      <xs:element name="assertionResult" type="AssertionResult" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  
+    <xs:attribute name="t" type="xs:long" use="required" />
+    <xs:attribute name="it" type="xs:long" />
+    <xs:attribute name="lt" type="xs:long" />
+    <xs:attribute name="ts" type="xs:long" />
+    <xs:attribute name="s" type="xs:boolean" />
+    <xs:attribute name="lb" type="xs:string" />
+    <xs:attribute name="rc" type="xs:string" />
+    <xs:attribute name="rm" type="xs:string" />
+    <xs:attribute name="tn" type="xs:string" />
+    <xs:attribute name="dt" type="xs:string" />
+    <xs:attribute name="de" type="xs:string" />
+    <xs:attribute name="by" type="xs:long" />
+    <xs:attribute name="sc" type="xs:long" />
+    <xs:attribute name="ec" type="xs:long" />
+    <xs:attribute name="ng" type="xs:long" />
+    <xs:attribute name="na" type="xs:long" />
+    <xs:attribute name="hn" type="xs:string" />
+  </xs:complexType>
+  
+  
 	<xs:complexType name="HttpSample">
 	<xs:complexContent>
 	<xs:extension base="AbstractSample" >
 		<xs:sequence>
 			<xs:element name="httpSample" type="HttpSample" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
+      
+      <xs:element name="responseHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="requestHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="responseData" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="responseFile" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="cookies" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="method" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="queryString" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="redirectLocation" type="TextEl" minOccurs="0" maxOccurs="1" />
+      
+      <!-- 
+        XXX cfillol: 
+        In some versions the tagName is "java.net.URL" and in others is "url".
+        We'll have to take care of this when getting info from xmlbeans. 
+      -->
+      <xs:element name="java.net.URL" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="url" type="TextEl" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
 	</xs:extension>
 	</xs:complexContent>
 	</xs:complexType>
 	
+  
 	<xs:complexType name="Sample">
 	<xs:complexContent>
 	<xs:extension base="AbstractSample" >
-		<xs:choice minOccurs="0" maxOccurs="unbounded">
-			<xs:element name="httpSample" type="HttpSample" />
-			<xs:element name="sample" type="Sample"/>
-	    </xs:choice>
+    <xs:sequence>
+  		<xs:choice minOccurs="0" maxOccurs="unbounded">
+  			<xs:element name="httpSample" type="HttpSample" />
+  			<xs:element name="sample" type="Sample"/>
+  	  </xs:choice>
+      
+      <xs:element name="responseHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="requestHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="responseData" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="responseFile" type="TextEl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="samplerData" type="TextEl" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
 	</xs:extension>
 	</xs:complexContent>
 	</xs:complexType>
-
-	<xs:complexType name="TextEl">
-		<xs:simpleContent>
-			<xs:extension base="xs:string">
-				<xs:attribute name="class" type="xs:string" />
-			</xs:extension>
-		</xs:simpleContent>
-	</xs:complexType>
 	
-	<xs:complexType name="AbstractSample">
-		<xs:sequence>
-			<xs:element name="assertionResult" type="AssertionResult" minOccurs="0" maxOccurs="unbounded"/>
-		
-			<xs:element name="responseHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="requestHeader" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="responseData" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="responseFile" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="cookies" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="method" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="queryString" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="redirectLocation" type="TextEl" minOccurs="0" maxOccurs="1" />
-			
-			<!-- 
-				XXX cfillol: 
-				In some versions the tagName is "java.net.URL" and in others is "url".
-				We'll have to take care of this when getting info from xmlbeans. 
-			-->
-			<xs:element name="java.net.URL" type="TextEl" minOccurs="0" maxOccurs="1" />
-			<xs:element name="url" type="TextEl" minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	
-		<xs:attribute name="t" type="xs:long" use="required" />
-		<xs:attribute name="it" type="xs:long" />
-		<xs:attribute name="lt" type="xs:long" />
-		<xs:attribute name="ts" type="xs:long" />
-		<xs:attribute name="s" type="xs:boolean" />
-		<xs:attribute name="lb" type="xs:string" />
-		<xs:attribute name="rc" type="xs:string" />
-		<xs:attribute name="rm" type="xs:string" />
-		<xs:attribute name="tn" type="xs:string" />
-		<xs:attribute name="dt" type="xs:string" />
-		<xs:attribute name="de" type="xs:string" />
-		<xs:attribute name="by" type="xs:long" />
-		<xs:attribute name="sc" type="xs:long" />
-		<xs:attribute name="ec" type="xs:long" />
-		<xs:attribute name="ng" type="xs:long" />
-		<xs:attribute name="na" type="xs:long" />
-		<xs:attribute name="hn" type="xs:string" />
-	</xs:complexType>
-	
-	<xs:complexType name="AssertionResult">
-		<xs:sequence>
-			<xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="failure" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="error" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="failureMessage" type="xs:string" minOccurs="0" maxOccurs="1"/>
-		</xs:sequence>
-	</xs:complexType>
-
 </xs:schema>

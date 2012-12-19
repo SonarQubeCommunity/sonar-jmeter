@@ -27,7 +27,19 @@ import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 /**
- * Reader para obtener sólo los objetos HttpSample de un fichero jtl
+ * Reader to get all HttpSamples from jtl xml file.
+ * Well, not all. HttpSamples inside another HttpSample will be
+ * discarted because parent time and size values reflect total 
+ * children size or time values.
+ * 
+ * This reader uses JtlSampleMixReader to get first level Samples (transactions) 
+ * and HttpSample. When it gets a transaction sample, the sample itself
+ * will be discarted but inner HttpSamples will be covered and will be
+ * returned through read method.
+ * HttpSamples inside another HttpSample will be discarted because 
+ * parent time and size values reflect total children size or time values.
+ * 
+ * Read method returns one HttpSample for each call.
  * 
  * @author cfillol
  * 
@@ -43,6 +55,13 @@ public class JtlHttpSampleReader extends StreamReader<HttpSample> {
     jtlReader = new JtlSampleMixReader(is);
   }
 
+  /**
+   * Read method returns one HttpSample for each call.
+   * Transaction Samples will be discarted but inner HttpSamples inside 
+   * the transaction will be covered and will be returned through read method.
+   * HttpSamples inside another HttpSample will be discarted because 
+   * parent time and size values reflect total children size or time values.
+   */
   @Override
   public HttpSample read() {
     if (httpSamples != null && httpSamplesIndex < httpSamples.size()) {

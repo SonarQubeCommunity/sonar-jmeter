@@ -33,7 +33,17 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 
 /**
- * Reader para obtener los objetos HttpSample y Sample de un fichero jtl
+ * 
+ * Reader to get Samples (transactions) and HttpSamples from jtl xml file.
+ * This reader uses JtlAbstractSampleReader to get information as an 
+ * xmlbean object, and discard samples that are not transactions.
+ * 
+ * Read method returns a single first level HttpSample or a single 
+ * first level Sample (transaction) for each invocation. 
+ * When a transaction is returned, SampleMix will contain inner 
+ * transactions and HttpSamples.
+ * HttpSamples inside another HttpSample will be discarted because 
+ * parent time and size values reflect total children size or time values.
  * 
  * @author cfillol
  * 
@@ -79,6 +89,13 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
     return true;
   }
 
+  /**
+   * Return a single HttpSample or a single Sample (transaction).
+   * When a transaction is returned, SampleMix will contain
+   * inner transactions and HttpSamples.
+   * HttpSamples inside another HttpSample will be discarted because 
+   * parent time and size values reflect total children size or time values.
+   */
   @Override
   public SampleMix read() {
     AbstractSample abstractSample = jtlReader.read();
@@ -92,7 +109,7 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
     boolean addedNodes = false;
     while (abstractSample != null) {
 
-      // Se trata de un Sample o de un HttpSample?
+      // It is a Sample or an HttpSample?
       if (abstractSample instanceof Sample) {
         addedNodes = addTransaction((Sample) abstractSample, transactions,
             httpSamples);

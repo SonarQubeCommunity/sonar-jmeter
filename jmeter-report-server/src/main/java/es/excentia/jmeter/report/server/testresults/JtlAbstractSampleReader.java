@@ -47,13 +47,18 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.TestResultsDocument;
 
 /**
- * Reader para obtener objetos a partir de un fichero jtl
+ * Reader to get first level Samples and HttpSamples from jtl xml file.
+ * This reader is at the most lower level and his function is to
+ * translate xml into objects using xmlbeans.
  * 
- * El procedimiento de lectura con stax y xmlbeans para poder leer ficheros
- * grandes se ha tomado de http://www.devx.com/xml/Article/34037/1954
+ * Read method returns only one first level Sample or HttpSample 
+ * for each call, but each returned object will contain
+ * descendant elements info inside.
+ * 
+ * Read process with stax and xmlbeans extracted from 
+ * http://www.devx.com/xml/Article/34037/1954 by Michael Pilone.
  * 
  * @author cfillol
- * 
  */
 public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
 
@@ -92,7 +97,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       XMLInputFactory inFactory = XMLInputFactory.newInstance();
       reader = inFactory.createXMLEventReader(is);
 
-      // Create an output writer. The writer uses the resettable
+      // Create an output writer. The writer uses the resetable
       // buffer so we can use the same writer continuously.
       XMLOutputFactory outFactory = XMLOutputFactory.newInstance();
       outFactory.setProperty("javax.xml.stream.isRepairingNamespaces", true);
@@ -117,6 +122,10 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   }
   
 
+  /**
+   * Returns one first level Sample or one HttpSample for each call,
+   * that contains child info inside.
+   */
   @Override
   public AbstractSample read() {
     try {
@@ -141,12 +150,11 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   
         
         if (sampleDepth > 0) {
-          // Nos quedamos con el xml que cuelga del primer HttpSample
-          // y de todos sus descendientes
+          // Sample o HttpSample. Take xml from sample and all its descendants
           writer.add(evt);
         } else {
-          // Descartamos el nodo raíz, pero lo incluimos en el writer
-          // para que el xml siga siendo válido
+          // Root node. Discard info but include text into xml 
+          // so it will be valid
           writer.add(evt);
           writer.flush();
           swriter.reset();
@@ -159,18 +167,15 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
           if (HTTPSAMPLE_TAG_NAME.equals(tagName)
               || SAMPLE_TAG_NAME.equals(tagName)) {
             
-            // Acaba un HttpSample ...
+            // HttpSample or Sample ends ...
             
-            readCount++; // Actualizamos el contador de HttSamples leídos
+            readCount++; // Update read elements counter
   
             if (sampleDepth == 1) {
-              // Si hemos llegado al final del HttpSample padre,
-              // terminamos de guardar el xml que nos interesa y
-              // lo devolvemos en forma de objeto
+              // End of parent Sample/HttpSample
+              // Save xml and return object
   
-              // Flush the write and grabe the XML from
-              // the memory, string buffer. At the same time
-              // we reset the position in the buffer.
+              // Get xml from buffer and reset
               writer.flush();
               String sampleXml = swriter.reset();
   
@@ -178,16 +183,15 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
                 log.trace(sampleXml);
               }
   
-              // Convertimos el xml en objeto de XmlBeans.
-              // Con XmlBeans, tenemos que usar el nodo padre para cargar
-              // el fragmento interno de xml.
+              // Convert xml into XmlBeans object
+              // We have to use container node TestResults to save inner html
               TestResultsDocument.TestResults testResults = (TestResultsDocument.TestResults) XmlObject.Factory
                   .parse(sampleXml, options);
               if (!testResults.validate(validationOptions)) {
                 throw new JtlReaderException(validationErrors.get(0).toString());
               }
   
-              // Devolvemos el HttpSample leído
+              // Return read sample
               if (HTTPSAMPLE_TAG_NAME.equals(tagName)) {
                 return testResults.getHttpSampleArray(0);
               } else {

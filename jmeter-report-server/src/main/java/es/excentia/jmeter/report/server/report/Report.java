@@ -34,8 +34,8 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 public class Report {
 
   /**
-   * Dos fases: En la primera pasada obtendremos la media y la mayoría de los
-   * datos y en la segunda obtendremos las desviaciones típicas
+   * Two phases: First obtain averages and most part of data and
+   * second obtain deviations. 
    */
   int actualPhaseIndex;
 
@@ -174,7 +174,7 @@ public class Report {
 
       while (sampleMix != null) {
 
-        // Analizamos requests
+        // Analyze requests
         for (HttpSample request : sampleMix.getHttpSamples()) {
           if (phase == FIRST_PHASE) {
             testDuration.addMeasure(request);
@@ -187,7 +187,7 @@ public class Report {
           }
         }
 
-        // Analizamos transacciones
+        // Analyze transactions
         for (Sample trans : sampleMix.getTransactions()) {
           actualTransName = trans.getLb();
 
