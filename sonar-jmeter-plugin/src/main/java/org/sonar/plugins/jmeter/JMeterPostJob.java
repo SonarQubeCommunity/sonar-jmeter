@@ -78,9 +78,9 @@ public class JMeterPostJob implements PostJob, CheckProject {
   /**
    * Gets the generated jtl file path, if it was any generated
    */
-  protected String getJtlFilePath(Project project) {
+  protected String getJtlFilePath(Project project, String innerProjectJMeterReportsPath) {
     String baseDirPath = project.getFileSystem().getBasedir().getAbsolutePath();
-    File reportDir = new File(baseDirPath + "/target/jmeter-reports");
+    File reportDir = new File(baseDirPath + innerProjectJMeterReportsPath);
     
     if (reportDir.exists()) {
       for (File file : (Collection<File>) FileUtils.listFiles(reportDir, new String[] { "jtl" }, true)) {
@@ -100,19 +100,23 @@ public class JMeterPostJob implements PostJob, CheckProject {
   protected GlobalSummary getGlobalSummaryFromLocalJTL(Project project) {
     GlobalSummary globalSummary = null;
     String projectName = project.getName();
-    String jtlPath = getJtlFilePath(project);
-
-    if (jtlPath != null) {
-      // Get report parsing jtl file
-      LOG.info("Getting JMeter results from "+jtlPath);
-      ConfigInfo configInfo = new ConfigInfo(jtlPath);
-      configService.setTestConfigInfo(projectName, configInfo);
-      globalSummary = metricService.getGlobalSummary(projectName);
-      LOG.info("JMeter GlobalSummary:\n"+globalSummary);
-    } else {
-      LOG.info("No JTL files found in target/jmeter-reports"+jtlPath);
+    
+    final String jtlPaths[] = new String[] { "/target/jmeter/results", "/target/jmeter-reports" };
+    for (String innerPath : jtlPaths) {
+      String jtlPath = getJtlFilePath(project, innerPath);
+      if (jtlPath == null) {
+        LOG.info("No JTL files found in "+innerPath);
+      } else {
+        // Get report parsing jtl file
+        LOG.info("Getting JMeter results from "+jtlPath);
+        ConfigInfo configInfo = new ConfigInfo(jtlPath);
+        configService.setTestConfigInfo(projectName, configInfo);
+        globalSummary = metricService.getGlobalSummary(projectName);
+        LOG.debug("JMeter GlobalSummary:\n"+globalSummary);
+        return globalSummary;
+      }
     }
-
+    
     return globalSummary;
   }
 

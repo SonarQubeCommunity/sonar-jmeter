@@ -20,6 +20,7 @@
 
 package es.excentia.jmeter.report.server.testresults;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,26 +63,32 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.TestResultsDocument
  */
 public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
 
+  private static final int GROWING_JTL_CHECK_TIME = 500;
+
   public static final String NAMESPACE = "http://xmlbeans.testresults.server.report.jmeter.excentia.es";
 
-  private static final int NODE_READ_BUFFER_MAX_BYTES = 1024 * 1024;
+  // It will be rare to have one first level sample bigger than 5MB ...
+  private static final int FIRST_LEVEL_SAMPLE_MAX_SIZE = 5 * 1024 * 1024;
 
   private static final String HTTPSAMPLE_TAG_NAME = "httpSample";
   private static final String SAMPLE_TAG_NAME = "sample";
+  
 
   private static final Logger log = LoggerFactory
       .getLogger(JtlAbstractSampleReader.class);
   private static final boolean LOG_DEBUG = log.isDebugEnabled();
   private static final boolean LOG_TRACE = log.isTraceEnabled();
 
-  protected XMLEventReader reader;
-  protected XMLEventWriter writer;
-  protected XmlOptions options;
-  protected XmlOptions validationOptions;
-  protected List<XmlValidationError> validationErrors = new ArrayList<XmlValidationError>();
-  protected ResettableStringWriter swriter;
-  protected int readCount = 0;
-
+  private XMLEventReader reader;
+  private XMLEventWriter writer;
+  private XmlOptions options;
+  private XmlOptions validationOptions;
+  private List<XmlValidationError> validationErrors = new ArrayList<XmlValidationError>();
+  private ResettableStringWriter swriter;
+  private int readCount = 0;
+  private int lastAvailableBytes = 0;
+  
+  
   public JtlAbstractSampleReader(InputStream is) {
     super(is);
 
@@ -101,7 +108,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       // buffer so we can use the same writer continuously.
       XMLOutputFactory outFactory = XMLOutputFactory.newInstance();
       outFactory.setProperty("javax.xml.stream.isRepairingNamespaces", true);
-      swriter = new ResettableStringWriter(NODE_READ_BUFFER_MAX_BYTES);
+      swriter = new ResettableStringWriter(FIRST_LEVEL_SAMPLE_MAX_SIZE);
       writer = outFactory.createXMLEventWriter(swriter);
 
       options = new XmlOptions();
@@ -123,19 +130,60 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   
 
   /**
+   * From version 0.3, JMeterReportServer can read jtl files for
+   * running jmeter tests. So when reading, we have to take care if EOF is near 
+   * because maybe we are reading a growing file and then we have to wait if
+   * there are not enough available information.
+   */
+  private void takeCareWhenNearToJTLEnd() {
+    try {
+      
+      int availableBytes = is.available();
+      while (availableBytes < FIRST_LEVEL_SAMPLE_MAX_SIZE && availableBytes>lastAvailableBytes) {
+        log.debug(
+            "JTL EOF is near ("+availableBytes+" bytes). Maybe there is " +
+         		"a jmeter test in process. We'll wait "+GROWING_JTL_CHECK_TIME+" ms."
+        );
+
+        try {
+          Thread.sleep(GROWING_JTL_CHECK_TIME); 
+        } catch (InterruptedException e) {
+          // Check remaining data size again ...
+        }
+        
+        lastAvailableBytes = availableBytes;
+        availableBytes = is.available();
+      }
+      
+      if (availableBytes >= FIRST_LEVEL_SAMPLE_MAX_SIZE) {
+        lastAvailableBytes = 0;
+      }
+      // else
+      // Available JTL bytes not growing after GROWING_JTL_CHECK_TIME 
+      // JMeter tests must be finished
+      
+    } catch (IOException e) {
+      throw new JtlReaderException(e);
+    }
+  }
+  
+  
+  /**
    * Returns one first level Sample or one HttpSample for each call,
    * that contains child info inside.
    */
   @Override
   public AbstractSample read() {
+    
+    takeCareWhenNearToJTLEnd();
+    
     try {
       
       // Begin reading events
       int sampleDepth = 0;
       while (reader.hasNext()) {
-  
-        XMLEvent evt = reader.nextEvent();
         
+        XMLEvent evt = reader.nextEvent();
   
         if (evt.isStartElement()) {
           StartElement elem = (StartElement) evt;

@@ -266,14 +266,23 @@ public class JMeterReportServerTest {
   }
 
   @Test
-  public void testIntegrationGetGlobalSummaryTransFull27() {
-    log.info("** TEST testIntegrationGetGlobalSummaryTransFull27 "
+  public void testIntegrationGetRunningGlobalSummaryTransFull27() {
+    log.info("** TEST testIntegrationGetRunningGlobalSummaryTransFull27 "
         + JMeterReportServerTestConst.TEST_CONFIG_TRANS_FULL_27);
-    GlobalSummary summary = client
-        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_TRANS_FULL_27);
-    log.debug(summary.toString());
+    
+    StreamReader<GlobalSummary> summaryReader = client.getRunningGlobalSummary(
+        JMeterReportServerTestConst.TEST_CONFIG_TRANS_FULL_27, true, 1);
+    
+    GlobalSummary summary = summaryReader.read();
+    while (summary!=null) {
+      log.debug(
+        summary.getRequestsOkTotal()+" requests ok at "+
+        summary.getTestDuration()+ " ms. from test start."
+      );
+      summary = summaryReader.read();
+    }
+    
   }
-  
   
   @Test
   public void testIntegrationGetBuckedMeasures() {

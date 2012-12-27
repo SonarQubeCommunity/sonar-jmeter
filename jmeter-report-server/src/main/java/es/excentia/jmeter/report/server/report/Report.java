@@ -33,19 +33,6 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 @SuppressWarnings("unchecked")
 public class Report {
 
-  /**
-   * Two phases: First obtain averages and most part of data and
-   * second obtain deviations. 
-   */
-  int actualPhaseIndex;
-
-  int getActualPhaseIndex() {
-    return actualPhaseIndex;
-  }
-
-  public static final int FIRST_PHASE = 0;
-  public static final int SECOND_PHASE = 1;
-
   public static final int SCOPE_REQUEST_GLOBAL = 1;
   public static final int SCOPE_TRANS_GLOBAL = 2;
   public static final int SCOPE_TRANS_TYPE = 3;
@@ -70,7 +57,6 @@ public class Report {
   }
 
   String actualTransName;
-
   String getActualTransName() {
     return actualTransName;
   }
@@ -79,9 +65,9 @@ public class Report {
   Map<String, Class<?>> transGlobalDataClasses = new HashMap<String, Class<?>>();
   Map<String, Class<?>> transTypeDataClasses = new HashMap<String, Class<?>>();
 
-  Map<String, ReportData>[] requestGlobalData = new Map[2];
-  Map<String, ReportData>[] transGlobalData = new Map[2];
-  Map<String, Map<String, ReportData>>[] transTypeData = new Map[2];
+  Map<String, ReportData> requestGlobalData = new HashMap<String, ReportData>();
+  Map<String, ReportData> transGlobalData = new HashMap<String, ReportData>();
+  Map<String, Map<String, ReportData>> transTypeData = new HashMap<String, Map<String,ReportData>>();
 
   public <T extends ReportData> void addData(Class<T> clazz, int scope) {
 
@@ -107,117 +93,96 @@ public class Report {
   }
 
   public <T extends ReportData> T getDataRequestGlobal(Class<T> clazz) {
-    int phase = getPhasesByClass(clazz)[0];
-    return (T) requestGlobalData[phase].get(clazz.getSimpleName());
+    return (T) requestGlobalData.get(clazz.getSimpleName());
   }
 
   public <T extends ReportData> T getDataTransGlobal(Class<T> clazz) {
-    int phase = getPhasesByClass(clazz)[0];
-    return (T) transGlobalData[phase].get(clazz.getSimpleName());
+    return (T) transGlobalData.get(clazz.getSimpleName());
   }
 
   public <T extends ReportData> Map<String, T> getDataTransType(Class<T> clazz) {
-    int phase = getPhasesByClass(clazz)[0];
-    return (Map<String, T>) transTypeData[phase].get(clazz.getSimpleName());
+    return (Map<String, T>) transTypeData.get(clazz.getSimpleName());
+  }
+
+  private boolean isInitialized = false;
+  public boolean isInitialized() {
+    return isInitialized;
   }
 
   public void init() {
-    actualPhaseIndex = 0;
+    isInitialized = false;
     actualTransName = null;
 
     okUserAccessCounter = (OkUserAccessCounter) createSummaryData(OkUserAccessCounter.class);
     testDuration = (Duration) createSummaryData(Duration.class);
 
-    for (int phase = 0; phase < 2; phase++) {
-      requestGlobalData[phase] = new HashMap<String, ReportData>();
-      transGlobalData[phase] = new HashMap<String, ReportData>();
-      transTypeData[phase] = new HashMap<String, Map<String, ReportData>>();
-    }
-
     for (String dataName : requestGlobalDataClasses.keySet()) {
       Class<?> dataClass = requestGlobalDataClasses.get(dataName);
-      int phases[] = getPhasesByClass(dataClass);
       ReportData data = createSummaryData(dataClass);
-      for (int phase : phases) {
-        requestGlobalData[phase].put(dataName, data);
-      }
+      requestGlobalData.put(dataName, data);
     }
 
     for (String dataName : transGlobalDataClasses.keySet()) {
       Class<?> dataClass = transGlobalDataClasses.get(dataName);
-      int phases[] = getPhasesByClass(dataClass);
       ReportData data = createSummaryData(dataClass);
-      for (int phase : phases) {
-        transGlobalData[phase].put(dataName, data);
-      }
+      transGlobalData.put(dataName, data);
     }
 
     for (String dataName : transTypeDataClasses.keySet()) {
-      Class<?> dataClass = transTypeDataClasses.get(dataName);
-      int phases[] = getPhasesByClass(dataClass);
       Map<String, ReportData> transDataMap = new HashMap<String, ReportData>();
-      for (int phase : phases) {
-        transTypeData[phase].put(dataName, transDataMap);
-      }
+      transTypeData.put(dataName, transDataMap);
     }
+    
+    isInitialized = true;
   }
 
-  public void extract(String config) {
+  public void extract(StreamReader<SampleMix> reader) {
 
     init();
-    StreamReader<SampleMix> reader;
+    SampleMix sampleMix = reader.read();
 
-    for (int phase = FIRST_PHASE; phase <= SECOND_PHASE; phase++) {
+    while (sampleMix != null) {
 
-      reader = readerService.getSampleMixReaderByTestConfig(config);
-      SampleMix sampleMix = reader.read();
+      // Analyze requests
+      for (HttpSample request : sampleMix.getHttpSamples()) {
+        testDuration.addMeasure(request);
+        okUserAccessCounter.addMeasure(request);
 
-      while (sampleMix != null) {
-
-        // Analyze requests
-        for (HttpSample request : sampleMix.getHttpSamples()) {
-          if (phase == FIRST_PHASE) {
-            testDuration.addMeasure(request);
-            okUserAccessCounter.addMeasure(request);
-          }
-
-          for (String dataName : requestGlobalData[phase].keySet()) {
-            ReportData data = requestGlobalData[phase].get(dataName);
-            data.addMeasure(request);
-          }
+        for (String dataName : requestGlobalData.keySet()) {
+          ReportData data = requestGlobalData.get(dataName);
+          data.addMeasure(request);
         }
-
-        // Analyze transactions
-        for (Sample trans : sampleMix.getTransactions()) {
-          actualTransName = trans.getLb();
-
-          for (String dataName : transGlobalData[phase].keySet()) {
-            ReportData data = transGlobalData[phase].get(dataName);
-            data.addMeasure(trans);
-          }
-
-          for (String dataName : transTypeData[phase].keySet()) {
-            Map<String, ReportData> transDataMap = transTypeData[phase]
-                                                                 .get(dataName);
-
-            ReportData data = transDataMap.get(actualTransName);
-            if (data == null) {
-              Class<?> summaryDataClass = transTypeDataClasses.get(dataName);
-              data = createSummaryData(summaryDataClass);
-              transDataMap.put(actualTransName, data);
-            }
-
-            data.addMeasure(trans);
-          }
-
-        }
-
-        actualTransName = null;
-        sampleMix = reader.read();
       }
 
-      actualPhaseIndex++;
+      // Analyze transactions
+      for (Sample trans : sampleMix.getTransactions()) {
+        actualTransName = trans.getLb();
+
+        for (String dataName : transGlobalData.keySet()) {
+          ReportData data = transGlobalData.get(dataName);
+          data.addMeasure(trans);
+        }
+
+        for (String dataName : transTypeData.keySet()) {
+          Map<String, ReportData> transDataMap = transTypeData
+                                                               .get(dataName);
+
+          ReportData data = transDataMap.get(actualTransName);
+          if (data == null) {
+            Class<?> summaryDataClass = transTypeDataClasses.get(dataName);
+            data = createSummaryData(summaryDataClass);
+            transDataMap.put(actualTransName, data);
+          }
+
+          data.addMeasure(trans);
+        }
+
+      }
+
+      actualTransName = null;
+      sampleMix = reader.read();
     }
+
 
   }
 
@@ -235,13 +200,6 @@ public class Report {
     return data;
   }
 
-  protected int[] getPhasesByClass(Class<?> dataClass) {
-    if (Average.class.isAssignableFrom(dataClass)) {
-      return new int[] { FIRST_PHASE, SECOND_PHASE };
-    } else {
-      return new int[] { FIRST_PHASE };
-    }
-  }
 
   @Override
   public String toString() {
@@ -250,19 +208,19 @@ public class Report {
     buff.append("\n** Request Global Scope **");
     for (int phase = 0; phase < 2; phase++) {
       buff.append('\n');
-      buff.append(requestGlobalData[phase].toString());
+      buff.append(requestGlobalData.toString());
     }
 
     buff.append("\n\n** Transaction Global Scope **");
     for (int phase = 0; phase < 2; phase++) {
       buff.append('\n');
-      buff.append(transGlobalData[phase].toString());
+      buff.append(transGlobalData.toString());
     }
 
     buff.append("\n\n** Transaction Type Scope **");
     for (int phase = 0; phase < 2; phase++) {
       buff.append('\n');
-      buff.append(transTypeData[phase].toString());
+      buff.append(transTypeData.toString());
     }
 
     buff.append('\n');

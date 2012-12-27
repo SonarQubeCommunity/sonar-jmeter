@@ -35,6 +35,7 @@ public class JMeterReportConst {
   public static final int OP_GET_AVALIABLE_METRICS = 2;
   public static final int OP_GET_BUCKET_MEASURES = 3;
   public static final int OP_GET_GLOBAL_SUMMARY = 4;
+  public static final int OP_GET_RUNNING_GLOBAL_SUMMARY = 5;
 
   public static final String METRIC_BUCKET_AVG_RESPONSE_TIME = "BucketAvgResponseTime";
 

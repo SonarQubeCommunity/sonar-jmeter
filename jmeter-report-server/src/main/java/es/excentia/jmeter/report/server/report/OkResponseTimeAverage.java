@@ -26,15 +26,9 @@ public class OkResponseTimeAverage extends Average {
   @Override
   public void addMeasure(AbstractSample sample) {
     if (sample.getS()) {
-      switch (getSummary().getActualPhaseIndex()) {
-        case Report.FIRST_PHASE:
-          incrementTotal();
-          addToAvg(sample.getT());
-          break;
-        case Report.SECOND_PHASE:
-          addToDev(sample.getT());
-          break;
-      }
+      incrementTotal();
+      addToAvg(sample.getT());
+      addToDev(sample.getT());
     }
   }
 }

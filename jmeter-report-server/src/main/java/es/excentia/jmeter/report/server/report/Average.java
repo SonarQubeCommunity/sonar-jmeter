@@ -23,57 +23,49 @@ package es.excentia.jmeter.report.server.report;
 public abstract class Average extends ReportData {
 
   protected long total;
-  protected double sumAvg;
-  protected Double avg;
-  protected double sumDev;
-
+  protected double valuesSum;
+  
+  /*
+    stddev = sqr ( devSum / (total - 1) )
+    devSum = sum(v_i - avg)²
+    devSum = (v_1 - avg)² + (v_2 - avg)² + ...
+    devSum = (v_1 - avg)*(v_1 - avg) + (v_2 - avg)*(v_2 - avg) + ...
+    devSum = v_1² + avg² - 2*v_1*avg + v_2² + avg² - 2*v_2*avg + ...
+    devSum = (v_1² + v_2² + ... ) - 2*avg*(v_1 + v_2 + ...) + total*avg²
+    devSum = squaresSum - 2*avg*valuesSum + total*avg²
+    stddev = sqr ( (squaresSum - 2*avg*valuesSum + total*avg²) / (total - 1) )
+  */
+  protected double squaresSum;
+  
   protected void incrementTotal() {
     total++;
   }
 
   protected void addToAvg(double value) {
-    sumAvg = sumAvg + value;
+    valuesSum = valuesSum + value;
   }
 
   protected void addToDev(double value) {
-    sumDev = sumDev + Math.pow(value - getAverage(), 2);
-  }
-
-  protected long getTotal() {
-    if (getSummary().getActualPhaseIndex() >= Report.SECOND_PHASE) {
-      return total;
-    } else {
-      throw new ReportException("El total aún no está disponible");
-    }
+    squaresSum = squaresSum + value*value;
   }
 
   public Double getAverage() {
-    if (getSummary().getActualPhaseIndex() < Report.SECOND_PHASE) {
-      throw new ReportException("La media aún no está disponible");
-    }
-
-    if (getTotal() <= 0) {
+    if (total <= 0) {
       return Double.NaN;
     }
-    if (avg != null) {
-      return avg;
-    }
-
-    avg = sumAvg / getTotal();
-    return avg;
+    return valuesSum/total;
   }
 
   public double getDeviation() {
-    // TODO cfillol: Comprobar que estamos en la tercera fase?
-    if (getTotal() <= 0) {
+    if (total <= 0) {
       return Double.NaN;
     }
-    return Math.sqrt(sumDev / (getTotal() - 1));
+    Double avg = getAverage();
+    return Math.sqrt((squaresSum - 2*avg*valuesSum + total*avg*avg) / (total - 1));
   }
 
   public double getDeviationPercent() {
-    // TODO cfillol: Comprobar que estamos en la tercera fase?
-    if (getTotal() <= 0) {
+    if (total <= 0) {
       return Double.NaN;
     }
     return (getDeviation() * 100.0) / getAverage();

@@ -28,9 +28,13 @@ import es.excentia.jmeter.report.server.report.OkCounter;
 import es.excentia.jmeter.report.server.report.OkResponseTimeAverage;
 import es.excentia.jmeter.report.server.report.Report;
 import es.excentia.jmeter.report.server.report.TransOrder;
+import es.excentia.jmeter.report.server.service.ReaderService;
+import es.excentia.jmeter.report.server.service.ServiceFactory;
 
 public class ReportTest {
 
+  protected ReaderService readerService = ServiceFactory.get(ReaderService.class);
+  
   @Test
   public void testReport() {
 
@@ -40,7 +44,8 @@ public class ReportTest {
     report.addData(OkResponseTimeAverage.class, Report.SCOPE_ALL);
     report.addData(OkBytesAverage.class, Report.SCOPE_ALL);
     report.addData(TransOrder.class, Report.SCOPE_TRANS_GLOBAL);
-    report.extract(JMeterReportServerTestConst.TEST_CONFIG_TRANS);
+    report.extract(readerService.getSampleMixReaderByTestConfig(
+        JMeterReportServerTestConst.TEST_CONFIG_TRANS));
 
     System.out.print(report.toString());
   }

@@ -53,7 +53,7 @@ public class JMeterReportServer {
   private boolean stopWhenPossible = false;
 
   protected ConfigService configService = ServiceFactory.get(ConfigService.class);
-  protected OperationService metricService = ServiceFactory.get(OperationService.class);
+  protected OperationService operationService = ServiceFactory.get(OperationService.class);
 
   /**
    * Atendemos en forma de hilos las peticiones de los clientes
@@ -86,14 +86,21 @@ public class JMeterReportServer {
           switch (op) {
             case JMeterReportConst.OP_GET_GLOBAL_SUMMARY:
               config = in.readUTF();
-              metricService.writeGlobalSummary(out, config);
+              operationService.writeGlobalSummary(out, config);
+              break;
+              
+            case JMeterReportConst.OP_GET_RUNNING_GLOBAL_SUMMARY:
+              config = in.readUTF();
+              boolean startNewIfNone = in.readBoolean();
+              int sleepTime = in.readInt();
+              operationService.writeRunningGlobalSummary(out, config, startNewIfNone, sleepTime);
               break;
 
             case JMeterReportConst.OP_GET_BUCKET_MEASURES:
               config = in.readUTF();
               metric = in.readUTF();
               int millisBucket = in.readInt();
-              metricService.writeBucketMeasures(out, config, metric, millisBucket);
+              operationService.writeBucketMeasures(out, config, metric, millisBucket);
               break;
 
             default:
