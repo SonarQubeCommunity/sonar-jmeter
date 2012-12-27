@@ -175,7 +175,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   @Override
   public AbstractSample read() {
     
-    takeCareWhenNearToJTLEnd();
+    // takeCareWhenNearToJTLEnd();
     
     try {
       
