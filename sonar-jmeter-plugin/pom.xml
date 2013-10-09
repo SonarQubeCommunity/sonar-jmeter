@@ -12,7 +12,7 @@
   <packaging>sonar-plugin</packaging>
   <name>Sonar JMeter Plugin</name>
 
-  <description>Retrieve JMeter test results in SONAR.</description>
+  <description>Feed SonarQube with JMeter test results.</description>
   <url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 
   <scm>
