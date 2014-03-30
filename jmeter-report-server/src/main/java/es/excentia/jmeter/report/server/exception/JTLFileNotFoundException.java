@@ -18,30 +18,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package es.excentia.jmeter.report.server.service;
+package es.excentia.jmeter.report.server.exception;
 
-import org.junit.Assert;
-import org.junit.Test;
 
-import es.excentia.jmeter.report.server.exception.JTLFileNotFoundException;
+public class JTLFileNotFoundException extends ConfigException {
 
-public class ReaderServiceTest {
+  private static final long serialVersionUID = 1L;
 
-  protected ReaderService readerService = ServiceFactory
-      .get(ReaderService.class);
-
-  @Test
-  public void testLoadJTLReaderAFileNotFound() {
-    boolean error = false;
-
-    try {
-      readerService.getAbstractSampleReaderByTestConfig("A");
-    } catch (Exception e) {
-      error = true;
-      Assert.assertTrue(e instanceof JTLFileNotFoundException);
-    }
-
-    Assert.assertTrue(error);
+  public JTLFileNotFoundException(String config, String jtlFilePath) {
+    super("JTL file \""+jtlFilePath+"\" has not been found");
   }
 
 }

@@ -29,10 +29,16 @@ import org.apache.commons.configuration.MapConfiguration;
 import org.junit.Test;
 import org.sonar.api.resources.Project;
 
+import es.excentia.jmeter.report.server.JMeterReportServer;
+
 
 public class JMeterSensorTest {
 
-  JMeterSensor sensor = new JMeterSensor();
+  private JMeterSensor sensor = new JMeterSensor();
+  
+  private static final int SERVER_START_TIME = 2000;
+  private static final int SERVER_STOP_TIME = 2000;
+
   
   @Test
   public void testLocalJtlPathConfig() {
@@ -44,5 +50,57 @@ public class JMeterSensorTest {
     
     Assert.assertNotNull(sensor.getGlobalSummary(project));
   }
+  
+  @Test
+  public void testSkipWhenLocalJtlNotExists() {
+    Map<String,String> configMap = new HashMap<String,String>();
+    configMap.put(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, "classpath:/notexistingpath/test.jtl.xml");
+    
+    Project project = new Project("mytestproject","","notexisting"); // Force "notexisting" as config name
+    project.setConfiguration(new MapConfiguration(configMap));
+    
+    Assert.assertNull(sensor.getGlobalSummary(project));
+  }
+  
+  
+  @Test
+  public void testSkipWhenRemoteJtlNotExists() {
+  	
+  	// Start jmeter report server.
+  	// Testing plugin targeting remote jmeter report server, 
+  	// then we need a running server.
+  	JMeterReportServer server = new JMeterReportServer();
+    server.start();
+    try {
+	    Thread.sleep(SERVER_START_TIME);
+    } catch (InterruptedException e) {
+    	// Server must be up at this point
+    }
+    
+	  try {
+	    	
+	    Map<String,String> configMap = new HashMap<String,String>();
+	    configMap.put(JMeterPluginConst.HOST_PROPERTY, "localhost");
+	    configMap.put(JMeterPluginConst.CONFIG_PROPERTY, "A");
+	    
+	    Project project = new Project("mytestproject","","notexisting"); // Force "notexisting" as config name
+	    project.setConfiguration(new MapConfiguration(configMap));
+	    
+	    Assert.assertNull(sensor.getGlobalSummary(project));
+	    
+    } finally {
+    	
+    	// Stop server at the end
+    	server.stop();
+      try {
+	      Thread.sleep(SERVER_STOP_TIME);
+      } catch (InterruptedException e) {
+	      // Server must be stopped at this point
+      }
+      
+    }
+    
+  }
+  
   
 }

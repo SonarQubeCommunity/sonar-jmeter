@@ -1,5 +1,5 @@
 /*
- * JMeter Report Server
+ * JMeter Report Client
  * Copyright (C) 2010 eXcentia
  * dev@sonar.codehaus.org
  *
@@ -18,30 +18,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package es.excentia.jmeter.report.server.service;
+package es.excentia.jmeter.report.client.util;
 
-import org.junit.Assert;
+import junit.framework.Assert;
+
 import org.junit.Test;
 
-import es.excentia.jmeter.report.server.exception.JTLFileNotFoundException;
-
-public class ReaderServiceTest {
-
-  protected ReaderService readerService = ServiceFactory
-      .get(ReaderService.class);
+public class JavaUtilTest {
 
   @Test
-  public void testLoadJTLReaderAFileNotFound() {
-    boolean error = false;
-
-    try {
-      readerService.getAbstractSampleReaderByTestConfig("A");
-    } catch (Exception e) {
-      error = true;
-      Assert.assertTrue(e instanceof JTLFileNotFoundException);
-    }
-
-    Assert.assertTrue(error);
+  public void testAll() {
+    Assert.assertTrue(JavaUtil.getJREMajorVersion()>0);
+    Assert.assertTrue(JavaUtil.getJREMinorVersion()>0);
   }
-
+  
 }

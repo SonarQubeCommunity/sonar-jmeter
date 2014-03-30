@@ -23,12 +23,11 @@ package es.excentia.jmeter.report.server.service;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.server.testresults.SampleMix;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
-import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 public interface ReaderService extends Service {
 
   StreamReader<AbstractSample> getAbstractSampleReaderByTestConfig(String config);
-  StreamReader<HttpSample> getHttpSampleReaderByTestConfig(String config);
+  StreamReader<AbstractSample> getHttpSampleReaderByTestConfig(String config);
   StreamReader<SampleMix> getSampleMixReaderByTestConfig(String config);
   
 }

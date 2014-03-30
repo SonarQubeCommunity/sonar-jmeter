@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.serialization.StreamReader;
+import es.excentia.jmeter.report.client.util.JavaUtil;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.TestResultsDocument;
 
@@ -63,8 +64,6 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.TestResultsDocument
  */
 public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
 
-  private static final int GROWING_JTL_CHECK_TIME = 500;
-
   public static final String NAMESPACE = "http://xmlbeans.testresults.server.report.jmeter.excentia.es";
 
   // It will be rare to have one first level sample bigger than 5MB ...
@@ -79,6 +78,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   private static final boolean LOG_DEBUG = log.isDebugEnabled();
   private static final boolean LOG_TRACE = log.isTraceEnabled();
 
+  
   private XMLEventReader reader;
   private XMLEventWriter writer;
   private XmlOptions options;
@@ -88,6 +88,26 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   private int readCount = 0;
   private int lastAvailableBytes = 0;
   
+  /** 
+   * Ability for reading JTL result files when jmeter 
+   * test is running running is only available for java 1.5 and later. 
+   * See method takeCareWhenNearToJTLEnd.
+   */
+  private static final int GROWING_JTL_CHECK_TIME = 500;
+  private static Boolean canReanRunningTestJtl = null;
+  private synchronized static boolean getCanReadRunningTestJtl() {
+  	if (canReanRunningTestJtl==null) {
+  		canReanRunningTestJtl = 
+  	  		JavaUtil.getJREMajorVersion()==1 && JavaUtil.getJREMinorVersion()>=6 || 
+  	  		JavaUtil.getJREMajorVersion()>1;
+  	  		
+  		if (!canReanRunningTestJtl) {
+  			log.warn("Ability for reading JTL results when jmeter test is running "
+  					+ "is NOT AVAILABLE. You will need at least java 1.6 for this.");
+  		}
+  	}
+		return canReanRunningTestJtl;
+	}
   
   public JtlAbstractSampleReader(InputStream is) {
     super(is);
@@ -130,14 +150,17 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   
 
   /**
-   * From version 0.3, JMeterReportServer can read jtl files for
-   * running jmeter tests. So when reading, we have to take care if EOF is near 
+   * From version 0.3, JMeterReportServer can read jtl files of tests that 
+   * are still running. So, when reading, we have to take care if EOF is near 
    * because maybe we are reading a growing file and then we have to wait if
    * there are not enough available information.
+   * 
+   * Feature available only for java 1.6 or later. See SONARPLUGINS-2355.
+   * 
+   * @throws IOException 
    */
-  private void takeCareWhenNearToJTLEnd() {
-    try {
-      
+  private void takeCareWhenNearToJTLEnd() throws IOException {
+  	
       int availableBytes = is.available();
       while (availableBytes < FIRST_LEVEL_SAMPLE_MAX_SIZE && availableBytes>lastAvailableBytes) {
         log.debug(
@@ -162,9 +185,6 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       // Available JTL bytes not growing after GROWING_JTL_CHECK_TIME 
       // JMeter tests must be finished
       
-    } catch (IOException e) {
-      throw new JtlReaderException(e);
-    }
   }
   
   
@@ -175,9 +195,11 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   @Override
   public AbstractSample read() {
     
-    // takeCareWhenNearToJTLEnd();
-    
     try {
+    	
+    	if (getCanReadRunningTestJtl()) {
+    		takeCareWhenNearToJTLEnd();
+    	}
       
       // Begin reading events
       int sampleDepth = 0;
@@ -265,6 +287,8 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       throw new JtlReaderException(e);
     } catch (XmlException e) {
       throw new JtlReaderException(e);
+    } catch (IOException e) {
+    	throw new JtlReaderException(e);
     }
   
   }

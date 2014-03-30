@@ -22,15 +22,15 @@ package es.excentia.jmeter.report.server.testresults;
 
 import java.util.List;
 
-import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
+import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 
 public class SampleMix {
 
   List<Sample> transactions;
-  List<HttpSample> httpSamples;
+  List<AbstractSample> httpSamples;
 
-  public SampleMix(List<Sample> transactions, List<HttpSample> httpSamples) {
+  public SampleMix(List<Sample> transactions, List<AbstractSample> httpSamples) {
     this.transactions = transactions;
     this.httpSamples = httpSamples;
   }
@@ -39,7 +39,7 @@ public class SampleMix {
     return transactions;
   }
 
-  public List<HttpSample> getHttpSamples() {
+  public List<AbstractSample> getHttpSamples() {
     return httpSamples;
   }
 

@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
-import es.excentia.jmeter.report.server.exception.ConfigException;
+import es.excentia.jmeter.report.server.exception.JTLFileNotFoundException;
 import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.service.ReaderService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
@@ -39,7 +39,6 @@ import es.excentia.jmeter.report.server.testresults.JtlHttpSampleReader;
 import es.excentia.jmeter.report.server.testresults.JtlSampleMixReader;
 import es.excentia.jmeter.report.server.testresults.SampleMix;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
-import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 public class ReaderServiceImpl implements ReaderService {
 
@@ -72,7 +71,7 @@ public class ReaderServiceImpl implements ReaderService {
       // The resource is in the classpath
       is = getClass().getResourceAsStream(jtlPath.substring(CLASSPATH_PREFIX.length()));
       if (is==null) {
-        throw new ConfigException("JTL resource defined for config '" + config + "' not found: "+jtlPath);
+        throw new JTLFileNotFoundException(config, jtlPath);
       }
     } else {
       
@@ -80,7 +79,7 @@ public class ReaderServiceImpl implements ReaderService {
       try {
         is = new FileInputStream(new File(jtlPath));
       } catch (FileNotFoundException e) {
-        throw new ConfigException("JTL file defined for config '" + config + "' doesn't exist: "+jtlPath, e);
+        throw new JTLFileNotFoundException(config, jtlPath);
       }
       
     }
@@ -93,7 +92,7 @@ public class ReaderServiceImpl implements ReaderService {
     return new JtlAbstractSampleReader(is);
   }
 
-  public StreamReader<HttpSample> getHttpSampleReaderByTestConfig(String config) {
+  public StreamReader<AbstractSample> getHttpSampleReaderByTestConfig(String config) {
     InputStream is = getInputStreamByTestConfig(config);
     return new JtlHttpSampleReader(is);
   }

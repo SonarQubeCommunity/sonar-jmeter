@@ -54,7 +54,6 @@ public abstract class BasicWriter<T> extends StreamWriter<T> {
 
   public abstract void writeObjectToStream(T obj) throws IOException;
 
-  
   protected void writeStringList(List<String> list) throws IOException {
     if (list == null || list.isEmpty()) {
       dos.writeInt(0);

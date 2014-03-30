@@ -31,7 +31,10 @@ import org.sonar.plugins.jmeter.exception.JMeterPluginException;
 import es.excentia.jmeter.report.client.JMeterReportClient;
 import es.excentia.jmeter.report.client.JMeterReportConst;
 import es.excentia.jmeter.report.client.data.GlobalSummary;
+import es.excentia.jmeter.report.client.exception.FatalJMeterReportServerException;
+import es.excentia.jmeter.report.client.exception.ServerErrorException;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
+import es.excentia.jmeter.report.server.exception.JTLFileNotFoundException;
 import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.service.OperationService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
@@ -63,7 +66,9 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
     try {
 
       GlobalSummary summary = getGlobalSummary(project);
-      JMeterMAO.saveSummaryAsMetrics(summary, context);
+      if (summary!=null) {
+      	JMeterMAO.saveSummaryAsMetrics(summary, context);
+      }
 
     } catch (Exception e) {
       LOG.error("Cannot analyse project '" + project.getName() + "'", e);
@@ -121,35 +126,65 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
 
 
   /**
+   * Auxiliar method to skip sensor when jtl file is not found, 
+   * either locally or remote.
+   */
+  private void skipIfNotJtlOrThrowException(FatalJMeterReportServerException e) {
+  	String notJtlFoundMsg = null;
+  	
+  	if (e instanceof JTLFileNotFoundException) {
+  		notJtlFoundMsg = e.getMessage();
+  	} else {
+  		String exceptionTypeText = JTLFileNotFoundException.class.getName()+": ";
+  		if (e.getMessage().contains(exceptionTypeText)) {
+  			notJtlFoundMsg = e.getMessage().replace(exceptionTypeText, "");
+  		}
+  	}
+  	
+  	if (notJtlFoundMsg==null) throw e;
+  	
+  	LOG.info(notJtlFoundMsg+" : skipped");
+  }
+  
+  /**
    * Gets the GlobalSummary from local jtl file or remote jmeter 
    * report server, according to project config.
    */
   protected GlobalSummary getGlobalSummary(Project project) {
-    GlobalSummary globalSummary;
+    GlobalSummary globalSummary = null;
     String localJtlPath = getLocalJtlFilePath(project);
     String projectName = project.getName();
-
-    if (!StringUtils.isBlank(localJtlPath)) {
-      // Get report parsing local jtl file
-      LOG.info("Getting JMeter results from local file");
-      ConfigInfo configInfo = new ConfigInfo(localJtlPath);
-      configService.setTestConfigInfo(projectName, configInfo);
-      globalSummary = metricService.getGlobalSummary(projectName);
-
-    } else {
-      // Get report from remote server
-      LOG.info("Getting JMeter results from remote server");
-
-      // Remove inMemoryConfig if there was any
-      configService.setTestConfigInfo(projectName, null);
-
-      // Use a jmeter report client for getting report from a 
-      // remote jmeter report server
-      JMeterReportClient client = getReportClient(project);
-      String config = getTestConfigName(project);
-      globalSummary = client.getGlobalSummary(config);
-    }
-
+    
+    try {
+    	
+	    if (!StringUtils.isBlank(localJtlPath)) {
+	      // Get report parsing local jtl file
+	      LOG.info("Getting JMeter results from local file");
+	      ConfigInfo configInfo = new ConfigInfo(localJtlPath);
+	      configService.setTestConfigInfo(projectName, configInfo);
+	      globalSummary = metricService.getGlobalSummary(projectName);
+	
+	    } else {
+	      // Get report from remote server
+	      LOG.info("Getting JMeter results from remote server");
+	
+	      // Remove inMemoryConfig if there was any
+	      configService.setTestConfigInfo(projectName, null);
+	
+	      // Use a jmeter report client for getting report from a 
+	      // remote jmeter report server
+	      JMeterReportClient client = getReportClient(project);
+	      String config = getTestConfigName(project);
+	      globalSummary = client.getGlobalSummary(config);
+	      
+	    }
+	
+    } catch(JTLFileNotFoundException e) {
+    	skipIfNotJtlOrThrowException(e);
+	  } catch(ServerErrorException e) {
+	  	skipIfNotJtlOrThrowException(e);
+	  }
+    
     return globalSummary;
   }
 

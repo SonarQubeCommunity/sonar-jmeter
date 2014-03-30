@@ -24,6 +24,7 @@ import es.excentia.jmeter.report.client.data.Measure;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.client.serialization.StreamWriter;
 import es.excentia.jmeter.report.client.serialization.Transformer;
+import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
 
 public class BucketAvgResponseTimeTransformer extends
@@ -43,7 +44,7 @@ public class BucketAvgResponseTimeTransformer extends
       millisBucket = DEFAULT_MILLIS_BUCKET;
     }
 
-    HttpSample httpSample = reader.read();
+    AbstractSample httpSample = reader.read();
     if (httpSample == null) {
       return;
     }

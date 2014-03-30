@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import es.excentia.jmeter.report.client.serialization.StreamReader;
-import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
+import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 /**
  * Reader to get all HttpSamples from jtl xml file.
@@ -44,10 +44,10 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
  * @author cfillol
  * 
  */
-public class JtlHttpSampleReader extends StreamReader<HttpSample> {
+public class JtlHttpSampleReader extends StreamReader<AbstractSample> {
 
   protected JtlSampleMixReader jtlReader;
-  protected List<HttpSample> httpSamples;
+  protected List<AbstractSample> httpSamples;
   protected int httpSamplesIndex;
 
   public JtlHttpSampleReader(InputStream is) {
@@ -63,9 +63,9 @@ public class JtlHttpSampleReader extends StreamReader<HttpSample> {
    * parent time and size values reflect total children size or time values.
    */
   @Override
-  public HttpSample read() {
+  public AbstractSample read() {
     if (httpSamples != null && httpSamplesIndex < httpSamples.size()) {
-      HttpSample httpSample = httpSamples.get(httpSamplesIndex);
+    	AbstractSample httpSample = httpSamples.get(httpSamplesIndex);
       httpSamplesIndex++;
       return httpSample;
     }
@@ -75,7 +75,7 @@ public class JtlHttpSampleReader extends StreamReader<HttpSample> {
       if (sampleMix == null)
         return null;
 
-      List<HttpSample> newHttpSamples = sampleMix.getHttpSamples();
+      List<AbstractSample> newHttpSamples = sampleMix.getHttpSamples();
 
       if (newHttpSamples == null || newHttpSamples.size() == 0) {
         continue;

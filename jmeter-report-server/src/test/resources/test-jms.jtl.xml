@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<sample t="20" lt="0" ts="1387443948550" s="true" lb="JMS Point-to-Point" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="641">
+  <requestHeader class="java.lang.String">JMSCorrelationId Jmeter345678
+JMSMessageId     ID:5527d8ae:3dd5c0001:1430A1A8C06
+JMSTimestamp     1387443948550
+JMSType          null
+JMSExpiration    0
+JMSPriority      4
+JMSDestination   rn_con_01::test.in
+Properties:
+bgc_soa_TargetOperation	GetBGCSegmentNB
+bgc_soa_TargetService	bgc.services.thk.getbgcsegmentnb.v2
+</requestHeader>
+</sample>
+
+<sample t="21" lt="0" ts="1387444347019" s="true" lb="JMS Point-to-Point" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="641">
+  <requestHeader class="java.lang.String">JMSCorrelationId Jmeter345678
+JMSMessageId     ID:5527d8ad:4e0d0001:1430A20A08A
+JMSTimestamp     1387444347018
+JMSType          null
+JMSExpiration    0
+JMSPriority      4
+JMSDestination   rn_con_01::test.in
+Properties:
+bgc_soa_TargetOperation	GetBGCSegmentNB
+bgc_soa_TargetService	bgc.services.thk.getbgcsegmentnb.v2
+</requestHeader>
+  <samplerData class="java.lang.String">  &lt;urn1:RequestDataGetBGCSegmentNB version=&quot;2.0&quot; xmlns:urn=&quot;urn:v4.context.vss.objects.bgc&quot; xmlns:urn1=&quot;urn:v2.getbgcsegmentnb.thk.services.bgc&quot;&gt;
+         &lt;urn1:requestGetBGCSegmentParameters&gt;
+            &lt;urn1:subscriberNumber&gt;032575104&lt;/urn1:subscriberNumber&gt;
+         &lt;/urn1:requestGetBGCSegmentParameters&gt;
+      &lt;/urn1:RequestDataGetBGCSegmentNB&gt;</samplerData>
+</sample>
+
+<sample t="23" lt="0" ts="1387444542874" s="true" lb="JMS Point-to-Point" rc="200" rm="OK" tn="Thread Group 1-1" dt="text" by="641">
+  <responseHeader class="java.lang.String">JMSCorrelationId Jmeter345678
+JMSMessageId     ID:5527d8ad:4c3a0195:1430A239DA3
+JMSTimestamp     1387444542883
+JMSType          null
+JMSExpiration    0
+JMSPriority      4
+JMSDestination   test.out
+Properties:
+JMSXUserID	poc
+</responseHeader>
+  <requestHeader class="java.lang.String">JMSCorrelationId Jmeter345678
+JMSMessageId     ID:5527d8ad:4e0f0001:1430A239D9B
+JMSTimestamp     1387444542875
+JMSType          null
+JMSExpiration    0
+JMSPriority      4
+JMSDestination   rn_con_01::test.in
+Properties:
+bgc_soa_TargetOperation	GetBGCSegmentNB
+bgc_soa_TargetService	bgc.services.thk.getbgcsegmentnb.v2
+</requestHeader>
+  <responseData class="java.lang.String">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&lt;ns3:ResponseDataGetBGCSegmentNB xmlns:ns5=&quot;urn:v4.getcustomertechnicalhistorynb.thk.services.bgc&quot; xmlns=&quot;urn:v2.resources.thk.objects.bgc&quot; xmlns:ns6=&quot;urn:v1.functionalerror.vss.objects.bgc&quot; xmlns:ns7=&quot;urn:v1.technicalerror.vss.objects.bgc&quot; xmlns:ns2=&quot;urn:v5.resources.thk.objects.bgc&quot; xmlns:ns3=&quot;urn:v2.getbgcsegmentnb.thk.services.bgc&quot; xmlns:ns4=&quot;urn:v1.checkservice.vss.objects.bgc&quot;&gt;&lt;ns3:bGCSegment&gt;&lt;identification&gt;TAN&lt;/identification&gt;&lt;/ns3:bGCSegment&gt;&lt;ns3:logicalResource&gt;&lt;ns3:subscriberNumber&gt;032575104&lt;/ns3:subscriberNumber&gt;&lt;/ns3:logicalResource&gt;&lt;/ns3:ResponseDataGetBGCSegmentNB&gt;</responseData>
+  <samplerData class="java.lang.String">  &lt;urn1:RequestDataGetBGCSegmentNB version=&quot;2.0&quot; xmlns:urn=&quot;urn:v4.context.vss.objects.bgc&quot; xmlns:urn1=&quot;urn:v2.getbgcsegmentnb.thk.services.bgc&quot;&gt;
+         &lt;urn1:requestGetBGCSegmentParameters&gt;
+            &lt;urn1:subscriberNumber&gt;032575104&lt;/urn1:subscriberNumber&gt;
+         &lt;/urn1:requestGetBGCSegmentParameters&gt;
+      &lt;/urn1:RequestDataGetBGCSegmentNB&gt;</samplerData>
+</sample>
+
+<sample t="2039" lt="0" ts="1389708737564" s="false" lb="JMS Point-to-Point" rc="" rm="No reply message received" tn="Thread Group 1-1" dt="text" by="0">
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String">JMSCorrelationId Jmeter345678
+JMSMessageId     ID:5527d8ae:7630001:14391187C3E
+JMSTimestamp     1389708737598
+JMSType          null
+JMSExpiration    0
+JMSPriority      4
+JMSDestination   rn_con_01::test.in
+Properties:
+bgc_soa_TargetOperation	GetBGCSegmentNB
+bgc_soa_TargetService	bgc.services.thk.getbgcsegmentnb.v2
+</requestHeader>
+  <responseData class="java.lang.String"></responseData>
+  <samplerData class="java.lang.String">  &lt;urn1:RequestDataGetBGCSegmentNB version=&quot;2.0&quot; xmlns:urn=&quot;urn:v4.context.vss.objects.bgc&quot; xmlns:urn1=&quot;urn:v2.getbgcsegmentnb.thk.services.bgc&quot;&gt;
+         &lt;urn1:requestGetBGCSegmentParameters&gt;
+            &lt;urn1:subscriberNumber&gt;032575104&lt;/urn1:subscriberNumber&gt;
+         &lt;/urn1:requestGetBGCSegmentParameters&gt;
+      &lt;/urn1:RequestDataGetBGCSegmentNB&gt;</samplerData>
+</sample>
+
+</testResults>

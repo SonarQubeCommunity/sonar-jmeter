@@ -27,7 +27,7 @@ import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.server.service.ReaderService;
 import es.excentia.jmeter.report.server.service.ServiceFactory;
 import es.excentia.jmeter.report.server.testresults.SampleMix;
-import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
+import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 
 @SuppressWarnings("unchecked")
@@ -144,7 +144,7 @@ public class Report {
     while (sampleMix != null) {
 
       // Analyze requests
-      for (HttpSample request : sampleMix.getHttpSamples()) {
+      for (AbstractSample request : sampleMix.getHttpSamples()) {
         testDuration.addMeasure(request);
         okUserAccessCounter.addMeasure(request);
 

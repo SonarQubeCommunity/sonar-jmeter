@@ -54,7 +54,6 @@ public class JMeterPostJobTest {
   
   @Test
   public void test() {
-    
     ProjectFileSystem projectFileSystem = mock(ProjectFileSystem.class);
     File testProjectFolder = new File("src/test/resources/test-project");
     doReturn(testProjectFolder).when(projectFileSystem).getBasedir();
@@ -66,4 +65,23 @@ public class JMeterPostJobTest {
     Assert.assertNotNull(job.getGlobalSummary());
   }
   
+  
+	@Test
+	public void testNoJMeterMavenPluginJTL() {
+		// JMeterPostJob will do nothing if not JTL file is generated 
+		// by maven jmeter plugin, only will show log info messages:
+		// No JTL files found in /target/jmeter/results
+		// No JTL files found in /target/jmeter-reports
+		
+		ProjectFileSystem projectFileSystem = mock(ProjectFileSystem.class);
+		File testProjectFolder = new File("src/test/resources/notexistingfolder");
+		doReturn(testProjectFolder).when(projectFileSystem).getBasedir();
+		
+		Project project = spy(new Project("JMeterPostJobTest","","JMeterPostJobTest"));
+		doReturn(projectFileSystem).when(project).getFileSystem();
+		
+		job.executeOn(project, new MockSensorContext());
+		Assert.assertNull(job.getGlobalSummary());
+	}
+
 }

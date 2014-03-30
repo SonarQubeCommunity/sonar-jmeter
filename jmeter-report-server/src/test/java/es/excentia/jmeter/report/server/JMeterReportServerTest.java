@@ -171,7 +171,7 @@ public class JMeterReportServerTest {
         .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_NESTED_TRANS);
     log.debug(summary.toString());
 
-    Assert.assertEquals(19, summary.getRequestsTotal());
+    Assert.assertEquals(21, summary.getRequestsTotal());
     Assert.assertEquals(8, summary.getTransTotal());
   }
 
@@ -255,6 +255,15 @@ public class JMeterReportServerTest {
 
     value = summary.getTransMapOkTotal().get("OK_TRANS");
     Assert.assertEquals(4.0, value, MARGEN);
+  }
+  
+  @Test
+  public void testIntegrationGetGlobalSummaryJms() {
+    log.info("** TEST testIntegrationGetGlobalSummaryJms "
+        + JMeterReportServerTestConst.TEST_CONFIG_JMS);
+    GlobalSummary summary = client
+        .getGlobalSummary(JMeterReportServerTestConst.TEST_CONFIG_JMS);
+    log.debug(summary.toString());
   }
   
   @Test

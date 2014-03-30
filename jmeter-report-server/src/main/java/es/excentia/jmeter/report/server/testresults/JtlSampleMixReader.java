@@ -35,6 +35,7 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
 /**
  * 
  * Reader to get Samples (transactions) and HttpSamples from jtl xml file.
+ * 
  * This reader uses JtlAbstractSampleReader to get information as an 
  * xmlbean object, and discard samples that are not transactions.
  * 
@@ -42,8 +43,14 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
  * first level Sample (transaction) for each invocation. 
  * When a transaction is returned, SampleMix will contain inner 
  * transactions and HttpSamples.
+ * 
  * HttpSamples inside another HttpSample will be discarted because 
  * parent time and size values reflect total children size or time values.
+ * 
+ * There can be also samples that are not transactions. They can be
+ * JMeter debug samples, or requests of protocols diferent to HTTP like
+ * JMS. We will consider that samples that are not transactions are
+ * request if they have a duration bigger than 0.
  * 
  * @author cfillol
  * 
@@ -67,9 +74,22 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
         sample.getRm().contains("Number of samples in transaction")
     );
   }
+  
+  /*
+   * There can be also samples that are not transactions. They can be
+	 * JMeter debug samples, or requests from other protocols different 
+	 * to HTTP (JMS for example). We will consider that samples that are 
+	 * not transactions are request if they have a duration bigger than 0.
+   */
+  protected boolean isRequest(Sample sample) {
+    return (
+    		// !isTransaction(sample) && // no hace falta de momento
+    		sample.getT() > 0
+    );
+  }
 
   protected boolean addTransaction(Sample sample, List<Sample> samples,
-      List<HttpSample> httpSamples) {
+      List<AbstractSample> httpSamples) {
     if (!isTransaction(sample)) {
       return false;
     }
@@ -81,9 +101,14 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
       httpSamples.add(httpSample);
     }
 
-    // Anotamos las transacciones hijas
+    // Anotamos las transacciones hijas y otros samples no http que
+    // no son transacciones
     for (Sample s : sample.getSampleArray()) {
-      addTransaction(s, samples, httpSamples);
+    	if (isTransaction(s)) {
+    		addTransaction(s, samples, httpSamples);
+    	} else if (isRequest(s)) {
+    		httpSamples.add(s);
+    	}
     }
 
     return true;
@@ -104,18 +129,24 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
     }
 
     List<Sample> transactions = new ArrayList<Sample>();
-    List<HttpSample> httpSamples = new ArrayList<HttpSample>();
+    List<AbstractSample> httpSamples = new ArrayList<AbstractSample>();
 
     boolean addedNodes = false;
     while (abstractSample != null) {
 
       // It is a Sample or an HttpSample?
-      if (abstractSample instanceof Sample) {
-        addedNodes = addTransaction((Sample) abstractSample, transactions,
-            httpSamples);
-      } else if (abstractSample instanceof HttpSample) {
-        httpSamples.add((HttpSample) abstractSample);
+      if (abstractSample instanceof Sample && isTransaction((Sample)abstractSample)) {
+      		// abstractSample is a transaction with nested samples
+      		addedNodes = addTransaction((Sample) abstractSample, transactions, httpSamples);
+        
+      } else if (
+      		abstractSample instanceof HttpSample || abstractSample instanceof Sample
+      ) {
+      	// Typical http request (instanceof HttpSample) or 
+      	// other type or request ... (maybe JMS?)
+        httpSamples.add(abstractSample);
         addedNodes = true;
+        
       } else {
         if (LOG_WARN) {
           log.warn("Tipo de sample no reconocido: "

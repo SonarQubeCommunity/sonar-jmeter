@@ -85,7 +85,7 @@
     </assertionResult>
   </httpSample>
   <httpSample t="59" lt="55" ts="1283274305325" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
-  <sample t="1" lt="0" ts="1283274305385" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="277"/>
+  <sample t="0" lt="0" ts="1283274305385" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="277"/>
 </sample>
 <sample t="212" lt="0" ts="1283274305421" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
   <httpSample t="91" lt="30" ts="1283274305421" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>
@@ -388,7 +388,7 @@
     </assertionResult>
   </httpSample>
   <httpSample t="63" lt="60" ts="1283274754321" s="true" lb="/iceweb/restful/Centro/findMarcasCuadriculaByFilter" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="63757"/>
-  <sample t="1" lt="0" ts="1283274754384" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
+  <sample t="0" lt="0" ts="1283274754384" s="true" lb="Debug Sampler" rc="" rm="" tn="Grupo de Hilos 1-1" dt="text" by="278"/>
 </sample>
 <sample t="123" lt="0" ts="1283274754388" s="true" lb="TR_ABRIR_LISTADO_CENTROS" rc="200" rm="Number of samples in transaction : 2, number of failing samples : 0" tn="Grupo de Hilos 1-1" dt="" by="718860">
   <httpSample t="63" lt="21" ts="1283274754388" s="true" lb="/iceweb/centroLista" rc="200" rm="OK" tn="Grupo de Hilos 1-1" dt="text" by="653259"/>

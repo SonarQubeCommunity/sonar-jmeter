@@ -115,7 +115,7 @@ public class JMeterReportServer {
 
           // Send error to client
           out.writeInt(JMeterReportConst.RETURN_CODE_ERROR);
-          out.writeUTF(e.getMessage());
+          out.writeUTF(e.toString());
         }
 
       } catch (IOException ioe) {

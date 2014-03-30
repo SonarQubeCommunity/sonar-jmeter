@@ -24,19 +24,19 @@ import es.excentia.jmeter.report.client.data.Measure;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
 import es.excentia.jmeter.report.client.serialization.StreamWriter;
 import es.excentia.jmeter.report.client.serialization.Transformer;
-import es.excentia.jmeter.report.server.testresults.xmlbeans.HttpSample;
+import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public class BucketMeasuresTransformerFactory {
 
   private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.transformer";
 
   @SuppressWarnings("unchecked")
-  public static synchronized Transformer<HttpSample, Measure> get(String name,
-      StreamReader<HttpSample> reader, StreamWriter<Measure> writer,
+  public static synchronized Transformer<AbstractSample, Measure> get(String name,
+      StreamReader<AbstractSample> reader, StreamWriter<Measure> writer,
       int millisBucket) {
     try {
 
-      Class<Transformer<HttpSample, Measure>> clazz = (Class<Transformer<HttpSample, Measure>>) Class
+      Class<Transformer<AbstractSample, Measure>> clazz = (Class<Transformer<AbstractSample, Measure>>) Class
           .forName(IMPL_PACKAGE + "." + name + "Transformer");
 
       return clazz.getConstructor(
