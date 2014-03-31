@@ -75,9 +75,9 @@
   </modules>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org</url>
+    <connection>scm:git:git@github.com:SonarCommunity/sonar-jmeter.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-jmeter.git</developerConnection>
+    <url>https://github.com/SonarCommunity/sonar-jmeter</url>
   </scm>
 
   <issueManagement>
