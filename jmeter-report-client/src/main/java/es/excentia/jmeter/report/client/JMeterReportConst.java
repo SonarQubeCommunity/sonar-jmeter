@@ -21,6 +21,8 @@
 package es.excentia.jmeter.report.client;
 
 public class JMeterReportConst {
+	
+	private JMeterReportConst() {}
 
   public static final String REPORT_SERVER_PROPERTIES = "jmeter-report-server.properties";
 

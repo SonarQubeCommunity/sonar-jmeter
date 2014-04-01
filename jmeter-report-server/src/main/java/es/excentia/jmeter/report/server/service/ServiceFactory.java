@@ -25,6 +25,8 @@ import java.util.Map;
 
 public class ServiceFactory {
 
+	private ServiceFactory() {}
+	
   private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.service.impl";
 
   private static Map<Class<? extends Service>, Service> map = new HashMap<Class<? extends Service>, Service>();

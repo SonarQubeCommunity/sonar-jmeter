@@ -24,10 +24,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Util class for working with strings
+ * Utility class for checking java version
  */
 public class JavaUtil {
 
+	private JavaUtil() {}
+	
 	private static Pattern JAVA_VERSION_PATTERN = Pattern.compile("(\\d+)\\.(\\d+)\\.(\\w+)");
 	
 	public static String getVersion() {
@@ -39,20 +41,20 @@ public class JavaUtil {
     if (m.matches()) {
     	return m.group(groupidx);
     } 
-    return null;
+    return "0";
 	}
 	
   /**
-   * Return jre major version
+   * Return jre major version or 0 if couldn't parse java.version
    */
-	public static int getJREMajorVersion() {
+	public static Integer getJREMajorVersion() {
 		return Integer.parseInt(getGroup(1));
 	}
 	
 	/**
-   * Return jre minor version
+   * Return jre minor version or 0 if couldn't parse java.version
    */
-	public static int getJREMinorVersion() {
+	public static Integer getJREMinorVersion() {
 		return Integer.parseInt(getGroup(2));
 	}
   

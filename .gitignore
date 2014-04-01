@@ -1,0 +1,6 @@
+.classpath
+.project
+.settings
+target
+!/sonar-jmeter-plugin/src/test/resources/test-project/target
+

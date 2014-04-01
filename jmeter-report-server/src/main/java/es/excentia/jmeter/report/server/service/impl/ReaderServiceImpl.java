@@ -44,8 +44,8 @@ public class ReaderServiceImpl implements ReaderService {
 
   private static final String CLASSPATH_PREFIX = "classpath:";
   
-  private static final Logger log = LoggerFactory.getLogger(ReaderServiceImpl.class);
-  private static final boolean LOG_DEBUG =  log.isDebugEnabled();
+  private static final Logger LOG = LoggerFactory.getLogger(ReaderServiceImpl.class);
+  private static final boolean LOG_DEBUG =  LOG.isDebugEnabled();
   
   ConfigService configService = ServiceFactory.get(ConfigService.class);
   
@@ -53,7 +53,7 @@ public class ReaderServiceImpl implements ReaderService {
   protected InputStream getInputStreamByTestConfig(String config) {
     
     if (LOG_DEBUG) {
-      log.debug("getInputStreamByTestConfig for config '" + config+"'");
+      LOG.debug("getInputStreamByTestConfig for config '" + config+"'");
     }
 
     
@@ -63,7 +63,7 @@ public class ReaderServiceImpl implements ReaderService {
     String jtlPath = testConfigInfo.getJtlPath();
     
     if (LOG_DEBUG) {
-      log.debug("JTL path: " + jtlPath);
+      LOG.debug("JTL path: " + jtlPath);
     }
     
     if (jtlPath.startsWith(CLASSPATH_PREFIX)) {

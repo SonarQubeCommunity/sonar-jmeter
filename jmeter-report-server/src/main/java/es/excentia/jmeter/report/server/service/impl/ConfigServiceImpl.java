@@ -40,7 +40,7 @@ import es.excentia.jmeter.report.server.service.ConfigService;
  */
 public class ConfigServiceImpl implements ConfigService {
 
-  private static final Logger log = LoggerFactory.getLogger(ConfigServiceImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ConfigServiceImpl.class);
   
   private static final String PORT_KEY = "port";
   private static final String MAX_CONNECTIONS_KEY = "maxConnections";
@@ -90,7 +90,7 @@ public class ConfigServiceImpl implements ConfigService {
 
     String strValue = getProperty(key);
     if (strValue == null) {
-      log.debug(
+      LOG.debug(
           "No " + key + " configured. "+
           "Using default value " + defaultValue + "."
        );
@@ -98,12 +98,12 @@ public class ConfigServiceImpl implements ConfigService {
       try {
         value = Integer.parseInt(getProperty(key));
       } catch (NumberFormatException e) {
-        log.warn("Could not parse " + key + ": " + e.getMessage());
+        LOG.warn("Could not parse " + key + ": " + e.getMessage());
       }
     }
 
     if (value < 0) {
-      log.warn(
+      LOG.warn(
           "The value of " + key + " cannot be negative: " + value+ ". "+
           "Using default value " + defaultValue + "."
       );

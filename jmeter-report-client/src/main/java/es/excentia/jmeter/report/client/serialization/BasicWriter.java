@@ -32,7 +32,7 @@ import es.excentia.jmeter.report.client.exception.SerializationException;
 
 public abstract class BasicWriter<T> extends StreamWriter<T> {
 
-  DataOutputStream dos;
+  protected DataOutputStream dos;
 
   public BasicWriter(OutputStream os) {
     super(os);

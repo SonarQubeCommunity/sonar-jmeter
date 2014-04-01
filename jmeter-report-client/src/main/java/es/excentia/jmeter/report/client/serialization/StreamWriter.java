@@ -23,7 +23,7 @@ package es.excentia.jmeter.report.client.serialization;
 import java.io.OutputStream;
 
 public abstract class StreamWriter<T> {
-  OutputStream os;
+  protected OutputStream os;
 
   public StreamWriter(OutputStream os) {
     this.os = os;

@@ -21,9 +21,11 @@
 package es.excentia.jmeter.report.client.util;
 
 /**
- * Util class for working with strings
+ * Utility class for working with strings
  */
 public class StringUtil {
+	
+	private StringUtil() {}
 
   /**
    * Return true if the string is null, empty or only have white spaces

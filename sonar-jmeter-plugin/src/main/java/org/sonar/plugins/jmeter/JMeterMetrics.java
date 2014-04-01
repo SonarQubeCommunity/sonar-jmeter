@@ -24,139 +24,95 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.sonar.api.measures.Metric;
+import org.sonar.api.measures.Metric.ValueType;
 import org.sonar.api.measures.Metrics;
 
 public class JMeterMetrics implements Metrics {
 
   public static final String JMETER_DOMAIN = "Performance tests";
+  
+  private static Metric newMetric(String key, String name, String descrip, ValueType valueType, int direction) {
+  	return new Metric.Builder(key, name, valueType)
+			.setDescription(descrip==null? name : descrip)
+			.setQualitative(false)
+			.setDirection(direction)
+			.setDomain(JMETER_DOMAIN)
+			.create();
+  }
+  
+  private static Metric newMetric(String key, String name, ValueType valueType, int direction) {
+  	return newMetric(key, name, null, valueType, direction);
+  }
 
-  public static final Metric requestErrorPercent = new Metric.Builder(
-	"requestErrorPercent", "Errors", Metric.ValueType.PERCENT)
-	.setDescription("Errors")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_WORST)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric requestErrorPercent = newMetric(
+  		"requestErrorPercent", "Errors", 
+  		ValueType.PERCENT, Metric.DIRECTION_WORST);
 
-  public static final Metric testDesc = new Metric.Builder(
-	"testDesc", "Test description", Metric.ValueType.STRING)
-	.setDescription("Test description")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_NONE)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric testDesc = newMetric(
+  		"testDesc", "Test description", 
+  		ValueType.STRING, Metric.DIRECTION_NONE);
 		  
-  public static final Metric duration = new Metric.Builder(
-	"duration", "Duration", Metric.ValueType.MILLISEC)
-	.setDescription("Duration")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_NONE)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric duration = newMetric(
+  		"duration", "Duration", 
+  		ValueType.MILLISEC, Metric.DIRECTION_NONE);
   
-  public static final Metric usersLogged = new Metric.Builder(
-	"usersLogged", "Users", Metric.ValueType.INT)
-	.setDescription("Users")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_NONE)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric usersLogged = newMetric(
+  		"usersLogged", "Users", 
+  		ValueType.INT, Metric.DIRECTION_NONE);
   
-  public static final Metric requestTotal = new Metric.Builder(
-	"requestTotal", "Requests", Metric.ValueType.INT)
-	.setDescription("Total requests")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_NONE)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric requestTotal = newMetric(
+  		"requestTotal", "Requests", "Total requests", 
+  		ValueType.INT, Metric.DIRECTION_NONE);
   
-  public static final Metric transTotal = new Metric.Builder(
-	"transTotal", "Transactions", Metric.ValueType.INT)
-	.setDescription("Total transactions")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_NONE)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric transTotal = newMetric(
+  		"transTotal", "Transactions", "Total transactions", 
+  		ValueType.INT, Metric.DIRECTION_NONE);
   
-  public static final Metric requestResponseTimeOkAvg = new Metric.Builder(
-	"requestResponseTimeOkAvg", "Response time per request", Metric.ValueType.MILLISEC)
-	.setDescription("Average response time per request")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_WORST)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric requestResponseTimeOkAvg = newMetric(
+  		"requestResponseTimeOkAvg", "Response time per request", 
+  		"Average response time per request", 
+  		ValueType.MILLISEC, Metric.DIRECTION_WORST);
 
-  public static final Metric requestResponseTimeOkDevPercent = new Metric.Builder(
-	"requestResponseTimeOkDevPercent", "Deviation per request", Metric.ValueType.PERCENT)
-	.setDescription("Response time deviation")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_WORST)
-	.setDomain(JMETER_DOMAIN)
-	.create();
-
-  public static final Metric requestOkPerMinute = new Metric.Builder(
-	"requestOkPerMinute", "Requests per minute", Metric.ValueType.FLOAT)
-	.setDescription("Requests per minute")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_BETTER)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric requestResponseTimeOkDevPercent = newMetric(
+  		"requestResponseTimeOkDevPercent", "Deviation per request", 
+  		"Response time deviation", 
+  		ValueType.PERCENT, Metric.DIRECTION_WORST);
   
-  public static final Metric requestOkPerMinuteAndUser = new Metric.Builder(
-	"requestOkPerMinuteAndUser", "Requests per minute and user", Metric.ValueType.FLOAT)
-	.setDescription("Requests per minute")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_BETTER)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric requestOkPerMinute = newMetric(
+  		"requestOkPerMinute", "Requests per minute", 
+  		ValueType.FLOAT, Metric.DIRECTION_BETTER);
   
-  public static final Metric transResponseTimeOkAvg = new Metric.Builder(
-	"transResponseTimeOkAvg", "Response time per transaction", Metric.ValueType.MILLISEC)
-	.setDescription("Average response time per transaction")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_WORST)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric requestOkPerMinuteAndUser = newMetric(
+  		"requestOkPerMinuteAndUser", "Requests per minute and user", 
+  		ValueType.FLOAT, Metric.DIRECTION_BETTER);
   
-  public static final Metric transResponseTimeOkDevPercent = new Metric.Builder(
-	"transResponseTimeOkDevPercent", "Deviation per transaction", Metric.ValueType.PERCENT)
-	.setDescription("Response time deviation")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_WORST)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric transResponseTimeOkAvg = newMetric(
+  		"transResponseTimeOkAvg", "Response time per transaction", 
+  		"Average response time per transaction",
+  		ValueType.MILLISEC, Metric.DIRECTION_WORST);
   
-  public static final Metric transOkPerMinute = new Metric.Builder(
-	"transOkPerMinute", "Transactions per minute", Metric.ValueType.FLOAT)
-	.setDescription("Transactions per minute")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_BETTER)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric transResponseTimeOkDevPercent = newMetric(
+  		"transResponseTimeOkDevPercent", "Deviation per transaction", 
+  		"Response time deviation", 
+  		ValueType.PERCENT, Metric.DIRECTION_WORST);
   
-  public static final Metric transOkPerMinuteAndUser = new Metric.Builder(
-	"transOkPerMinuteAndUser", "Transactions per minute and user", Metric.ValueType.FLOAT)
-	.setDescription("Transactions per minute and user")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_BETTER)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric transOkPerMinute = newMetric(
+  		"transOkPerMinute", "Transactions per minute", 
+  		ValueType.FLOAT, Metric.DIRECTION_BETTER);
   
-  public static final Metric transMapResponseTimeOkAvg = new Metric.Builder(
-	"transMapResponseTimeOkAvg", "Response time average", Metric.ValueType.DISTRIB)
-	.setDescription("Average response time per transaction type")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_WORST)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric transOkPerMinuteAndUser = newMetric(
+  		"transOkPerMinuteAndUser", "Transactions per minute and user", 
+  		ValueType.FLOAT, Metric.DIRECTION_BETTER);
   
-  public static final Metric transMapResponseTimeOkDevPercent = new Metric.Builder(
-	"transMapResponseTimeOkDevPercent", "Response time deviation", Metric.ValueType.DISTRIB)
-	.setDescription("Response time deviation per transaction type")
-	.setQualitative(false)
-	.setDirection(Metric.DIRECTION_WORST)
-	.setDomain(JMETER_DOMAIN)
-	.create();
+  public static final Metric transMapResponseTimeOkAvg = newMetric(
+  		"transMapResponseTimeOkAvg", "Response time average", 
+  		"Average response time per transaction type",
+  		ValueType.DISTRIB, Metric.DIRECTION_WORST);
+  
+  public static final Metric transMapResponseTimeOkDevPercent = newMetric(
+  		"transMapResponseTimeOkDevPercent", "Response time deviation", 
+  		"Response time deviation per transaction type",
+  		ValueType.DISTRIB, Metric.DIRECTION_WORST);
   
   // Used by Sonar to retrieve the list of metrics
   public List<Metric> getMetrics() {

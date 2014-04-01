@@ -42,9 +42,9 @@ import es.excentia.jmeter.report.server.service.ServiceFactory;
  */
 public class JMeterReportServer {
 
-  private static final Logger log = LoggerFactory.getLogger(JMeterReportServer.class);
-  private static final boolean LOG_DEBUG = log.isDebugEnabled();
-  private static final boolean LOG_TRACE = log.isTraceEnabled();
+  private static final Logger LOG = LoggerFactory.getLogger(JMeterReportServer.class);
+  private static final boolean LOG_DEBUG = LOG.isDebugEnabled();
+  private static final boolean LOG_TRACE = LOG.isTraceEnabled();
 
   private ServerSocket listener;
   private Thread serverThread;
@@ -75,7 +75,7 @@ public class JMeterReportServer {
 
         int op = in.readInt();
         if (LOG_DEBUG) {
-          log.debug("Attending client request operation: " + op);
+          LOG.debug("Attending client request operation: " + op);
         }
 
         try {
@@ -109,9 +109,9 @@ public class JMeterReportServer {
           }
 
         } catch (IOException ioe) {
-          log.error("IOException on socket when serving request", ioe);
+          LOG.error("IOException on socket when serving request", ioe);
         } catch (Exception e) {
-          log.error("Report request exception", e);
+          LOG.error("Report request exception", e);
 
           // Send error to client
           out.writeInt(JMeterReportConst.RETURN_CODE_ERROR);
@@ -119,14 +119,14 @@ public class JMeterReportServer {
         }
 
       } catch (IOException ioe) {
-        log.error("Could not get socket streams", ioe);
+        LOG.error("Could not get socket streams", ioe);
       } finally {
         try {
           connections--;
           socket.close();
-          log.debug("Request finished");
+          LOG.debug("Request finished");
         } catch (Exception e) {
-          log.error("Could not close server socket", e);
+          LOG.error("Could not close server socket", e);
         }
       }
     }
@@ -139,12 +139,12 @@ public class JMeterReportServer {
    */
   private void connectionLimitExceeded(Socket socket) {
     if (LOG_DEBUG) {
-      log.debug("Connection limit exceeded ("+maxConnections+"). Closing socket ...");
+      LOG.debug("Connection limit exceeded ("+maxConnections+"). Closing socket ...");
     }
     try {
       socket.close();
     } catch (Exception e) {
-      log.error("Could not close server socket", e);
+      LOG.error("Could not close server socket", e);
     }
   }
   
@@ -157,7 +157,7 @@ public class JMeterReportServer {
     try {
 
       int port = configService.getPort();
-      log.info("Starting server on port " + port);
+      LOG.info("Starting server on port " + port);
 
       maxConnections = configService.getMaxConnections();
       
@@ -181,13 +181,13 @@ public class JMeterReportServer {
 
     } catch (IOException ioe) {
       if (LOG_TRACE) {
-        log.trace("IOException on socket listen", ioe);
+        LOG.trace("IOException on socket listen", ioe);
       } else if (!stopWhenPossible) {
-        log.error("IOException on socket listen", ioe);
+        LOG.error("IOException on socket listen", ioe);
       }
     }
 
-    log.info("Server stopped");
+    LOG.info("Server stopped");
   }
 
   /**
@@ -208,14 +208,14 @@ public class JMeterReportServer {
 
   public void stop() {
     if (listener != null) {
-      log.info("Stopping server ...");
+      LOG.info("Stopping server ...");
 
       stopWhenPossible = true;
 
       try {
         listener.close();
       } catch (IOException e) {
-        log.error("Error stoping server", e);
+        LOG.error("Error stoping server", e);
       } finally {
         listener = null;
       }

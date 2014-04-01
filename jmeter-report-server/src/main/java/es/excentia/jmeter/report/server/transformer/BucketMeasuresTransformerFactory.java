@@ -28,6 +28,8 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.AbstractSample;
 
 public class BucketMeasuresTransformerFactory {
 
+	private BucketMeasuresTransformerFactory() {}
+	
   private static final String IMPL_PACKAGE = "es.excentia.jmeter.report.server.transformer";
 
   @SuppressWarnings("unchecked")

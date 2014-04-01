@@ -41,7 +41,7 @@ import es.excentia.jmeter.report.server.service.ServiceFactory;
 
 public class JMeterSensor implements Sensor { // , GeneratesViolations {
 
-  public static final Logger LOG = LoggerFactory.getLogger(JMeterSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(JMeterSensor.class);
 
   // Local JMeterReportServer services we will use to analize local jtl files
   static final ConfigService configService = ServiceFactory.get(ConfigService.class);

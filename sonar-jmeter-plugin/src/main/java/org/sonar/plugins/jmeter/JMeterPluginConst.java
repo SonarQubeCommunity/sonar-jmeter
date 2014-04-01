@@ -21,10 +21,14 @@
 package org.sonar.plugins.jmeter;
 
 public class JMeterPluginConst {
+	
+	private JMeterPluginConst() {}
+	
   public static final String HOST_PROPERTY = "org.sonar.plugins.jmeter.server.host";
   public static final String PORT_PROPERTY = "org.sonar.plugins.jmeter.server.port";
   public static final String CONFIG_PROPERTY = "org.sonar.plugins.jmeter.server.config";
   public static final String LOCAL_JTL_PATH_PROPERTY = "org.sonar.plugins.jmeter.jtlpath";
   public static final String REQUESTXTIME_TIMEUNIT_PROPERTY = "org.sonar.plugins.jmeter.requestxtimeunit";
   public static final String TRANSXTIME_TIMEUNIT_PROPERTY = "org.sonar.plugins.jmeter.transxtimeunit";
+  
 }

@@ -27,20 +27,20 @@ import es.excentia.jmeter.report.server.testresults.SampleMix;
 
 public abstract class ReportThread extends Thread  {
   
-  private static final Logger log = LoggerFactory.getLogger(ReportThread.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ReportThread.class);
   
   
   private RuntimeException resultException;
   private Report report;
   private StreamReader<SampleMix> reader;
+  private boolean ok = false;
   
-  
-  public ReportThread(Report report, StreamReader<SampleMix> reader) {
+	public ReportThread(Report report, StreamReader<SampleMix> reader) {
     this.report = report;
     this.reader = reader;
   }
   
-  
+	public boolean isOk() { return ok; }
   public Report getReport() {  return report; }
   public RuntimeException getResultException() { return resultException; }
   
@@ -49,12 +49,13 @@ public abstract class ReportThread extends Thread  {
     
     try {
       report.extract(reader);
+      ok = true;
     } catch(RuntimeException ex) {
-      log.debug("ReportThread running finished with exception", ex);
+      LOG.debug("ReportThread finished with exception", ex);
       resultException = ex;
+    } finally {
+    	onFinished();
     }
-    
-    onFinished();
   }
   
   public abstract void onFinished();

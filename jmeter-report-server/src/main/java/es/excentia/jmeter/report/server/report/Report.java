@@ -203,7 +203,7 @@ public class Report {
 
   @Override
   public String toString() {
-    StringBuffer buff = new StringBuffer();
+  	StringBuilder buff = new StringBuilder();
 
     buff.append("\n** Request Global Scope **");
     for (int phase = 0; phase < 2; phase++) {

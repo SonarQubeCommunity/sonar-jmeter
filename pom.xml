@@ -73,11 +73,10 @@
     <module>jmeter-report-server</module>
     <module>sonar-jmeter-plugin</module>
   </modules>
-
+   
   <scm>
-    <connection>scm:git:git@github.com:SonarCommunity/sonar-jmeter.git</connection>
     <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-jmeter.git</developerConnection>
-    <url>https://github.com/SonarCommunity/sonar-jmeter</url>
+    <url>http://svn.sonar-plugins.codehaus.org</url>
   </scm>
 
   <issueManagement>

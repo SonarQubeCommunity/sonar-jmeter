@@ -35,6 +35,8 @@ import es.excentia.jmeter.report.client.data.GlobalSummary;
  * @author cfillol
  */
 public class JMeterMAO {
+	
+	private JMeterMAO() {}
 
   /**
    * Save GlobalSummary as sonar metrics

@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 import es.excentia.jmeter.report.client.data.Measure;
+import es.excentia.jmeter.report.client.exception.FatalJMeterReportServerException;
 import es.excentia.jmeter.report.client.serialization.GlobalSummaryWriter;
 import es.excentia.jmeter.report.client.serialization.MeasureWriter;
 import es.excentia.jmeter.report.client.serialization.StreamReader;
@@ -65,7 +66,7 @@ import es.excentia.jmeter.report.server.transformer.BucketMeasuresTransformerFac
  */
 public class OperationServiceImpl implements OperationService {
 
-  private static final Logger log = LoggerFactory.getLogger(OperationServiceImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(OperationServiceImpl.class);
   
   private ReaderService readerService = ServiceFactory.get(ReaderService.class);
 
@@ -191,7 +192,7 @@ public class OperationServiceImpl implements OperationService {
     ReportThread reportThread = runningGlobalSummaryReports.get(config);
     if (reportThread!=null) {
       
-      log.debug(
+      LOG.debug(
           "There is no need to start a new global summary report " +
           "process because there is one running allready for config: '"+config+"'"
       );
@@ -210,19 +211,21 @@ public class OperationServiceImpl implements OperationService {
         public void onFinished() {
           runningGlobalSummaryReports.remove(config);
           
-          if (this.getResultException()==null) {
-            log.info("Global summary report successful finished for config '"+config+ "'");
+          if (this.isOk()) {
+            LOG.info("Global summary report successful finished for config '"+config+ "'");
           } else {
-            log.error(
-                "Error extracting global summary report for config '"+config+ "'",
-                this.getResultException()
-            );
+          	String errorMsg = "Error extracting global summary report for config '"+config+ "'";
+          	if (this.getResultException()==null) {
+          		LOG.error(errorMsg);
+          	} else {
+          		LOG.error(errorMsg, this.getResultException());
+          	}
           }
         }
       };
 
       runningGlobalSummaryReports.put(config, reportThread);
-      log.info("Starting global summary report for config '"+config+ "'");
+      LOG.info("Starting global summary report for config '"+config+ "'");
       reportThread.start();
     }
     
@@ -244,8 +247,12 @@ public class OperationServiceImpl implements OperationService {
       }
     }
     
-    Report report = reportThread.getReport();
-    return getGlobalSummaryFromReport(config, report);
+    if (reportThread.isOk()) {
+    	Report report = reportThread.getReport();
+    	return getGlobalSummaryFromReport(config, report);
+    } else {
+    	throw new FatalJMeterReportServerException("Fatal error extracting report");
+    }
   }
   
   /* (non-Javadoc)

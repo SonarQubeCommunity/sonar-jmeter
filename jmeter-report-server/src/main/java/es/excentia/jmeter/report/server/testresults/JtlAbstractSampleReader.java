@@ -73,10 +73,10 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   private static final String SAMPLE_TAG_NAME = "sample";
   
 
-  private static final Logger log = LoggerFactory
+  private static final Logger LOG = LoggerFactory
       .getLogger(JtlAbstractSampleReader.class);
-  private static final boolean LOG_DEBUG = log.isDebugEnabled();
-  private static final boolean LOG_TRACE = log.isTraceEnabled();
+  private static final boolean LOG_DEBUG = LOG.isDebugEnabled();
+  private static final boolean LOG_TRACE = LOG.isTraceEnabled();
 
   
   private XMLEventReader reader;
@@ -94,26 +94,26 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
    * See method takeCareWhenNearToJTLEnd.
    */
   private static final int GROWING_JTL_CHECK_TIME = 500;
-  private static Boolean canReanRunningTestJtl = null;
+  private static Boolean CAN_READ_RUNNING_TEST_JTL = null;
   private synchronized static boolean getCanReadRunningTestJtl() {
-  	if (canReanRunningTestJtl==null) {
-  		canReanRunningTestJtl = 
+  	if (CAN_READ_RUNNING_TEST_JTL==null) {
+  		CAN_READ_RUNNING_TEST_JTL = 
   	  		JavaUtil.getJREMajorVersion()==1 && JavaUtil.getJREMinorVersion()>=6 || 
   	  		JavaUtil.getJREMajorVersion()>1;
   	  		
-  		if (!canReanRunningTestJtl) {
-  			log.warn("Ability for reading JTL results when jmeter test is running "
+  		if (!CAN_READ_RUNNING_TEST_JTL) {
+  			LOG.warn("Ability for reading JTL results when jmeter test is running "
   					+ "is NOT AVAILABLE. You will need at least java 1.6 for this.");
   		}
   	}
-		return canReanRunningTestJtl;
+		return CAN_READ_RUNNING_TEST_JTL;
 	}
   
   public JtlAbstractSampleReader(InputStream is) {
     super(is);
 
     if (LOG_DEBUG) {
-      log.debug("Creating JtlAbstractSampleReader ...");
+      LOG.debug("Creating JtlAbstractSampleReader ...");
     }
 
     try {
@@ -142,7 +142,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
 
     } catch (XMLStreamException e) {
       if (LOG_DEBUG) {
-        log.debug("Cannot create JtlReader", e);
+        LOG.debug("Cannot create JtlReader", e);
       }
       throw new JtlReaderException("Cannot create JtlReader", e);
     }
@@ -163,7 +163,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   	
       int availableBytes = is.available();
       while (availableBytes < FIRST_LEVEL_SAMPLE_MAX_SIZE && availableBytes>lastAvailableBytes) {
-        log.debug(
+        LOG.debug(
             "JTL EOF is near ("+availableBytes+" bytes). Maybe there is " +
          		"a jmeter test in process. We'll wait "+GROWING_JTL_CHECK_TIME+" ms."
         );
@@ -250,7 +250,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
               String sampleXml = swriter.reset();
   
               if (LOG_TRACE) {
-                log.trace(sampleXml);
+                LOG.trace(sampleXml);
               }
   
               // Convert xml into XmlBeans object
@@ -277,7 +277,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       }
   
       if (LOG_DEBUG) {
-        log.debug(String.format("JtlAbstractSampleReader read %d nodes",
+        LOG.debug(String.format("JtlAbstractSampleReader read %d nodes",
             readCount));
       }
   

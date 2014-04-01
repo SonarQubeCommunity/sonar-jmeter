@@ -57,9 +57,9 @@ import es.excentia.jmeter.report.server.testresults.xmlbeans.Sample;
  */
 public class JtlSampleMixReader extends StreamReader<SampleMix> {
 
-  private static final Logger log = LoggerFactory
+  private static final Logger LOG = LoggerFactory
       .getLogger(JtlSampleMixReader.class);
-  private static final boolean LOG_WARN = log.isWarnEnabled();
+  private static final boolean LOG_WARN = LOG.isWarnEnabled();
 
   protected JtlAbstractSampleReader jtlReader;
 
@@ -149,7 +149,7 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
         
       } else {
         if (LOG_WARN) {
-          log.warn("Tipo de sample no reconocido: "
+          LOG.warn("Tipo de sample no reconocido: "
               + abstractSample.getClass().getSimpleName());
         }
       }

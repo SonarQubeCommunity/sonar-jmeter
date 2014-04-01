@@ -39,8 +39,8 @@ import es.excentia.jmeter.report.client.serialization.StreamReader;
 
 public class JMeterReportClient {
 
-  private static final Logger log = LoggerFactory.getLogger(JMeterReportClient.class);
-  private static final boolean LOG_DEBUG = log.isDebugEnabled();
+  private static final Logger LOG = LoggerFactory.getLogger(JMeterReportClient.class);
+  private static final boolean LOG_DEBUG = LOG.isDebugEnabled();
 
   private String serverHost = JMeterReportConst.DEFAULT_HOST;
   private int serverPort = JMeterReportConst.DEFAULT_PORT;
@@ -70,8 +70,8 @@ public class JMeterReportClient {
    */
   public GlobalSummary getGlobalSummary(String config) {
     if (LOG_DEBUG) {
-      log.debug("getGlobalSummary");
-      log.debug("config: " + config);
+      LOG.debug("getGlobalSummary");
+      LOG.debug("config: " + config);
     }
 
     Socket socket = null;
@@ -130,10 +130,10 @@ public class JMeterReportClient {
    */
   public StreamReader<GlobalSummary> getRunningGlobalSummary(String config, boolean startNewIfNone, int sleepTime) {
     if (LOG_DEBUG) {
-      log.debug("getRunningGlobalSummary");
-      log.debug("config: " + config);
-      log.debug("startNewIfNone: " + startNewIfNone);
-      log.debug("sleepTime: " + sleepTime);
+      LOG.debug("getRunningGlobalSummary");
+      LOG.debug("config: " + config);
+      LOG.debug("startNewIfNone: " + startNewIfNone);
+      LOG.debug("sleepTime: " + sleepTime);
     }
 
     Socket socket = null;
@@ -169,10 +169,10 @@ public class JMeterReportClient {
   public StreamReader<Measure> getBuckedMeasures(String config, String metric,
       int millisBucket) {
     if (LOG_DEBUG) {
-      log.debug("getBuckedMeasures");
-      log.debug("config: " + config);
-      log.debug("metric: " + metric);
-      log.debug("millisBucket: " + millisBucket);
+      LOG.debug("getBuckedMeasures");
+      LOG.debug("config: " + config);
+      LOG.debug("metric: " + metric);
+      LOG.debug("millisBucket: " + millisBucket);
     }
 
     Socket socket = null;

@@ -40,7 +40,7 @@ import es.excentia.jmeter.report.server.service.ServiceFactory;
 
 public class JMeterPostJob implements PostJob, CheckProject {
 
-  public static final Logger LOG = LoggerFactory.getLogger(JMeterPostJob.class);
+  private static final Logger LOG = LoggerFactory.getLogger(JMeterPostJob.class);
 
   // Local JMeterReportServer services we will use to analize jtl files
   static final ConfigService configService = ServiceFactory.get(ConfigService.class);
@@ -101,7 +101,7 @@ public class JMeterPostJob implements PostJob, CheckProject {
     GlobalSummary globalSummary = null;
     String projectName = project.getName();
     
-    final String jtlPaths[] = new String[] { "/target/jmeter/results", "/target/jmeter-reports" };
+    final String[] jtlPaths = new String[] { "/target/jmeter/results", "/target/jmeter-reports" };
     for (String innerPath : jtlPaths) {
       String jtlPath = getJtlFilePath(project, innerPath);
       if (jtlPath == null) {
