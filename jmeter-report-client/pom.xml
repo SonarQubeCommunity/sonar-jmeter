@@ -15,12 +15,6 @@
   <description>Client to retrieve JMeter test results from JMeter report server.</description>
   <url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/jmeter-report-client</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/jmeter-report-client</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org</url>
-  </scm>
-
   <dependencies>
 
     <!-- Test -->

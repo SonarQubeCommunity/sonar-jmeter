@@ -16,12 +16,6 @@
   <description>Server to retrieve JMeter test results from JMeter data files.</description>
   <url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/jmeter-report-server</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/jmeter-report-server</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org</url>
-  </scm>
-
   <build>
     <plugins>
       <plugin>

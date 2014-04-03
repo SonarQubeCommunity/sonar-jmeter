@@ -15,12 +15,6 @@
   <description>Feed SonarQube with JMeter test results.</description>
   <url>http://docs.codehaus.org/display/SONAR/JMeter+Plugin</url>
 
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/jmeter/sonar-jmeter-plugin</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org</url>
-  </scm>
-
   <properties>
     <sonar.pluginClass>org.sonar.plugins.jmeter.JMeterPlugin</sonar.pluginClass>
     <sonar.pluginName>JMeter</sonar.pluginName>
