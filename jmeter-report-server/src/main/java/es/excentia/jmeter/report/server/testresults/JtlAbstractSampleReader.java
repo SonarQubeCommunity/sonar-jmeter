@@ -77,7 +77,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       .getLogger(JtlAbstractSampleReader.class);
   private static final boolean LOG_DEBUG = LOG.isDebugEnabled();
   private static final boolean LOG_TRACE = LOG.isTraceEnabled();
-
+  
   
   private XMLEventReader reader;
   private XMLEventWriter writer;
@@ -90,33 +90,40 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
   
   /** 
    * Ability for reading JTL result files when jmeter 
-   * test is running running is only available for java 1.5 and later. 
-   * See method takeCareWhenNearToJTLEnd.
+   * test is running running is only available for java 1.6 and later. 
+   * See methods getCanReadRunningTestJtl and takeCareWhenNearToJTLEnd.
    */
-  private static final int GROWING_JTL_CHECK_TIME = 500;
-  private static Boolean CAN_READ_RUNNING_TEST_JTL = null;
-  private synchronized static boolean getCanReadRunningTestJtl() {
-  	if (CAN_READ_RUNNING_TEST_JTL==null) {
-  		CAN_READ_RUNNING_TEST_JTL = 
-  	  		JavaUtil.getJREMajorVersion()==1 && JavaUtil.getJREMinorVersion()>=6 || 
-  	  		JavaUtil.getJREMajorVersion()>1;
-  	  		
-  		if (!CAN_READ_RUNNING_TEST_JTL) {
-  			LOG.warn("Ability for reading JTL results when jmeter test is running "
-  					+ "is NOT AVAILABLE. You will need at least java 1.6 for this.");
-  		}
-  	}
-		return CAN_READ_RUNNING_TEST_JTL;
+  private int growingJtlWaitTime = 0;
+  
+  private synchronized boolean getCanReadRunningTestJtl() {
+    boolean canReadRunning = growingJtlWaitTime > 0;
+    if (canReadRunning) {
+      canReadRunning = 
+          JavaUtil.getJREMajorVersion()==1 && JavaUtil.getJREMinorVersion()>=6 || 
+          JavaUtil.getJREMajorVersion()>1;
+          
+      if (!canReadRunning) {
+        LOG.warn("Ability for reading JTL results when jmeter test is running "
+            + "is NOT AVAILABLE. You will need at least java 1.6 for this.");
+      }
+    }
+    return canReadRunning;
 	}
   
   public JtlAbstractSampleReader(InputStream is) {
+    this(is, 0);
+  }
+  
+  public JtlAbstractSampleReader(InputStream is, int growingJtlWaitTime) {
     super(is);
-
+    
     if (LOG_DEBUG) {
       LOG.debug("Creating JtlAbstractSampleReader ...");
     }
 
     try {
+      
+      this.growingJtlWaitTime = growingJtlWaitTime;
 
       // Create the input reader to read the file. We will
       // use the defaults here, but it could be configured
@@ -165,11 +172,11 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
       while (availableBytes < FIRST_LEVEL_SAMPLE_MAX_SIZE && availableBytes>lastAvailableBytes) {
         LOG.debug(
             "JTL EOF is near ("+availableBytes+" bytes). Maybe there is " +
-         		"a jmeter test in process. We'll wait "+GROWING_JTL_CHECK_TIME+" ms."
+         		"a jmeter test in process. We'll wait "+growingJtlWaitTime+" secs."
         );
 
         try {
-          Thread.sleep(GROWING_JTL_CHECK_TIME); 
+          Thread.sleep(growingJtlWaitTime * 1000); 
         } catch (InterruptedException e) {
           // Check remaining data size again ...
         }
@@ -182,7 +189,7 @@ public class JtlAbstractSampleReader extends StreamReader<AbstractSample> {
         lastAvailableBytes = 0;
       }
       // else
-      // Available JTL bytes not growing after GROWING_JTL_CHECK_TIME 
+      // Available JTL bytes not growing after growingJtlWaitTime 
       // JMeter tests must be finished
       
   }

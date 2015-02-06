@@ -64,8 +64,12 @@ public class JtlSampleMixReader extends StreamReader<SampleMix> {
   protected JtlAbstractSampleReader jtlReader;
 
   public JtlSampleMixReader(InputStream is) {
+    this(is, 0);
+  }
+  
+  public JtlSampleMixReader(InputStream is, int growingJtlWaitTime) {
     super(is);
-    jtlReader = new JtlAbstractSampleReader(is);
+    jtlReader = new JtlAbstractSampleReader(is, growingJtlWaitTime);
   }
 
   protected boolean isTransaction(Sample sample) {

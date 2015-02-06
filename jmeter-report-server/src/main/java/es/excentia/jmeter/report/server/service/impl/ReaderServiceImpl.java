@@ -50,7 +50,7 @@ public class ReaderServiceImpl implements ReaderService {
   ConfigService configService = ServiceFactory.get(ConfigService.class);
   
 
-  protected InputStream getInputStreamByTestConfig(String config) {
+  protected InputStream getInputStreamByTestConfig(String config, String jtlPath) {
     
     if (LOG_DEBUG) {
       LOG.debug("getInputStreamByTestConfig for config '" + config+"'");
@@ -58,9 +58,6 @@ public class ReaderServiceImpl implements ReaderService {
 
     
     InputStream is = null;
-    
-    ConfigInfo testConfigInfo = configService.getTestConfigInfo(config);
-    String jtlPath = testConfigInfo.getJtlPath();
     
     if (LOG_DEBUG) {
       LOG.debug("JTL path: " + jtlPath);
@@ -88,18 +85,21 @@ public class ReaderServiceImpl implements ReaderService {
   }
 
   public StreamReader<AbstractSample> getAbstractSampleReaderByTestConfig(String config) {
-    InputStream is = getInputStreamByTestConfig(config);
-    return new JtlAbstractSampleReader(is);
+    ConfigInfo configInfo = configService.getTestConfigInfo(config);
+    InputStream is = getInputStreamByTestConfig(config, configInfo.getJtlPath());
+    return new JtlAbstractSampleReader(is, configInfo.getGrowingJtlWaitTime());
   }
 
   public StreamReader<AbstractSample> getHttpSampleReaderByTestConfig(String config) {
-    InputStream is = getInputStreamByTestConfig(config);
-    return new JtlHttpSampleReader(is);
+    ConfigInfo configInfo = configService.getTestConfigInfo(config);
+    InputStream is = getInputStreamByTestConfig(config, configInfo.getJtlPath());
+    return new JtlHttpSampleReader(is, configInfo.getGrowingJtlWaitTime());
   }
 
   public StreamReader<SampleMix> getSampleMixReaderByTestConfig(String config) {
-    InputStream is = getInputStreamByTestConfig(config);
-    return new JtlSampleMixReader(is);
+    ConfigInfo configInfo = configService.getTestConfigInfo(config);
+    InputStream is = getInputStreamByTestConfig(config, configInfo.getJtlPath());
+    return new JtlSampleMixReader(is, configInfo.getGrowingJtlWaitTime());
   }
 
 }

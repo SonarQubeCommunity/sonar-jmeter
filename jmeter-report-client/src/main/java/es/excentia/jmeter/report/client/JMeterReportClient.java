@@ -94,6 +94,14 @@ public class JMeterReportClient {
   
   /**
    * Gets global summary reports for a running or a finished jmeter test.
+   * 
+   * BE CAREFUL! For this to work properly growingJtlWaitTime has to be 
+   * configured in jmeter_report_server.properties, for the specified 
+   * configuration, and it must have a value bigger than 0. For example
+   * this means jmeter will wait 5 seconds when reaches jtl end to see
+   * if it grows, and so, keep reading:
+   * 
+   * testconfig.yourtestconfigname.growingJtlWaitTime=5 
    *  
    * Last obtained GlobalSummary object will contain total results, but
    * previous obtained GlobalSummary objects will contain partial results.
@@ -118,7 +126,7 @@ public class JMeterReportClient {
    * @param startNewIfNone true to start a new parsing process if there 
    * isn't one running. false to get running parsing results or null if there
    * wasn't a parsing process running.
-   * @param sleepTime Time in seconds that that jmeter report server will wait to 
+   * @param sleepTime Time in seconds that jmeter report server will wait to 
    * send a new GlobalReport object containing partial results.
    * 
    * @return A StreamReader<GlobalSummary> object that have to be used to 
@@ -128,7 +136,8 @@ public class JMeterReportClient {
    * 
    * @throws ServerErrorException
    */
-  public StreamReader<GlobalSummary> getRunningGlobalSummary(String config, boolean startNewIfNone, int sleepTime) {
+  public StreamReader<GlobalSummary> getRunningGlobalSummary(
+      String config, boolean startNewIfNone, int sleepTime) {
     if (LOG_DEBUG) {
       LOG.debug("getRunningGlobalSummary");
       LOG.debug("config: " + config);

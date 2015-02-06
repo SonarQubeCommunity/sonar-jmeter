@@ -38,6 +38,10 @@ import es.excentia.jmeter.report.server.service.ConfigService;
 /**
  * @author cfillol
  */
+/**
+ * @author carlos
+ *
+ */
 public class ConfigServiceImpl implements ConfigService {
 
   private static final Logger LOG = LoggerFactory.getLogger(ConfigServiceImpl.class);
@@ -96,7 +100,7 @@ public class ConfigServiceImpl implements ConfigService {
        );
     } else {
       try {
-        value = Integer.parseInt(getProperty(key));
+        value = Integer.parseInt(strValue);
       } catch (NumberFormatException e) {
         LOG.warn("Could not parse " + key + ": " + e.getMessage());
       }
@@ -112,6 +116,25 @@ public class ConfigServiceImpl implements ConfigService {
 
     return value;
   }
+  
+  /**
+   * Get a configured boolean value or default
+   */
+  public boolean getBooleanProperty(String key, boolean defaultValue) {
+    boolean value = defaultValue;
+
+    String strValue = getProperty(key);
+    if (strValue == null) {
+      LOG.debug(
+          "No " + key + " configured. "+
+          "Using default value " + defaultValue + "."
+       );
+    } else {
+      value = strValue.toLowerCase().startsWith("t");
+    }
+
+    return value;
+  }
 
   
   private static final Map<String, ConfigInfo> inMemoryConfigs = new HashMap<String, ConfigInfo>();
@@ -121,27 +144,32 @@ public class ConfigServiceImpl implements ConfigService {
    */
   public ConfigInfo getTestConfigInfo(String config) {
 
-    String jtlPath;
+    ConfigInfo testCfg = new ConfigInfo();
     
     ConfigInfo memConfigInfo = inMemoryConfigs.get(config);
     if (memConfigInfo != null) {
       
-      // Retrieve JTL file path from memory
-      jtlPath = memConfigInfo.getJtlPath();
+      // Clone
+      testCfg.setJtlPath(memConfigInfo.getJtlPath());
+      testCfg.setGrowingJtlWaitTime(memConfigInfo.getGrowingJtlWaitTime());
       
     } else {
       
       // Retrieve JTL file path from system property or properties file
       String jtlPathProp = "testconfig." + config + ".jtlpath";
-      jtlPath = getProperty(jtlPathProp);
-      if (jtlPath == null) {
+      testCfg.setJtlPath(getProperty(jtlPathProp));
+      if (testCfg.getJtlPath() == null) {
         throw new ConfigException("There is no property " + jtlPathProp + " in " + JMeterReportConst.REPORT_SERVER_PROPERTIES);
       }
       
+      // Retrieve growingJtlWaitTime from system property or properties file
+      testCfg.setGrowingJtlWaitTime(getNaturalProperty(
+        "testconfig." + config + ".growingJtlWaitTime", 
+        JMeterReportConst.DEFAULT_GROWING_JTL_WAIT_TIME)
+      );
     }
     
-    return new ConfigInfo(config, jtlPath);
-    
+    return testCfg;
   }
   
   /* (non-Javadoc)
@@ -182,5 +210,5 @@ public class ConfigServiceImpl implements ConfigService {
   public int getMaxConnections() {
     return getNaturalProperty(MAX_CONNECTIONS_KEY, JMeterReportConst.DEFAULT_MAX_CONNECTIONS);
   }
-
+  
 }

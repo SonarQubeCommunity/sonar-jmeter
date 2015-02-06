@@ -51,8 +51,12 @@ public class JtlHttpSampleReader extends StreamReader<AbstractSample> {
   protected int httpSamplesIndex;
 
   public JtlHttpSampleReader(InputStream is) {
+    this(is, 0);
+  }
+  
+  public JtlHttpSampleReader(InputStream is, int growingJtlWaitTime) {
     super(is);
-    jtlReader = new JtlSampleMixReader(is);
+    jtlReader = new JtlSampleMixReader(is, growingJtlWaitTime);
   }
 
   /**
