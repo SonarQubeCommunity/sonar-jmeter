@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.jmeter.exception.JMeterPluginException;
 
@@ -47,7 +48,12 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
   static final ConfigService configService = ServiceFactory.get(ConfigService.class);
   static final OperationService metricService = ServiceFactory.get(OperationService.class);
 
-
+  private final Settings settings;
+  
+  public JMeterSensor(Settings settings) {
+  	this.settings = settings;
+  }
+  
   public boolean shouldExecuteOnProject(Project project) {
     return true;
   }
@@ -55,8 +61,8 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
   public void analyse(Project project, SensorContext context) {
 
     // this sensor is executed if local jtl path or remote config name are set
-    String jtlPath = (String) project.getProperty(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
-    String config = (String) project.getProperty(JMeterPluginConst.CONFIG_PROPERTY);
+    String jtlPath = settings.getString(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
+    String config = settings.getString(JMeterPluginConst.CONFIG_PROPERTY);
     if (StringUtils.isBlank(jtlPath) && StringUtils.isBlank(config)) {
       return;
     }
@@ -83,14 +89,14 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
    */
   protected JMeterReportClient getReportClient(Project project) {
 
-    String host = (String) project.getProperty(JMeterPluginConst.HOST_PROPERTY);
+    String host = settings.getString(JMeterPluginConst.HOST_PROPERTY);
     if (StringUtils.isBlank(host)) {
       throw new JMeterPluginException(
           "You must set the HOST in sonar-jmeter-plugin config "
           + "for the project '" + project.getName() + "'");
     }
 
-    String port = (String) project.getProperty(JMeterPluginConst.PORT_PROPERTY);
+    String port = settings.getString(JMeterPluginConst.PORT_PROPERTY);
     if (StringUtils.isBlank(port) || Integer.parseInt(port) == 0) {
       LOG.warn("Null or invalid jmeter-report-server PORT. "
           + "Using default '{}'", JMeterReportConst.DEFAULT_PORT);
@@ -105,7 +111,7 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
    * Gets the configured jmeter test configuration name
    */
   protected String getTestConfigName(Project project) {
-    String config = (String) project.getProperty(JMeterPluginConst.CONFIG_PROPERTY);
+    String config = settings.getString(JMeterPluginConst.CONFIG_PROPERTY);
     if (StringUtils.isBlank(config)) {
       throw new JMeterPluginException(
           "You must set test CONFIG in sonar-jmeter-plugin "
@@ -119,8 +125,7 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
    * Gets the configured jmeter jtl file path, if it was specified
    */
   protected String getLocalJtlFilePath(Project project) {
-    String localJtlPath = (String) project
-    .getProperty(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
+    String localJtlPath = settings.getString(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
     return StringUtils.isBlank(localJtlPath)? null : localJtlPath;
   }
 

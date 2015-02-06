@@ -20,13 +20,9 @@
 
 package org.sonar.plugins.jmeter;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import junit.framework.Assert;
-
-import org.apache.commons.configuration.MapConfiguration;
+import org.junit.Assert;
 import org.junit.Test;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 
 import es.excentia.jmeter.report.server.JMeterReportServer;
@@ -34,30 +30,28 @@ import es.excentia.jmeter.report.server.JMeterReportServer;
 
 public class JMeterSensorTest {
 
-  private JMeterSensor sensor = new JMeterSensor();
-  
   private static final int SERVER_START_TIME = 2000;
   private static final int SERVER_STOP_TIME = 2000;
 
   
   @Test
   public void testLocalJtlPathConfig() {
-    Map<String,String> configMap = new HashMap<String,String>();
-    configMap.put(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, "classpath:/test-http.jtl.xml");
+    Settings settings = new Settings();
+    settings.setProperty(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, "classpath:/test-http.jtl.xml");
     
+    JMeterSensor sensor = new JMeterSensor(settings);
     Project project = new Project("test-http-key","","test-http"); // Force "test-http" as config name
-    project.setConfiguration(new MapConfiguration(configMap));
     
     Assert.assertNotNull(sensor.getGlobalSummary(project));
   }
   
   @Test
   public void testSkipWhenLocalJtlNotExists() {
-    Map<String,String> configMap = new HashMap<String,String>();
-    configMap.put(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, "classpath:/notexistingpath/test.jtl.xml");
+  	Settings settings = new Settings();
+    settings.setProperty(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY, "classpath:/notexistingpath/test.jtl.xml");
     
+    JMeterSensor sensor = new JMeterSensor(settings);
     Project project = new Project("mytestproject","","notexisting"); // Force "notexisting" as config name
-    project.setConfiguration(new MapConfiguration(configMap));
     
     Assert.assertNull(sensor.getGlobalSummary(project));
   }
@@ -79,12 +73,12 @@ public class JMeterSensorTest {
     
 	  try {
 	    	
-	    Map<String,String> configMap = new HashMap<String,String>();
-	    configMap.put(JMeterPluginConst.HOST_PROPERTY, "localhost");
-	    configMap.put(JMeterPluginConst.CONFIG_PROPERTY, "A");
+	  	Settings settings = new Settings();
+	    settings.setProperty(JMeterPluginConst.HOST_PROPERTY, "localhost");
+	    settings.setProperty(JMeterPluginConst.CONFIG_PROPERTY, "A");
 	    
+	    JMeterSensor sensor = new JMeterSensor(settings);
 	    Project project = new Project("mytestproject","","notexisting"); // Force "notexisting" as config name
-	    project.setConfiguration(new MapConfiguration(configMap));
 	    
 	    Assert.assertNull(sensor.getGlobalSummary(project));
 	    

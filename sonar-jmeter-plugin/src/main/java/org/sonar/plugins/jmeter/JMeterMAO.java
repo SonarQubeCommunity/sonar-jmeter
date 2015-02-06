@@ -20,6 +20,8 @@
 
 package org.sonar.plugins.jmeter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.PropertiesBuilder;
@@ -36,6 +38,8 @@ import es.excentia.jmeter.report.client.data.GlobalSummary;
  */
 public class JMeterMAO {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(JMeterPostJob.class);
+	
 	private JMeterMAO() {}
 
   /**
@@ -43,6 +47,10 @@ public class JMeterMAO {
    */
   public static void saveSummaryAsMetrics(GlobalSummary summary, SensorContext context) {
 
+      if (LOG.isDebugEnabled()) {
+  		  LOG.debug(summary.toString());
+      }
+  		
       context.saveMeasure(JMeterMetrics.requestErrorPercent, summary.getRequestsErrorPercent());
       context.saveMeasure(new Measure(JMeterMetrics.testDesc, summary.getTestDesc()));
       context.saveMeasure(JMeterMetrics.duration, Double.valueOf(summary.getTestDuration()));
@@ -53,16 +61,20 @@ public class JMeterMAO {
       if (summary.getRequestsOkTotal() > 0) {
         context.saveMeasure(JMeterMetrics.requestResponseTimeOkAvg, Double.valueOf(summary.getRequestsResponseTimeOkAvg()));
         if (summary.getRequestsOkTotal() > 1) {
+          // Need at least 2 measures to compute dev and total time
           context.saveMeasure(JMeterMetrics.requestResponseTimeOkDevPercent, Double.valueOf(summary.getRequestsResponseTimeOkAvgDevPercent()));
+          context.saveMeasure(JMeterMetrics.requestOkPerMinute, Double.valueOf(summary.getRequestsOkPerMinute()));
+          context.saveMeasure(JMeterMetrics.requestOkPerMinuteAndUser, Double.valueOf(summary.getRequestsOkPerMinuteAndUser()));
         }
       }
-      context.saveMeasure(JMeterMetrics.requestOkPerMinute, Double.valueOf(summary.getRequestsOkPerMinute()));
-      context.saveMeasure(JMeterMetrics.requestOkPerMinuteAndUser, Double.valueOf(summary.getRequestsOkPerMinuteAndUser()));
-
+      
       if (summary.getTransOkTotal() > 0) {
         context.saveMeasure(JMeterMetrics.transResponseTimeOkAvg, Double.valueOf(summary.getTransResponseTimeOkAvg()));
         if (summary.getTransOkTotal() > 1) {
+          // Need at least 2 measures to compute dev and total time
           context.saveMeasure(JMeterMetrics.transResponseTimeOkDevPercent, Double.valueOf(summary.getTransBytesOkAvgDevPercent()));
+          context.saveMeasure(JMeterMetrics.transOkPerMinute, Double.valueOf(summary.getTransOkPerMinute()));
+          context.saveMeasure(JMeterMetrics.transOkPerMinuteAndUser, Double.valueOf(summary.getTransOkPerMinuteAndUser()));
         }
         
         // transMapResponseTimeOkAvg
@@ -77,8 +89,7 @@ public class JMeterMAO {
           context.saveMeasure(new Measure(JMeterMetrics.transMapResponseTimeOkDevPercent, transMapResponseTimeOkDevPropBuild.buildData()));
         }
       }
-      context.saveMeasure(JMeterMetrics.transOkPerMinute, Double.valueOf(summary.getTransOkPerMinute()));
-      context.saveMeasure(JMeterMetrics.transOkPerMinuteAndUser, Double.valueOf(summary.getTransOkPerMinuteAndUser()));
+      
   }
   
 }

@@ -93,19 +93,21 @@
 <tr colspan="3"><td height="10px"></td></tr>
 <tr>
 	<td>
+	<%	if measure('requestTotal').value > 1 %>
 		<h3>Requests</h3>
 		<p><span class="big"><%= formatByPreferedTimeUnits('requestOkPerMinute') -%></span> requests ok/<%= getPreferedTimeUnits('requestOkPerMinute') -%> <%= tendency_icon(measure('requestOkPerMinute')) %></p>
 		<%	if measure('requestResponseTimeOkAvg') %><p><%= format_measure('requestResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('requestResponseTimeOkAvg')) %></p><%  end %>
 		<%	if measure('requestResponseTimeOkDevPercent') %><p><%= format_measure('requestResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('requestResponseTimeOkDevPercent')) %></p><%  end %>
+	<%  end %>
 	</td>
 	<td width="10%" />
 	<td>
-<%	if measure('transTotal').value > 0 %>
+	<%	if measure('transTotal').value > 1 %>
 		<h3>Transactions</h3>
 		<p><span class="big"><%= formatByPreferedTimeUnits('transOkPerMinute') -%></span> transactions ok/<%= getPreferedTimeUnits('transOkPerMinute') -%> <%= tendency_icon(measure('transOkPerMinute')) %></p>
 		<%	if measure('transResponseTimeOkAvg') %><p><%= format_measure('transResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('transResponseTimeOkAvg')) %></p><%  end %>
 		<%	if measure('transResponseTimeOkDevPercent') %><p><%= format_measure('transResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('transResponseTimeOkDevPercent')) %></p><%  end %>
-<%  end %>
+	<%  end %>
 	</td>
 </tr>
 

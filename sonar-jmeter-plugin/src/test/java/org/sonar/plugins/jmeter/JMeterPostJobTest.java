@@ -28,6 +28,7 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.plugins.MockSensorContext;
@@ -39,7 +40,11 @@ public class JMeterPostJobTest {
   
   // Extend original class to save globalSummary reference
   class JMeterPostJobForTesting extends JMeterPostJob {
-    private GlobalSummary globalSumary;
+    public JMeterPostJobForTesting() {
+	    super(new Settings());
+    }
+
+		private GlobalSummary globalSumary;
     public GlobalSummary getGlobalSummary() { 
       return globalSumary; 
     }

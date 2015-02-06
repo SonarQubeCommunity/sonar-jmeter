@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.CheckProject;
 import org.sonar.api.batch.PostJob;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
@@ -46,6 +47,12 @@ public class JMeterPostJob implements PostJob, CheckProject {
   static final ConfigService configService = ServiceFactory.get(ConfigService.class);
   static final OperationService metricService = ServiceFactory.get(OperationService.class);
 
+  private final Settings settings;
+  
+  public JMeterPostJob(Settings settings) {
+  	this.settings = settings;
+  }
+  
   public boolean shouldExecuteOnProject(Project project) {
     return true;
   }
@@ -53,8 +60,8 @@ public class JMeterPostJob implements PostJob, CheckProject {
   public void executeOn(Project project, SensorContext context) {
 
     // this sensor is executed if no config defined on sonar server
-    String jtlPath = (String) project.getProperty(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
-    String config = (String) project.getProperty(JMeterPluginConst.CONFIG_PROPERTY);
+    String jtlPath = settings.getString(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
+    String config = settings.getString(JMeterPluginConst.CONFIG_PROPERTY);
     if (StringUtils.isNotBlank(jtlPath) || StringUtils.isNotBlank(config)) {
       return;
     }
