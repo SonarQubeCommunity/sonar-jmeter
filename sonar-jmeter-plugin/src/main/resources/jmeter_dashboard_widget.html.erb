@@ -138,6 +138,19 @@
 			html.concat('</table>')
 			return html
 		end
+		
+		def transMapToTitle(measureName)
+			title = ''
+			list = measure(measureName).data.split(';')
+			list.each_with_index do |regStr, index|
+				reg = regStr.split('=')
+				title.concat(reg[0]+' '+fn(reg[1]))
+				if index < list.size - 1
+					title.concat('&#13;')
+				end
+			end
+			return title
+		end
 	%>
 	<td align="center">
 		<%
@@ -146,14 +159,8 @@
 		   chart_id = 'chart_' + m
 		   query='ck=distbar&c=777777&w=220&h=100&bgc=ffffff&fs=8&v=' + u(measure(m).data)
 		%>
-		  <p><%= chart(query, :id => chart_id) -%></p>
+		  <p><%= chart(query, :id => chart_id, :title => transMapToTitle(m)) -%></p>
 		  <span class="small" style="position:relative;top:-10px;left:10px;"><%= title -%></span>
-		  
-		  <script type='text/javascript'>
-		  //<![CDATA[
-		  new Tip('<%=chart_id-%>', '<div><%= transMapToTable(m) -%></div>');
-		  //]]>
-		  </script>
 	</td>
 	<td width="10%" />
 	<td align="center">
@@ -165,14 +172,8 @@
 		   query='ck=distbar&c=777777&w=220&h=100&bgc=ffffff&fs=8&v=' + u(measure(m).data)
 		%>
 		  
-		  <p><%= chart(query, :id => chart_id, :alt => title) -%></p>
+		  <p><%= chart(query, :id => chart_id, :title => transMapToTitle(m)) -%></p>
 		  <span class="small" style="position:relative;top:-10px;left:10px;"><%= title -%></span>
-		  
-		  <script type='text/javascript'>
-		  //<![CDATA[
-		  new Tip('<%=chart_id-%>', '<div><%= transMapToTable(m) -%></div>');
-		  //]]>
-		  </script>
 		<% end %>
 	</td>
 </tr>
