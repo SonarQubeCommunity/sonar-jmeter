@@ -58,25 +58,29 @@ public class JMeterMAO {
       context.saveMeasure(JMeterMetrics.requestTotal, Double.valueOf(summary.getRequestsTotal()));
       context.saveMeasure(JMeterMetrics.transTotal, Double.valueOf(summary.getTransTotal()));
 
-      if (summary.getRequestsOkTotal() > 0) {
-        context.saveMeasure(JMeterMetrics.requestResponseTimeOkAvg, Double.valueOf(summary.getRequestsResponseTimeOkAvg()));
+      if (summary.getRequestsTotal() > 1) {
         if (summary.getRequestsOkTotal() > 1) {
-          // Need at least 2 measures to compute dev and total time
+          context.saveMeasure(JMeterMetrics.requestResponseTimeOkAvg, Double.valueOf(summary.getRequestsResponseTimeOkAvg()));
           context.saveMeasure(JMeterMetrics.requestResponseTimeOkDevPercent, Double.valueOf(summary.getRequestsResponseTimeOkAvgDevPercent()));
-          context.saveMeasure(JMeterMetrics.requestOkPerMinute, Double.valueOf(summary.getRequestsOkPerMinute()));
+        }
+        context.saveMeasure(JMeterMetrics.requestOkPerMinute, Double.valueOf(summary.getRequestsOkPerMinute()));
+        if (summary.getUsersLogged() > 0) {
           context.saveMeasure(JMeterMetrics.requestOkPerMinuteAndUser, Double.valueOf(summary.getRequestsOkPerMinuteAndUser()));
         }
       }
       
-      if (summary.getTransOkTotal() > 0) {
-        context.saveMeasure(JMeterMetrics.transResponseTimeOkAvg, Double.valueOf(summary.getTransResponseTimeOkAvg()));
+      if (summary.getTransTotal() > 1) {
         if (summary.getTransOkTotal() > 1) {
-          // Need at least 2 measures to compute dev and total time
+          context.saveMeasure(JMeterMetrics.transResponseTimeOkAvg, Double.valueOf(summary.getTransResponseTimeOkAvg()));
           context.saveMeasure(JMeterMetrics.transResponseTimeOkDevPercent, Double.valueOf(summary.getTransBytesOkAvgDevPercent()));
-          context.saveMeasure(JMeterMetrics.transOkPerMinute, Double.valueOf(summary.getTransOkPerMinute()));
+        }
+        context.saveMeasure(JMeterMetrics.transOkPerMinute, Double.valueOf(summary.getTransOkPerMinute()));
+        if (summary.getUsersLogged() > 0) {
           context.saveMeasure(JMeterMetrics.transOkPerMinuteAndUser, Double.valueOf(summary.getTransOkPerMinuteAndUser()));
         }
-        
+      }
+      
+      if (summary.getTransOkTotal() > 0) {
         // transMapResponseTimeOkAvg
         PropertiesBuilder<String, Double> transMapResponseTimeOkAvgPropBuild = new PropertiesBuilder<String, Double>(
             JMeterMetrics.transMapResponseTimeOkAvg, summary.getTransMapResponseTimeOkAvg());

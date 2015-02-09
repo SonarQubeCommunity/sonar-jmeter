@@ -45,17 +45,22 @@
 	end
 	
 	def formatByPreferedTimeUnits(measureName)
-		propKey = getPreferedTimeUnitPropKey(measureName)
-		timeUnits = getConfigValue(propKey, 'min')
-		value = measure(measureName).value;
-		if timeUnits.start_with?('h')
-			return fn(value * 60)
-		else
-			if timeUnits.start_with?('s')
-				return fn(value / 60)
+		if measure(measureName)
+			propKey = getPreferedTimeUnitPropKey(measureName)
+			timeUnits = getConfigValue(propKey, 'min')
+			
+			value = measure(measureName).value;
+			if timeUnits.start_with?('h')
+				return fn(value * 60)
 			else
-				return fn(value);
+				if timeUnits.start_with?('s')
+					return fn(value / 60)
+				else
+					return fn(value);
+				end
 			end
+		else
+			return '-'
 		end
 	end	
 %>
@@ -93,20 +98,24 @@
 <tr colspan="3"><td height="10px"></td></tr>
 <tr>
 	<td>
-	<%	if measure('requestTotal').value > 1 %>
+	<%	if measure('requestTotal') and measure('requestTotal').value > 1 %>
 		<h3>Requests</h3>
 		<p><span class="big"><%= formatByPreferedTimeUnits('requestOkPerMinute') -%></span> requests ok/<%= getPreferedTimeUnits('requestOkPerMinute') -%> <%= tendency_icon(measure('requestOkPerMinute')) %></p>
-		<%	if measure('requestResponseTimeOkAvg') %><p><%= format_measure('requestResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('requestResponseTimeOkAvg')) %></p><%  end %>
-		<%	if measure('requestResponseTimeOkDevPercent') %><p><%= format_measure('requestResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('requestResponseTimeOkDevPercent')) %></p><%  end %>
+		<%	if measure('requestOkTotal') and measure('requestOkTotal').value > 1 %>
+			<%	if measure('requestResponseTimeOkAvg') %><p><%= format_measure('requestResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('requestResponseTimeOkAvg')) %></p><%  end %>
+			<%	if measure('requestResponseTimeOkDevPercent') %><p><%= format_measure('requestResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('requestResponseTimeOkDevPercent')) %></p><%  end %>
+		<%  end %>
 	<%  end %>
 	</td>
 	<td width="10%" />
 	<td>
-	<%	if measure('transTotal').value > 1 %>
+	<%	if measure('transTotal') and measure('transTotal').value > 1 %>
 		<h3>Transactions</h3>
 		<p><span class="big"><%= formatByPreferedTimeUnits('transOkPerMinute') -%></span> transactions ok/<%= getPreferedTimeUnits('transOkPerMinute') -%> <%= tendency_icon(measure('transOkPerMinute')) %></p>
-		<%	if measure('transResponseTimeOkAvg') %><p><%= format_measure('transResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('transResponseTimeOkAvg')) %></p><%  end %>
-		<%	if measure('transResponseTimeOkDevPercent') %><p><%= format_measure('transResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('transResponseTimeOkDevPercent')) %></p><%  end %>
+		<%	if measure('transOkTotal') and measure('transOkTotal').value > 1 %>
+			<%	if measure('transResponseTimeOkAvg') %><p><%= format_measure('transResponseTimeOkAvg') -%> response time <%= tendency_icon(measure('transResponseTimeOkAvg')) %></p><%  end %>
+			<%	if measure('transResponseTimeOkDevPercent') %><p><%= format_measure('transResponseTimeOkDevPercent') -%> deviation <%= tendency_icon(measure('transResponseTimeOkDevPercent')) %></p><%  end %>
+		<%  end %>
 	<%  end %>
 	</td>
 </tr>
