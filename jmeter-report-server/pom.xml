@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins.jmeter</groupId>
     <artifactId>parent</artifactId>
-    <version>0.3</version>
+    <version>0.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>jmeter-report-server</artifactId>
@@ -92,7 +92,7 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>jmeter-report-client</artifactId>
-      <version>0.3</version>
+      <version>0.4-SNAPSHOT</version>
     </dependency>
 
     <!-- Logging -->
