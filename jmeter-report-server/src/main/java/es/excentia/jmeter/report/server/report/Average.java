@@ -57,7 +57,7 @@ public abstract class Average extends ReportData {
   }
 
   public double getDeviation() {
-    if (total <= 0) {
+    if (total <= 1) {
       return Double.NaN;
     }
     Double avg = getAverage();
@@ -65,7 +65,7 @@ public abstract class Average extends ReportData {
   }
 
   public double getDeviationPercent() {
-    if (total <= 0) {
+    if (total <= 1) {
       return Double.NaN;
     }
     return (getDeviation() * 100.0) / getAverage();
