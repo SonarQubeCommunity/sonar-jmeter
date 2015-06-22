@@ -28,9 +28,9 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.plugins.MockSensorContext;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
@@ -40,8 +40,8 @@ public class JMeterPostJobTest {
   
   // Extend original class to save globalSummary reference
   class JMeterPostJobForTesting extends JMeterPostJob {
-    public JMeterPostJobForTesting() {
-	    super(new Settings());
+    public JMeterPostJobForTesting(FileSystem projectFileSystem) {
+	    super(new Settings(), projectFileSystem);
     }
 
 		private GlobalSummary globalSumary;
@@ -54,18 +54,17 @@ public class JMeterPostJobTest {
       return this.globalSumary;
     };
   };
-  
-  JMeterPostJobForTesting job = new JMeterPostJobForTesting();
-  
+
   @Test
   public void test() {
-    ProjectFileSystem projectFileSystem = mock(ProjectFileSystem.class);
+    FileSystem projectFileSystem = mock(FileSystem.class);
+      
     File testProjectFolder = new File("src/test/resources/test-project");
-    doReturn(testProjectFolder).when(projectFileSystem).getBasedir();
+    doReturn(testProjectFolder).when(projectFileSystem).baseDir();
     
     Project project = spy(new Project("JMeterPostJobTest","","JMeterPostJobTest"));
-    doReturn(projectFileSystem).when(project).getFileSystem();
-    
+
+    JMeterPostJobForTesting job = new JMeterPostJobForTesting(projectFileSystem);
     job.executeOn(project, new MockSensorContext());
     Assert.assertNotNull(job.getGlobalSummary());
   }
@@ -78,13 +77,13 @@ public class JMeterPostJobTest {
 		// No JTL files found in /target/jmeter/results
 		// No JTL files found in /target/jmeter-reports
 		
-		ProjectFileSystem projectFileSystem = mock(ProjectFileSystem.class);
+	    FileSystem projectFileSystem = mock(FileSystem.class);
 		File testProjectFolder = new File("src/test/resources/notexistingfolder");
-		doReturn(testProjectFolder).when(projectFileSystem).getBasedir();
+		doReturn(testProjectFolder).when(projectFileSystem).baseDir();
 		
 		Project project = spy(new Project("JMeterPostJobTest","","JMeterPostJobTest"));
-		doReturn(projectFileSystem).when(project).getFileSystem();
 		
+		JMeterPostJobForTesting job = new JMeterPostJobForTesting(projectFileSystem);
 		job.executeOn(project, new MockSensorContext());
 		Assert.assertNull(job.getGlobalSummary());
 	}
