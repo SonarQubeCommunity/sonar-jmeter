@@ -20,14 +20,26 @@
 
 package org.sonar.plugins;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.sonar.api.batch.AnalysisMode;
 import org.sonar.api.batch.Event;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.InputPath;
+import org.sonar.api.batch.rule.ActiveRules;
+import org.sonar.api.batch.sensor.dependency.NewDependency;
+import org.sonar.api.batch.sensor.duplication.NewDuplication;
+import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
+import org.sonar.api.batch.sensor.issue.NewIssue;
+import org.sonar.api.batch.sensor.measure.NewMeasure;
+import org.sonar.api.config.Settings;
 import org.sonar.api.design.Dependency;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.MeasuresFilter;
@@ -40,130 +52,191 @@ import org.sonar.api.rules.Violation;
 @SuppressWarnings("rawtypes")
 public class MockSensorContext implements SensorContext {
 
-  public Event createEvent(Resource arg0, String arg1, String arg2, String arg3, Date arg4) {
-    throw new NotImplementedException();
-  }
+    public Event createEvent(Resource arg0, String arg1, String arg2, String arg3, Date arg4) {
+        throw new NotImplementedException();
+    }
 
-  public void deleteEvent(Event arg0) {
-    throw new NotImplementedException();
-  }
+    public void deleteEvent(Event arg0) {
+        throw new NotImplementedException();
+    }
 
-  public void deleteLink(String arg0) {
-    throw new NotImplementedException();
-  }
+    public void deleteLink(String arg0) {
+        throw new NotImplementedException();
+    }
 
-  public Set<Dependency> getDependencies() {
-    throw new NotImplementedException();
-  }
+    public Set<Dependency> getDependencies() {
+        throw new NotImplementedException();
+    }
 
-  public List<Event> getEvents(Resource arg0) {
-    throw new NotImplementedException();
-  }
+    public List<Event> getEvents(Resource arg0) {
+        throw new NotImplementedException();
+    }
 
-  public Collection<Dependency> getIncomingDependencies(Resource arg0) {
-    throw new NotImplementedException();
-  }
+    public Collection<Dependency> getIncomingDependencies(Resource arg0) {
+        throw new NotImplementedException();
+    }
 
-  public Measure getMeasure(Metric arg0) {
-    throw new NotImplementedException();
-  }
+    public <M> M getMeasures(MeasuresFilter<M> arg0) {
+        throw new NotImplementedException();
+    }
 
-  public Measure getMeasure(Resource arg0, Metric arg1) {
-    throw new NotImplementedException();
-  }
+    public <M> M getMeasures(Resource arg0, MeasuresFilter<M> arg1) {
+        throw new NotImplementedException();
+    }
 
-  public <M> M getMeasures(MeasuresFilter<M> arg0) {
-    throw new NotImplementedException();
-  }
+    public Collection<Dependency> getOutgoingDependencies(Resource arg0) {
+        throw new NotImplementedException();
+    }
 
-  public <M> M getMeasures(Resource arg0, MeasuresFilter<M> arg1) {
-    throw new NotImplementedException();
-  }
+    public Dependency saveDependency(Dependency arg0) {
+        throw new NotImplementedException();
+    }
 
-  public Collection<Dependency> getOutgoingDependencies(Resource arg0) {
-    throw new NotImplementedException();
-  }
+    public void saveLink(ProjectLink arg0) {
+        throw new NotImplementedException();
+    }
 
-  public Dependency saveDependency(Dependency arg0) {
-    throw new NotImplementedException();
-  }
-
-  public void saveLink(ProjectLink arg0) {
-    throw new NotImplementedException();
-  }
-
-  public Measure saveMeasure(Measure measure) {
+    public Measure saveMeasure(Measure measure) {
     if (measure==null) throw new NullPointerException();
-    if (measure.getMetric()==null) {
-      throw new RuntimeException("Metric cannot be null");
+        if (measure.getMetric() == null) {
+            throw new RuntimeException("Metric cannot be null");
+        }
+
+        return measure;
     }
 
-    return measure;
-  }
-
-  public Measure saveMeasure(Metric metric, Double value) {
-    if (value!=null) {
-      if (Double.isNaN(value)) {
-        throw new RuntimeException("Double value cannot be NaN");
-      }
+    public Measure saveMeasure(Metric metric, Double value) {
+        if (value != null) {
+            if (Double.isNaN(value)) {
+                throw new RuntimeException("Double value cannot be NaN");
+            }
+        }
+        return new Measure(metric, value);
     }
-    return new Measure(metric, value);
-  }
 
-  public Measure saveMeasure(Resource arg0, Measure arg1) {
-    throw new NotImplementedException();
-  }
+    public Measure saveMeasure(Resource arg0, Measure arg1) {
+        throw new NotImplementedException();
+    }
 
-  public Measure saveMeasure(Resource arg0, Metric arg1, Double arg2) {
-    throw new NotImplementedException();
-  }
+    public Measure saveMeasure(Resource arg0, Metric arg1, Double arg2) {
+        throw new NotImplementedException();
+    }
 
-  public String saveResource(Resource arg0) {
-    throw new NotImplementedException();
-  }
+    public String saveResource(Resource arg0) {
+        throw new NotImplementedException();
+    }
 
-  public void saveSource(Resource arg0, String arg1) {
-    throw new NotImplementedException();
-  }
+    public void saveSource(Resource arg0, String arg1) {
+        throw new NotImplementedException();
+    }
 
-  public void saveViolation(Violation arg0) {
-    throw new NotImplementedException();
-  }
+    public void saveViolation(Violation arg0) {
+        throw new NotImplementedException();
+    }
 
-  public void saveViolations(Collection<Violation> arg0) {
-    throw new NotImplementedException();
-  }
+    public void saveViolations(Collection<Violation> arg0) {
+        throw new NotImplementedException();
+    }
 
-  public boolean index(Resource resource) {
-    throw new NotImplementedException();
-  }
+    public boolean index(Resource resource) {
+        throw new NotImplementedException();
+    }
 
-  public boolean index(Resource resource, Resource parentReference) {
-    throw new NotImplementedException();
-  }
+    public boolean index(Resource resource, Resource parentReference) {
+        throw new NotImplementedException();
+    }
 
-  public boolean isExcluded(Resource reference) {
-    throw new NotImplementedException();
-  }
+    public boolean isExcluded(Resource reference) {
+        throw new NotImplementedException();
+    }
 
-  public boolean isIndexed(Resource reference, boolean acceptExcluded) {
-    throw new NotImplementedException();
-  }
+    public boolean isIndexed(Resource reference, boolean acceptExcluded) {
+        throw new NotImplementedException();
+    }
 
-  public <R extends Resource> R getResource(R reference) {
-    throw new NotImplementedException();
-  }
+    public <R extends Resource> R getResource(R reference) {
+        throw new NotImplementedException();
+    }
 
-  public Resource getParent(Resource reference) {
-    throw new NotImplementedException();
-  }
+    public Resource getParent(Resource reference) {
+        throw new NotImplementedException();
+    }
 
-  public Collection<Resource> getChildren(Resource reference) {
-    throw new NotImplementedException();
-  }
+    public Collection<Resource> getChildren(Resource reference) {
+        throw new NotImplementedException();
+    }
 
-  public void saveViolation(Violation violation, boolean force) {
-    throw new NotImplementedException();
-  }
+    public void saveViolation(Violation violation, boolean force) {
+        throw new NotImplementedException();
+    }
 
+    @Override
+    public Settings settings() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public FileSystem fileSystem() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public ActiveRules activeRules() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public AnalysisMode analysisMode() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public <G extends Serializable> NewMeasure<G> newMeasure() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public NewIssue newIssue() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public NewHighlighting newHighlighting() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public NewDuplication newDuplication() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public NewDependency newDependency() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public <G extends Serializable> Measure<G> getMeasure(Metric<G> metric) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public <G extends Serializable> Measure<G> getMeasure(Resource resource, Metric<G> metric) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Measure saveMeasure(InputFile inputFile, Metric metric, Double value) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Measure saveMeasure(InputFile inputFile, Measure measure) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Resource getResource(InputPath inputPath) {
+        throw new NotImplementedException();
+    }
 }
