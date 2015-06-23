@@ -18,7 +18,7 @@
   <properties>
     <sonar.pluginClass>org.sonar.plugins.jmeter.JMeterPlugin</sonar.pluginClass>
     <sonar.pluginName>JMeter</sonar.pluginName>
-    <sonar.version>5.1</sonar.version>
+    <sonar.version>4.5.1</sonar.version>
   </properties>
 
   <dependencies>
