@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.CheckProject;
 import org.sonar.api.batch.PostJob;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 
@@ -48,9 +49,12 @@ public class JMeterPostJob implements PostJob, CheckProject {
   static final OperationService metricService = ServiceFactory.get(OperationService.class);
 
   private final Settings settings;
+
+  private FileSystem filesystem;
   
-  public JMeterPostJob(Settings settings) {
+  public JMeterPostJob(Settings settings, FileSystem filesystem) {
   	this.settings = settings;
+  	this.filesystem = filesystem;
   }
   
   public boolean shouldExecuteOnProject(Project project) {
@@ -85,8 +89,8 @@ public class JMeterPostJob implements PostJob, CheckProject {
   /**
    * Gets the generated jtl file path, if it was any generated
    */
-  protected String getJtlFilePath(Project project, String innerProjectJMeterReportsPath) {
-    String baseDirPath = project.getFileSystem().getBasedir().getAbsolutePath();
+  protected String getJtlFilePath(String innerProjectJMeterReportsPath) {
+    String baseDirPath = filesystem.baseDir().getAbsolutePath();
     File reportDir = new File(baseDirPath + innerProjectJMeterReportsPath);
     
     if (reportDir.exists()) {
@@ -110,7 +114,7 @@ public class JMeterPostJob implements PostJob, CheckProject {
     
     final String[] jtlPaths = new String[] { "/target/jmeter/results", "/target/jmeter-reports" };
     for (String innerPath : jtlPaths) {
-      String jtlPath = getJtlFilePath(project, innerPath);
+      String jtlPath = getJtlFilePath(innerPath);
       if (jtlPath == null) {
         LOG.info("No JTL files found in "+innerPath);
       } else {

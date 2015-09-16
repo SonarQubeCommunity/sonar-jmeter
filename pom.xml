@@ -24,13 +24,13 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
-    <version>18</version>
+    <version>19</version>
     <relativePath>../parent</relativePath>
   </parent>
   
   <groupId>org.codehaus.sonar-plugins.jmeter</groupId>
   <artifactId>parent</artifactId>
-  <version>0.4-SNAPSHOT</version>
+  <version>0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Sonar JMeter Plugin (parent)</name>
