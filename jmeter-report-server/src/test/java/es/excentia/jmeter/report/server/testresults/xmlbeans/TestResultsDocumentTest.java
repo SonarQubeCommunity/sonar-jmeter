@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 import org.apache.xmlbeans.XmlOptions;
 import org.junit.Test;
@@ -39,20 +39,20 @@ public class TestResultsDocumentTest {
   public void testLoadFile() throws Exception {
 
     // Bind the incoming XML to an XMLBeans type.
-    InputStream is = getClass().getResourceAsStream("/test-http.jtl.xml");
-    Assert
-        .assertNotNull("No se encontró en el classpath test-http.jtl.xml", is);
+    try (InputStream is = getClass().getResourceAsStream("/test-http.jtl.xml")) {
+      assertNotNull("No se encontró en el classpath test-http.jtl.xml", is);
 
-    XmlOptions options = new XmlOptions();
-    Map<String, String> ns = new HashMap<String, String>();
-    ns.put("", JtlAbstractSampleReader.NAMESPACE);
+      XmlOptions options = new XmlOptions();
+      Map<String, String> ns = new HashMap<String, String>();
+      ns.put("", JtlAbstractSampleReader.NAMESPACE);
 
-    options.setLoadSubstituteNamespaces(ns);
-    TestResultsDocument doc = TestResultsDocument.Factory.parse(is, options);
+      options.setLoadSubstituteNamespaces(ns);
+      TestResultsDocument doc = TestResultsDocument.Factory.parse(is, options);
 
-    TestResults testResults = doc.getTestResults();
-    Assert.assertNotNull(testResults.getHttpSampleArray());
-    Assert.assertTrue(testResults.getHttpSampleArray().length > 0);
+      TestResults testResults = doc.getTestResults();
+      assertNotNull(testResults.getHttpSampleArray());
+      assertTrue(testResults.getHttpSampleArray().length > 0);
+    }
   }
 
 }

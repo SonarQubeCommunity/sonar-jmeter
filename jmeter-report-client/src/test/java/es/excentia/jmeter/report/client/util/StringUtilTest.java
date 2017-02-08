@@ -20,7 +20,7 @@
 
 package es.excentia.jmeter.report.client.util;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -28,12 +28,12 @@ public class StringUtilTest {
 
   @Test
   public void isBlankTest() {
-    Assert.assertTrue(StringUtil.isBlank(null));
-    Assert.assertTrue(StringUtil.isBlank(""));
-    Assert.assertTrue(StringUtil.isBlank(" "));
-    Assert.assertTrue(StringUtil.isBlank("  "));
-    Assert.assertFalse(StringUtil.isBlank("a"));
-    Assert.assertFalse(StringUtil.isBlank("ab"));
+    assertTrue(StringUtil.isBlank(null));
+    assertTrue(StringUtil.isBlank(""));
+    assertTrue(StringUtil.isBlank(" "));
+    assertTrue(StringUtil.isBlank("  "));
+    assertFalse(StringUtil.isBlank("a"));
+    assertFalse(StringUtil.isBlank("ab"));
   }
-  
+
 }

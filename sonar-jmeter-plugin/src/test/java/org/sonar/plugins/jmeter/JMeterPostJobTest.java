@@ -28,64 +28,66 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
-import org.sonar.plugins.MockSensorContext;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 
 
 public class JMeterPostJobTest {
-  
+
   // Extend original class to save globalSummary reference
   class JMeterPostJobForTesting extends JMeterPostJob {
     public JMeterPostJobForTesting(FileSystem projectFileSystem) {
-	    super(new Settings(), projectFileSystem);
+      super(new Settings(), projectFileSystem);
     }
 
-		private GlobalSummary globalSumary;
-    public GlobalSummary getGlobalSummary() { 
-      return globalSumary; 
+    private GlobalSummary globalSumary;
+    public GlobalSummary getGlobalSummary() {
+      return globalSumary;
     }
-    
+
     protected GlobalSummary getGlobalSummaryFromLocalJTL(Project project) {
       this.globalSumary = super.getGlobalSummaryFromLocalJTL(project);
       return this.globalSumary;
-    };
-  };
+    }
+  }
 
   @Test
   public void test() {
     FileSystem projectFileSystem = mock(FileSystem.class);
-      
+
     File testProjectFolder = new File("src/test/resources/test-project");
     doReturn(testProjectFolder).when(projectFileSystem).baseDir();
-    
+
     Project project = spy(new Project("JMeterPostJobTest","","JMeterPostJobTest"));
 
     JMeterPostJobForTesting job = new JMeterPostJobForTesting(projectFileSystem);
-    job.executeOn(project, new MockSensorContext());
+    SensorContext context = mock(SensorContext.class);
+    job.executeOn(project, context);
     Assert.assertNotNull(job.getGlobalSummary());
   }
-  
-  
-	@Test
-	public void testNoJMeterMavenPluginJTL() {
-		// JMeterPostJob will do nothing if not JTL file is generated 
-		// by maven jmeter plugin, only will show log info messages:
-		// No JTL files found in /target/jmeter/results
-		// No JTL files found in /target/jmeter-reports
-		
-	    FileSystem projectFileSystem = mock(FileSystem.class);
-		File testProjectFolder = new File("src/test/resources/notexistingfolder");
-		doReturn(testProjectFolder).when(projectFileSystem).baseDir();
-		
-		Project project = spy(new Project("JMeterPostJobTest","","JMeterPostJobTest"));
-		
-		JMeterPostJobForTesting job = new JMeterPostJobForTesting(projectFileSystem);
-		job.executeOn(project, new MockSensorContext());
-		Assert.assertNull(job.getGlobalSummary());
-	}
+
+
+  @Test
+  public void testNoJMeterMavenPluginJTL() {
+    // JMeterPostJob will do nothing if not JTL file is generated
+    // by maven jmeter plugin, only will show log info messages:
+    // No JTL files found in /target/jmeter/results
+    // No JTL files found in /target/jmeter-reports
+
+    FileSystem projectFileSystem = mock(FileSystem.class);
+    File testProjectFolder = new File("src/test/resources/notexistingfolder");
+    doReturn(testProjectFolder).when(projectFileSystem).baseDir();
+
+    Project project = spy(new Project("JMeterPostJobTest","","JMeterPostJobTest"));
+
+    JMeterPostJobForTesting job = new JMeterPostJobForTesting(projectFileSystem);
+    SensorContext context = mock(SensorContext.class);
+    job.executeOn(project, context);
+    Assert.assertNull(job.getGlobalSummary());
+  }
 
 }

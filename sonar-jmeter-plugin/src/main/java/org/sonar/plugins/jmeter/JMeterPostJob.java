@@ -21,10 +21,14 @@
 package org.sonar.plugins.jmeter;
 
 import java.io.File;
-import java.util.Collection;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.concurrent.atomic.AtomicReference;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.CheckProject;
@@ -33,8 +37,10 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
+import org.sonar.plugins.jmeter.exception.JMeterPluginException;
 
 import es.excentia.jmeter.report.client.data.GlobalSummary;
+import es.excentia.jmeter.report.client.util.StringUtil;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
 import es.excentia.jmeter.report.server.service.ConfigService;
 import es.excentia.jmeter.report.server.service.OperationService;
@@ -51,25 +57,27 @@ public class JMeterPostJob implements PostJob, CheckProject {
   private final Settings settings;
 
   private FileSystem filesystem;
-  
+
   public JMeterPostJob(Settings settings, FileSystem filesystem) {
-  	this.settings = settings;
-  	this.filesystem = filesystem;
+    this.settings = settings;
+    this.filesystem = filesystem;
   }
-  
+
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
     return true;
   }
 
+  @Override
   public void executeOn(Project project, SensorContext context) {
 
     // this sensor is executed if no config defined on sonar server
     String jtlPath = settings.getString(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
     String config = settings.getString(JMeterPluginConst.CONFIG_PROPERTY);
-    if (StringUtils.isNotBlank(jtlPath) || StringUtils.isNotBlank(config)) {
+    if (!StringUtil.isBlank(jtlPath) || !StringUtil.isBlank(config)) {
       return;
     }
-    
+
     LOG.debug("START JMeterPostJob");
 
     try {
@@ -92,17 +100,48 @@ public class JMeterPostJob implements PostJob, CheckProject {
   protected String getJtlFilePath(String innerProjectJMeterReportsPath) {
     String baseDirPath = filesystem.baseDir().getAbsolutePath();
     File reportDir = new File(baseDirPath + innerProjectJMeterReportsPath);
-    
+
     if (reportDir.exists()) {
-      for (File file : (Collection<File>) FileUtils.listFiles(reportDir, new String[] { "jtl" }, true)) {
-        return file.getAbsolutePath();
+      String jtlFilePath = findFirstFile(reportDir, "jtl");
+      if (jtlFilePath != null) {
+        return jtlFilePath;
       }
-  
-      for (File file : (Collection<File>) FileUtils.listFiles(reportDir, new String[] { "xml" }, true)) {
-        return file.getAbsolutePath();
+      String xmlFilePath = findFirstFile(reportDir, "xml");
+      if (xmlFilePath != null) {
+        return xmlFilePath;
       }
     }
     return null;
+  }
+
+  private static String findFirstFile(File directory, String extension) {
+    final AtomicReference<Path> resultHolder = new AtomicReference<>();
+    final String extensionWithDot = '.' + extension;
+
+    try {
+      Files.walkFileTree(directory.toPath(), new SimpleFileVisitor<Path>() {
+        @Override
+        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+          Path fileNamePath = file.getFileName();
+          if (fileNamePath != null) {
+            if (fileNamePath.toString().endsWith(extensionWithDot)) {
+              resultHolder.set(file);
+              return FileVisitResult.TERMINATE;
+            }
+          }
+          return FileVisitResult.CONTINUE;
+        }
+      });
+    } catch (IOException e) {
+      throw new JMeterPluginException("could not walk directory: " + directory, e);
+    }
+
+    Path result = resultHolder.get();
+    if (result != null) {
+      return result.toFile().getAbsolutePath();
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -111,7 +150,7 @@ public class JMeterPostJob implements PostJob, CheckProject {
   protected GlobalSummary getGlobalSummaryFromLocalJTL(Project project) {
     GlobalSummary globalSummary = null;
     String projectName = project.getName();
-    
+
     final String[] jtlPaths = new String[] { "/target/jmeter/results", "/target/jmeter-reports" };
     for (String innerPath : jtlPaths) {
       String jtlPath = getJtlFilePath(innerPath);
@@ -127,7 +166,7 @@ public class JMeterPostJob implements PostJob, CheckProject {
         return globalSummary;
       }
     }
-    
+
     return globalSummary;
   }
 

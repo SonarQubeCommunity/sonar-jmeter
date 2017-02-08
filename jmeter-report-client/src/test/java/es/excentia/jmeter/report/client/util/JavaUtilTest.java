@@ -20,7 +20,7 @@
 
 package es.excentia.jmeter.report.client.util;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -28,8 +28,8 @@ public class JavaUtilTest {
 
   @Test
   public void testAll() {
-    Assert.assertTrue(JavaUtil.getJREMajorVersion()>0);
-    Assert.assertTrue(JavaUtil.getJREMinorVersion()>0);
+    assertTrue(JavaUtil.getJREMajorVersion() > 0);
+    assertTrue(JavaUtil.getJREMinorVersion() > 0);
   }
-  
+
 }
