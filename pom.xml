@@ -22,10 +22,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.codehaus.sonar-plugins</groupId>
+    <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>19</version>
-    <relativePath>../parent</relativePath>
+    <version>38</version>
   </parent>
   
   <groupId>org.codehaus.sonar-plugins.jmeter</groupId>
@@ -89,14 +88,23 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- 
-    Inherit from org.codehaus.sonar-plugins:parent:18.pom 
-    <jdk.min.version>1.6</jdk.min.version>
+    Inherit from org.sonarsource.parent:parent:38:pom 
     -->
-    <slf4j.version>1.5.6</slf4j.version>
+    <slf4j.version>1.7.12</slf4j.version>
   </properties>
   
   <build>
-  	<pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <configuration>
+          <!-- doesn't match expectations from parent -->
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
       <plugins>
     
         <!--This plugin's configuration is used to store Eclipse m2e settings 
@@ -110,21 +118,15 @@
               <pluginExecutions>
                 <pluginExecution>
                   <pluginExecutionFilter>
-                    <groupId>
-                      com.mycila.maven-license-plugin
-                    </groupId>
-                    <artifactId>
-                      maven-license-plugin
-                    </artifactId>
-                    <versionRange>
-                      [1.9.0,)
-                    </versionRange>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <versionRange>[2.11,)</versionRange>
                     <goals>
                       <goal>check</goal>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore></ignore>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -132,6 +134,6 @@
           </configuration>
         </plugin>
       </plugins>
-  	</pluginManagement>
+    </pluginManagement>
   </build>
 </project>

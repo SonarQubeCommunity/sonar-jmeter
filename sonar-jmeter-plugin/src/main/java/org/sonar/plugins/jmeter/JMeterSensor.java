@@ -20,7 +20,6 @@
 
 package org.sonar.plugins.jmeter;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -34,6 +33,7 @@ import es.excentia.jmeter.report.client.JMeterReportConst;
 import es.excentia.jmeter.report.client.data.GlobalSummary;
 import es.excentia.jmeter.report.client.exception.FatalJMeterReportServerException;
 import es.excentia.jmeter.report.client.exception.ServerErrorException;
+import es.excentia.jmeter.report.client.util.StringUtil;
 import es.excentia.jmeter.report.server.data.ConfigInfo;
 import es.excentia.jmeter.report.server.exception.JTLFileNotFoundException;
 import es.excentia.jmeter.report.server.service.ConfigService;
@@ -49,11 +49,11 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
   static final OperationService metricService = ServiceFactory.get(OperationService.class);
 
   private final Settings settings;
-  
+
   public JMeterSensor(Settings settings) {
   	this.settings = settings;
   }
-  
+
   public boolean shouldExecuteOnProject(Project project) {
     return true;
   }
@@ -63,10 +63,10 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
     // this sensor is executed if local jtl path or remote config name are set
     String jtlPath = settings.getString(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
     String config = settings.getString(JMeterPluginConst.CONFIG_PROPERTY);
-    if (StringUtils.isBlank(jtlPath) && StringUtils.isBlank(config)) {
+    if (StringUtil.isBlank(jtlPath) && StringUtil.isBlank(config)) {
       return;
     }
-    
+
     LOG.debug("START JMeterSensor");
 
     try {
@@ -90,14 +90,14 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
   protected JMeterReportClient getReportClient(Project project) {
 
     String host = settings.getString(JMeterPluginConst.HOST_PROPERTY);
-    if (StringUtils.isBlank(host)) {
+    if (StringUtil.isBlank(host)) {
       throw new JMeterPluginException(
           "You must set the HOST in sonar-jmeter-plugin config "
           + "for the project '" + project.getName() + "'");
     }
 
     String port = settings.getString(JMeterPluginConst.PORT_PROPERTY);
-    if (StringUtils.isBlank(port) || Integer.parseInt(port) == 0) {
+    if (StringUtil.isBlank(port) || Integer.parseInt(port) == 0) {
       LOG.warn("Null or invalid jmeter-report-server PORT. "
           + "Using default '{}'", JMeterReportConst.DEFAULT_PORT);
       port = Integer.toString(JMeterReportConst.DEFAULT_PORT);
@@ -112,7 +112,7 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
    */
   protected String getTestConfigName(Project project) {
     String config = settings.getString(JMeterPluginConst.CONFIG_PROPERTY);
-    if (StringUtils.isBlank(config)) {
+    if (StringUtil.isBlank(config)) {
       throw new JMeterPluginException(
           "You must set test CONFIG in sonar-jmeter-plugin "
           + "for the project '" + project.getName() + "'");
@@ -126,17 +126,17 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
    */
   protected String getLocalJtlFilePath(Project project) {
     String localJtlPath = settings.getString(JMeterPluginConst.LOCAL_JTL_PATH_PROPERTY);
-    return StringUtils.isBlank(localJtlPath)? null : localJtlPath;
+    return StringUtil.isBlank(localJtlPath) ? null : localJtlPath;
   }
 
 
   /**
-   * Auxiliar method to skip sensor when jtl file is not found, 
+   * Auxiliar method to skip sensor when jtl file is not found,
    * either locally or remote.
    */
   private void skipIfNotJtlOrThrowException(FatalJMeterReportServerException e) {
   	String notJtlFoundMsg = null;
-  	
+
   	if (e instanceof JTLFileNotFoundException) {
   		notJtlFoundMsg = e.getMessage();
   	} else {
@@ -145,51 +145,51 @@ public class JMeterSensor implements Sensor { // , GeneratesViolations {
   			notJtlFoundMsg = e.getMessage().replace(exceptionTypeText, "");
   		}
   	}
-  	
+
   	if (notJtlFoundMsg==null) throw e;
-  	
+
   	LOG.info(notJtlFoundMsg+" : skipped");
   }
-  
+
   /**
-   * Gets the GlobalSummary from local jtl file or remote jmeter 
+   * Gets the GlobalSummary from local jtl file or remote jmeter
    * report server, according to project config.
    */
   protected GlobalSummary getGlobalSummary(Project project) {
     GlobalSummary globalSummary = null;
     String localJtlPath = getLocalJtlFilePath(project);
     String projectName = project.getName();
-    
+
     try {
-    	
-	    if (!StringUtils.isBlank(localJtlPath)) {
+
+	    if (!StringUtil.isBlank(localJtlPath)) {
 	      // Get report parsing local jtl file
 	      LOG.info("Getting JMeter results from local file");
 	      ConfigInfo configInfo = new ConfigInfo(localJtlPath);
 	      configService.setTestConfigInfo(projectName, configInfo);
 	      globalSummary = metricService.getGlobalSummary(projectName);
-	
+
 	    } else {
 	      // Get report from remote server
 	      LOG.info("Getting JMeter results from remote server");
-	
+
 	      // Remove inMemoryConfig if there was any
 	      configService.setTestConfigInfo(projectName, null);
-	
-	      // Use a jmeter report client for getting report from a 
+
+	      // Use a jmeter report client for getting report from a
 	      // remote jmeter report server
 	      JMeterReportClient client = getReportClient(project);
 	      String config = getTestConfigName(project);
 	      globalSummary = client.getGlobalSummary(config);
-	      
+
 	    }
-	
+
     } catch(JTLFileNotFoundException e) {
     	skipIfNotJtlOrThrowException(e);
 	  } catch(ServerErrorException e) {
 	  	skipIfNotJtlOrThrowException(e);
 	  }
-    
+
     return globalSummary;
   }
 

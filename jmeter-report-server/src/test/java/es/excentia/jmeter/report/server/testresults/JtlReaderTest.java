@@ -20,9 +20,10 @@
 
 package es.excentia.jmeter.report.server.testresults;
 
-import java.io.InputStream;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.Assert;
+import java.io.InputStream;
 
 import org.junit.Test;
 
@@ -36,13 +37,13 @@ public class JtlReaderTest {
     for (String config : JMeterReportServerTestConst.TEST_CONFIGS) {
       InputStream is = getClass()
           .getResourceAsStream("/" + config + ".jtl.xml");
-      Assert.assertNotNull("No se encontró en el classpath " + config
+      assertNotNull("No se encontró en el classpath " + config
           + ".jtl.xml", is);
 
       JtlAbstractSampleReader jtlReader = new JtlAbstractSampleReader(is);
       AbstractSample sample = jtlReader.read();
       while (sample != null) {
-        Assert.assertTrue(sample.getTs() > -1);
+        assertTrue(sample.getTs() > -1);
         sample = jtlReader.read();
       }
     }
