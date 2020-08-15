@@ -92,7 +92,7 @@
     Inherit from org.codehaus.sonar-plugins:parent:18.pom 
     <jdk.min.version>1.6</jdk.min.version>
     -->
-    <slf4j.version>1.5.6</slf4j.version>
+    <slf4j.version>1.7.30</slf4j.version>
   </properties>
   
   <build>
@@ -124,7 +124,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
